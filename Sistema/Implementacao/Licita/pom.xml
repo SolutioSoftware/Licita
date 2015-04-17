@@ -36,6 +36,13 @@
             <version>7.0</version>
         </dependency>
         
+        <!-- PrimeFaces 5.0 -->
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>5.0</version>
+        </dependency>
+        
         <!-- Junit -->
         <dependency>
             <groupId>junit</groupId>
