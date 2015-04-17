@@ -4,12 +4,13 @@
  * and open the template in the editor.
  */
 
-package br.com.solutio.licita.dao;
+package br.solutio.licita.controlador;
 
 /**
- *
+ * Essa classe devera ser excluida, pois, sua origem foi para possa ser
+ * realizado a adicao do pacote no repositorio
  * @author Matheus Oliveira
  */
-public class HelloLicita {
+public class Controlador {
     
 }

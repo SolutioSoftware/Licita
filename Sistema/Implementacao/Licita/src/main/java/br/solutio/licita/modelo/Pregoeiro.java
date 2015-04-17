@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 
-package br.com.solutio.licita.service.interfaces;
+package br.solutio.licita.modelo;
 
 /**
  *
  * @author Matheus Oliveira
  */
-public interface ServiceDAOIF {
+public class Pregoeiro {
     
 }

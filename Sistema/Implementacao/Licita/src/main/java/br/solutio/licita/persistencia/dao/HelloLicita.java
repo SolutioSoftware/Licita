@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 
-package br.com.solutio.licita.dao.interfaces;
+package br.solutio.licita.persistencia.dao;
 
 /**
  *
  * @author Matheus Oliveira
  */
-public interface DAOIF {
+public class HelloLicita {
     
 }
