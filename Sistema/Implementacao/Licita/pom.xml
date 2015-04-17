@@ -51,6 +51,16 @@
             <scope>test</scope>
         </dependency>
         
+        <!-- Temas do Primefaces -->
+        <dependency>
+            <groupId>org.primefaces.themes</groupId>
+            <artifactId>all-themes</artifactId>
+            <version>1.0.10</version>
+        </dependency>
+
+        <!-- Adicionar dependencias do HSQL -->
+
+        
     </dependencies>
 
     <build>

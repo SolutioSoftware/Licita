@@ -15,7 +15,7 @@
     </servlet-mapping>
     <context-param>
         <param-name>primefaces.THEME</param-name>
-        <param-value>licitacao</param-value>
+        <param-value>bootstrap</param-value>
     </context-param>
     <session-config>
         <session-timeout>
