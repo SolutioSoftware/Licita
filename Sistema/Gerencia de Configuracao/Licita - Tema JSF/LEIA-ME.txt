@@ -1,0 +1,14 @@
+TEMA LICITA JSF
+
+Adicione a pasta 'br' ao diretório repositório do maven do seu computador.
+
+No Windows: c:\USUARIO\.m2\repository
+
+Adicione a dependência no pom.xml
+
+ <dependency>              
+    <groupId>br.com.solutio</groupId>                     
+    <artifactId>licitacao</artifactId>
+    <version>1.0-SNAPSHOT</version>
+ </dependency> 
+
