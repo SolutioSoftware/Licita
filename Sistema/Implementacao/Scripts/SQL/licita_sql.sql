@@ -9,13 +9,6 @@
 	
 );
 
-CREATE TABLE tbl_contato(
-
-	id BIGSERIAL PRIMARY KEY,
-	tipo_contato VARCHAR(10),
-	valor VARCHAR(50) NOT NULL
-	
-);
 
 CREATE TABLE tbl_endereco(
 	
@@ -32,32 +25,38 @@ CREATE TABLE tbl_endereco(
 CREATE TABLE tbl_pessoa_fisica(
 	
 	id BIGSERIAL PRIMARY KEY,
+	id_endereco BIGINT,
 	nome VARCHAR(80),
 	cpf CHAR(11) UNIQUE NOT NULL,
-	rg VARCHAR(30)	
+	rg VARCHAR(30),
+	CONSTRAINT fk_pessoa_fisica_endereco FOREIGN KEY(id_endereco) REFERENCES tbl_endereco(id) ON DELETE CASCADE
 	
 );
 
 CREATE TABLE tbl_pessoa_juridica(
 	
 	id BIGSERIAL PRIMARY KEY,
+	id_endereco BIGINT,
 	razao_social VARCHAR(80),
 	nome_fantasia VARCHAR(80),	
 	cnpj CHAR(14) UNIQUE NOT NULL
+	CONSTRAINT fk_pessoa_juridica_endereco FOREIGN KEY(id_endereco) REFERENCES tbl_endereco(id) ON DELETE CASCADE
 	
 );
 
 CREATE TABLE tbl_contato_pessoa_juridica(
-		id_contato BIGINT NOT NULL,
+		id BIGSERIAL PRIMARY KEY,
+		tipo_contato VARCHAR(10),
+		valor VARCHAR(50) NOT NULL,
 		id_pessoa_juridica BIGINT NOT NULL,
-		CONSTRAINT fk_contato_pessoa_juridica FOREIGN KEY(id_contato) REFERENCES tbl_contato(id),
 		CONSTRAINT fk_pessoa_juridica_contato FOREIGN KEY(id_pessoa_juridica) REFERENCES tbl_pessoa_juridica(id)
 );
 
 CREATE TABLE tbl_contato_pessoa_fisica(
-		id_contato BIGINT NOT NULL,
+		id BIGSERIAL PRIMARY KEY,
+		tipo_contato VARCHAR(10),
+		valor VARCHAR(50) NOT NULL,
 		id_pessoa_fisica BIGINT NOT NULL,
-		CONSTRAINT fk_contato_pessoa_fisica FOREIGN KEY(id_contato) REFERENCES tbl_contato(id),
 		CONSTRAINT fk_pessoa_fisica_contato FOREIGN KEY(id_pessoa_fisica) REFERENCES tbl_pessoa_fisica(id)
 );
 

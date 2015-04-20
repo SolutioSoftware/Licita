@@ -1,0 +1,9 @@
+Antes de rodar os scripts nas máquinas de vcs,
+criem no PostgreSQL dois bancos: 
+licita_simulacao_local
+licita_simulacao_remoto
+
+Durante parte do desenvolvimento usaremos esse ambiente para simular a persistencia local e remota.
+
+Podemos ver mais a frente como o Firebird se comporta a uma aplicação destas, to achando que o 
+HSQL não seria tão bom para esse projeto. Mas só vamos saber depois dos testes.
