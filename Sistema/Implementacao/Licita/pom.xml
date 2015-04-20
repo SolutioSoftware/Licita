@@ -31,6 +31,17 @@
         
         <!-- Implementação JavaEE -->
         <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink</artifactId>
+            <version>2.5.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.jpa.modelgen.processor</artifactId>
+            <version>2.5.2</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>
@@ -57,6 +68,15 @@
             <artifactId>all-themes</artifactId>
             <version>1.0.10</version>
         </dependency>
+        
+        
+        <!-- Drive JDBC 4 do PostgreSQL 9.4 -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.4-1200-jdbc4</version>
+        </dependency>
+
 
         <!-- HSQLDB -->
         <dependency>
