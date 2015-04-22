@@ -4,12 +4,15 @@
  * and open the template in the editor.
  */
 
-package br.solutio.licita.persistencia.dao;
+package br.solutio.licita.servico;
+
+import br.solutio.licita.modelo.Identificavel;
 
 /**
  *
  * @author Matheus Oliveira
  */
-public class HelloLicita {
+public interface ServicoLoginIF extends ServicoIF{
+    public Identificavel verificarDados(String login, String senha);
     
 }
