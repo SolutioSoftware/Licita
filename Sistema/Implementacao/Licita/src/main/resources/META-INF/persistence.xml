@@ -33,27 +33,7 @@
   </persistence-unit>
   <persistence-unit name="Licita_PU_Remoto" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>br.solutio.licita.modelo.ContaBancaria</class>
-    <class>br.solutio.licita.modelo.ContatoPessoaFisica</class>
-    <class>br.solutio.licita.modelo.ContatoPessoaJuridica</class>
-    <class>br.solutio.licita.modelo.EmpresaLicitante</class>
-    <class>br.solutio.licita.modelo.Endereco</class>
-    <class>br.solutio.licita.modelo.InstituicaoLicitadora</class>
-    <class>br.solutio.licita.modelo.ItemPregao</class>
-    <class>br.solutio.licita.modelo.Lance</class>
-    <class>br.solutio.licita.modelo.Login</class>
-    <class>br.solutio.licita.modelo.MembroApoio</class>
-    <class>br.solutio.licita.modelo.PessoaFisica</class>
-    <class>br.solutio.licita.modelo.PessoaJuridica</class>
-    <class>br.solutio.licita.modelo.Pregao</class>
-    <class>br.solutio.licita.modelo.Pregoeiro</class>
-    <class>br.solutio.licita.modelo.Proposta</class>
-    <class>br.solutio.licita.modelo.RepresentanteLegal</class>
-    <class>br.solutio.licita.modelo.Sessao</class>
-    <class>br.solutio.licita.modelo.StatusItemPregao</class>
-    <class>br.solutio.licita.modelo.StatusPregao</class>
-    <class>br.solutio.licita.modelo.StatusSessao</class>
-    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://127.0.0.1:5432/licita_simulacao_remoto"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>

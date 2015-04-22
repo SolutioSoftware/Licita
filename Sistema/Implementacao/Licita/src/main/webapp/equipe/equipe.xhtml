@@ -39,18 +39,18 @@
 
     <ui:define name="pn_conteudo">
        
-        <h:form id="equipe_form">
+        <h:form id="equipe_form" title="Novo Membro Equipe" style="text-align: center">
             
-            <p:panelGrid columns="2">
+            <p:panelGrid columns="2" >
                 
-                <p:outputLabel value="#{bundle.id}" for="id" />
-                <p:inputText id="id" value="#{equipeBean.entidade.id}" title="#{bundle.id}" required="true" requiredMessage="#{bundle.CreateTblPessoaFisicaRequiredMessage_id}"/>
-                        <p:outputLabel value="#{bundle.nome}" for="nome" />
-                        <p:inputText id="nome" value="#{equipeBean.entidade.nome}" title="#{bundle.nome}" />
-                        <p:outputLabel value="#{bundle.cpf}" for="cpf" />
-                        <p:inputText id="cpf" value="#{equipeBean.entidade.cpf}" title="#{bundle.cpf}" required="true" requiredMessage="#{bundle.CreateTblPessoaFisicaRequiredMessage_cpf}"/>
-                        <p:outputLabel value="#{bundle.rg}" for="rg" />
-                        <p:inputText id="rg" value="#{equipeBean.entidade.rg}" title="#{bundle.rg}" /> 
+                <p:outputLabel value="ID" for="id" />
+                <p:inputText id="id" value="#{equipeBean.entidade.id}" title="ID" required="true" requiredMessage="Campo Necessário"/>
+                        <p:outputLabel value="Nome:" for="nome" />
+                        <p:inputText id="nome" value="#{equipeBean.entidade.nome}" title="Nome" />
+                        <p:outputLabel value="CPF" for="cpf" />
+                        <p:inputText id="cpf" value="#{equipeBean.entidade.cpf}" title="CPF" required="true" requiredMessage="Campo Necessário"/>
+                        <p:outputLabel value="RG" for="rg" />
+                        <p:inputText id="rg" value="#{equipeBean.entidade.rg}" title="RG" /> 
                 
                 
             </p:panelGrid>
