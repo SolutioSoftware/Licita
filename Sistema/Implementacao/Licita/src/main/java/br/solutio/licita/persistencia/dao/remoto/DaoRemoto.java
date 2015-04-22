@@ -18,22 +18,25 @@ import javax.persistence.Persistence;
  */
 public class DaoRemoto<T extends Identificavel> extends DaoAbstrato<T> implements DaoRemotoIF{
 
-    protected EntityManagerFactory emf; 
+    private static EntityManagerFactory emf; 
     protected EntityManager entityManager;
     
     public DaoRemoto(){
-        this.emf = Persistence.createEntityManagerFactory("Licita_PU_Remoto");
-        this.entityManager = emf.createEntityManager();
+      
     }
     
      public DaoRemoto(Class<T> entidade){
         super(entidade);
-        this.emf = Persistence.createEntityManagerFactory("Licita_PU_Remoto");
-        this.entityManager = emf.createEntityManager();
+       
     }
     
     @Override
     protected EntityManager getEntityManager() {
+        if(emf == null){
+            emf = Persistence.createEntityManagerFactory("Licita_PU_Remoto");
+        }
+        
+        entityManager = emf.createEntityManager();
         return entityManager;
     }
     

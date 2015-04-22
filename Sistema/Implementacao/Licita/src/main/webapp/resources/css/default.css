@@ -119,11 +119,225 @@ footer {
       
 }
 
-.bt_pregao{
-    background-image: url(../icons/empresa_ic.png)
+
+
+.bt_pregoes{
+    background-image: url("../resources/icons/pregao_ic.png");
+    background-position: center;
+    background-color: #2285BB;
+    border-width: 0;
+    border-radius: 0;
+    box-shadow: none;
+    width: 80px;
+    height: 100%; 
+    background-repeat: no-repeat
+}
+
+.bt_pregoes:hover{
+ 
+    background-color: #036fab;
+ 
+}
+
+.bt_pregoes:active{
+ 
+    background-color: #045491;
+ 
+}
+
+.bt_sessoes{
+    background-image: url("../resources/icons/sessao_ic.png");
+    background-position: center;
+    background-color: #2285BB;
+    border-width: 0;
+    border-radius: 0;
+    box-shadow: none;
+    width: 80px;
+    height: 100%; 
+    background-repeat: no-repeat
+}
+
+.bt_sessoes:hover{
+ 
+    background-color: #036fab;
+ 
+}
+
+.bt_sessoes:active{
+ 
+    background-color: #045491;
+ 
+}
+
+.bt_licitantes{
+    background-image: url("../resources/icons/empresa_ic.png");
+    background-position: center;
+    background-color: #2285BB;
+    border-width: 0;
+    border-radius: 0;
+    box-shadow: none;
+    width: 80px;
+    height: 100%; 
+    background-repeat: no-repeat
+}
+
+.bt_licitantes:hover{
+ 
+    background-color: #036fab;
+ 
+}
+
+.bt_licitantes:active{
+
+    background-color: #045491;
+}
+
+.bt_itens{
+    background-image: url("../resources/icons/item_ic.png");
+    background-position: center;
+    background-color: #2285BB;
+    border-width: 0;
+    border-radius: 0;
+    box-shadow: none;
+    width: 80px;
+    height: 100%; 
+    background-repeat: no-repeat
+}
+
+.bt_itens:hover{
+ 
+    background-color: #036fab;
+ 
+}
+
+.bt_itens:active{
+ 
+    background-color: #045491;
+ 
+}
+
+.bt_equipe{
+    background-image: url("../resources/icons/equipe_ic.png");
+    background-position: center;
+    background-color: #2285BB;
+    border-width: 0;
+    border-radius: 0;
+    box-shadow: none;
+    width: 80px;
+    height: 100%; 
+    background-repeat: no-repeat
+}
+
+.bt_equipe:hover{
+ 
+    background-color: #036fab;
+ 
+}
+
+.bt_equipe:active{
+ 
+    background-color: #045491;
 }
 
 
+.bt_licitadores{
+    background-image: url("../resources/icons/licitador_ic.png");
+    background-position: center;
+    background-color: #2285BB;
+    border-width: 0;
+    border-radius: 0;
+    box-shadow: none;
+    width: 80px;
+    height: 100%; 
+    background-repeat: no-repeat
+}
+
+.bt_licitadores:hover{
+ 
+    background-color: #036fab;
+ 
+}
+
+.bt_licitadores:active{
+ 
+    background-color: #045491;
+}
+
+.bt_ajustes{
+    background-image: url("../resources/icons/config_ic.png");
+    background-position: center;
+    background-color: #2285BB;
+    border-width: 0;
+    border-radius: 0;
+    box-shadow: none;
+    width: 80px;
+    height: 100%; 
+    background-repeat: no-repeat
+}
+
+.bt_ajustes:hover{
+ 
+    background-color: #036fab;
+ 
+}
+
+.bt_ajustes:active{
+ 
+    background-color: #045491;
+ 
+}
+
+
+.bt_sair{
+    
+    color: #ffffff;
+    background: #2285BB;
+    border-width: 0;
+    border-radius: 4px;
+    box-shadow: none;
+    
+    
+}
+
+.bt_sair:hover{
+ 
+    background-color: #036fab;
+ 
+}
+
+.bt_sair:active{
+ 
+    background-color: #045491;
+ 
+}
+
+
+.bt_alerta{
+    
+    background-image: url("../resources/icons/notificacao_ic.png");
+    background-position: center;
+    background-color: #2285BB;
+    border-width: 0;
+    border-radius: 4px;
+    box-shadow: none;
+    width: 24px;
+    height: 24px; 
+    background-repeat: no-repeat
+    
+    
+}
+
+.bt_alerta:hover{
+ 
+    background-color: #036fab;
+ 
+}
+
+.bt_alerta:active{
+ 
+    background-color: #045491;
+ 
+}
 
 .icones:hover{
     color: #ffffff; text-transform: capitalize;text-decoration: none;

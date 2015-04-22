@@ -22,27 +22,29 @@
                         <p:graphicImage id="licita_logo" library="images" name="licita_logo.png"/>
                     </div>
 
-                    <div id="div_menu" class="ui-grid-col-8" style="margin-left: 10%;">
+                    <div id="div_menu" class="ui-grid-col-8" style="margin-left: 8%;">
 
-                        <p:button value="" style="background-image: url(resources/icons/pregao_ic.png);width: 80px;height: 100%; background-repeat: no-repeat" />
-                        <p:button value="" style="background-image: url(resources/icons/sessao_ic.png);width: 80px;height: 100%; background-repeat: no-repeat"  outcome="./sessoes.xhtml"/>
-                        <p:button value="" style="background-image: url(resources/icons/empresa_ic.png);width: 80px;height: 100%; background-repeat: no-repeat" />
-                        <p:button value="" style="background-image: url(resources/icons/item_ic.png);width: 80px;height: 100%; background-repeat: no-repeat" />
-                        <p:button value="" style="background-image: url(resources/icons/equipe_ic.png);width: 80px;height: 100%; background-repeat: no-repeat" />
-                        <p:button value="" style="background-image: url(resources/icons/config_ic.png);width: 80px;height: 100%; background-repeat: no-repeat" />
+                        <p:button value="" id="bt_pregoes" class="bt_pregoes"/>
+                        <p:button value="" id="bt_sessoes" class="bt_sessoes" outcome="/sessoes/sessoes.xhtml"/>
+                        <p:button value="" id="bt_licitantes" class="bt_licitantes" outcome="/licitantes/licitantes.xhtml"/>
+                        <p:button value="" id="bt_itens" class="bt_itens" />
+                        <p:button value="" id="bt_equipe" class="bt_equipe" outcome="/equipe/equipe.xhtml"/>
+                        <p:button value="" id="bt_licitadores" class="bt_licitadores" outcome="/licitadores/licitadores.xhtml"/>
+                        <p:button value="" id="bt_ajustes" class="bt_ajustes" />
+                        
 
 
                     </div>
 
-                    <div id="div_notificacoes" class="ui-grid-col-3" style="margin-left: 18%;margin-top: 10px;">
+                    <div id="div_notificacoes" class="ui-grid-col-3" style="margin-left: 12%;margin-top: 10px;">
                         <h:outputText value="Bem Vindo José Quincas"/>
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-3" style="margin-top: 5px;"></div>
                             <div class="ui-grid-col-2" style="margin-top: 5px;">
-                                <p:button value="" style="background-image: url(resources/icons/notificacao_ic.png);width: 24px;height: 24px; background-repeat: no-repeat;"  />
+                                <p:button value="" id="bt_alerta" class="bt_alerta"  />
                             </div>
                             <div class="ui-grid-col-3" style="margin-top: 5px;">
-                                <p:button value="Sair" outcome="./login.xhtml" />
+                                <p:button value="Sair" id="bt_sair" class="bt_sair" outcome="/login/login.xhtml" />
                             </div>
                         </div>
                     </div>
@@ -58,8 +60,16 @@
 
         <div id="content" class="center_content">
 
-            
+
+            <p:layout style="height: 85%; max-height: 85%">
+                <p:layoutUnit id="sub_template" position="center">
+                    <ui:insert name="conteudo_sub_template"></ui:insert>
+                </p:layoutUnit>
+
+            </p:layout>
         </div>
+
+        
         <!--
                 <footer>
                     <div id="footer" style="position: relative; left: 43%;right: 50%;padding: 5px;">

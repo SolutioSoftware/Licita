@@ -9,6 +9,12 @@ package br.solutio.licita.persistencia.dao.local;
  *
  * @author WitaloCarlos
  */
-public interface DaoInstituicaoLicitadoraIF extends DaoLocalIF{
+public interface FabricaDaoLocalIF {
+
+    DaoLocalIF getDaoInstituicaoLicitadora();
+
+    DaoLocalIF getDaoLogin();
+
+    DaoLocalIF getDaoPregoeiro();
     
 }

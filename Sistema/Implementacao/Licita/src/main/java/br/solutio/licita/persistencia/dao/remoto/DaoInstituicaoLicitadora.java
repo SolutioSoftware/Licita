@@ -6,6 +6,7 @@
 package br.solutio.licita.persistencia.dao.remoto;
 
 import br.solutio.licita.modelo.InstituicaoLicitadora;
+import br.solutio.licita.persistencia.dao.DaoInstituicaoLicitadoraIF;
 
 
 /**

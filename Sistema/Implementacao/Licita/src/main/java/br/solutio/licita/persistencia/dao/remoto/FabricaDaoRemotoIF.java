@@ -5,12 +5,16 @@
  */
 package br.solutio.licita.persistencia.dao.remoto;
 
-import br.solutio.licita.persistencia.dao.local.*;
-
 /**
  *
  * @author WitaloCarlos
  */
-public interface DaoInstituicaoLicitadoraIF extends DaoRemotoIF{
+public interface FabricaDaoRemotoIF {
+
+    DaoRemotoIF getDaoInstituicaoLicitadora();
+
+    DaoRemotoIF getDaoLogin();
+
+    DaoRemotoIF getDaoPregoeiro();
     
 }

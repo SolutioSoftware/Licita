@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.solutio.licita.persistencia.dao.local;
+package br.solutio.licita.persistencia.dao;
 
 /**
  *
  * @author WitaloCarlos
  */
-public interface DaoLoginIF extends DaoLocalIF{
+public enum TipoDAO {
+    Local, Remoto;
     
 }

@@ -5,6 +5,7 @@
  */
 package br.solutio.licita.persistencia.dao.remoto;
 
+import br.solutio.licita.persistencia.dao.DaoLoginIF;
 import br.solutio.licita.persistencia.dao.local.*;
 import br.solutio.licita.modelo.Login;
 

@@ -8,7 +8,7 @@
     
     <ui:define name="corpo">
         
-        <p:dialog header="Entrar" visible="true" closable="false" draggable="false" resizable="false"  hideEffect="explode">
+        <p:dialog visible="true" closable="false" draggable="false" resizable="false"  hideEffect="explode">
             
             <h:panelGrid columns="1" cellpadding="1">
                 <p:outputLabel style="color: #036fab;">Login</p:outputLabel>
@@ -17,7 +17,7 @@
             <p:outputLabel style="color: #036fab;">Senha</p:outputLabel>
             <p:password id="campo_senha" required="true" style="width: 100%;"/>
            
-            <p:button value="Entrar" style="margin-left: 30%; margin-top: 10px" outcome="./index.xhtml"/>
+            <p:button value="Entrar" style="margin-left: 30%; margin-top: 10px" outcome="/index.xhtml"/>
            
         </h:panelGrid>
         </p:dialog>

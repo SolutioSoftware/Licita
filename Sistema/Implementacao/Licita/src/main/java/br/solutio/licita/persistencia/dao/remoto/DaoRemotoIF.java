@@ -12,7 +12,5 @@ import br.solutio.licita.persistencia.dao.DaoAbstratoIF;
  * @author WitaloCarlos
  */
 public interface DaoRemotoIF extends DaoAbstratoIF{
-
-
-
+    
 }

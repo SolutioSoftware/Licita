@@ -18,22 +18,25 @@ import javax.persistence.Persistence;
  */
 public class DaoLocal<T extends Identificavel> extends DaoAbstrato<T> implements DaoLocalIF{
 
-    protected EntityManagerFactory emf; 
+    private static EntityManagerFactory emf = null; 
     protected EntityManager entityManager;
     
     public DaoLocal(){
-        this.emf = Persistence.createEntityManagerFactory("Licita_PU_Local");
-        this.entityManager = emf.createEntityManager();
+      
     }
     
     public DaoLocal(Class<T> entidade){
         super(entidade);
-        this.emf = Persistence.createEntityManagerFactory("Licita_PU_Local");
-        this.entityManager = emf.createEntityManager();
+        
     }
     
     @Override
     protected EntityManager getEntityManager() {
+        if (emf == null){
+            emf = Persistence.createEntityManagerFactory("Licita_PU_Local");
+        }
+        
+        entityManager = emf.createEntityManager();
         return entityManager;
     }
     

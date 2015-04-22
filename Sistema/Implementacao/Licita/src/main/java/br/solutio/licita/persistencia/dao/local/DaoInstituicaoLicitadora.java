@@ -5,6 +5,7 @@
  */
 package br.solutio.licita.persistencia.dao.local;
 
+import br.solutio.licita.persistencia.dao.DaoInstituicaoLicitadoraIF;
 import br.solutio.licita.modelo.InstituicaoLicitadora;
 
 

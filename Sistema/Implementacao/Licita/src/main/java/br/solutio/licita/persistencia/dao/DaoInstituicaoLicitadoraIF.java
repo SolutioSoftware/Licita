@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.solutio.licita.persistencia.dao.remoto;
+package br.solutio.licita.persistencia.dao;
 
-import br.solutio.licita.persistencia.dao.local.*;
+import br.solutio.licita.persistencia.dao.local.DaoLocalIF;
 
 /**
  *
  * @author WitaloCarlos
  */
-public interface DaoLoginIF extends DaoRemotoIF{
+public interface DaoInstituicaoLicitadoraIF extends DaoLocalIF{
     
 }
