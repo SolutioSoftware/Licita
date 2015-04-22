@@ -1,10 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.solutio.licita.modelo;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -13,99 +10,63 @@ import static org.junit.Assert.*;
  * @author ricardocaldeira
  */
 public class LoginTest {
-    
-    public LoginTest() {
+
+    Login login1, login2;
+
+    /**
+     * Metodo executado antes dos testes, iniciando os objetos e setandos seus valores.
+     */
+    @Before
+    public void setUp() {
+        System.out.println("LoginTest iniciado");
+        login1 = new Login();
+        login2 = new Login();
+        
+        login1.setLogado(true);
+        login1.setSenha("12345");
+        login1.setUsuario("Ricardo");
+        login1.setId(Long.MIN_VALUE);
+
+        login2.setLogado(true);
+        login2.setSenha("54321");
+        login2.setUsuario("Ludmyla");
+        login2.setId(Long.MAX_VALUE);
     }
 
     /**
-     * Test of getId method, of class Login.
+     * Metodo executado depois dos teste.
      */
-    @Test
-    public void testGetId() {
+    @After
+    public void tearDown() {
+        System.out.println("LoginTest finalizado");
     }
 
-    /**
-     * Test of setId method, of class Login.
-     */
-    @Test
-    public void testSetId() {
-    }
 
     /**
-     * Test of getUsuario method, of class Login.
+     * Testando Set do Login
      */
     @Test
-    public void testGetUsuario() {
-    }
+    public void testGetLogin() {
+        assertEquals("Ricardo", login1.getUsuario());
+        assertEquals("12345", login1.getSenha());
+        assertEquals(true, login1.getLogado());
 
-    /**
-     * Test of setUsuario method, of class Login.
-     */
-    @Test
-    public void testSetUsuario() {
-    }
+        assertEquals("Ludmyla", login2.getUsuario());
+        assertEquals("54321", login2.getSenha());
+        assertEquals(true, login2.getLogado());
 
-    /**
-     * Test of getSenha method, of class Login.
-     */
-    @Test
-    public void testGetSenha() {
-    }
-
-    /**
-     * Test of setSenha method, of class Login.
-     */
-    @Test
-    public void testSetSenha() {
-    }
-
-    /**
-     * Test of getLogado method, of class Login.
-     */
-    @Test
-    public void testGetLogado() {
-    }
-
-    /**
-     * Test of setLogado method, of class Login.
-     */
-    @Test
-    public void testSetLogado() {
-    }
-
-    /**
-     * Test of getIdPregoeiro method, of class Login.
-     */
-    @Test
-    public void testGetIdPregoeiro() {
-    }
-
-    /**
-     * Test of setIdPregoeiro method, of class Login.
-     */
-    @Test
-    public void testSetIdPregoeiro() {
-    }
-
-    /**
-     * Test of hashCode method, of class Login.
-     */
-    @Test
-    public void testHashCode() {
-    }
-
-    /**
-     * Test of equals method, of class Login.
-     */
-    @Test
-    public void testEquals() {
-    }
-
-    /**
-     * Test of toString method, of class Login.
-     */
-    @Test
-    public void testToString() {
+        assertNotEquals("Ricardo", login2.getUsuario());
+        assertNotEquals("12345", login2.getSenha());
+        assertNotEquals(false, login2.getLogado());
     }
     
+    /**
+     * Testando o metodo equals
+     */
+    @Test
+    public void testEqualsLogin(){
+        assertEquals(false, login1.equals(login2));
+        assertEquals(true, login1.equals(login1));
+    }
+
 }

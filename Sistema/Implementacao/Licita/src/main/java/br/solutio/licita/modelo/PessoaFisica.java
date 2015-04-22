@@ -38,29 +38,38 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "PessoaFisica.findByCpf", query = "SELECT p FROM PessoaFisica p WHERE p.cpf = :cpf"),
     @NamedQuery(name = "PessoaFisica.findByRg", query = "SELECT p FROM PessoaFisica p WHERE p.rg = :rg")})
 public class PessoaFisica implements Identificavel {
+
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
+
     @Size(max = 80)
     @Column(name = "nome")
     private String nome;
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 11)
     @Column(name = "cpf")
     private String cpf;
+
     @Size(max = 30)
     @Column(name = "rg")
     private String rg;
+
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoaFisica")
     private MembroApoio membroApoio;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPessoaFisica")
     private Set<ContatoPessoaFisica> contatoPessoaFisicaSet;
+
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoaFisica")
     private RepresentanteLegal representanteLegal;
+
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoaFisica")
     private Pregoeiro pregoeiro;
 
@@ -166,5 +175,5 @@ public class PessoaFisica implements Identificavel {
     public String toString() {
         return "br.solutio.licita.modelo.PessoaFisica[ id=" + id + " ]";
     }
-    
+
 }

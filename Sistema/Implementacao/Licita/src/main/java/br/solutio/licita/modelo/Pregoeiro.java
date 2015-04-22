@@ -31,13 +31,18 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Pregoeiro.findById", query = "SELECT p FROM Pregoeiro p WHERE p.pregoeiroPK.id = :id"),
     @NamedQuery(name = "Pregoeiro.findByIdPessoaFisica", query = "SELECT p FROM Pregoeiro p WHERE p.pregoeiroPK.idPessoaFisica = :idPessoaFisica")})
 public class Pregoeiro implements Identificavel {
+    
     private static final long serialVersionUID = 1L;
+    
     @EmbeddedId
     protected PregoeiroPK pregoeiroPK;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPregoeiro")
     private Set<Sessao> sessaoSet;
+    
     @OneToOne(mappedBy = "idPregoeiro")
     private Login login;
+    
     @JoinColumn(name = "id_pessoa_fisica", referencedColumnName = "id", insertable = false, updatable = false)
     @OneToOne(optional = false)
     private PessoaFisica pessoaFisica;
