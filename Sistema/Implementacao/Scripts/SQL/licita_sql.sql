@@ -39,7 +39,7 @@ CREATE TABLE tbl_pessoa_juridica(
 	id_endereco BIGINT,
 	razao_social VARCHAR(80),
 	nome_fantasia VARCHAR(80),	
-	cnpj CHAR(14) UNIQUE NOT NULL
+	cnpj CHAR(14) UNIQUE NOT NULL,
 	CONSTRAINT fk_pessoa_juridica_endereco FOREIGN KEY(id_endereco) REFERENCES tbl_endereco(id) ON DELETE CASCADE
 	
 );

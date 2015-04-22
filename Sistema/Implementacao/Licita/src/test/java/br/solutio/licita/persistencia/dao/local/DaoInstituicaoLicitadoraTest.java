@@ -5,6 +5,8 @@
  */
 package br.solutio.licita.persistencia.dao.local;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -15,6 +17,14 @@ import static org.junit.Assert.*;
 public class DaoInstituicaoLicitadoraTest {
     
     public DaoInstituicaoLicitadoraTest() {
+    }
+    
+    @Before
+    public void setUp() {
+    }
+    
+    @After
+    public void tearDown() {
     }
 
     @Test
