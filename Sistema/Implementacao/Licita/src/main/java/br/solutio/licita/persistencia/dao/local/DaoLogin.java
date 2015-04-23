@@ -22,11 +22,11 @@ public class DaoLogin extends DaoLocal<Login> implements DaoLoginIF{
     }
 
     @Override
-    public Identificavel verificarDados(String login, String senha) {
-        List<Identificavel> list = getEntityManager().createQuery("FROM Login as l where l.usuario = :login AND l.senha = :senha").getResultList();
-        for (Identificavel id : list) {
-            return id;
+    public boolean verificarDados(String login, String senha) {
+        List<Login> list = getEntityManager().createQuery("FROM Login as l where l.usuario = :login AND l.senha = :senha").getResultList();
+        for (Login id : list) {
+            return true;
         }
-        return null;
+        return false;
     }
 }

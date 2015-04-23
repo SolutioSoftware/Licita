@@ -5,16 +5,21 @@
  */
 package br.solutio.licita.persistencia.dao.local;
 
+import br.solutio.licita.persistencia.dao.DaoInstituicaoLicitadoraIF;
+import br.solutio.licita.persistencia.dao.DaoLoginIF;
+import br.solutio.licita.persistencia.dao.DaoPregoeiroIF;
+
 /**
  *
  * @author WitaloCarlos
+ * @param <T>
  */
 public interface FabricaDaoLocalIF {
 
-    DaoLocalIF getDaoInstituicaoLicitadora();
+    DaoInstituicaoLicitadoraIF getDaoInstituicaoLicitadora();
 
-    DaoLocalIF getDaoLogin();
+    DaoLoginIF getDaoLogin();
 
-    DaoLocalIF getDaoPregoeiro();
+    DaoPregoeiroIF getDaoPregoeiro();
     
 }

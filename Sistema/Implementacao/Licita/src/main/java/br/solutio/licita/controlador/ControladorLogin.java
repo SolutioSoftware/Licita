@@ -3,37 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package br.solutio.licita.controlador;
 
-
 import br.solutio.licita.modelo.Identificavel;
-import br.solutio.licita.modelo.PessoaFisica;
 import br.solutio.licita.servico.ServicoIF;
-import javax.faces.bean.ManagedBean;
 
 /**
  *
- * @author WitaloCarlos
+ * @author Matheus Oliveira
  */
-@ManagedBean
-public class EquipeBean extends ControladorAbstrato{
+public class ControladorLogin extends ControladorAbstrato{
 
-    PessoaFisica entidade;
-    
-    
+
     @Override
-    public PessoaFisica getEntidade() {
-        return this.entidade;
+    public Identificavel getEntidade() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void setEntidade(Identificavel entidade) {
-        this.entidade = (PessoaFisica) entidade;
-        
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public ServicoIF getServico() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 }

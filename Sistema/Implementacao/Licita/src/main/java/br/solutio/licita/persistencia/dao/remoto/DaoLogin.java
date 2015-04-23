@@ -5,9 +5,7 @@
  */
 package br.solutio.licita.persistencia.dao.remoto;
 
-import br.solutio.licita.modelo.Identificavel;
 import br.solutio.licita.persistencia.dao.DaoLoginIF;
-import br.solutio.licita.persistencia.dao.local.*;
 import br.solutio.licita.modelo.Login;
 import java.util.List;
 
@@ -23,12 +21,12 @@ public class DaoLogin extends DaoRemoto<Login> implements DaoLoginIF{
     }
     
     @Override
-    public Identificavel verificarDados(String login, String senha) {
-        List<Identificavel> list = getEntityManager().createQuery("FROM Login as l where l.usuario = :login AND l.senha = :senha").getResultList();
-        for (Identificavel id : list) {
-            return id;
+    public boolean verificarDados(String login, String senha) {
+        List<Login> list = getEntityManager().createQuery("FROM Login as l where l.usuario = :login AND l.senha = :senha").getResultList();
+        for (Login id : list) {
+            return true;
         }
-        return null;
+        return false;
     }
     
 }

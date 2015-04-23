@@ -81,7 +81,6 @@ public class RepresentanteLegal implements Identificavel {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof RepresentanteLegal)) {
             return false;
         }

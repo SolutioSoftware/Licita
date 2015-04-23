@@ -7,46 +7,46 @@ package br.solutio.licita.controlador;
 
 import br.solutio.licita.modelo.Identificavel;
 import br.solutio.licita.persistencia.dao.DaoAbstratoIF;
+import br.solutio.licita.servico.ServicoIF;
 import java.util.List;
 
 /**
  *
  * @author WitaloCarlos
- * @param <T>
  */
 
-public abstract class ControladorAbstrato<T extends Identificavel> implements ControladorAbstratoIF{
+public abstract class ControladorAbstrato implements ControladorAbstratoIF{
 
-    public abstract DaoAbstratoIF getDao();
+    public abstract ServicoIF getServico();
     
     @Override
     public int contagem() {
-        return getDao().contagem();
+        return getServico().contagem();
     }
 
     @Override
     public boolean criar(Identificavel entidade) {
-        return getDao().criar(entidade);
+        return getServico().criar(entidade);
     }
 
     @Override
     public boolean editar(Identificavel entidade) {
-        return getDao().editar(entidade);
+        return getServico().editar(entidade);
     }
 
     @Override
     public boolean deletar(Identificavel entidade) {
-        return getDao().deletar(entidade);
+        return getServico().deletar(entidade);
     }
 
     @Override
     public Identificavel buscarPorId(Long id) {
-        return getDao().buscarPorId(id);
+        return getServico().buscarPorId(id);
     }
 
     @Override
     public List<Identificavel> buscarTodos() {
-        return getDao().buscarTodos();
+        return getServico().buscarTodos();
     }
     
     

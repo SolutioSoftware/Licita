@@ -12,7 +12,6 @@ import java.util.List;
 /**
  *
  * @author Matheus Oliveira
- * @param <T>
  */
 public interface ServicoIF{
 

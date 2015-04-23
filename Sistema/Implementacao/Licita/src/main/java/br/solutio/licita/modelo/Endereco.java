@@ -5,7 +5,6 @@
  */
 package br.solutio.licita.modelo;
 
-import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -132,7 +131,6 @@ public class Endereco implements Identificavel {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Endereco)) {
             return false;
         }
