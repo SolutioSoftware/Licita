@@ -6,11 +6,10 @@
 
 package br.solutio.licita.servico;
 
-import br.solutio.licita.modelo.Identificavel;
 import br.solutio.licita.persistencia.dao.DaoAbstratoIF;
+import br.solutio.licita.persistencia.dao.DaoLoginIF;
 import br.solutio.licita.persistencia.dao.FabricaDAO;
 import br.solutio.licita.persistencia.dao.TipoDAO;
-import br.solutio.licita.persistencia.dao.local.DaoLogin;
 import br.solutio.licita.persistencia.dao.local.FabricaDaoLocal;
 import br.solutio.licita.persistencia.dao.local.FabricaDaoLocalIF;
 
@@ -18,18 +17,25 @@ import br.solutio.licita.persistencia.dao.local.FabricaDaoLocalIF;
  *
  * @author Matheus Oliveira
  */
-public class ServicoLoginLocal extends ServicoAbstrato implements ServicoLoginIF{
+public class ServicoLogin extends ServicoAbstrato implements ServicoLoginIF{
 
-    FabricaDaoLocalIF fabricaLocal = (FabricaDaoLocal) FabricaDAO.getFabricaDAO(TipoDAO.Local);
-    DaoLogin dao;
+    private FabricaDaoLocalIF fabricaLocal = (FabricaDaoLocal) FabricaDAO.getFabricaDAO(TipoDAO.Local);
+    private DaoLoginIF dao = fabricaLocal.getDaoLogin();
+
+    /**
+     *
+     * @param login
+     * @param senha
+     * @return
+     */
     @Override
-    public Identificavel verificarDados(String login, String senha) {
-        return null;
+    public boolean verificarDados(String login, String senha) {
+        return dao.verificarDados(login, senha);
     }
 
     @Override
     public DaoAbstratoIF getDao() {
-        return fabricaLocal.getDaoLogin();
+        return this.dao;
     }
     
 }

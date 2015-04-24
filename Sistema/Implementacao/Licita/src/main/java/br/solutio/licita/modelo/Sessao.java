@@ -5,7 +5,6 @@
  */
 package br.solutio.licita.modelo;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -190,7 +189,6 @@ public class Sessao implements Identificavel {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Sessao)) {
             return false;
         }

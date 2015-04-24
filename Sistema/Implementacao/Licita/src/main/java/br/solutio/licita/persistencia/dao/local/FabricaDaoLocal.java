@@ -17,18 +17,30 @@ public class FabricaDaoLocal extends FabricaDAO implements FabricaDaoLocalIF {
         
     }
     
+    /**
+     *
+     * @return
+     */
     @Override
-    public DaoLocalIF getDaoPregoeiro(){
+    public DaoPregoeiro getDaoPregoeiro(){
         return new DaoPregoeiro();
     }
     
+    /**
+     *
+     * @return
+     */
     @Override
-    public DaoLocalIF getDaoInstituicaoLicitadora(){
+    public DaoInstituicaoLicitadora getDaoInstituicaoLicitadora(){
         return new DaoInstituicaoLicitadora();
     }
     
+    /**
+     *
+     * @return
+     */
     @Override
-    public DaoLocalIF getDaoLogin(){
+    public DaoLogin getDaoLogin(){
         return new DaoLogin();
     }
     

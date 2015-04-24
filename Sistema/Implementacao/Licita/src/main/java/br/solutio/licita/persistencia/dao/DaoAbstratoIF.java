@@ -7,7 +7,6 @@
 package br.solutio.licita.persistencia.dao;
 
 import br.solutio.licita.modelo.Identificavel;
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -15,7 +14,7 @@ import java.util.List;
  * @author Matheus Oliveira
  * 
  */
-public interface DaoAbstratoIF extends Serializable{
+public interface DaoAbstratoIF{
     
     /**
      * Retorna a quantidade de registros da entidade na base de dados.

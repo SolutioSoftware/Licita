@@ -12,6 +12,7 @@ import java.util.List;
 /**
  *
  * @author WitaloCarlos
+ * @param <T>
  */
 public interface ControladorAbstratoIF<T extends Identificavel> extends Serializable{
     

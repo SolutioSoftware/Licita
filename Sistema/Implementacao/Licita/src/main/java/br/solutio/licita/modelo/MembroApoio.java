@@ -5,7 +5,6 @@
  */
 package br.solutio.licita.modelo;
 
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -84,7 +83,6 @@ public class MembroApoio implements Identificavel {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof MembroApoio)) {
             return false;
         }

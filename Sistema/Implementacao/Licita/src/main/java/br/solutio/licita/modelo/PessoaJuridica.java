@@ -5,7 +5,6 @@
  */
 package br.solutio.licita.modelo;
 
-import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -141,7 +140,6 @@ public class PessoaJuridica implements Identificavel {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof PessoaJuridica)) {
             return false;
         }

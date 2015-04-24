@@ -6,7 +6,6 @@
 package br.solutio.licita.persistencia.dao.local;
 
 import br.solutio.licita.persistencia.dao.DaoAbstratoIF;
-import br.solutio.licita.persistencia.dao.DaoAbstratoIF;
 
 /**
  *

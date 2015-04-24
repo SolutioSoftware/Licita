@@ -5,7 +5,6 @@
  */
 package br.solutio.licita.persistencia.dao;
 
-import br.solutio.licita.modelo.Identificavel;
 import br.solutio.licita.persistencia.dao.local.DaoLocalIF;
 
 /**
@@ -13,5 +12,5 @@ import br.solutio.licita.persistencia.dao.local.DaoLocalIF;
  * @author WitaloCarlos
  */
 public interface DaoLoginIF extends DaoLocalIF{
-    public Identificavel verificarDados(String login, String senha);
+    public boolean verificarDados(String login, String senha);
 }

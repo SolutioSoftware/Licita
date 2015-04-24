@@ -20,32 +20,32 @@ public abstract class ServicoAbstrato implements ServicoIF{
 
     @Override
     public int contagem() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getDao().contagem();
     }
 
     @Override
     public boolean criar(Identificavel entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getDao().criar(entidade);
     }
 
     @Override
     public boolean editar(Identificavel entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getDao().editar(entidade);
     }
 
     @Override
     public boolean deletar(Identificavel entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getDao().deletar(entidade);
     }
 
     @Override
     public Identificavel buscarPorId(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getDao().buscarPorId(id);
     }
 
     @Override
     public List<Identificavel> buscarTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getDao().buscarTodos();
     }
     
 }

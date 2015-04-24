@@ -13,6 +13,6 @@ import br.solutio.licita.modelo.Identificavel;
  * @author Matheus Oliveira
  */
 public interface ServicoLoginIF extends ServicoIF{
-    public Identificavel verificarDados(String login, String senha);
+    public boolean verificarDados(String login, String senha);
     
 }
