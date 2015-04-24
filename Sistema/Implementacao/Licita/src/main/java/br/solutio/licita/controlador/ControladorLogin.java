@@ -40,9 +40,8 @@ public class ControladorLogin extends ControladorAbstrato {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void imprimir() {
-        logger.info("hello jsf");
-        login = new Login();
+    public String validarLogin() {
+        return "/index.xhtml";
     }
 
 }
