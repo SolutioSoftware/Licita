@@ -6,7 +6,6 @@
 package br.solutio.licita.controlador;
 
 import br.solutio.licita.modelo.Identificavel;
-import br.solutio.licita.persistencia.dao.DaoAbstratoIF;
 import br.solutio.licita.servico.ServicoIF;
 import java.util.List;
 
