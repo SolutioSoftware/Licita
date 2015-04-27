@@ -15,7 +15,7 @@ import br.solutio.licita.modelo.Pregoeiro;
  *
  * @author WitaloCarlos
  */
-interface FabricaDaoIF {
+public interface FabricaDaoIF {
     
     public DaoIF<Pregoeiro> getDaoPregoeiro();
     public DaoIF<InstituicaoLicitadora> getDaoInstituicaoLicitadora();

@@ -13,7 +13,7 @@ import java.util.List;
  * @author WitaloCarlos
  */
 
-public abstract class ControladorAbstrato<T> implements ControladorAbstratoIF{
+public abstract class ControladorAbstrato<T> implements ControladorAbstratoIF<T>{
 
     public abstract ServicoIF getServico();
     
@@ -39,7 +39,7 @@ public abstract class ControladorAbstrato<T> implements ControladorAbstratoIF{
 
     @Override
     public T buscarPorId(Long id) {
-        return getServico().buscarPorId(id);
+        return (T) getServico().buscarPorId(id);
     }
 
     @Override

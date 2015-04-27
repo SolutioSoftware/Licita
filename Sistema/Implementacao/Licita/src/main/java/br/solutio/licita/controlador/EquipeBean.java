@@ -34,4 +34,9 @@ public class EquipeBean extends ControladorAbstrato<PessoaFisica>{
     public ServicoIF getServico() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void setEntidade(PessoaFisica entidade) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

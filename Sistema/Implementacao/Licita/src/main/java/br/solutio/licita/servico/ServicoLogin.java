@@ -6,21 +6,22 @@
 
 package br.solutio.licita.servico;
 
+import br.solutio.licita.modelo.Login;
 import br.solutio.licita.persistencia.dao.DaoIF;
-import br.solutio.licita.persistencia.dao.DaoLoginIF;
 import br.solutio.licita.persistencia.dao.FabricaDAO;
+import br.solutio.licita.persistencia.dao.FabricaDaoIF;
 import br.solutio.licita.persistencia.dao.TipoDAO;
 import br.solutio.licita.persistencia.dao.local.FabricaDaoLocal;
-import br.solutio.licita.persistencia.dao.local.FabricaDaoLocalIF;
+
 
 /**
  *
  * @author Matheus Oliveira
  */
-public class ServicoLogin extends ServicoAbstrato implements ServicoLoginIF{
+public class ServicoLogin extends ServicoAbstrato<Login> implements ServicoLoginIF{
 
-    private FabricaDaoLocalIF fabricaLocal = (FabricaDaoLocal) FabricaDAO.getFabricaDAO(TipoDAO.Local);
-    private DaoLoginIF dao = fabricaLocal.getDaoLogin();
+    private FabricaDaoIF fabricaLocal = (FabricaDaoLocal) FabricaDAO.getFabricaDAO(TipoDAO.Local);
+    private DaoIF<Login> dao = fabricaLocal.getDaoLogin();
 
     /**
      *
@@ -30,7 +31,9 @@ public class ServicoLogin extends ServicoAbstrato implements ServicoLoginIF{
      */
     @Override
     public boolean verificarDados(String login, String senha) {
-        return dao.verificarDados(login, senha);
+        //TODO resolver este método neste nível
+        // dao.verificarDados(login, senha);
+        return false;
     }
 
     @Override

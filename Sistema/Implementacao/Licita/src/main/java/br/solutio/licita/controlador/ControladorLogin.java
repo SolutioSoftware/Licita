@@ -5,7 +5,6 @@
  */
 package br.solutio.licita.controlador;
 
-import br.solutio.licita.modelo.Identificavel;
 import br.solutio.licita.modelo.Login;
 import br.solutio.licita.servico.ServicoIF;
 import java.util.logging.Logger;
@@ -16,7 +15,7 @@ import javax.faces.bean.ManagedBean;
  * @author Matheus Oliveira
  */
 @ManagedBean(name = "Login")
-public class ControladorLogin extends ControladorAbstrato {
+public class ControladorLogin extends ControladorAbstrato<Login> {
 
     private static final Logger logger = Logger.getGlobal();
     private Login login;
@@ -31,7 +30,7 @@ public class ControladorLogin extends ControladorAbstrato {
     }
 
     @Override
-    public void setEntidade(Identificavel entidade) {
+    public void setEntidade(Login entidade) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

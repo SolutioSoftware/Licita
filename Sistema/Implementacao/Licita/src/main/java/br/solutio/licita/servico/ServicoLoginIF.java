@@ -6,13 +6,13 @@
 
 package br.solutio.licita.servico;
 
-import br.solutio.licita.modelo.Persistivel;
+import br.solutio.licita.modelo.Login;
 
 /**
  *
  * @author Matheus Oliveira
  */
-public interface ServicoLoginIF extends ServicoIF{
+public interface ServicoLoginIF extends ServicoIF<Login>{
     public boolean verificarDados(String login, String senha);
     
 }

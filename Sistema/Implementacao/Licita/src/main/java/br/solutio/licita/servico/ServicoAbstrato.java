@@ -40,7 +40,7 @@ public abstract class ServicoAbstrato<T> implements ServicoIF<T>{
 
     @Override
     public T buscarPorId(Long id) {
-        return getDao().buscarPorId(id);
+        return (T) getDao().buscarPorId(id);
     }
 
     @Override
