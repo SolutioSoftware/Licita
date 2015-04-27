@@ -6,14 +6,13 @@
 
 package br.solutio.licita.servico;
 
-import br.solutio.licita.modelo.Identificavel;
 import java.util.List;
 
 /**
  *
  * @author Matheus Oliveira
  */
-public interface ServicoIF{
+public interface ServicoIF<T>{
 
     /**
      * Retorna a quantidade de registros da entidade na base de dados.
@@ -26,35 +25,35 @@ public interface ServicoIF{
      * @param entidade
      * @return true caso a persistencia ocorra com sucesso; false caso contrário.
      */
-    public boolean criar(Identificavel entidade);
+    public boolean criar(T entidade);
     
     /**
      * Modifica um registro de uma entidade na base de dados.
      * @param entidade
      * @return true caso a persistencia ocorra com sucesso; false caso contrário.
      */
-    public boolean editar(Identificavel entidade);
+    public boolean editar(T entidade);
     
     /**
      * Remove um registro de uma entidade na base de dados.
      * @param entidade
      * @return true caso a persistencia ocorra com sucesso; false caso contrário.
      */
-    public boolean deletar(Identificavel entidade);
+    public boolean deletar(T entidade);
     
 
     /**
      * Busca um registro de uma entidade na base de dados através do id.
      * @param id 
-     * @return entidade do tipo Identificavel
+     * @return entidade do tipo Persistivel
      */
-    public Identificavel buscarPorId(Long id);
+    public T buscarPorId(Long id);
     
     
      /**
      * Busca todos os registros de uma entidade na base de dados.
-     * @return entidade do tipo Identificavel
+     * @return entidade do tipo Persistivel
      */
-    public List<Identificavel> buscarTodos();
+    public List<T> buscarTodos();
     
 }

@@ -6,7 +6,7 @@
 
 package br.solutio.licita.servico;
 
-import br.solutio.licita.persistencia.dao.DaoAbstratoIF;
+import br.solutio.licita.persistencia.dao.DaoIF;
 import br.solutio.licita.persistencia.dao.DaoLoginIF;
 import br.solutio.licita.persistencia.dao.FabricaDAO;
 import br.solutio.licita.persistencia.dao.TipoDAO;
@@ -34,7 +34,7 @@ public class ServicoLogin extends ServicoAbstrato implements ServicoLoginIF{
     }
 
     @Override
-    public DaoAbstratoIF getDao() {
+    public DaoIF getDao() {
         return this.dao;
     }
     

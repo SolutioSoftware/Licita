@@ -6,7 +6,7 @@
 package br.solutio.licita.controlador;
 
 
-import br.solutio.licita.modelo.Identificavel;
+
 import br.solutio.licita.modelo.PessoaFisica;
 import br.solutio.licita.servico.ServicoIF;
 import javax.faces.bean.ManagedBean;
@@ -16,8 +16,10 @@ import javax.faces.bean.ManagedBean;
  * @author WitaloCarlos
  */
 @ManagedBean
-public class EquipeBean extends ControladorAbstrato{
-
+public class EquipeBean extends ControladorAbstrato<PessoaFisica>{
+    
+    
+    
     PessoaFisica entidade;
     
     
@@ -26,11 +28,7 @@ public class EquipeBean extends ControladorAbstrato{
         return this.entidade;
     }
 
-    @Override
-    public void setEntidade(Identificavel entidade) {
-        this.entidade = (PessoaFisica) entidade;
-        
-    }
+  
 
     @Override
     public ServicoIF getServico() {

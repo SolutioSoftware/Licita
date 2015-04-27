@@ -5,6 +5,7 @@
  */
 package br.solutio.licita.modelo;
 
+import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -40,7 +41,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Pregao.findByDescricao", query = "SELECT p FROM Pregao p WHERE p.descricao = :descricao"),
     @NamedQuery(name = "Pregao.findByStatusPregao", query = "SELECT p FROM Pregao p WHERE p.statusPregao = :statusPregao"),
     @NamedQuery(name = "Pregao.findBySincronizado", query = "SELECT p FROM Pregao p WHERE p.sincronizado = :sincronizado")})
-public class Pregao implements Identificavel {
+public class Pregao implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -85,7 +86,6 @@ public class Pregao implements Identificavel {
         this.numeroProcesso = numeroProcesso;
     }
 
-    @Override
     public Long getId() {
         return id;
     }

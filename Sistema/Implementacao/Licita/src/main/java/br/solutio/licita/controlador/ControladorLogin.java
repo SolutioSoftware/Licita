@@ -6,7 +6,7 @@
 
 package br.solutio.licita.controlador;
 
-import br.solutio.licita.modelo.Identificavel;
+import br.solutio.licita.modelo.Persistivel;
 import br.solutio.licita.servico.ServicoIF;
 
 /**
@@ -17,12 +17,12 @@ public class ControladorLogin extends ControladorAbstrato{
 
 
     @Override
-    public Identificavel getEntidade() {
+    public Persistivel getEntidade() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void setEntidade(Identificavel entidade) {
+    public void setEntidade(Persistivel entidade) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

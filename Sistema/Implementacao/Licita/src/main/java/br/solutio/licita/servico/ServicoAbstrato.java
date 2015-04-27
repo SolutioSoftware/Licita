@@ -6,17 +6,17 @@
 
 package br.solutio.licita.servico;
 
-import br.solutio.licita.modelo.Identificavel;
-import br.solutio.licita.persistencia.dao.DaoAbstratoIF;
+import br.solutio.licita.persistencia.dao.DaoIF;
 import java.util.List;
 
 /**
  *
  * @author Matheus Oliveira
+ * @param <T>
  */
-public abstract class ServicoAbstrato implements ServicoIF{
+public abstract class ServicoAbstrato<T> implements ServicoIF<T>{
     
-    public abstract DaoAbstratoIF getDao();
+    public abstract DaoIF getDao();
 
     @Override
     public int contagem() {
@@ -24,27 +24,27 @@ public abstract class ServicoAbstrato implements ServicoIF{
     }
 
     @Override
-    public boolean criar(Identificavel entidade) {
+    public boolean criar(T entidade) {
         return getDao().criar(entidade);
     }
 
     @Override
-    public boolean editar(Identificavel entidade) {
+    public boolean editar(T entidade) {
         return getDao().editar(entidade);
     }
 
     @Override
-    public boolean deletar(Identificavel entidade) {
+    public boolean deletar(T entidade) {
         return getDao().deletar(entidade);
     }
 
     @Override
-    public Identificavel buscarPorId(Long id) {
+    public T buscarPorId(Long id) {
         return getDao().buscarPorId(id);
     }
 
     @Override
-    public List<Identificavel> buscarTodos() {
+    public List<T> buscarTodos() {
         return getDao().buscarTodos();
     }
     

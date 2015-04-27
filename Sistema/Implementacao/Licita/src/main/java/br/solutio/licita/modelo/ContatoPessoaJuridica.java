@@ -5,6 +5,7 @@
  */
 package br.solutio.licita.modelo;
 
+import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,7 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "ContatoPessoaJuridica.findById", query = "SELECT c FROM ContatoPessoaJuridica c WHERE c.id = :id"),
     @NamedQuery(name = "ContatoPessoaJuridica.findByTipoContato", query = "SELECT c FROM ContatoPessoaJuridica c WHERE c.tipoContato = :tipoContato"),
     @NamedQuery(name = "ContatoPessoaJuridica.findByValor", query = "SELECT c FROM ContatoPessoaJuridica c WHERE c.valor = :valor")})
-public class ContatoPessoaJuridica implements Identificavel {
+public class ContatoPessoaJuridica implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,7 +64,7 @@ public class ContatoPessoaJuridica implements Identificavel {
         this.valor = valor;
     }
 
-    @Override
+    
     public Long getId() {
         return id;
     }

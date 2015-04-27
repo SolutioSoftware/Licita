@@ -5,8 +5,8 @@
  */
 package br.solutio.licita.persistencia.dao.local;
 
-import br.solutio.licita.modelo.Identificavel;
 import br.solutio.licita.persistencia.dao.DaoAbstrato;
+import br.solutio.licita.persistencia.dao.DaoIF;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -16,7 +16,7 @@ import javax.persistence.Persistence;
  * @author WitaloCarlos
  * @param <T>
  */
-public class DaoLocal<T extends Identificavel> extends DaoAbstrato<T> implements DaoLocalIF{
+public class DaoLocal<T> extends DaoAbstrato<T> implements DaoIF<T>{
 
     private static EntityManagerFactory emf = null; 
     protected EntityManager entityManager;

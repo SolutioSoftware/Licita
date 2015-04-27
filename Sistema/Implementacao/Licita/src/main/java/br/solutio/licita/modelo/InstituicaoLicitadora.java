@@ -5,6 +5,7 @@
  */
 package br.solutio.licita.modelo;
 
+import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -25,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "InstituicaoLicitadora.findAll", query = "SELECT i FROM InstituicaoLicitadora i"),
     @NamedQuery(name = "InstituicaoLicitadora.findById", query = "SELECT i FROM InstituicaoLicitadora i WHERE i.instituicaoLicitadoraPK.id = :id"),
     @NamedQuery(name = "InstituicaoLicitadora.findByIdPessoaJuridica", query = "SELECT i FROM InstituicaoLicitadora i WHERE i.instituicaoLicitadoraPK.idPessoaJuridica = :idPessoaJuridica")})
-public class InstituicaoLicitadora implements Identificavel {
+public class InstituicaoLicitadora implements Serializable{
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected InstituicaoLicitadoraPK instituicaoLicitadoraPK;
@@ -84,7 +85,7 @@ public class InstituicaoLicitadora implements Identificavel {
         return "br.solutio.licita.modelo.InstituicaoLicitadora[ instituicaoLicitadoraPK=" + instituicaoLicitadoraPK + " ]";
     }
 
-    @Override
+    
     public Long getId() {
         return getInstituicaoLicitadoraPK().getId();
     }

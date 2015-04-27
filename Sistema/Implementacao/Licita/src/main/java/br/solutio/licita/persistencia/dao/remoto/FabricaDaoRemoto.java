@@ -5,30 +5,46 @@
  */
 package br.solutio.licita.persistencia.dao.remoto;
 
+import br.solutio.licita.modelo.EmpresaLicitante;
+import br.solutio.licita.modelo.InstituicaoLicitadora;
+import br.solutio.licita.modelo.ItemPregao;
+import br.solutio.licita.modelo.Login;
+import br.solutio.licita.modelo.Pregoeiro;
+import br.solutio.licita.persistencia.dao.DaoIF;
 import br.solutio.licita.persistencia.dao.FabricaDAO;
+
 
 /**
  *
  * @author WitaloCarlos
  */
-public class FabricaDaoRemoto extends FabricaDAO implements FabricaDaoRemotoIF {
+public class FabricaDaoRemoto extends FabricaDAO {
 
-    public FabricaDaoRemoto() {
-    }
-    
     @Override
-    public DaoRemotoIF getDaoPregoeiro(){
-        return new DaoPregoeiro();
+    public DaoIF<Pregoeiro> getDaoPregoeiro() {
+        return new DaoRemoto<>();
     }
-    
+
     @Override
-    public DaoRemotoIF getDaoInstituicaoLicitadora(){
-        return new DaoInstituicaoLicitadora();
+    public DaoIF<InstituicaoLicitadora> getDaoInstituicaoLicitadora() {
+        return new DaoRemoto<>();
     }
-    
+
     @Override
-    public DaoRemotoIF getDaoLogin(){
-        return new DaoLogin();
+    public DaoIF<Login> getDaoLogin() {
+        return new DaoRemoto<>();
     }
+
+    @Override
+    public DaoIF<EmpresaLicitante> getDaoEmpresaLicitante() {
+        return new DaoRemoto<>();
+    }
+
+    @Override
+    public DaoIF<ItemPregao> getDaoItemPregao() {
+        return new DaoRemoto<>();
+    }
+
+   
     
 }

@@ -5,12 +5,12 @@
  */
 package br.solutio.licita.persistencia.dao.remoto;
 
-import br.solutio.licita.persistencia.dao.DaoAbstratoIF;
+import br.solutio.licita.persistencia.dao.DaoIF;
 
 /**
  *
  * @author WitaloCarlos
  */
-public interface DaoRemotoIF extends DaoAbstratoIF{
+public interface DaoRemotoIF extends DaoIF{
     
 }

@@ -5,45 +5,43 @@
  */
 package br.solutio.licita.persistencia.dao.local;
 
+import br.solutio.licita.modelo.EmpresaLicitante;
+import br.solutio.licita.modelo.InstituicaoLicitadora;
+import br.solutio.licita.modelo.ItemPregao;
+import br.solutio.licita.modelo.Login;
+import br.solutio.licita.modelo.Pregoeiro;
+import br.solutio.licita.persistencia.dao.DaoIF;
 import br.solutio.licita.persistencia.dao.FabricaDAO;
 
 /**
  *
  * @author WitaloCarlos
  */
-public class FabricaDaoLocal extends FabricaDAO implements FabricaDaoLocalIF {
+public class FabricaDaoLocal extends FabricaDAO {
 
-    public FabricaDaoLocal() {
-        
-    }
-    
-    /**
-     *
-     * @return
-     */
     @Override
-    public DaoPregoeiro getDaoPregoeiro(){
-        return new DaoPregoeiro();
+    public DaoIF<Pregoeiro> getDaoPregoeiro() {
+        return new DaoLocal<>();
     }
-    
-    /**
-     *
-     * @return
-     */
+
     @Override
-    public DaoInstituicaoLicitadora getDaoInstituicaoLicitadora(){
-        return new DaoInstituicaoLicitadora();
+    public DaoIF<InstituicaoLicitadora> getDaoInstituicaoLicitadora() {
+        return new DaoLocal<>();
     }
-    
-    /**
-     *
-     * @return
-     */
+
     @Override
-    public DaoLogin getDaoLogin(){
-        return new DaoLogin();
+    public DaoIF<Login> getDaoLogin() {
+        return new DaoLocal<>();
     }
-    
-    
+
+    @Override
+    public DaoIF<EmpresaLicitante> getDaoEmpresaLicitante() {
+        return new DaoLocal<>();
+    }
+
+    @Override
+    public DaoIF<ItemPregao> getDaoItemPregao() {
+        return new DaoLocal<>();
+    }
     
 }

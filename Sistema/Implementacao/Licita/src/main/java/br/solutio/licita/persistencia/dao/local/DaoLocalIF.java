@@ -5,12 +5,12 @@
  */
 package br.solutio.licita.persistencia.dao.local;
 
-import br.solutio.licita.persistencia.dao.DaoAbstratoIF;
+import br.solutio.licita.persistencia.dao.DaoIF;
 
 /**
  *
  * @author WitaloCarlos
  */
-public interface DaoLocalIF extends DaoAbstratoIF{
+public interface DaoLocalIF extends DaoIF{
     
 }

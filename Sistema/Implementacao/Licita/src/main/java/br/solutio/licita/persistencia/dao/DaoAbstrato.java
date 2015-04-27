@@ -5,7 +5,6 @@
  */
 package br.solutio.licita.persistencia.dao;
 
-import br.solutio.licita.modelo.Identificavel;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -15,7 +14,7 @@ import javax.persistence.EntityManager;
  * @author WitaloCarlos
  * @param <T>
  */
-public abstract class DaoAbstrato<T extends Identificavel> implements DaoAbstratoIF{
+public abstract class DaoAbstrato<T> implements DaoIF<T>{
     
     private Class<T> entidade;
     static final Logger logger = Logger.getGlobal();
@@ -40,38 +39,38 @@ public abstract class DaoAbstrato<T extends Identificavel> implements DaoAbstrat
     @Override
     public int contagem() {
         javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
-        javax.persistence.criteria.Root<Identificavel> rt = cq.from(entidade);
+        javax.persistence.criteria.Root<T> rt = cq.from(entidade);
         cq.select(getEntityManager().getCriteriaBuilder().count(rt));
         javax.persistence.Query q = getEntityManager().createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
     }
 
     @Override
-    public boolean criar(Identificavel entidade) {
+    public boolean criar(T entidade) {
         getEntityManager().persist(entidade);
         return true;
     }
 
     @Override
-    public boolean editar(Identificavel entidade) {
+    public boolean editar(T entidade) {
         getEntityManager().merge(entidade);
         return true;
     }
 
     @Override
-    public boolean deletar(Identificavel entidade) {
-        getEntityManager().remove(entidade);
+    public boolean deletar(T entidade) {
+        getEntityManager().remove(entidade);      
         return true;
     }
 
 
     @Override
-    public Identificavel buscarPorId(Long id) {
+    public T buscarPorId(Long id) {
         return getEntityManager().find(entidade, id);
     }
 
     @Override
-    public List<Identificavel> buscarTodos() {
+    public List<T> buscarTodos() {
         javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(entidade));
         return getEntityManager().createQuery(cq).getResultList();

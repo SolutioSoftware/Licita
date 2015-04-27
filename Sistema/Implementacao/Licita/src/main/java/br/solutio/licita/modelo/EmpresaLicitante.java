@@ -5,6 +5,7 @@
  */
 package br.solutio.licita.modelo;
 
+import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -36,7 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "EmpresaLicitante.findByInscricaoEstadual", query = "SELECT e FROM EmpresaLicitante e WHERE e.inscricaoEstadual = :inscricaoEstadual"),
     @NamedQuery(name = "EmpresaLicitante.findByTipoEmpresa", query = "SELECT e FROM EmpresaLicitante e WHERE e.tipoEmpresa = :tipoEmpresa"),
     @NamedQuery(name = "EmpresaLicitante.findByComplemento", query = "SELECT e FROM EmpresaLicitante e WHERE e.complemento = :complemento")})
-public class EmpresaLicitante implements Identificavel {
+public class EmpresaLicitante implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected EmpresaLicitantePK empresaLicitantePK;
@@ -177,7 +178,7 @@ public class EmpresaLicitante implements Identificavel {
         return "br.solutio.licita.modelo.EmpresaLicitante[ empresaLicitantePK=" + empresaLicitantePK + " ]";
     }
 
-    @Override
+    
     public Long getId() {
         return getEmpresaLicitantePK().getId();
     }

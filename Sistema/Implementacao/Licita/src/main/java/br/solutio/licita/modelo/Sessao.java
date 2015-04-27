@@ -5,6 +5,7 @@
  */
 package br.solutio.licita.modelo;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -43,7 +44,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Sessao.findByDataRealizacao", query = "SELECT s FROM Sessao s WHERE s.dataRealizacao = :dataRealizacao"),
     @NamedQuery(name = "Sessao.findByHorarioPrevisto", query = "SELECT s FROM Sessao s WHERE s.horarioPrevisto = :horarioPrevisto"),
     @NamedQuery(name = "Sessao.findByStatusSessao", query = "SELECT s FROM Sessao s WHERE s.statusSessao = :statusSessao")})
-public class Sessao implements Identificavel {
+public class Sessao implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -88,7 +89,7 @@ public class Sessao implements Identificavel {
         this.id = id;
     }
 
-    @Override
+    
     public Long getId() {
         return id;
     }

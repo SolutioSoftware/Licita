@@ -5,6 +5,7 @@
  */
 package br.solutio.licita.modelo;
 
+import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -36,7 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "PessoaFisica.findByNome", query = "SELECT p FROM PessoaFisica p WHERE p.nome = :nome"),
     @NamedQuery(name = "PessoaFisica.findByCpf", query = "SELECT p FROM PessoaFisica p WHERE p.cpf = :cpf"),
     @NamedQuery(name = "PessoaFisica.findByRg", query = "SELECT p FROM PessoaFisica p WHERE p.rg = :rg")})
-public class PessoaFisica implements Identificavel {
+public class PessoaFisica implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
@@ -84,7 +85,7 @@ public class PessoaFisica implements Identificavel {
         this.cpf = cpf;
     }
 
-    @Override
+    
     public Long getId() {
         return id;
     }

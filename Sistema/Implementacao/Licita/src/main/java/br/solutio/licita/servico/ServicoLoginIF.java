@@ -6,7 +6,7 @@
 
 package br.solutio.licita.servico;
 
-import br.solutio.licita.modelo.Identificavel;
+import br.solutio.licita.modelo.Persistivel;
 
 /**
  *

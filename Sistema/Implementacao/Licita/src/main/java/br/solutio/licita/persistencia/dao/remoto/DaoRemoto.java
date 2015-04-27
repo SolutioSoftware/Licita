@@ -5,8 +5,9 @@
  */
 package br.solutio.licita.persistencia.dao.remoto;
 
-import br.solutio.licita.modelo.Identificavel;
 import br.solutio.licita.persistencia.dao.DaoAbstrato;
+import br.solutio.licita.persistencia.dao.DaoIF;
+import br.solutio.licita.persistencia.dao.FabricaDAO;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -16,10 +17,12 @@ import javax.persistence.Persistence;
  * @author WitaloCarlos
  * @param <T>
  */
-public class DaoRemoto<T extends Identificavel> extends DaoAbstrato<T> implements DaoRemotoIF{
+public class DaoRemoto<T> extends DaoAbstrato<T> implements DaoIF<T>{
 
     private static EntityManagerFactory emf; 
     protected EntityManager entityManager;
+    
+    
     
     public DaoRemoto(){
       

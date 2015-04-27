@@ -5,6 +5,7 @@
  */
 package br.solutio.licita.modelo;
 
+import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
@@ -29,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Pregoeiro.findAll", query = "SELECT p FROM Pregoeiro p"),
     @NamedQuery(name = "Pregoeiro.findById", query = "SELECT p FROM Pregoeiro p WHERE p.pregoeiroPK.id = :id"),
     @NamedQuery(name = "Pregoeiro.findByIdPessoaFisica", query = "SELECT p FROM Pregoeiro p WHERE p.pregoeiroPK.idPessoaFisica = :idPessoaFisica")})
-public class Pregoeiro implements Identificavel {
+public class Pregoeiro implements Serializable{
     
     private static final long serialVersionUID = 1L;
     
@@ -116,7 +117,7 @@ public class Pregoeiro implements Identificavel {
         return "br.solutio.licita.modelo.Pregoeiro[ pregoeiroPK=" + pregoeiroPK + " ]";
     }
 
-    @Override
+    
     public Long getId() {
         return getPregoeiroPK().getId();
     }

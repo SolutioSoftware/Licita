@@ -5,6 +5,7 @@
  */
 package br.solutio.licita.modelo;
 
+import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -26,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "RepresentanteLegal.findById", query = "SELECT r FROM RepresentanteLegal r WHERE r.representanteLegalPK.id = :id"),
     @NamedQuery(name = "RepresentanteLegal.findByIdPessoaFisica", query = "SELECT r FROM RepresentanteLegal r WHERE r.representanteLegalPK.idPessoaFisica = :idPessoaFisica"),
     @NamedQuery(name = "RepresentanteLegal.findByIdLicitante", query = "SELECT r FROM RepresentanteLegal r WHERE r.representanteLegalPK.idLicitante = :idLicitante")})
-public class RepresentanteLegal implements Identificavel {
+public class RepresentanteLegal implements Serializable{
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected RepresentanteLegalPK representanteLegalPK;
@@ -96,7 +97,7 @@ public class RepresentanteLegal implements Identificavel {
         return "br.solutio.licita.modelo.RepresentanteLegal[ representanteLegalPK=" + representanteLegalPK + " ]";
     }
 
-    @Override
+  
     public Long getId() {
         return getRepresentanteLegalPK().getId();
     }

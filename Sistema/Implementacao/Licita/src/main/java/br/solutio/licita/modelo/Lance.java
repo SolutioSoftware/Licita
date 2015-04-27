@@ -5,6 +5,7 @@
  */
 package br.solutio.licita.modelo;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -35,7 +36,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Lance.findById", query = "SELECT l FROM Lance l WHERE l.id = :id"),
     @NamedQuery(name = "Lance.findByHorarioLance", query = "SELECT l FROM Lance l WHERE l.horarioLance = :horarioLance"),
     @NamedQuery(name = "Lance.findByValor", query = "SELECT l FROM Lance l WHERE l.valor = :valor")})
-public class Lance implements Identificavel {
+public class Lance implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -74,7 +75,7 @@ public class Lance implements Identificavel {
         this.valor = valor;
     }
 
-    @Override
+    
     public Long getId() {
         return id;
     }

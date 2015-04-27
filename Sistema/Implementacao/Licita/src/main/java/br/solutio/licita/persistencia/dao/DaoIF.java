@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.solutio.licita.controlador;
 
-import java.io.Serializable;
+package br.solutio.licita.persistencia.dao;
+
 import java.util.List;
 
 /**
  *
- * @author WitaloCarlos
- * @param <T>
+ * @author Matheus Oliveira
+ * 
  */
-public interface ControladorAbstratoIF<T> extends Serializable{
+public interface DaoIF<T>{
     
-     /**
+    /**
      * Retorna a quantidade de registros da entidade na base de dados.
      * @return contagem
      */
@@ -56,17 +56,6 @@ public interface ControladorAbstratoIF<T> extends Serializable{
      * @return entidade do tipo Persistivel
      */
     public List<T> buscarTodos();
-    
-    public T getEntidade();
-    
-    public void setEntidade(T entidade);
-    
-    
-    
-    
-    
-    
-    
     
     
 }

@@ -5,6 +5,7 @@
  */
 package br.solutio.licita.modelo;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -44,7 +45,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "ItemPregao.findByDescricao", query = "SELECT i FROM ItemPregao i WHERE i.descricao = :descricao"),
     @NamedQuery(name = "ItemPregao.findByUnidade", query = "SELECT i FROM ItemPregao i WHERE i.unidade = :unidade"),
     @NamedQuery(name = "ItemPregao.findByStatusItem", query = "SELECT i FROM ItemPregao i WHERE i.statusItem = :statusItem")})
-public class ItemPregao implements Identificavel {
+public class ItemPregao implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -102,7 +103,7 @@ public class ItemPregao implements Identificavel {
         this.nome = nome;
     }
 
-    @Override
+    
     public Long getId() {
         return id;
     }

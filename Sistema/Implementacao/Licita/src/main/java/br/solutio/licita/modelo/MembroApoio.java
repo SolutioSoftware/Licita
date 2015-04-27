@@ -5,6 +5,7 @@
  */
 package br.solutio.licita.modelo;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -28,7 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "MembroApoio.findById", query = "SELECT m FROM MembroApoio m WHERE m.membroApoioPK.id = :id"),
     @NamedQuery(name = "MembroApoio.findByIdPessoaFisica", query = "SELECT m FROM MembroApoio m WHERE m.membroApoioPK.idPessoaFisica = :idPessoaFisica"),
     @NamedQuery(name = "MembroApoio.findByFuncao", query = "SELECT m FROM MembroApoio m WHERE m.funcao = :funcao")})
-public class MembroApoio implements Identificavel {
+public class MembroApoio implements Serializable{
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected MembroApoioPK membroApoioPK;
@@ -98,7 +99,7 @@ public class MembroApoio implements Identificavel {
         return "br.solutio.licita.modelo.MembroApoio[ membroApoioPK=" + membroApoioPK + " ]";
     }
 
-    @Override
+   
     public Long getId() {
         return getMembroApoioPK().getId();
     }
