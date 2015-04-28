@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template/TemplateLicitaPaineis.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="pn_info">
+
+        <div style="padding: 5px;margin-bottom: 15px;margin-top: 15px">
+            <p:button value="Novo" style="width: 80px" outcome="/restrito/equipe/equipeSalvar.xhtml"/>
+            <p:button value="Excluir" style="margin-left: 12px; width: 80px" />
+            <b><h:outputText value="Buscar: " style="margin-left: 12px; color: #045491 "/></b>
+            <p:inputText label="Buscar" placeholder="Digite sua busca" style="margin-left: 2px;width: 185px;" />
+        </div>
+
+        <p:dataTable id='dt_equipe' var="equipe" widgetVar="tbl_equipe" paginator="true" style="padding:5px" rowsPerPageTemplate="5,10,20,50,100, 200"  emptyMessage="Nenhum Membro Cadastrado"  paginatorAlwaysVisible="false">
+
+
+            <p:column headerText="CPF">
+                <h:outputText value="" />
+            </p:column>
+
+            <p:column headerText="Nome">
+                <h:outputText value="" />
+            </p:column>
+
+            <p:column headerText="Função">
+                <h:outputText value="" />
+            </p:column>
+
+
+
+        </p:dataTable>
+
+    </ui:define>
+
+    <ui:define name="pn_conteudo">
+        
+        <h:form id="equipe_form" title="Novo Membro Equipe" style="text-align: center"  >
+
+            <div style="margin-left: 30%; margin-top: 2%">
+                <h:panelGrid columns="2" >
+
+                    <p:outputLabel value="Nome:" for="nome" />
+                    <p:inputText id="nome" value="#{equipeBean.entidade.nome}" title="Nome"  required="true"  requiredMessage="O campo nome é obrigatório"/>
+
+                    <p:outputLabel value="CPF:" for="cpf" />
+                    <p:inputMask id="cpf" value="#{equipeBean.entidade.cpf}" title="CPF" required="true" requiredMessage="O campo CPF é obrigatorio" mask="999.999.999-99"/>
+
+                    <p:outputLabel value="RG:" for="rg" />
+                    <p:inputText id="rg" value="#{equipeBean.entidade.rg}" title="RG" />
+
+                    <p:outputLabel value="Tipo Pessoa:" for="tipopessoa"/>
+                    <h:selectOneRadio id="tipopessoa" value="#{equipeBean.valor}" required="true" requiredMessage="O campo tipo de pessoa é obrigatorio">
+                        <f:selectItem itemValue="Pregoeiro" itemLabel="Pregoeiro"/>  
+                        <f:selectItem itemValue="Membro de Apoio" itemLabel="Membro de Apoio"/>  
+                        <p:ajax listener="#{equipeBean.tipoPessoaFisica()}"  update="login"/>  
+                    </h:selectOneRadio>  
+
+                    <p:outputLabel value="Login:" for="login"/>
+                    <p:inputText id="login" value="#{equipeBean.entidade.pregoeiro.login.usuario}"  rendered="#{equipeBean.cargo}" />
+
+                    <p:outputLabel value="Senha:" for="senha"/>
+                    <p:inputText id="senha" value="#{equipeBean.entidade.pregoeiro.login.senha}"/>
+
+                    <p:outputLabel value="Função:" for="funcao"/>
+                    <p:inputText id="funcao" value="#{equipeBean.entidade.membroApoio.funcao}"/>
+
+                </h:panelGrid>
+
+            </div>
+            <p:commandButton  value="Salvar"/>
+        </h:form>
+
+    </ui:define> 
+
+
+</ui:composition>

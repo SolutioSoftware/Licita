@@ -5,8 +5,6 @@
  */
 package br.solutio.licita.controlador;
 
-
-
 import br.solutio.licita.modelo.PessoaFisica;
 import br.solutio.licita.servico.ServicoIF;
 import javax.faces.bean.ManagedBean;
@@ -16,19 +14,40 @@ import javax.faces.bean.ManagedBean;
  * @author WitaloCarlos
  */
 @ManagedBean
-public class EquipeBean extends ControladorAbstrato<PessoaFisica>{
-    
-    
-    
+public class EquipeBean extends ControladorAbstrato<PessoaFisica> {
+
     PessoaFisica entidade;
+    private boolean cargo = true;
+    private String valor;
     
-    
+    public boolean tipoPessoaFisica(){
+        if("Pregoeiro".equals(valor)){
+            return this.cargo = true;
+        }else{
+            return this.cargo = false;
+        }
+    }
+
+    public boolean isCargo() {
+        return cargo;
+    }
+
+    public void setCargo(boolean cargo) {
+        this.cargo = cargo;
+    }
+
+    public String getValor() {
+        return valor;
+    }
+
+    public void setValor(String valor) {
+        this.valor = valor;
+    }
+
     @Override
     public PessoaFisica getEntidade() {
         return this.entidade;
     }
-
-  
 
     @Override
     public ServicoIF getServico() {
