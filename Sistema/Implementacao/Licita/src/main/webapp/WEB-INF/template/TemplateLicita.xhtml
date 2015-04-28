@@ -25,13 +25,13 @@
                     <div id="div_menu" class="ui-grid-col-8" style="margin-left: 8%;">
 
                         <p:button value="" id="bt_pregoes" class="bt_pregoes"/>
-                        <p:button value="" id="bt_sessoes" class="bt_sessoes" outcome="/sessoes/sessoes.xhtml"/>
-                        <p:button value="" id="bt_licitantes" class="bt_licitantes" outcome="/licitantes/licitantes.xhtml"/>
+                        <p:button value="" id="bt_sessoes" class="bt_sessoes" outcome="/restrito/sessoes/sessoes.xhtml"/>
+                        <p:button value="" id="bt_licitantes" class="bt_licitantes" outcome="/restrito/licitantes/licitantes.xhtml"/>
                         <p:button value="" id="bt_itens" class="bt_itens" />
-                        <p:button value="" id="bt_equipe" class="bt_equipe" outcome="/equipe/equipe.xhtml"/>
-                        <p:button value="" id="bt_licitadores" class="bt_licitadores" outcome="/licitadores/licitadores.xhtml"/>
+                        <p:button value="" id="bt_equipe" class="bt_equipe" outcome="/restrito/equipe/equipe.xhtml"/>
+                        <p:button value="" id="bt_licitadores" class="bt_licitadores" outcome="/restrito/licitadores/licitadores.xhtml"/>
                         <p:button value="" id="bt_ajustes" class="bt_ajustes" />
-                        
+
 
 
                     </div>
@@ -43,9 +43,12 @@
                             <div class="ui-grid-col-2" style="margin-top: 5px;">
                                 <p:button value="" id="bt_alerta" class="bt_alerta"  />
                             </div>
-                            <div class="ui-grid-col-3" style="margin-top: 5px;">
-                                <p:button value="Sair" id="bt_sair" class="bt_sair" outcome="/login/login.xhtml" />
-                            </div>
+                            <h:form>
+                                <div class="ui-grid-col-3" style="margin-top: 5px;">
+                                    <p:commandButton value="Sair" id="bot_sair" class="bt_sair"
+                                                     action="#{Login.efetuarLogout}" />
+                                </div>
+                            </h:form>
                         </div>
                     </div>
                 </div>
@@ -69,7 +72,7 @@
             </p:layout>
         </div>
 
-        
+
         <!--
                 <footer>
                     <div id="footer" style="position: relative; left: 43%;right: 50%;padding: 5px;">

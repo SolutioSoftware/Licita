@@ -13,6 +13,16 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
+    
+    <filter>
+        <filter-name>FiltroLogin</filter-name>
+        <filter-class>br.solutio.licita.filtros.FiltroLogin</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>FiltroLogin</filter-name>
+        <url-pattern>/restrito/*</url-pattern>
+    </filter-mapping>
+    
     <context-param>
         <param-name>primefaces.THEME</param-name>
         <param-value>bootstrap</param-value>

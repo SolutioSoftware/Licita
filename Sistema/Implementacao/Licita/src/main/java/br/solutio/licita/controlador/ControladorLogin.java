@@ -7,8 +7,11 @@ package br.solutio.licita.controlador;
 
 import br.solutio.licita.modelo.Login;
 import br.solutio.licita.servico.ServicoIF;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -19,7 +22,6 @@ public class ControladorLogin extends ControladorAbstrato<Login> {
 
     private static final Logger logger = Logger.getGlobal();
     private Login login;
-
     public ControladorLogin() {
         login = new Login();
     }
@@ -39,8 +41,17 @@ public class ControladorLogin extends ControladorAbstrato<Login> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public String validarLogin() {
-        return "/index.xhtml";
+    public String efetuarLogin() {
+        FacesContext.getCurrentInstance()
+                .getExternalContext()
+                .getSessionMap()
+                .put("usuario", login); // Adiciona Login a sessão com JSF
+        return "/restrito/index.xhtml?faces-redirect=true";
+    }
+    
+    public String efetuarLogout(){
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "/login/login.xhtml?faces-redirect=true";
     }
 
 }
