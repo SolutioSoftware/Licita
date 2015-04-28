@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Login.findAll", query = "SELECT l FROM Login l"),
     @NamedQuery(name = "Login.findById", query = "SELECT l FROM Login l WHERE l.id = :id"),
     @NamedQuery(name = "Login.findByUsuario", query = "SELECT l FROM Login l WHERE l.usuario = :usuario"),
+    @NamedQuery(name = "Login.buscaPorLogin", query = "SELECT l FROM Login l WHERE l.usuario = :usuario AND l.senha = :senha"),
     @NamedQuery(name = "Login.findBySenha", query = "SELECT l FROM Login l WHERE l.senha = :senha"),
     @NamedQuery(name = "Login.findByLogado", query = "SELECT l FROM Login l WHERE l.logado = :logado")})
 public class Login implements Serializable{

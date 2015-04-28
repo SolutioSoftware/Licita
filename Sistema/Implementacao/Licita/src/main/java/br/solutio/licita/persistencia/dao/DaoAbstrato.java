@@ -8,27 +8,24 @@ package br.solutio.licita.persistencia.dao;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  *
  * @author WitaloCarlos
  * @param <T>
  */
-public abstract class DaoAbstrato<T> implements DaoIF<T>{
-    
+public abstract class DaoAbstrato<T> implements DaoIF<T> {
+
     private Class<T> entidade;
     static final Logger logger = Logger.getGlobal();
-   
 
     /**
-     *      
+     *
      * @return EntityManager
      */
     protected abstract EntityManager getEntityManager();
 
-    
-    
-  
     public DaoAbstrato(Class<T> entidade) {
         this.entidade = entidade;
     }
@@ -46,23 +43,20 @@ public abstract class DaoAbstrato<T> implements DaoIF<T>{
     }
 
     @Override
-    public boolean criar(T entidade) {
+    public void criar(T entidade) {
         getEntityManager().persist(entidade);
-        return true;
     }
 
     @Override
-    public boolean editar(T entidade) {
+    public void editar(T entidade) {
         getEntityManager().merge(entidade);
-        return true;
+
     }
 
     @Override
-    public boolean deletar(T entidade) {
-        getEntityManager().remove(entidade);      
-        return true;
+    public void deletar(T entidade) {
+        getEntityManager().remove(entidade);
     }
-
 
     @Override
     public T buscarPorId(Long id) {
@@ -75,5 +69,16 @@ public abstract class DaoAbstrato<T> implements DaoIF<T>{
         cq.select(cq.from(entidade));
         return getEntityManager().createQuery(cq).getResultList();
     }
-    
+
+    @Override
+    public List<T> consultar(String namedQuery, Object... parametros) {
+
+        Query query = getEntityManager().createNamedQuery(namedQuery, entidade.getClass());
+        for (int i = 0; i > parametros.length; i++) {
+            query.setParameter(i, parametros[i]);
+        }
+
+        return query.getResultList();
+    }
+
 }

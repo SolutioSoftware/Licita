@@ -23,18 +23,18 @@ public abstract class ControladorAbstrato<T> implements ControladorAbstratoIF<T>
     }
 
     @Override
-    public boolean criar(T entidade) {
-        return getServico().criar(entidade);
+    public void criar(T entidade) {
+        getServico().criar(entidade);
     }
 
     @Override
-    public boolean editar(T entidade) {
-        return getServico().editar(entidade);
+    public void editar(T entidade) {
+        getServico().editar(entidade);
     }
 
     @Override
-    public boolean deletar(T entidade) {
-        return getServico().deletar(entidade);
+    public void deletar(T entidade) {
+         getServico().deletar(entidade);
     }
 
     @Override

@@ -24,23 +24,20 @@ public interface DaoIF<T>{
     /**
      * Cria um registro de uma entidade na base de dados.
      * @param entidade
-     * @return true caso a persistencia ocorra com sucesso; false caso contrário.
      */
-    public boolean criar(T entidade);
+    public void criar(T entidade);
     
     /**
      * Modifica um registro de uma entidade na base de dados.
      * @param entidade
-     * @return true caso a persistencia ocorra com sucesso; false caso contrário.
      */
-    public boolean editar(T entidade);
+    public void editar(T entidade);
     
     /**
      * Remove um registro de uma entidade na base de dados.
      * @param entidade
-     * @return true caso a persistencia ocorra com sucesso; false caso contrário.
      */
-    public boolean deletar(T entidade);
+    public void deletar(T entidade);
     
 
     /**
@@ -57,5 +54,12 @@ public interface DaoIF<T>{
      */
     public List<T> buscarTodos();
     
+    /**
+     * Faz consultas através das namedQuery declaradas nas entidades.
+     * @param namedQuery o nome da namedQuery que deseja consultar
+     * @param parametros Parametros da consulta na ordem que aparecem na namedQuery. Separe os argumentos com virgula.
+     * @return lista de resultados da named query
+     */
+    public List<T> consultar(String namedQuery, Object... parametros);
     
 }

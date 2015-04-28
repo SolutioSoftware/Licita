@@ -8,6 +8,7 @@ package br.solutio.licita.servico;
 
 import br.solutio.licita.persistencia.dao.DaoIF;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,27 +16,35 @@ import java.util.List;
  * @param <T>
  */
 public abstract class ServicoAbstrato<T> implements ServicoIF<T>{
-    
+    protected static final Logger logger = Logger.getGlobal();
     public abstract DaoIF getDao();
 
     @Override
     public int contagem() {
         return getDao().contagem();
     }
-
+    
+    @Transacional
     @Override
-    public boolean criar(T entidade) {
-        return getDao().criar(entidade);
+    public void criar(T entidade) {
+        try {
+            getDao().criar(entidade);
+        } catch (Exception e) {
+            logger.info(e.getLocalizedMessage());
+        }
+        
     }
 
+    @Transacional
     @Override
-    public boolean editar(T entidade) {
-        return getDao().editar(entidade);
+    public void editar(T entidade) {
+        getDao().editar(entidade);
     }
-
+    
+    @Transacional
     @Override
-    public boolean deletar(T entidade) {
-        return getDao().deletar(entidade);
+    public void deletar(T entidade) {
+        getDao().deletar(entidade);
     }
 
     @Override
@@ -46,6 +55,11 @@ public abstract class ServicoAbstrato<T> implements ServicoIF<T>{
     @Override
     public List<T> buscarTodos() {
         return getDao().buscarTodos();
+    }
+    
+    @Override
+    public List<T> consultar(String namedQuery, Object... parametros){
+        return getDao().consultar(namedQuery, parametros);
     }
     
 }

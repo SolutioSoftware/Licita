@@ -24,23 +24,20 @@ public interface ControladorAbstratoIF<T> extends Serializable{
     /**
      * Cria um registro de uma entidade na base de dados.
      * @param entidade
-     * @return true caso a persistencia ocorra com sucesso; false caso contrário.
      */
-    public boolean criar(T entidade);
+    public void criar(T entidade);
     
     /**
      * Modifica um registro de uma entidade na base de dados.
      * @param entidade
-     * @return true caso a persistencia ocorra com sucesso; false caso contrário.
      */
-    public boolean editar(T entidade);
+    public void editar(T entidade);
     
     /**
      * Remove um registro de uma entidade na base de dados.
      * @param entidade
-     * @return true caso a persistencia ocorra com sucesso; false caso contrário.
      */
-    public boolean deletar(T entidade);
+    public void deletar(T entidade);
     
 
     /**
