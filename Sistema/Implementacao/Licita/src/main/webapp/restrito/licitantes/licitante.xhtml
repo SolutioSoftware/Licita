@@ -10,8 +10,8 @@
     <ui:define name="pn_info">
 
         <div style="padding: 5px;margin-bottom: 15px;margin-top: 15px">
-        <p:button value="Novo" style="width: 80px"/>
-        <p:button value="Excluir" style="margin-left: 12px; width: 80px" />
+        <p:button value="Novo" style="width: 80px" outcome="/restrito/licitantes/licitanteSalvar.xhtml" icon="fa fa-plus"/>
+        <p:button value="Excluir" style="margin-left: 12px; width: 80px" icon="fa fa-trash"/>
         <b><h:outputText value="Buscar: " style="margin-left: 12px; color: #045491 "/></b>
         <p:inputText label="Buscar" placeholder="Digite sua busca" style="margin-left: 2px;width: 185px;" />
         </div>
@@ -27,15 +27,11 @@
                 <h:outputText value="" />
             </p:column>
 
-            
-
         </p:dataTable>
 
     </ui:define>
 
     <ui:define name="pn_conteudo">
-
-       
 
     </ui:define> 
     

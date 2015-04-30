@@ -80,15 +80,6 @@ public class PregoeiroTest {
         pregoeiro2.setPregoeiroPK(pregoeiroPK2);
         pregoeiro2.setSessaoSet(sessoes2);
 
-        System.out.println("PregoeiroTest iniciado");
-    }
-
-    /**
-     * Metodo executado depois dos teste.
-     */
-    @After
-    public void tearDown() {
-        System.out.println("PregoeiroPKTest finalizado");
     }
 
     @Test

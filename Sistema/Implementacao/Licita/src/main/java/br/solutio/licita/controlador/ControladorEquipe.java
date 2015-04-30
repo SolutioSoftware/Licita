@@ -7,6 +7,8 @@ package br.solutio.licita.controlador;
 
 import br.solutio.licita.modelo.PessoaFisica;
 import br.solutio.licita.servico.ServicoIF;
+import java.util.ArrayList;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 
 /**
@@ -14,26 +16,48 @@ import javax.faces.bean.ManagedBean;
  * @author WitaloCarlos
  */
 @ManagedBean
-public class EquipeBean extends ControladorAbstrato<PessoaFisica> {
+public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> {
 
     PessoaFisica entidade;
-    private boolean cargo = true;
+    private List<PessoaFisica> pessoasfisica = new ArrayList<>();
+    private boolean cargoPregoeiro = false;
+    private boolean cargoMembrodeApoio = false;
     private String valor;
     
-    public boolean tipoPessoaFisica(){
+    public void tipoPessoaFisica(){
+        
         if("Pregoeiro".equals(valor)){
-            return this.cargo = true;
+            setCargoPregoeiro(true);
+            setCargoMembrodeApoio(false);
         }else{
-            return this.cargo = false;
+            setCargoPregoeiro(false);
+            setCargoMembrodeApoio(true);
         }
+            
     }
 
-    public boolean isCargo() {
-        return cargo;
+    public boolean isCargoPregoeiro() {
+        return cargoPregoeiro;
     }
 
-    public void setCargo(boolean cargo) {
-        this.cargo = cargo;
+    public void setCargoPregoeiro(boolean cargoPregoeiro) {
+        this.cargoPregoeiro = cargoPregoeiro;
+    }
+
+    public boolean isCargoMembrodeApoio() {
+        return cargoMembrodeApoio;
+    }
+
+    public void setCargoMembrodeApoio(boolean cargoMembrodeApoio) {
+        this.cargoMembrodeApoio = cargoMembrodeApoio;
+    }
+
+    public List<PessoaFisica> getPessoasfisica() {
+        return pessoasfisica;
+    }
+
+    public void setPessoasfisica(List<PessoaFisica> pessoasfisica) {
+        this.pessoasfisica = pessoasfisica;
     }
 
     public String getValor() {

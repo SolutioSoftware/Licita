@@ -38,29 +38,39 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "EmpresaLicitante.findByTipoEmpresa", query = "SELECT e FROM EmpresaLicitante e WHERE e.tipoEmpresa = :tipoEmpresa"),
     @NamedQuery(name = "EmpresaLicitante.findByComplemento", query = "SELECT e FROM EmpresaLicitante e WHERE e.complemento = :complemento")})
 public class EmpresaLicitante implements Serializable {
+    
     private static final long serialVersionUID = 1L;
+    
     @EmbeddedId
     protected EmpresaLicitantePK empresaLicitantePK;
+    
     @Size(max = 25)
     @Column(name = "inscricao_estadual")
     private String inscricaoEstadual;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
     @Column(name = "tipo_empresa")
     private String tipoEmpresa;
+    
     @Size(max = 150)
     @Column(name = "complemento")
     private String complemento;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idLicitante")
     private Set<Lance> lanceSet;
+    
     @JoinColumn(name = "id_pessoa_juridica", referencedColumnName = "id", insertable = false, updatable = false)
     @OneToOne(optional = false)
     private PessoaJuridica pessoaJuridica;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idLicitante")
     private Set<Proposta> propostaSet;
+    
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "empresaLicitante")
     private ContaBancaria contaBancaria;
+    
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "empresaLicitante")
     private RepresentanteLegal representanteLegal;
 

@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template/TemplateLicitaPaineis.xhtml">
+
+    <ui:define name="pn_info">
+
+        <div style="padding: 5px;margin-bottom: 15px;margin-top: 15px">
+            <p:button value="Novo" style="width: 80px" outcome="/restrito/licitadores/licitadorSalvar.xhtml" icon="fa fa-plus"/>
+            <p:button value="Excluir" style="margin-left: 12px; width: 80px" icon="fa fa-trash"/>
+            <b><h:outputText value="Buscar: " style="margin-left: 12px; color: #045491 "/></b>
+            <p:inputText label="Buscar" placeholder="Digite sua busca" style="margin-left: 2px;width: 185px;" />
+        </div>
+
+        <p:dataTable id='dt_licitadores' var="licitadores" widgetVar="tbl_licitadores" paginator="true" style="padding:5px" rowsPerPageTemplate="5,10,20,50,100, 200"  emptyMessage="Nenhum Orgão Cadastrado"  paginatorAlwaysVisible="false">
+
+            <p:column headerText="CNPJ">
+                <h:outputText value="" />
+            </p:column>
+
+            <p:column headerText="Nome do Orgão">
+                <h:outputText value="" />
+            </p:column>
+
+        </p:dataTable>
+
+    </ui:define>
+
+    <ui:define name="pn_conteudo">
+
+        <h:form id="licitador_form" title="Licitador" style="text-align: center"  >
+
+            <p:growl id="growLicitador" showDetail="false" for="licitador_form" />
+
+            <div style="margin-left: 25%; margin-top: 2%">
+
+                <h:panelGrid columns="2" id="panelGridSaveLicitador">
+                    
+                    <p:outputLabel value="CNPJ:" for="cnpj"/>
+                    <p:inputMask id="cnpj" value="" title="CNPJ" required="true" requiredMessage="O campo CNPJ é obrigatorio" 
+                                 mask="99.999.999/9999-99" placeholder="CNPJ"/>
+                    
+                    <p:outputLabel value="Razão Social:" for="razaoSocial"/>
+                    <p:inputText id="razaoSocial" value="" title="Razão Social" required="true" 
+                                 requiredMessage="O campo Razão Social é obrigatorio" placeholder="Razão Social"/>
+                    
+                    <p:outputLabel value="Inscrição Estadual:" for="inscricaoEstadual"/>
+                    <p:inputText id="inscricaoEstadual" value="" title="Inscrição Estadual" placeholder="Inscrição Estadual"/>
+ 
+                </h:panelGrid>
+
+            </div>
+            <p:commandButton  id="bt_salvar_licitador" value="Salvar" icon="fa fa-save" action="#{controladorLicitador.criar}" update="growLicitador" ajax="false"/>
+        </h:form>
+
+    </ui:define> 
+
+</ui:composition>

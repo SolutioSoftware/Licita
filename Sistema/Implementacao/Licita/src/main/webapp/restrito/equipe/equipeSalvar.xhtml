@@ -10,8 +10,8 @@
     <ui:define name="pn_info">
 
         <div style="padding: 5px;margin-bottom: 15px;margin-top: 15px">
-            <p:button value="Novo" style="width: 80px" outcome="/restrito/equipe/equipeSalvar.xhtml"/>
-            <p:button value="Excluir" style="margin-left: 12px; width: 80px" />
+            <p:button value="Novo" style="width: 80px" outcome="/restrito/equipe/equipeSalvar.xhtml" icon="fa fa-plus"/>
+            <p:button value="Excluir" style="margin-left: 12px; width: 80px" icon="fa fa-trash"/>
             <b><h:outputText value="Buscar: " style="margin-left: 12px; color: #045491 "/></b>
             <p:inputText label="Buscar" placeholder="Digite sua busca" style="margin-left: 2px;width: 185px;" />
         </div>
@@ -31,48 +31,58 @@
                 <h:outputText value="" />
             </p:column>
 
-
-
         </p:dataTable>
 
     </ui:define>
 
     <ui:define name="pn_conteudo">
-        
-        <h:form id="equipe_form" title="Novo Membro Equipe" style="text-align: center"  >
 
-            <div style="margin-left: 30%; margin-top: 2%">
-                <h:panelGrid columns="2" >
+        <h:form id="equipe_form" title="Membro Equipe" style="text-align: center"  >
 
-                    <p:outputLabel value="Nome:" for="nome" />
-                    <p:inputText id="nome" value="#{equipeBean.entidade.nome}" title="Nome"  required="true"  requiredMessage="O campo nome é obrigatório"/>
+            <p:growl id="growEquipe" showDetail="false" for="equipe_form" />
 
-                    <p:outputLabel value="CPF:" for="cpf" />
-                    <p:inputMask id="cpf" value="#{equipeBean.entidade.cpf}" title="CPF" required="true" requiredMessage="O campo CPF é obrigatorio" mask="999.999.999-99"/>
+            <div style="margin-left: 25%; margin-top: 2%">
 
-                    <p:outputLabel value="RG:" for="rg" />
-                    <p:inputText id="rg" value="#{equipeBean.entidade.rg}" title="RG" />
+                <h:panelGrid columns="2" id="panelGridSavePessoaFisica">
 
-                    <p:outputLabel value="Tipo Pessoa:" for="tipopessoa"/>
-                    <h:selectOneRadio id="tipopessoa" value="#{equipeBean.valor}" required="true" requiredMessage="O campo tipo de pessoa é obrigatorio">
+                    <p:outputLabel value="Tipo Pessoa:" for="tipopessoa" />
+                    <h:selectOneRadio id="tipopessoa" value="#{controladorEquipe.valor}" required="true" requiredMessage="O campo tipo de pessoa é obrigatorio">
                         <f:selectItem itemValue="Pregoeiro" itemLabel="Pregoeiro"/>  
                         <f:selectItem itemValue="Membro de Apoio" itemLabel="Membro de Apoio"/>  
-                        <p:ajax listener="#{equipeBean.tipoPessoaFisica()}"  update="login"/>  
-                    </h:selectOneRadio>  
+                        <p:ajax listener="#{controladorEquipe.tipoPessoaFisica}" process="tipopessoa" event="change" update="panelGridSavePessoaFisica"/>  
+                    </h:selectOneRadio>
 
-                    <p:outputLabel value="Login:" for="login"/>
-                    <p:inputText id="login" value="#{equipeBean.entidade.pregoeiro.login.usuario}"  rendered="#{equipeBean.cargo}" />
+                    <p:outputLabel value="Nome:" for="nome" />
+                    <p:inputText id="nome" value="#{controladorEquipe.entidade.nome}" title="Nome"  required="true"  requiredMessage="O campo nome é obrigatório" placeholder="Nome"/>
 
-                    <p:outputLabel value="Senha:" for="senha"/>
-                    <p:inputText id="senha" value="#{equipeBean.entidade.pregoeiro.login.senha}"/>
+                    <p:outputLabel value="CPF:" for="cpf" />
+                    <p:inputMask id="cpf" value="#{controladorEquipe.entidade.cpf}" title="CPF" required="true" requiredMessage="O campo CPF é obrigatorio" 
+                                 mask="999.999.999-99" placeholder="CPF"/>
 
-                    <p:outputLabel value="Função:" for="funcao"/>
-                    <p:inputText id="funcao" value="#{equipeBean.entidade.membroApoio.funcao}"/>
+                    <p:outputLabel value="RG:" for="rg" />
+                    <p:inputText id="rg" value="#{controladorEquipe.entidade.rg}" title="RG" placeholder="RG" />
+
+                    <p:outputLabel value="Login:" for="login" rendered="#{controladorEquipe.cargoPregoeiro}"/>
+                    <p:inputText id="login" value="#{controladorEquipe.entidade.pregoeiro.login.usuario}"  rendered="#{controladorEquipe.cargoPregoeiro}" required="true" 
+                                 requiredMessage="O campo login é obrigatório" placeholder="Login"/>
+
+                    <p:outputLabel value="Senha:" for="senha" rendered="#{controladorEquipe.cargoPregoeiro}"/>
+                    <p:password id="senha" value="#{controladorEquipe.entidade.pregoeiro.login.senha}" rendered="#{controladorEquipe.cargoPregoeiro}" feedback="true" required="true" 
+                                requiredMessage="O campo senha é obrigatório" placeholder="Senha" strongLabel="Senha Forte" goodLabel="Senha Boa" 
+                                weakLabel="Senha Fraca" promptLabel="Digite Sua Senha"/>
+
+                    <p:outputLabel value="Confirma Senha:" for="confirmarSenha" rendered="#{controladorEquipe.cargoPregoeiro}"/>
+                    <p:password id="confirmarSenha" value="" rendered="#{controladorEquipe.cargoPregoeiro}" feedback="true" required="true" 
+                                requiredMessage="O campo Confirmar Senha é obrigatório" placeholder="Confirmar Senha" strongLabel="Senha Forte" goodLabel="Senha Boa" 
+                                weakLabel="Senha Fraca" promptLabel="Digite Sua Senha"/>
+
+                    <p:outputLabel value="Função:" for="funcao" rendered="#{controladorEquipe.cargoMembrodeApoio}"/>
+                    <p:inputText id="funcao" value="#{controladorEquipe.entidade.membroApoio.funcao}" rendered="#{controladorEquipe.cargoMembrodeApoio}" placeholder="Função"/>
 
                 </h:panelGrid>
 
             </div>
-            <p:commandButton  value="Salvar"/>
+            <p:commandButton  id="bt_salvar_pessoa" value="Salvar" icon="fa fa-save" action="#{controladorEquipe.criar(entidade)}" update="growEquipe" ajax="false"/>
         </h:form>
 
     </ui:define> 
