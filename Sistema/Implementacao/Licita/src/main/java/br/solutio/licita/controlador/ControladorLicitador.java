@@ -5,30 +5,17 @@
  */
 package br.solutio.licita.controlador;
 
-
-
-import br.solutio.licita.modelo.PessoaFisica;
+import br.solutio.licita.modelo.InstituicaoLicitadora;
 import br.solutio.licita.servico.ServicoIF;
 import javax.faces.bean.ManagedBean;
 
 /**
- *
- * @author WitaloCarlos
+ * @author ricardocaldeira
  */
 @ManagedBean
-public class EquipeBean extends ControladorAbstrato<PessoaFisica>{
+public class ControladorLicitador extends ControladorAbstrato<InstituicaoLicitadora> {
     
     
-    
-    PessoaFisica entidade;
-    
-    
-    @Override
-    public PessoaFisica getEntidade() {
-        return this.entidade;
-    }
-
-  
 
     @Override
     public ServicoIF getServico() {
@@ -36,7 +23,13 @@ public class EquipeBean extends ControladorAbstrato<PessoaFisica>{
     }
 
     @Override
-    public void setEntidade(PessoaFisica entidade) {
+    public InstituicaoLicitadora getEntidade() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void setEntidade(InstituicaoLicitadora entidade) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }

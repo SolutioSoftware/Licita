@@ -28,15 +28,6 @@ public class InstituicaoLicitadoraPKTest {
         instituicaoPK2.setId(Long.MAX_VALUE);
         instituicaoPK2.setIdPessoaJuridica(Long.MAX_VALUE);
 
-        System.out.println("InstituicaoLicitadoraPKTest iniciado");
-    }
-
-    /**
-     * Metodo executado depois dos teste.
-     */
-    @After
-    public void tearDown() {
-        System.out.println("InstituicaoLicitadoraPKTest finalizado");
     }
 
     /**

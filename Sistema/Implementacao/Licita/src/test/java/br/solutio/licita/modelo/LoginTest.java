@@ -34,15 +34,6 @@ public class LoginTest {
     }
 
     /**
-     * Metodo executado depois dos teste.
-     */
-    @After
-    public void tearDown() {
-        System.out.println("LoginTest finalizado");
-    }
-
-
-    /**
      * Testando Set do Login
      */
     @Test

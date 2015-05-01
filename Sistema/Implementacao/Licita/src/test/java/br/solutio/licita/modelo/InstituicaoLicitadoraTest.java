@@ -43,17 +43,8 @@ public class InstituicaoLicitadoraTest {
         instituicao2.setInstituicaoLicitadoraPK(instituicaoPK4);
         instituicao2.setPessoaJuridica(pessoaJuridica6);
         
-        System.out.println("InstituicaoLicitadoraTest iniciado");
     }
 
-    /**
-     * Metodo executado depois dos teste.
-     */
-    @After
-    public void tearDown() {
-        System.out.println("InstituicaoLicitadoraTest finalizado");
-    }
-    
     /**
      * testando Set da InstituicaoLicitadora.
      */

@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/WEB-INF/template/TemplateLicitaPaineis.xhtml">
+
+    <ui:define name="pn_info">
+
+        <div style="padding: 5px;margin-bottom: 15px;margin-top: 15px">
+            <p:button value="Novo" style="width: 80px" outcome="/restrito/licitantes/licitanteSalvar.xhtml" icon="fa fa-plus"/>
+            <p:button value="Excluir" style="margin-left: 12px; width: 80px" icon="fa fa-trash" />
+            <b><h:outputText value="Buscar: " style="margin-left: 12px; color: #045491 "/></b>
+            <p:inputText label="Buscar" placeholder="Digite sua busca" style="margin-left: 2px;width: 185px;" />
+        </div>
+
+        <p:dataTable id='dt_licitantes' var="licitantes" widgetVar="tbl_sessoes" paginator="true" style="padding:5px" rowsPerPageTemplate="5,10,20,50,100, 200"  emptyMessage="Nenhuma Empresa Cadastrarda"  paginatorAlwaysVisible="false">
+
+
+            <p:column headerText="CNPJ">
+                <h:outputText value="" />
+            </p:column>
+
+            <p:column headerText="Nome Fantasia">
+                <h:outputText value="" />
+            </p:column>
+
+
+
+        </p:dataTable>
+
+    </ui:define>
+
+    <ui:define name="pn_conteudo">
+
+        <h:form id="licitante_form" title="Licitante" style="text-align: center"  >
+
+            <p:growl id="growLicitante" showDetail="false" for="licitante_form" />
+
+            <div style="margin-left: 25%; margin-top: 2%">
+
+                <h:panelGrid columns="2" id="panelGridSaveLicitante">
+
+                    <p:outputLabel value="CNPJ:" for="cnpj"/>
+                    <p:inputMask id="cnpj" value="" title="CNPJ" required="true" requiredMessage="O campo CNPJ é obrigatorio" 
+                                 mask="99.999.999/9999-99" placeholder="CNPJ"/>
+
+                    <p:outputLabel value="Razão Social:" for="razaoSocial"/>
+                    <p:inputText id="razaoSocial" value="" title="Razão Social" required="true" 
+                                 requiredMessage="O campo Razão Social é obrigatorio" placeholder="Razão Social"/>
+
+                    <p:outputLabel value="Inscrição Estadual:" for="inscricaoEstadual"/>
+                    <p:inputText id="inscricaoEstadual" value="" title="Inscrição Estadual" placeholder="Inscrição Estadual"/>
+
+                    <p:outputLabel value="Nome de Fantasia:" for="nomeDeFantasia"/>
+                    <p:inputText id="nomeDeFantasia" value="" title="Nome de Fantasia" placeholder="Nome de Fantasia"/>
+
+                    <p:outputLabel value="Complemento:" for="complemento"/>
+                    <p:inputTextarea id="complemento" value="" title="Complemento" placeholder="Complemento" 
+                                     rows="5" cols="30" counter="display" maxlength="150" counterTemplate="{0} caracteres restantes." 
+                                     autoResize="true" />
+                    <p:outputLabel/>
+                    <p:outputLabel id="display" />
+                    
+                    <p:outputLabel value="Tipo da Empresa" for="tipoDaEmpresa"/>
+                    <p:selectOneMenu id="tipoDaEmpresa" value="" required="true" 
+                                      requiredMessage="O campo Tipo da Empresa é obrigatório">
+                        
+                        <f:selectItem noSelectionOption="true" />
+                        <f:selectItem itemLabel="Micro Emprendedor individual (MEI)" itemValue="MEI" />
+                        <f:selectItem itemLabel="Mrico Empresa (ME)" itemValue="ME" />
+                        <f:selectItem itemLabel="Empresa de Perqueno Porte (EPP)" itemValue="EPP" />
+                        <f:selectItem itemLabel="Empresa Normal" itemValue="EN" />
+
+                    </p:selectOneMenu>
+
+                </h:panelGrid>
+            </div>
+            
+            <p:commandButton  id="bt_salvar_licitante" value="Salvar" icon="fa fa-save" update="growLicitador" ajax="false"/>
+            
+        </h:form>
+
+    </ui:define> 
+
+
+</ui:composition>

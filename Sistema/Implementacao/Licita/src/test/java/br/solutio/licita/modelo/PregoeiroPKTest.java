@@ -29,15 +29,6 @@ public class PregoeiroPKTest {
         pregoeiropk2.setId(Long.MAX_VALUE);
         pregoeiropk2.setIdPessoaFisica(Long.MAX_VALUE);
 
-        System.out.println("PregoeiroPKTest iniciado");
-    }
-
-    /**
-     * Metodo executado depois dos teste.
-     */
-    @After
-    public void tearDown() {
-        System.out.println("PregoeiroPKTest finalizado");
     }
 
     /**

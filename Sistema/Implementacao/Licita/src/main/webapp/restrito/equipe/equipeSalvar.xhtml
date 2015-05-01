@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template/TemplateLicitaPaineis.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="pn_info">
+
+        <div style="padding: 5px;margin-bottom: 15px;margin-top: 15px">
+            <p:button value="Novo" style="width: 80px" outcome="/restrito/equipe/equipeSalvar.xhtml" icon="fa fa-plus"/>
+            <p:button value="Excluir" style="margin-left: 12px; width: 80px" icon="fa fa-trash"/>
+            <b><h:outputText value="Buscar: " style="margin-left: 12px; color: #045491 "/></b>
+            <p:inputText label="Buscar" placeholder="Digite sua busca" style="margin-left: 2px;width: 185px;" />
+        </div>
+
+        <p:dataTable id='dt_equipe' var="equipe" widgetVar="tbl_equipe" paginator="true" style="padding:5px" rowsPerPageTemplate="5,10,20,50,100, 200"  emptyMessage="Nenhum Membro Cadastrado"  paginatorAlwaysVisible="false">
+
+
+            <p:column headerText="CPF">
+                <h:outputText value="" />
+            </p:column>
+
+            <p:column headerText="Nome">
+                <h:outputText value="" />
+            </p:column>
+
+            <p:column headerText="Função">
+                <h:outputText value="" />
+            </p:column>
+
+        </p:dataTable>
+
+    </ui:define>
+
+    <ui:define name="pn_conteudo">
+
+        <h:form id="equipe_form" title="Membro Equipe" style="text-align: center"  >
+
+            <p:growl id="growEquipe" showDetail="false" for="equipe_form" />
+
+            <div style="margin-left: 25%; margin-top: 2%">
+
+                <h:panelGrid columns="2" id="panelGridSavePessoaFisica">
+
+                    <p:outputLabel value="Tipo Pessoa:" for="tipopessoa" />
+                    <h:selectOneRadio id="tipopessoa" value="#{controladorEquipe.valor}" required="true" requiredMessage="O campo tipo de pessoa é obrigatorio">
+                        <f:selectItem itemValue="Pregoeiro" itemLabel="Pregoeiro"/>  
+                        <f:selectItem itemValue="Membro de Apoio" itemLabel="Membro de Apoio"/>  
+                        <p:ajax listener="#{controladorEquipe.tipoPessoaFisica}" process="tipopessoa" event="change" update="panelGridSavePessoaFisica"/>  
+                    </h:selectOneRadio>
+
+                    <p:outputLabel value="Nome:" for="nome" />
+                    <p:inputText id="nome" value="#{controladorEquipe.entidade.nome}" title="Nome"  required="true"  requiredMessage="O campo nome é obrigatório" placeholder="Nome"/>
+
+                    <p:outputLabel value="CPF:" for="cpf" />
+                    <p:inputMask id="cpf" value="#{controladorEquipe.entidade.cpf}" title="CPF" required="true" requiredMessage="O campo CPF é obrigatorio" 
+                                 mask="999.999.999-99" placeholder="CPF"/>
+
+                    <p:outputLabel value="RG:" for="rg" />
+                    <p:inputText id="rg" value="#{controladorEquipe.entidade.rg}" title="RG" placeholder="RG" />
+
+                    <p:outputLabel value="Login:" for="login" rendered="#{controladorEquipe.cargoPregoeiro}"/>
+                    <p:inputText id="login" value="#{controladorEquipe.entidade.pregoeiro.login.usuario}"  rendered="#{controladorEquipe.cargoPregoeiro}" required="true" 
+                                 requiredMessage="O campo login é obrigatório" placeholder="Login"/>
+
+                    <p:outputLabel value="Senha:" for="senha" rendered="#{controladorEquipe.cargoPregoeiro}"/>
+                    <p:password id="senha" value="#{controladorEquipe.entidade.pregoeiro.login.senha}" rendered="#{controladorEquipe.cargoPregoeiro}" feedback="true" required="true" 
+                                requiredMessage="O campo senha é obrigatório" placeholder="Senha" strongLabel="Senha Forte" goodLabel="Senha Boa" 
+                                weakLabel="Senha Fraca" promptLabel="Digite Sua Senha"/>
+
+                    <p:outputLabel value="Confirma Senha:" for="confirmarSenha" rendered="#{controladorEquipe.cargoPregoeiro}"/>
+                    <p:password id="confirmarSenha" value="" rendered="#{controladorEquipe.cargoPregoeiro}" feedback="true" required="true" 
+                                requiredMessage="O campo Confirmar Senha é obrigatório" placeholder="Confirmar Senha" strongLabel="Senha Forte" goodLabel="Senha Boa" 
+                                weakLabel="Senha Fraca" promptLabel="Digite Sua Senha"/>
+
+                    <p:outputLabel value="Função:" for="funcao" rendered="#{controladorEquipe.cargoMembrodeApoio}"/>
+                    <p:inputText id="funcao" value="#{controladorEquipe.entidade.membroApoio.funcao}" rendered="#{controladorEquipe.cargoMembrodeApoio}" placeholder="Função"/>
+
+                </h:panelGrid>
+
+            </div>
+            <p:commandButton  id="bt_salvar_pessoa" value="Salvar" icon="fa fa-save" action="#{controladorEquipe.criar(entidade)}" update="growEquipe" ajax="false"/>
+        </h:form>
+
+    </ui:define> 
+
+
+</ui:composition>
