@@ -39,6 +39,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>login/login.xhtml</welcome-file>
+        <welcome-file>restrito/login/login.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>

@@ -7,11 +7,9 @@ package br.solutio.licita.controlador;
 
 import br.solutio.licita.modelo.Login;
 import br.solutio.licita.servico.ServicoIF;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -51,7 +49,7 @@ public class ControladorLogin extends ControladorAbstrato<Login> {
     
     public String efetuarLogout(){
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "/login/login.xhtml?faces-redirect=true";
+        return "/restrito/login/login.xhtml?faces-redirect=true";
     }
 
 }
