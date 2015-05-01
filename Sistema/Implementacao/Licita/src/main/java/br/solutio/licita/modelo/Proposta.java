@@ -17,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -46,7 +47,7 @@ public class Proposta implements Serializable{
     private BigInteger valorUnitario;
     @Column(name = "classificada")
     private Boolean classificada;
-    @JoinColumn(name = "id_licitante", referencedColumnName = "id")
+    @PrimaryKeyJoinColumn(name = "id_licitante", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private EmpresaLicitante idLicitante;
     @JoinColumn(name = "id_item_pregao", referencedColumnName = "id")

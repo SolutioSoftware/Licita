@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -54,7 +55,8 @@ public class Login implements Serializable{
     private String senha;
     @Column(name = "logado")
     private Boolean logado;
-    @JoinColumn(name = "id_pregoeiro", referencedColumnName = "id")
+    
+    @PrimaryKeyJoinColumn(name = "id_pregoeiro", referencedColumnName = "id")
     @OneToOne
     private Pregoeiro idPregoeiro;
 

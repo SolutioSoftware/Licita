@@ -57,9 +57,6 @@ public abstract class ServicoAbstrato<T> implements ServicoIF<T>{
         return getDao().buscarTodos();
     }
     
-    @Override
-    public List<T> consultar(String namedQuery, Object... parametros){
-        return getDao().consultar(namedQuery, parametros);
-    }
+    
     
 }

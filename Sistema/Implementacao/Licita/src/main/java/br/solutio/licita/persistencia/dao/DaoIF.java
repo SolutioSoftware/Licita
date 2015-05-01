@@ -57,9 +57,10 @@ public interface DaoIF<T>{
     /**
      * Faz consultas através das namedQuery declaradas nas entidades.
      * @param namedQuery o nome da namedQuery que deseja consultar
-     * @param parametros Parametros da consulta na ordem que aparecem na namedQuery. Separe os argumentos com virgula.
+     * @param parametros Array com os parametros da consulta na ordem que aparecem na namedQuery. 
+     * @param valores Array com os valores setados para os parametros em ordem.
      * @return lista de resultados da named query
      */
-    public List<T> consultar(String namedQuery, Object... parametros);
+    public List<T> consultar(String namedQuery, String[] parametros, Object[] valores);
     
 }

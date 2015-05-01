@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -51,7 +52,8 @@ public class ContaBancaria implements Serializable {
     @Size(max = 6)
     @Column(name = "operacao")
     private String operacao;
-    @JoinColumn(name = "id_licitante", referencedColumnName = "id", insertable = false, updatable = false)
+    
+    @PrimaryKeyJoinColumn(name = "id_licitante", referencedColumnName = "id")
     @OneToOne(optional = false)
     private EmpresaLicitante empresaLicitante;
 

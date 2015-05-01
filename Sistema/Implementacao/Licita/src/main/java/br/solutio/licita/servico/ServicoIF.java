@@ -53,12 +53,6 @@ public interface ServicoIF<T>{
      */
     public List<T> buscarTodos();
     
-    /**
-     * Faz consultas através das namedQuery declaradas nas entidades.
-     * @param namedQuery o nome da namedQuery que deseja consultar
-     * @param parametros Parametros da consulta na ordem que aparecem na namedQuery. Separe os argumentos com virgula.
-     * @return lista de resultados da named query
-     */
-    public List<T> consultar(String namedQuery, Object... parametros);
+    
     
 }

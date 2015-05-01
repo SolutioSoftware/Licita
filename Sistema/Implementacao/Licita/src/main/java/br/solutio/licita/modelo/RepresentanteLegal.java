@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -31,9 +32,11 @@ public class RepresentanteLegal implements Serializable{
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected RepresentanteLegalPK representanteLegalPK;
-    @JoinColumn(name = "id_licitante", referencedColumnName = "id", insertable = false, updatable = false)
+    
+    @PrimaryKeyJoinColumn(name = "id_licitante", referencedColumnName = "id")
     @OneToOne(optional = false)
     private EmpresaLicitante empresaLicitante;
+    
     @JoinColumn(name = "id_pessoa_fisica", referencedColumnName = "id", insertable = false, updatable = false)
     @OneToOne(optional = false)
     private PessoaFisica pessoaFisica;

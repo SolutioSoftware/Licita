@@ -22,6 +22,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -76,7 +77,8 @@ public class Sessao implements Serializable{
     @JoinColumn(name = "id_pregao", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Pregao idPregao;
-    @JoinColumn(name = "id_pregoeiro", referencedColumnName = "id")
+    
+    @PrimaryKeyJoinColumn(name = "id_pregoeiro", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Pregoeiro idPregoeiro;
     @OneToMany(mappedBy = "idSessao")

@@ -5,9 +5,14 @@
  */
 package br.solutio.licita.persistencia.dao;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import javax.persistence.Parameter;
 import javax.persistence.Query;
 
 /**
@@ -71,14 +76,22 @@ public abstract class DaoAbstrato<T> implements DaoIF<T> {
     }
 
     @Override
-    public List<T> consultar(String namedQuery, Object... parametros) {
+    public List<T> consultar(String namedQuery, String[] parametros, Object[] valores) {
 
-        Query query = getEntityManager().createNamedQuery(namedQuery, entidade.getClass());
-        for (int i = 0; i > parametros.length; i++) {
-            query.setParameter(i, parametros[i]);
+        Query query = getEntityManager().createNamedQuery(namedQuery, entidade);
+
+        if (parametros.length == valores.length) {
+            for (int i = 0; i < parametros.length; i++) {
+
+                query.setParameter(parametros[i], valores[i]);
+
+            }
+
+            return query.getResultList();
+        } else{
+            return null;
         }
 
-        return query.getResultList();
     }
 
 }
