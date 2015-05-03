@@ -36,25 +36,32 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Endereco.findByComplemento", query = "SELECT e FROM Endereco e WHERE e.complemento = :complemento")})
 public class Endereco implements Serializable{
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
+    
     @Size(max = 60)
     @Column(name = "logradouro")
     private String logradouro;
+    
     @Size(max = 60)
     @Column(name = "cidade")
     private String cidade;
+    
     @Size(max = 2)
     @Column(name = "estado")
     private String estado;
+    
     @Size(max = 8)
     @Column(name = "cep")
     private String cep;
+    
     @Column(name = "numero")
     private Integer numero;
+    
     @Size(max = 50)
     @Column(name = "complemento")
     private String complemento;

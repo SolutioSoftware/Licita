@@ -18,7 +18,7 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean
 public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> {
 
-    PessoaFisica entidade;
+    private PessoaFisica entidade;
     private List<PessoaFisica> pessoasfisica = new ArrayList<>();
     private boolean cargoPregoeiro = false;
     private boolean cargoMembrodeApoio = false;

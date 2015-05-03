@@ -46,34 +46,44 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Sessao.findByHorarioPrevisto", query = "SELECT s FROM Sessao s WHERE s.horarioPrevisto = :horarioPrevisto"),
     @NamedQuery(name = "Sessao.findByStatusSessao", query = "SELECT s FROM Sessao s WHERE s.statusSessao = :statusSessao")})
 public class Sessao implements Serializable{
+    
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
+    
     @Column(name = "horario_inicio")
     @Temporal(TemporalType.TIMESTAMP)
     private Date horarioInicio;
+    
     @Column(name = "horario_encerramento")
     @Temporal(TemporalType.TIMESTAMP)
     private Date horarioEncerramento;
+    
     @Column(name = "data_realizacao")
     @Temporal(TemporalType.DATE)
     private Date dataRealizacao;
+    
     @Column(name = "horario_previsto")
     @Temporal(TemporalType.TIME)
     private Date horarioPrevisto;
+    
     @Size(max = 20)
     @Column(name = "status_sessao")
     private String statusSessao;
+    
     @JoinTable(name = "tbl_historico_status_sessao", joinColumns = {
         @JoinColumn(name = "id_sessao", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_status", referencedColumnName = "id")})
     @ManyToMany
     private Set<StatusSessao> statusSessaoSet;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idSessao")
     private Set<Lance> lanceSet;
+    
     @JoinColumn(name = "id_pregao", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Pregao idPregao;
@@ -81,6 +91,7 @@ public class Sessao implements Serializable{
     @PrimaryKeyJoinColumn(name = "id_pregoeiro", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Pregoeiro idPregoeiro;
+    
     @OneToMany(mappedBy = "idSessao")
     private Set<Proposta> propostaSet;
 

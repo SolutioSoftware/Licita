@@ -4,7 +4,8 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
-                template="/WEB-INF/template/TemplateLicitaPaineis.xhtml">
+                template="/WEB-INF/template/TemplateLicitaPaineis.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="pn_info">
 
@@ -21,7 +22,7 @@
                 <h:outputText value="" />
             </p:column>
 
-            <p:column headerText="Nome do Orgão">
+            <p:column headerText="Razão Social">
                 <h:outputText value="" />
             </p:column>
 
@@ -38,22 +39,76 @@
             <div style="margin-left: 25%; margin-top: 2%">
 
                 <h:panelGrid columns="2" id="panelGridSaveLicitador">
-                    
+
                     <p:outputLabel value="CNPJ:" for="cnpj"/>
                     <p:inputMask id="cnpj" value="" title="CNPJ" required="true" requiredMessage="O campo CNPJ é obrigatorio" 
                                  mask="99.999.999/9999-99" placeholder="CNPJ"/>
-                    
+
                     <p:outputLabel value="Razão Social:" for="razaoSocial"/>
                     <p:inputText id="razaoSocial" value="" title="Razão Social" required="true" 
                                  requiredMessage="O campo Razão Social é obrigatorio" placeholder="Razão Social"/>
-                    
+
                     <p:outputLabel value="Inscrição Estadual:" for="inscricaoEstadual"/>
                     <p:inputText id="inscricaoEstadual" value="" title="Inscrição Estadual" placeholder="Inscrição Estadual"/>
- 
+
+                    <p:outputLabel value="Logradouro:" for="logradouro" />
+                    <p:inputText id="logradouro" value="" title="Logradouro" placeholder="Logradouro" maxlength="60"/>
+
+                    <p:outputLabel value="Cidade:" for="cidade"/>
+                    <p:inputText id="cidade" value="" title="Cidade" placeholder="Cidade" maxlength="60"/>
+
+                    <p:outputLabel value="Estado:" for="estado"/>
+                    <p:selectOneMenu id="estado" value="">
+
+                        <f:selectItem noSelectionOption="true" />
+                        <f:selectItem itemLabel="Acre" itemValue="AC" />
+                        <f:selectItem itemLabel="Alagoas" itemValue="AL" />
+                        <f:selectItem itemLabel="Amapá" itemValue="AP" />
+                        <f:selectItem itemLabel="Amazonas" itemValue="AM" />
+                        <f:selectItem itemLabel="Bahia" itemValue="BA" />
+                        <f:selectItem itemLabel="Ceará" itemValue="CE" />
+                        <f:selectItem itemLabel="Distrito Federal" itemValue="DF" />
+                        <f:selectItem itemLabel="Espírito Santo" itemValue="ES" />
+                        <f:selectItem itemLabel="Goiás" itemValue="GO" />
+                        <f:selectItem itemLabel="Maranhão" itemValue="MA" />
+                        <f:selectItem itemLabel="Mato Grosso" itemValue="MT" />
+                        <f:selectItem itemLabel="Mato Grosso do Sul" itemValue="MS" />
+                        <f:selectItem itemLabel="Minas Gerais" itemValue="MG" />
+                        <f:selectItem itemLabel="Pará" itemValue="PA" />
+                        <f:selectItem itemLabel="Paraíba" itemValue="PB" />
+                        <f:selectItem itemLabel="Paraná" itemValue="PR" />
+                        <f:selectItem itemLabel="Pernanbuco" itemValue="PE" />
+                        <f:selectItem itemLabel="Piauí" itemValue="PI" />
+                        <f:selectItem itemLabel="Rio de Janeiro" itemValue="RJ" />
+                        <f:selectItem itemLabel="Rio Grande do Norte" itemValue="RN" />
+                        <f:selectItem itemLabel="Rio Grande do Sul" itemValue="RS" />
+                        <f:selectItem itemLabel="Rondônia" itemValue="RO" />
+                        <f:selectItem itemLabel="Roraima" itemValue="RR" />
+                        <f:selectItem itemLabel="Santa Catarina" itemValue="SC" />
+                        <f:selectItem itemLabel="São Paulo" itemValue="SP" />
+                        <f:selectItem itemLabel="Sergipe" itemValue="SE" />
+                        <f:selectItem itemLabel="Tocantins" itemValue="TO" />
+
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value="CEP:" for="cep"/>
+                    <p:inputMask id="cep" value="" title="CPF" mask="99.999-999" placeholder="CPF"/>
+
+                    <p:outputLabel value="Numero:" for="numero"/>
+                    <p:inputText id="numero" value="" title="Numero" placeholder="Numero" type=""/>
+
+                    <p:outputLabel value="Complemento"  for="complemento"/>
+                    <p:inputTextarea id="complemento" value="" title="Complemento" placeholder="Complemento" 
+                                     rows="3" cols="30" counter="display" maxlength="50" counterTemplate="{0} caracteres restantes." 
+                                     autoResize="true" />
+                    
+                    <p:outputLabel/>
+                    <p:outputLabel id="display" />
+
                 </h:panelGrid>
 
             </div>
-            <p:commandButton  id="bt_salvar_licitador" value="Salvar" icon="fa fa-save" action="#{controladorLicitador.criar}" update="growLicitador" ajax="false"/>
+            <p:commandButton  id="btSalvarLicitador" value="Salvar" icon="fa fa-save" action="#{controladorLicitador.criar}" update="growLicitador" ajax="false"/>
         </h:form>
 
     </ui:define> 

@@ -39,12 +39,14 @@
             <artifactId>eclipselink</artifactId>
             <version>2.5.2</version>
         </dependency>
+        
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>org.eclipse.persistence.jpa.modelgen.processor</artifactId>
             <version>2.5.2</version>
             <scope>provided</scope>
         </dependency>
+        
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
@@ -94,6 +96,14 @@
             <artifactId>selenium-java</artifactId>
             <version>2.45.0</version>
         </dependency>
+        
+        <!-- PrimeFaces extensions-->
+        <dependency>
+            <groupId>org.primefaces.extensions</groupId>
+            <artifactId>primefaces-extensions</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        
     </dependencies>
     
     <repositories>
