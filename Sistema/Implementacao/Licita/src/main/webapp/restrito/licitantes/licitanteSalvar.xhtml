@@ -5,7 +5,8 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                template="/WEB-INF/template/TemplateLicitaPaineis.xhtml">
+                template="/WEB-INF/template/TemplateLicitaPaineis.xhtml"
+                xmlns:pe="http://primefaces.org/ui/extensions">
 
     <ui:define name="pn_info">
 
@@ -39,28 +40,28 @@
 
             <p:growl id="growLicitante" showDetail="false" for="licitante_form" />
 
-            <div style="margin-left: 25%; margin-top: 2%">
+            <div style="margin-left: 2%; margin-top: 2%; margin-right: 2%">
 
-                <h:panelGrid columns="2" id="panelGridSaveLicitante">
+                <h:panelGrid columns="4" id="panelGridSaveLicitante">
 
                     <p:outputLabel value="CNPJ:" for="cnpj"/>
                     <p:inputMask id="cnpj" value="" title="CNPJ" required="true" requiredMessage="O campo CNPJ é obrigatorio" 
-                                 mask="99.999.999/9999-99" placeholder="CNPJ"/>
+                                 mask="99.999.999/9999-99" placeholder="CNPJ" style="width:260px"/>
 
                     <p:outputLabel value="Razão Social:" for="razaoSocial"/>
                     <p:inputText id="razaoSocial" value="" title="Razão Social" required="true" 
                                  requiredMessage="O campo Razão Social é obrigatorio" placeholder="Razão Social"/>
 
                     <p:outputLabel value="Inscrição Estadual:" for="inscricaoEstadual"/>
-                    <p:inputText id="inscricaoEstadual" value="" title="Inscrição Estadual" placeholder="Inscrição Estadual" maxlength="25"/>
+                    <p:inputText id="inscricaoEstadual" value="" title="Inscrição Estadual" placeholder="Inscrição Estadual" maxlength="25" style="width:260px"/>
 
                     <p:outputLabel value="Nome de Fantasia:" for="nomeDeFantasia"/>
                     <p:inputText id="nomeDeFantasia" value="" title="Nome de Fantasia" placeholder="Nome de Fantasia"/>
 
                     <p:outputLabel value="Tipo da Empresa" for="tipoDaEmpresa"/>
-                    <p:selectOneMenu id="tipoDaEmpresa" value="" required="true" 
-                                      requiredMessage="O campo Tipo da Empresa é obrigatório">
-                        
+                    <p:selectOneMenu id="tipoDaEmpresa" value="" required="true" style="width:260px" 
+                                     requiredMessage="O campo Tipo da Empresa é obrigatório">
+
                         <f:selectItem noSelectionOption="true" />
                         <f:selectItem itemLabel="Micro Emprendedor individual (MEI)" itemValue="MEI" />
                         <f:selectItem itemLabel="Mrico Empresa (ME)" itemValue="ME" />
@@ -68,15 +69,18 @@
                         <f:selectItem itemLabel="Empresa Normal" itemValue="EN" />
 
                     </p:selectOneMenu>
-                    
+
                     <p:outputLabel value="Logradouro:" for="logradouro" />
                     <p:inputText id="logradouro" value="" title="Logradouro" placeholder="Logradouro" maxlength="60"/>
 
                     <p:outputLabel value="Cidade:" for="cidade"/>
-                    <p:inputText id="cidade" value="" title="Cidade" placeholder="Cidade" maxlength="60"/>
+                    <p:inputText id="cidade" value="" title="Cidade" placeholder="Cidade" maxlength="60" style="width:260px"/>
+
+                    <p:outputLabel value="Numero:" for="numero"/>
+                    <pe:inputNumber id="numero" value="" title="Numero" maxValue="9999999" decimalPlaces="0" />
 
                     <p:outputLabel value="Estado:" for="estado"/>
-                    <p:selectOneMenu id="estado" value="">
+                    <p:selectOneMenu id="estado" value="" style="width:260px">
 
                         <f:selectItem noSelectionOption="true" />
                         <f:selectItem itemLabel="Acre" itemValue="AC" />
@@ -110,24 +114,26 @@
                     </p:selectOneMenu>
 
                     <p:outputLabel value="CEP:" for="cep"/>
-                    <p:inputMask id="cep" value="" title="CPF" mask="99.999-999" placeholder="CPF"/>
-
-                    <p:outputLabel value="Numero:" for="numero"/>
-                    <p:inputText id="numero" value="" title="Numero" placeholder="Numero"/>
+                    <p:inputMask id="cep" value="" title="CEP" mask="99.999-999" placeholder="CEP"/>
 
                     <p:outputLabel value="Complemento"  for="complemento"/>
                     <p:inputTextarea id="complemento" value="" title="Complemento" placeholder="Complemento" 
                                      rows="3" cols="30" counter="display" maxlength="50" counterTemplate="{0} caracteres restantes." 
                                      autoResize="true" />
-                    
+
+                    <p:outputLabel/>
+                    <p:outputLabel/>
                     <p:outputLabel/>
                     <p:outputLabel id="display" />
 
                 </h:panelGrid>
             </div>
-            
-            <p:commandButton  id="btSalvarLicitante" value="Salvar" icon="fa fa-save" update="growLicitante" ajax="false"/>
-            
+
+            <div style="margin-left: 2%; margin-top: 2%; margin-right: 2%">
+
+                <p:commandButton  id="btSalvarLicitante" value="Salvar" icon="fa fa-save" update="growLicitante" ajax="false"/>
+
+            </div>
         </h:form>
 
     </ui:define> 

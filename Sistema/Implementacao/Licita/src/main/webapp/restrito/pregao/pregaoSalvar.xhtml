@@ -48,14 +48,14 @@
 
                     <p:outputLabel value="Número do Processo:" for="numeroProcesso"/>
                     <pe:inputNumber id="numeroProcesso" value="" title="Número do Processo" required="true"
-                                    requiredMessage="O campo Número do Processo é obrigatorio" />
+                                    requiredMessage="O campo Número do Processo é obrigatorio" maxValue="99999999999" decimalPlaces="0" decimalSeparator="" thousandSeparator=""/>
 
                     <p:outputLabel value="Número do Pregão:" for="numeroPregao"/>
                     <pe:inputNumber id="numeroPregao" value="" title="Número do Pregão" required="true" 
-                                    requiredMessage="O Campo Número do pregão é obrigatorio" emptyValue="empty"/> 
+                                 requiredMessage="O Campo Número do pregão é obrigatorio" maxValue="99999999999" decimalPlaces="0" decimalSeparator="" thousandSeparator=""/> 
 
                     <p:outputLabel value="Status:" for="statusDoPregao"/>
-                    <p:selectOneMenu id="statusDoPregao" value="" >
+                    <p:selectOneMenu id="statusDoPregao" value="" style="width: 210px">
 
                         <f:selectItem itemLabel="Aberto" itemValue="Aberto" />
                         <f:selectItem itemLabel="Cancelado" itemValue="Cancelado" />
@@ -70,8 +70,12 @@
                 </h:panelGrid>
             </div>
 
-            <p:commandButton  id="btSalvarPregao" value="Salvar" icon="fa fa-save" update="growPregao" ajax="false"/>
+            <div style="margin-left: 2%; margin-top: 2%; margin-right: 2%">
 
+                <p:commandButton  id="btSalvarPregao" value="Salvar" icon="fa fa-save" update="growPregao" ajax="false"/>
+                
+            </div>
+            
         </h:form>
 
     </ui:define> 

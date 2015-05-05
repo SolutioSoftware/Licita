@@ -34,20 +34,24 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "ContatoPessoaFisica.findByTipoContato", query = "SELECT c FROM ContatoPessoaFisica c WHERE c.tipoContato = :tipoContato"),
     @NamedQuery(name = "ContatoPessoaFisica.findByValor", query = "SELECT c FROM ContatoPessoaFisica c WHERE c.valor = :valor")})
 public class ContatoPessoaFisica implements Serializable {
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
+    
     @Size(max = 10)
     @Column(name = "tipo_contato")
     private String tipoContato;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "valor")
     private String valor;
+    
     @JoinColumn(name = "id_pessoa_fisica", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private PessoaFisica idPessoaFisica;

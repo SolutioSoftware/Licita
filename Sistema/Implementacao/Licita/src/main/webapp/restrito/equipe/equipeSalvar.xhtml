@@ -5,7 +5,8 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/template/TemplateLicitaPaineis.xhtml"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:pe="http://primefaces.org/ui/extensions">
 
     <ui:define name="pn_info">
 
@@ -41,16 +42,17 @@
 
             <p:growl id="growEquipe" showDetail="false" for="equipe_form" />
 
-            <div style="margin-left: 25%; margin-top: 2%">
+            <div style="margin-left: 2%; margin-top: 2%; margin-right: 2%">
 
-                <h:panelGrid columns="2" id="panelGridSavePessoaFisica">
+                <h:panelGrid columns="4" id="panelGridSavePessoaFisica">
 
                     <p:outputLabel value="Tipo Pessoa:" for="tipopessoa" />
-                    <h:selectOneRadio id="tipopessoa" value="#{controladorEquipe.valor}" required="true" requiredMessage="O campo tipo de pessoa é obrigatorio">
+                    <p:selectOneMenu id="tipopessoa" value="#{controladorEquipe.valor}" required="true" requiredMessage="O campo tipo de pessoa é obrigatorio" style="width:188px">
+                        <f:selectItem noSelectionOption="true" />
                         <f:selectItem itemValue="Pregoeiro" itemLabel="Pregoeiro"/>  
                         <f:selectItem itemValue="Membro de Apoio" itemLabel="Membro de Apoio"/>  
                         <p:ajax listener="#{controladorEquipe.tipoPessoaFisica}" process="tipopessoa" event="change" update="panelGridSavePessoaFisica"/>  
-                    </h:selectOneRadio>
+                    </p:selectOneMenu>
 
                     <p:outputLabel value="Nome:" for="nome" />
                     <p:inputText id="nome" value="#{controladorEquipe.entidade.nome}" title="Nome"  required="true"  
@@ -66,11 +68,14 @@
                     <p:outputLabel value="Logradouro:" for="logradouro" />
                     <p:inputText id="logradouro" value="" title="Logradouro" placeholder="Logradouro" maxlength="60"/>
 
+                    <p:outputLabel value="Numero:" for="numero"/>
+                    <pe:inputNumber id="numero" value="" title="Numero" maxValue="9999999" decimalPlaces="0"/>
+
                     <p:outputLabel value="Cidade:" for="cidade"/>
                     <p:inputText id="cidade" value="" title="Cidade" placeholder="Cidade" maxlength="60"/>
 
                     <p:outputLabel value="Estado:" for="estado"/>
-                    <p:selectOneMenu id="estado" value="">
+                    <p:selectOneMenu id="estado" value="" style="width:188px">
 
                         <f:selectItem noSelectionOption="true" />
                         <f:selectItem itemLabel="Acre" itemValue="AC" />
@@ -89,7 +94,7 @@
                         <f:selectItem itemLabel="Pará" itemValue="PA" />
                         <f:selectItem itemLabel="Paraíba" itemValue="PB" />
                         <f:selectItem itemLabel="Paraná" itemValue="PR" />
-                        <f:selectItem itemLabel="Pernanbuco" itemValue="PE" />
+                        <f:selectItem itemLabel="Pernambuco" itemValue="PE" />
                         <f:selectItem itemLabel="Piauí" itemValue="PI" />
                         <f:selectItem itemLabel="Rio de Janeiro" itemValue="RJ" />
                         <f:selectItem itemLabel="Rio Grande do Norte" itemValue="RN" />
@@ -105,9 +110,6 @@
 
                     <p:outputLabel value="CEP:" for="cep"/>
                     <p:inputMask id="cep" value="" title="CPF" mask="99.999-999" placeholder="CPF"/>
-
-                    <p:outputLabel value="Numero:" for="numero"/>
-                    <p:inputText id="numero" value="" title="Numero" placeholder="Numero"/>
 
                     <p:outputLabel value="Login:" for="login" rendered="#{controladorEquipe.cargoPregoeiro}"/>
                     <p:inputText id="login" value="#{controladorEquipe.entidade.pregoeiro.login.usuario}"  rendered="#{controladorEquipe.cargoPregoeiro}" required="true" 
@@ -126,18 +128,34 @@
                     <p:outputLabel value="Função:" for="funcao" rendered="#{controladorEquipe.cargoMembrodeApoio}"/>
                     <p:inputText id="funcao" value="#{controladorEquipe.entidade.membroApoio.funcao}" rendered="#{controladorEquipe.cargoMembrodeApoio}" placeholder="Função"/>
 
+                    <p:outputLabel value="Telefone:" for="telefone"/>
+                    <p:inputText id="telefone" value="" title="Telefone" placeholder="(DDD) 9999-9999" maxlength="14"/>
+
+                    <p:outputLabel value="Celular:" for="celular"/>
+                    <p:inputText id="celular" value="" title="Celular" placeholder="(DDD) 9999-9999" maxlength="14"/>
+
+                    <p:outputLabel value="E-mail:" for="email"/>
+                    <p:inputText id="email" value="" title="E-mail" placeholder="E-mail"/>
+
                     <p:outputLabel value="Complemento"  for="complemento"/>
                     <p:inputTextarea id="complemento" value="" title="Complemento" placeholder="Complemento" 
                                      rows="3" cols="30" counter="display" maxlength="50" counterTemplate="{0} caracteres restantes." 
-                                     autoResize="true" />
-                    
+                                     autoResize="true" style="width:190px" />
+
+                    <p:outputLabel/>
+                    <p:outputLabel/>
                     <p:outputLabel/>
                     <p:outputLabel id="display" />
-                    
+
                 </h:panelGrid>
 
             </div>
-            <p:commandButton  id="bt_salvar_Pessoa" value="Salvar" icon="fa fa-save" action="#{controladorEquipe.criar(entidade)}" update="growEquipe" ajax="false"/>
+
+            <div style="margin-left: 2%; margin-top: 2%; margin-right: 2%">
+
+                <p:commandButton  id="bt_salvar_Pessoa" value="Salvar" icon="fa fa-save" action="#{controladorEquipe.criar(entidade)}" update="growEquipe" ajax="false"/>
+
+            </div>
         </h:form>
 
     </ui:define> 

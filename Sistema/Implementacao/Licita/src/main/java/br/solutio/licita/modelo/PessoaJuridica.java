@@ -38,27 +38,35 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "PessoaJuridica.findByNomeFantasia", query = "SELECT p FROM PessoaJuridica p WHERE p.nomeFantasia = :nomeFantasia"),
     @NamedQuery(name = "PessoaJuridica.findByCnpj", query = "SELECT p FROM PessoaJuridica p WHERE p.cnpj = :cnpj")})
 public class PessoaJuridica implements Serializable{
+    
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
+    
     @Size(max = 80)
     @Column(name = "razao_social")
     private String razaoSocial;
+    
     @Size(max = 80)
     @Column(name = "nome_fantasia")
     private String nomeFantasia;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 14)
     @Column(name = "cnpj")
     private String cnpj;
+    
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoaJuridica")
     private EmpresaLicitante empresaLicitante;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPessoaJuridica")
     private Set<ContatoPessoaJuridica> contatoPessoaJuridicaSet;
+    
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoaJuridica")
     private InstituicaoLicitadora instituicaoLicitadora;
 

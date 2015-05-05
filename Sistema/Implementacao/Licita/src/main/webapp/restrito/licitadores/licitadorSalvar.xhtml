@@ -5,7 +5,8 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/template/TemplateLicitaPaineis.xhtml"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:pe="http://primefaces.org/ui/extensions">
 
     <ui:define name="pn_info">
 
@@ -36,12 +37,12 @@
 
             <p:growl id="growLicitador" showDetail="false" for="licitador_form" />
 
-            <div style="margin-left: 25%; margin-top: 2%">
+            <div style="margin-left: 2%; margin-top: 2%; margin-right: 2%">
 
-                <h:panelGrid columns="2" id="panelGridSaveLicitador">
+                <h:panelGrid columns="4" id="panelGridSaveLicitador">
 
                     <p:outputLabel value="CNPJ:" for="cnpj"/>
-                    <p:inputMask id="cnpj" value="" title="CNPJ" required="true" requiredMessage="O campo CNPJ é obrigatorio" 
+                    <p:inputMask id="cnpj" value="" title="CNPJ" required="true" requiredMessage="O campo CNPJ é obrigatório" 
                                  mask="99.999.999/9999-99" placeholder="CNPJ"/>
 
                     <p:outputLabel value="Razão Social:" for="razaoSocial"/>
@@ -55,10 +56,13 @@
                     <p:inputText id="logradouro" value="" title="Logradouro" placeholder="Logradouro" maxlength="60"/>
 
                     <p:outputLabel value="Cidade:" for="cidade"/>
-                    <p:inputText id="cidade" value="" title="Cidade" placeholder="Cidade" maxlength="60"/>
+                    <p:inputText id="cidade" value="" title="Cidade" placeholder="Cidade" maxlength="60" required="true" requiredMessage="O campo cidade é obrigatório"/>
+
+                    <p:outputLabel value="Numero:" for="numero"/>
+                    <pe:inputNumber id="numero" value="" title="Numero" maxValue="9999999" decimalPlaces="0"/>
 
                     <p:outputLabel value="Estado:" for="estado"/>
-                    <p:selectOneMenu id="estado" value="">
+                    <p:selectOneMenu id="estado" value="" required="true" requiredMessage="O campo estado é obrigatório" style="width:188px">
 
                         <f:selectItem noSelectionOption="true" />
                         <f:selectItem itemLabel="Acre" itemValue="AC" />
@@ -92,23 +96,38 @@
                     </p:selectOneMenu>
 
                     <p:outputLabel value="CEP:" for="cep"/>
-                    <p:inputMask id="cep" value="" title="CPF" mask="99.999-999" placeholder="CPF"/>
+                    <p:inputMask id="cep" value="" title="CEP" mask="99.999-999" placeholder="CEP"/>
 
-                    <p:outputLabel value="Numero:" for="numero"/>
-                    <p:inputText id="numero" value="" title="Numero" placeholder="Numero" type=""/>
+                    <p:outputLabel value="Telefone:" for="telefone"/>
+                    <p:inputMask id="telefone" value="" title="Telefone" mask="(99)9999-9999" placeholder="(DDD) 9999-9999" maxlength="14"/>
 
-                    <p:outputLabel value="Complemento"  for="complemento"/>
+                    <p:outputLabel value="Celular:" for="celular"/>
+                    <p:inputText id="celular" value="" title="Celular" placeholder="(DDD) 9999-9999" maxlength="14"/>
+
+                    <p:outputLabel value="E-mail:" for="email"/>
+                    <p:inputText id="email" value="" title="E-mail" placeholder="E-mail"/>
+
+                    <p:outputLabel value="Complemento:"  for="complemento"/>
                     <p:inputTextarea id="complemento" value="" title="Complemento" placeholder="Complemento" 
                                      rows="3" cols="30" counter="display" maxlength="50" counterTemplate="{0} caracteres restantes." 
-                                     autoResize="true" />
-                    
+                                     autoResize="true" style="width:190px"/>
+
+                    <p:outputLabel/>
+                    <p:outputLabel/>
                     <p:outputLabel/>
                     <p:outputLabel id="display" />
 
+
+
                 </h:panelGrid>
+            </div>
+
+            <div style="margin-left: 2%; margin-top: 2%; margin-right: 2%">
+                
+                <p:commandButton  id="btSalvarLicitador" value="Salvar" icon="fa fa-save" action="#{controladorLicitador.criar}" update="growLicitador" ajax="false"/>
 
             </div>
-            <p:commandButton  id="btSalvarLicitador" value="Salvar" icon="fa fa-save" action="#{controladorLicitador.criar}" update="growLicitador" ajax="false"/>
+            
         </h:form>
 
     </ui:define> 
