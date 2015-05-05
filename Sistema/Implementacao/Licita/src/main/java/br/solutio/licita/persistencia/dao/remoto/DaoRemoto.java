@@ -7,7 +7,6 @@ package br.solutio.licita.persistencia.dao.remoto;
 
 import br.solutio.licita.persistencia.dao.DaoAbstrato;
 import br.solutio.licita.persistencia.dao.DaoIF;
-import br.solutio.licita.persistencia.dao.FabricaDAO;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

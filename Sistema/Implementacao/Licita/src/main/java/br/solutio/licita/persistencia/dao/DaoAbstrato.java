@@ -5,14 +5,9 @@
  */
 package br.solutio.licita.persistencia.dao;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
-import javax.persistence.Parameter;
 import javax.persistence.Query;
 
 /**
