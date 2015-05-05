@@ -74,7 +74,7 @@ CREATE TABLE tbl_login(
 	id BIGSERIAL PRIMARY KEY,
 	id_pregoeiro BIGINT,
 	usuario VARCHAR(20) NOT NULL,
-	senha VARCHAR(20) NOT NULL,
+	senha VARCHAR(126) NOT NULL,
 	logado BOOLEAN,
 	CONSTRAINT fk_login_pregoeiro FOREIGN KEY(id_pregoeiro) REFERENCES tbl_pregoeiro(id)
 	
