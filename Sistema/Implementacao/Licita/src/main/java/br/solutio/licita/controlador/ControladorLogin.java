@@ -45,9 +45,18 @@ public class ControladorLogin extends ControladorAbstrato<Login> {
         return this.servico;
     }
 
-    public String efetuarLogin() {
-        boolean permissao = this.servico.verificarDados(login.getUsuario(), login.getSenha());
-        if (permissao) {
+    public boolean efetuarLogin() {
+        boolean permissao = false;
+        if (getEntidade().getSenha() != null && getEntidade().getUsuario() != null) {
+            permissao = this.servico.verificarDados(login.getUsuario(), login.getSenha());
+            return permissao;
+        } else {
+            return permissao;
+        }
+    }
+
+    public String concerderAcesso() {
+        if (efetuarLogin()) {
             FacesContext.getCurrentInstance()
                     .getExternalContext()
                     .getSessionMap()
