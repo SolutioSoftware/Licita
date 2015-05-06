@@ -9,36 +9,28 @@
     <ui:define name="pn_info">
 
         <div style="padding: 5px;margin-bottom: 15px;margin-top: 15px">
-        <p:button value="Novo" style="width: 80px" outcome="/restrito/equipe/equipeSalvar.xhtml" icon="fa fa-plus"/>
+        <p:button value="Novo" style="width: 80px" outcome="/restrito/licitadores/licitadorSalvar.xhtml" icon="fa fa-plus"/>
         <p:button value="Excluir" style="margin-left: 12px; width: 80px" icon="fa fa-trash"/>
         <b><h:outputText value="Buscar: " style="margin-left: 12px; color: #045491 "/></b>
         <p:inputText label="Buscar" placeholder="Digite sua busca" style="margin-left: 2px;width: 185px;" />
         </div>
 
-        <p:dataTable id='dt_equipes' var="equipes" widgetVar="tbl_equipes" paginator="true" style="padding:5px" rowsPerPageTemplate="5,10,20,50,100, 200"  emptyMessage="Nenhum Membro Cadastrado"  paginatorAlwaysVisible="false">
+        <p:dataTable id='dt_licitadores' var="licitadores" widgetVar="tbl_licitadores" paginator="true" style="padding:5px" rowsPerPageTemplate="5,10,20,50,100, 200"  emptyMessage="Nenhum Orgão Cadastrado"  paginatorAlwaysVisible="false">
 
-           
-            <p:column headerText="CPF">
+            <p:column headerText="CNPJ">
                 <h:outputText value="" />
             </p:column>
 
-            <p:column headerText="Nome">
+            <p:column headerText="Razão Social">
                 <h:outputText value="" />
             </p:column>
             
-             <p:column headerText="Função">
-                <h:outputText value="" />
-            </p:column>
-
-            
-
         </p:dataTable>
 
     </ui:define>
 
     <ui:define name="pn_conteudo">
-   
+
     </ui:define> 
     
-
 </ui:composition>

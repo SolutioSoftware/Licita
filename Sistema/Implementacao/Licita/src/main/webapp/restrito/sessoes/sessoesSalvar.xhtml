@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template/TemplateLicitaPaineis.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="pn_info">
+
+        <div style="padding: 5px;margin-bottom: 15px;margin-top: 15px">
+            <p:button value="Novo" style="width: 80px" outcome="/restrito/sessoes/sessoesSalvar.xhtml" icon="fa fa-plus"/>
+            <p:button value="Excluir" style="margin-left: 12px; width: 80px" icon="fa fa-trash"/>
+            <b><h:outputText value="Buscar: " style="margin-left: 12px; color: #045491 "/></b>
+            <p:inputText label="Buscar" placeholder="Digite sua busca" style="margin-left: 2px;width: 185px;" />
+        </div>
+
+        <p:dataTable id='dt_sessoes' var="sessoes" widgetVar="tbl_sessoes" paginator="true" style="padding:5px" rowsPerPageTemplate="5,10,20,50,100, 200"  emptyMessage="Nenhuma sessão cadastrada"  paginatorAlwaysVisible="false">
+
+
+            <p:column headerText="Nº Pregão">
+                <h:outputText value="" />
+            </p:column>
+
+            <p:column headerText="Nº da Sessão">
+                <h:outputText value="" />
+            </p:column>
+
+            <p:column headerText="Horario de início">
+                <h:outputText value="" />
+            </p:column>
+
+        </p:dataTable>
+
+    </ui:define>
+
+    <ui:define name="pn_conteudo">
+
+        <h:form id="sessao_form" title="Sessão" style="text-align: center"  >
+
+            <p:growl id="growSessao" showDetail="false" for="sessao_form" />
+
+            <div style="margin-left: 25%; margin-top: 2%">
+
+                <h:panelGrid columns="2" id="panelGridSaveSessao">
+
+                    <p:outputLabel value="Numero do Pregão:" for="numeroDoPregao"/>
+                    <p:selectOneMenu id="numeroDoPregao" value="" style="width: 188px" required="true" requiredMessage="O campo Numero de Pregão deve ser selecionado">
+
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value="Horário Previsto:" for="horarioPrevisto"/>
+                    <p:calendar id="horarioPrevisto" pattern="MM/dd/yyyy HH:mm" style="width: 210px"/>
+
+                    <p:outputLabel value="Status:" for="statusDaSessao"/>
+                    <p:selectOneMenu id="statusDaSessao" value="" style="width: 210px" required="true" requiredMessage="O Campo Status da Sessão deve ser selecionado">
+
+                        <f:selectItem noSelectionOption="true" />
+                        <f:selectItem itemLabel="Agendada" itemValue="Agendada" />
+                        <f:selectItem itemLabel="Anulada" itemValue="Anulada" />
+                        <f:selectItem itemLabel="Cancelada" itemValue="Cancelada" />
+                        <f:selectItem itemLabel="Deserto" itemValue="Deserto" />
+                        <f:selectItem itemLabel="Encerrada" itemValue="Encerrada" />
+                        <f:selectItem itemLabel="Iniciada" itemValue="Iniciada" />
+                        <f:selectItem itemLabel="Pausada" itemValue="Pausada" />
+                        <f:selectItem itemLabel="Remarcada" itemValue="Remarcada" />
+
+                    </p:selectOneMenu>
+
+                </h:panelGrid>
+
+            </div>
+
+            <div style="margin-left: 2%; margin-top: 2%; margin-right: 2%">
+
+                <p:commandButton  id="bt_Salvar_Sessao" value="Salvar" icon="fa fa-save" update="growSessao" ajax="false" style="width: 125px"/>
+                <p:commandButton  id="bt_Iniciar_Sessao" value="Iniciar Sessão" icon="fa fa-youtube-play" update="growSessao" ajax="false" style="width: 125px"/>
+
+            </div>
+
+        </h:form>
+
+    </ui:define> 
+
+</ui:composition>

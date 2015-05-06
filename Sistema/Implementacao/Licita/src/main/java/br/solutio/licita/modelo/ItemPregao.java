@@ -46,36 +46,46 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "ItemPregao.findByUnidade", query = "SELECT i FROM ItemPregao i WHERE i.unidade = :unidade"),
     @NamedQuery(name = "ItemPregao.findByStatusItem", query = "SELECT i FROM ItemPregao i WHERE i.statusItem = :statusItem")})
 public class ItemPregao implements Serializable{
+    
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
+    
     @Column(name = "numero_item")
     private Integer numeroItem;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "quantidade")
     private int quantidade;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "valor_referencia")
     private BigInteger valorReferencia;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
     @Column(name = "nome")
     private String nome;
+    
     @Size(max = 50)
     @Column(name = "descricao")
     private String descricao;
+    
     @Size(max = 15)
     @Column(name = "unidade")
     private String unidade;
+    
     @Size(max = 15)
     @Column(name = "status_item")
     private String statusItem;
+    
     @JoinTable(name = "tbl_historico_status_item_pregao", joinColumns = {
         @JoinColumn(name = "id_item_pregao", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_status", referencedColumnName = "id")})

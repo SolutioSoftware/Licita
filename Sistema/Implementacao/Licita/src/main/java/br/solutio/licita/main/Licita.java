@@ -41,13 +41,17 @@ public class Licita {
         pessoa.setCpf("00011122235");
         pessoa.setNome("Matheus");
         pessoa.setRg("1232344");
+        daoPF.criar(pessoa);
+        
         pregoeiro.setPessoaFisica(pessoa);
+        daoPR.criar(pregoeiro);
+        
         login.setUsuario("matheus");
         login.setSenha("123");
         login.setIdPregoeiro(pregoeiro);
         
-        daoPF.criar(pessoa);
-        daoPR.criar(pregoeiro);
+        
+        
         daoLO.criar(login);
         
         

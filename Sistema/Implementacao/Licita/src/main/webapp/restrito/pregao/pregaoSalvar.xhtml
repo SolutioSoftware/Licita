@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template/TemplateLicitaPaineis.xhtml"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="pn_info">
+
+        <div style="padding: 5px;margin-bottom: 15px;margin-top: 15px">
+            <p:button value="Novo" style="width: 80px" outcome="/restrito/pregao/pregaoSalvar.xhtml" icon="fa fa-plus"/>
+            <p:button value="Excluir" style="margin-left: 12px; width: 80px" icon="fa fa-trash"/>
+            <b><h:outputText value="Buscar: " style="margin-left: 12px; color: #045491 "/></b>
+            <p:inputText label="Buscar" placeholder="Digite sua busca" style="margin-left: 2px;width: 185px;" />
+        </div>
+
+        <p:dataTable id='dt_pregoes' var="pregoes" widgetVar="tbl_pregoes" paginator="true" style="padding:5px" rowsPerPageTemplate="5,10,20,50,100, 200"  emptyMessage="Nenhum pregão cadastrado"  paginatorAlwaysVisible="false">
+
+
+            <p:column headerText="Número do processo">
+                <h:outputText value="" />
+            </p:column>
+
+            <p:column headerText="Número do pregão">
+                <h:outputText value="" />
+            </p:column>
+
+            <p:column headerText="Status">
+                <h:outputText value="" />
+            </p:column>
+
+        </p:dataTable>
+
+    </ui:define>
+
+    <ui:define name="pn_conteudo">
+
+        <h:form id="pregao_form" title="Pregão" style="text-align: center"  >
+
+            <p:growl id="growPregao" showDetail="false" for="pregao_form" />
+
+            <div style="margin-left: 25%; margin-top: 2%">
+
+                <h:panelGrid columns="2" id="panelGridSavePregao">
+
+                    <p:outputLabel value="Número do Processo:" for="numeroProcesso"/>
+                    <pe:inputNumber id="numeroProcesso" value="" title="Número do Processo" required="true"
+                                    requiredMessage="O campo Número do Processo é obrigatorio" maxValue="99999999999" decimalPlaces="0" decimalSeparator="" thousandSeparator=""/>
+
+                    <p:outputLabel value="Número do Pregão:" for="numeroPregao"/>
+                    <pe:inputNumber id="numeroPregao" value="" title="Número do Pregão" required="true" 
+                                    requiredMessage="O Campo Número do pregão é obrigatorio" maxValue="99999999999" decimalPlaces="0" decimalSeparator="" thousandSeparator=""/> 
+
+                    <p:outputLabel value="Status:" for="statusDoPregao"/>
+                    <p:selectOneMenu id="statusDoPregao" value="" style="width: 210px">
+
+                        <f:selectItem noSelectionOption="true" />
+                        <f:selectItem itemLabel="Aberto" itemValue="Aberto" />
+                        <f:selectItem itemLabel="Anulado" itemValue="Anulado" />
+                        <f:selectItem itemLabel="Cancelado" itemValue="Cancelado" />
+                        <f:selectItem itemLabel="Concluído COM Recurso" itemValue="Concluído COM Recurso" />
+                        <f:selectItem itemLabel="Concluído SEM Recurso" itemValue="Concluído SEM Recurso" />
+                        <f:selectItem itemLabel="Deserto" itemValue="Deserto" />
+                        <f:selectItem itemLabel="Fracassado" itemValue="Fracassado" />
+
+
+
+                    </p:selectOneMenu>
+
+                </h:panelGrid>
+            </div>
+
+            <div style="margin-left: 2%; margin-top: 2%; margin-right: 2%">
+
+                <p:commandButton  id="btSalvarPregao" value="Salvar" icon="fa fa-save" update="growPregao" ajax="false"/>
+
+            </div>
+
+        </h:form>
+
+    </ui:define> 
+
+
+</ui:composition>

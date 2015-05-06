@@ -4,14 +4,13 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
-                xmlns:f="http://xmlns.jcp.org/jsf/core"
                 template="/WEB-INF/template/TemplateLicitaPaineis.xhtml">
 
     <ui:define name="pn_info">
 
         <div style="padding: 5px;margin-bottom: 15px;margin-top: 15px">
-        <p:button value="Novo" style="width: 80px"/>
-        <p:button value="Excluir" style="margin-left: 12px; width: 80px" />
+        <p:button value="Novo" style="width: 80px" outcome="/restrito/sessoes/sessoesSalvar.xhtml" icon="fa fa-plus"/>
+        <p:button value="Excluir" style="margin-left: 12px; width: 80px" icon="fa fa-trash" />
         <b><h:outputText value="Buscar: " style="margin-left: 12px; color: #045491 "/></b>
         <p:inputText label="Buscar" placeholder="Digite sua busca" style="margin-left: 2px;width: 185px;" />
         </div>
@@ -22,16 +21,12 @@
             <p:column headerText="Nº Pregão">
                 <h:outputText value="" />
             </p:column>
-
-            <p:column headerText="Nº Processo">
+            
+            <p:column headerText="Nº da Sessão">
                 <h:outputText value="" />
             </p:column>
 
-            <p:column headerText="Data">
-                <h:outputText value="" />
-            </p:column>
-
-            <p:column headerText="Status">
+            <p:column headerText="Horário de início">
                 <h:outputText value="" />
             </p:column>
 

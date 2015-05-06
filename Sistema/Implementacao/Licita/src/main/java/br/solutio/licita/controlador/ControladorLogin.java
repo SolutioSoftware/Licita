@@ -5,13 +5,14 @@
  */
 package br.solutio.licita.controlador;
 
+import br.solutio.licita.controlador.util.JsfUtil;
 import br.solutio.licita.modelo.Login;
 import br.solutio.licita.servico.ServicoIF;
-import java.util.logging.Level;
+import br.solutio.licita.servico.ServicoLogin;
+import br.solutio.licita.servico.ServicoLoginIF;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -20,10 +21,13 @@ import javax.servlet.http.HttpSession;
 @ManagedBean(name = "Login")
 public class ControladorLogin extends ControladorAbstrato<Login> {
 
-    private static final Logger logger = Logger.getGlobal();
+    private static final Logger log = Logger.getGlobal();
     private Login login;
+    private ServicoLoginIF servico;
+
     public ControladorLogin() {
         login = new Login();
+        servico = new ServicoLogin();
     }
 
     @Override
@@ -33,25 +37,40 @@ public class ControladorLogin extends ControladorAbstrato<Login> {
 
     @Override
     public void setEntidade(Login entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.login = entidade;
     }
 
     @Override
     public ServicoIF getServico() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.servico;
     }
 
-    public String efetuarLogin() {
-        FacesContext.getCurrentInstance()
-                .getExternalContext()
-                .getSessionMap()
-                .put("usuario", login); // Adiciona Login a sessão com JSF
-        return "/restrito/index.xhtml?faces-redirect=true";
+    public boolean efetuarLogin() {
+        boolean permissao = false;
+        if (getEntidade().getSenha() != null && getEntidade().getUsuario() != null) {
+            permissao = this.servico.verificarDados(login.getUsuario(), login.getSenha());
+            return permissao;
+        } else {
+            return permissao;
+        }
     }
-    
-    public String efetuarLogout(){
+
+    public String concerderAcesso() {
+        if (efetuarLogin()) {
+            FacesContext.getCurrentInstance()
+                    .getExternalContext()
+                    .getSessionMap()
+                    .put("usuario", login); // Adiciona Login a sessão com JSF
+            return "/restrito/index.xhtml?faces-redirect=true";
+        } else {
+            JsfUtil.addErrorMessage("Usuário ou Senha inválidos.");
+            return "/restrito/login/login.xhtml";
+        }
+    }
+
+    public String efetuarLogout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "/login/login.xhtml?faces-redirect=true";
+        return "/restrito/login/login.xhtml?faces-redirect=true";
     }
 
 }

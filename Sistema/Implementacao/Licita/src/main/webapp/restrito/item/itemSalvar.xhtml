@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template/TemplateLicitaPaineis.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:pe="http://primefaces.org/ui/extensions">
+
+    <ui:define name="pn_info">
+
+        <div style="padding: 5px;margin-bottom: 15px;margin-top: 15px">
+            <p:button value="Novo" style="width: 80px" outcome="/restrito/item/itemSalvar.xhtml" icon="fa fa-plus"/>
+            <p:button value="Excluir" style="margin-left: 12px; width: 80px" icon="fa fa-trash"/>
+            <b><h:outputText value="Buscar: " style="margin-left: 12px; color: #045491 "/></b>
+            <p:inputText label="Buscar" placeholder="Digite sua busca" style="margin-left: 2px;width: 185px;" />
+        </div>
+
+        <p:dataTable id='dt_itens' var="itens" widgetVar="tbl_itens" paginator="true" style="padding:5px" rowsPerPageTemplate="5,10,20,50,100, 200"  emptyMessage="Nenhum item cadastrado"  paginatorAlwaysVisible="false">
+
+            <!-- Sera o ID dele -->
+            <p:column headerText="Numero do item">
+                <h:outputText value="" />
+            </p:column>
+
+            <p:column headerText="Nome do item">
+                <h:outputText value="" />
+            </p:column>
+
+            <p:column headerText="Unidade">
+                <h:outputText value="" />
+            </p:column>
+
+        </p:dataTable>
+
+    </ui:define>
+
+    <ui:define name="pn_conteudo">
+
+        <h:form id="item_form" title="Item" style="text-align: center"  >
+
+            <p:growl id="growItem" showDetail="false" for="item_form" />
+
+            <div style="margin-left: 2%; margin-top: 2%; margin-right: 2%">
+
+                <h:panelGrid columns="4" id="panelGridSaveItem">
+
+                    <p:outputLabel value="Nome do Item:" for="nome"/>
+                    <p:inputText id="nome" value="" title="Nome" required="true"  
+                                 requiredMessage="O campo nome do item é obrigatório" placeholder="Nome" maxlength="30"/>
+                    <p:outputLabel value="Valor de Referencia em R$:" for="valorDeReferencia"/>
+                    <pe:inputNumber id="valorDeReferencia" value="" maxValue="99999999999" decimalPlaces="2"/>
+
+                    <p:outputLabel value="Medida:" for="medida"/>
+                    <p:selectOneMenu id="medida" value="" style="width:188px" required="true" requiredMessage="O campo medida é obrigatório">
+
+                        <f:selectItem noSelectionOption="true" />
+                        <f:selectItem itemLabel="Ampoula" itemValue="Ampoula" />
+                        <f:selectItem itemLabel="Caixa" itemValue="Caixa" />
+                        <f:selectItem itemLabel="Centimetro" itemValue="Centimetro" />
+                        <f:selectItem itemLabel="Fardo" itemValue="Fardo" />
+                        <f:selectItem itemLabel="Frasco" itemValue="Frasco" />
+                        <f:selectItem itemLabel="Kilo" itemValue="Kilo" />
+                        <f:selectItem itemLabel="Kit" itemValue="Kit" />
+                        <f:selectItem itemLabel="Litro" itemValue="litro" />
+                        <f:selectItem itemLabel="Maço" itemValue="Maco" />
+                        <f:selectItem itemLabel="Metro" itemValue="Metro" />
+                        <f:selectItem itemLabel="Metro Cubico" itemValue="Metro Cubico" />
+                        <f:selectItem itemLabel="Metro Quadrado" itemValue="Metro Quadrado" />
+                        <f:selectItem itemLabel="Mililitro" itemValue="Mililitro" />
+                        <f:selectItem itemLabel="Milimetro" itemValue="Milimetro" />
+                        <f:selectItem itemLabel="Pacote" itemValue="Pacote" />
+                        <f:selectItem itemLabel="Peça" itemValue="Peca" />
+                        <f:selectItem itemLabel="Refil" itemValue="Refil" />
+                        <f:selectItem itemLabel="Rolo" itemValue="Rolo" />
+                        <f:selectItem itemLabel="Saco" itemValue="Saco" />
+                        <f:selectItem itemLabel="Unidade" itemValue="Unidade" />
+
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value="Quantidade:" for="quantidade"/>
+                    <pe:inputNumber id="quantidade" value="" title="Quantidade" maxValue="99999999999" decimalPlaces="2"/>
+
+                    <p:outputLabel value="Descrição" for="descricao"/>
+                    <p:inputTextarea id="descricao" value="" title="Descrição" placeholder="Descrição" 
+                                     rows="3" cols="30" counter="display" maxlength="50" counterTemplate="{0} caracteres restantes." 
+                                     autoResize="true" style="width:190px" />
+                    
+                    <p:outputLabel/>
+                    <p:outputLabel/>
+                    <p:outputLabel/>
+                    <p:outputLabel id="display" />
+                    
+                </h:panelGrid>
+
+            </div>
+
+            <div style="margin-left: 2%; margin-top: 2%; margin-right: 2%">
+
+                <p:commandButton  id="bt_salvar_item" value="Salvar" icon="fa fa-save" update="growItem" ajax="false"/>
+
+            </div>
+        </h:form>
+
+    </ui:define> 
+
+</ui:composition>
