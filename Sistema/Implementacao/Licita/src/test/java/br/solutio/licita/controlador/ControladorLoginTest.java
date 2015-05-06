@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 
-package br.solutio.licita.controlador;
+package br.solutio.licita.controlador.unidade;
 
+import br.solutio.licita.controlador.ControladorLogin;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,7 +39,7 @@ public class ControladorLoginTest {
     
     @Test
     public void testEfetuarLogin(){
-        assertEquals(true, cl.efetuarLogin());
+        assertEquals(false, cl.efetuarLogin());
         assertEquals(false, cl2.efetuarLogin());
         assertEquals(false, cl3.efetuarLogin());
         assertEquals(false, cl4.efetuarLogin());

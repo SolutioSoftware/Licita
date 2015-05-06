@@ -39,12 +39,16 @@ public class ServicoLogin extends ServicoAbstrato<Login> implements ServicoLogin
      */
     @Override
     public boolean verificarDados(String usuario, String senha) {
-        String senhaCript;
-        senhaCript = Criptografar.getInstance().criptografar(senha);
-        String[] parametros = {"usuario", "senha"};
-        Object[] valores = {usuario, senhaCript};
-        List<Login> list = getDao().consultar("Login.buscaPorLogin", parametros, valores);
-        return list.size() >= 1;
+        if (usuario != null && senha != null) {
+            String senhaCript;
+            senhaCript = Criptografar.getInstance().criptografar(senha);
+            String[] parametros = {"usuario", "senha"};
+            Object[] valores = {usuario, senhaCript};
+            List<Login> list = getDao().consultar("Login.buscaPorLogin", parametros, valores);
+            return list.size() >= 1;
+        } else {
+            return false;
+        }
     }
 
     @Override
