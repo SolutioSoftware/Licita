@@ -27,7 +27,7 @@
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://127.0.0.1:5432/licita_simulacao_local"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="123"/>
+      <property name="javax.persistence.jdbc.password" value="253545"/>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
       <property name="eclipselink.logging.level" value="INFO"/>
     </properties>
@@ -39,7 +39,7 @@
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://127.0.0.1:5432/licita_simulacao_remoto"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="123"/>
+      <property name="javax.persistence.jdbc.password" value="253545"/>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
   </persistence-unit>

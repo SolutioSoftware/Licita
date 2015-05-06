@@ -42,35 +42,45 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Pregao.findByStatusPregao", query = "SELECT p FROM Pregao p WHERE p.statusPregao = :statusPregao"),
     @NamedQuery(name = "Pregao.findBySincronizado", query = "SELECT p FROM Pregao p WHERE p.sincronizado = :sincronizado")})
 public class Pregao implements Serializable{
+    
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
     @Column(name = "numero_processo")
     private String numeroProcesso;
+    
     @Size(max = 20)
     @Column(name = "numero_pregao")
     private String numeroPregao;
+    
     @Size(max = 255)
     @Column(name = "descricao")
     private String descricao;
+    
     @Size(max = 10)
     @Column(name = "status_pregao")
     private String statusPregao;
+    
     @Column(name = "sincronizado")
     private Boolean sincronizado;
+    
     @JoinTable(name = "tbl_historico_status_pregao", joinColumns = {
         @JoinColumn(name = "id_pregao", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_status", referencedColumnName = "id")})
     @ManyToMany
     private Set<StatusPregao> statusPregaoSet;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPregao")
     private Set<ItemPregao> itemPregaoSet;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPregao")
     private Set<Sessao> sessaoSet;
 

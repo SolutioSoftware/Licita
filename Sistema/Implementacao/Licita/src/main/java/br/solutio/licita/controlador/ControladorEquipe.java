@@ -7,7 +7,6 @@ package br.solutio.licita.controlador;
 
 import br.solutio.licita.modelo.PessoaFisica;
 import br.solutio.licita.servico.ServicoIF;
-import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 
@@ -19,7 +18,7 @@ import javax.faces.bean.ManagedBean;
 public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> {
 
     private PessoaFisica entidade;
-    private List<PessoaFisica> pessoasfisica = new ArrayList<>();
+    private List<PessoaFisica> pessoasfisica;
     private boolean cargoPregoeiro = false;
     private boolean cargoMembrodeApoio = false;
     private String valor;
