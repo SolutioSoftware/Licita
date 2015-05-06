@@ -9,6 +9,7 @@ import br.solutio.licita.modelo.Login;
 import br.solutio.licita.modelo.PessoaFisica;
 import br.solutio.licita.modelo.Pregao;
 import br.solutio.licita.modelo.Pregoeiro;
+import br.solutio.licita.modelo.PregoeiroPK;
 import br.solutio.licita.persistencia.dao.DaoIF;
 import br.solutio.licita.persistencia.dao.FabricaDAO;
 import br.solutio.licita.persistencia.dao.TipoDAO;
@@ -38,16 +39,20 @@ public class Licita {
         
         
         
-        pessoa.setCpf("00011122235");
+        pessoa.setCpf("00011122266");
         pessoa.setNome("Matheus");
         pessoa.setRg("1232344");
         daoPF.criar(pessoa);
         
-        pregoeiro.setPessoaFisica(pessoa);
+        PregoeiroPK pregoeiroPk = new PregoeiroPK();
+        
+        pregoeiroPk.setIdPessoaFisica(pessoa.getId());
+        
+        pregoeiro.setPregoeiroPK(pregoeiroPk);
         daoPR.criar(pregoeiro);
         
-        login.setUsuario("matheus");
-        login.setSenha("123");
+        login.setUsuario("matheuss");
+        login.setSenha("1232");
         login.setIdPregoeiro(pregoeiro);
         
         
