@@ -17,7 +17,7 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean
 public class ControladorPregao extends ControladorAbstrato<Pregao>{
     
-    private Pregao pregao;
+    private Pregao pregao = new Pregao();
     private List<Pregao> pregoes;
 
     public Pregao getPregao() {
