@@ -9,9 +9,12 @@ import br.solutio.licita.modelo.EmpresaLicitante;
 import br.solutio.licita.modelo.InstituicaoLicitadora;
 import br.solutio.licita.modelo.ItemPregao;
 import br.solutio.licita.modelo.Login;
+import br.solutio.licita.modelo.PessoaFisica;
+import br.solutio.licita.modelo.Pregao;
 import br.solutio.licita.modelo.Pregoeiro;
 import br.solutio.licita.persistencia.dao.DaoIF;
 import br.solutio.licita.persistencia.dao.FabricaDAO;
+import java.util.logging.Level;
 
 /**
  *
@@ -41,6 +44,18 @@ public class FabricaDaoLocal extends FabricaDAO {
 
     @Override
     public DaoIF<ItemPregao> getDaoItemPregao() {
+        return new DaoLocal<>();
+    }
+    
+     @Override
+    public DaoIF<Pregao> getDaoPregao() {
+        logger.log(Level.INFO, "Dao Pregao Local");
+        return new DaoLocal<>();
+    }
+    
+    @Override
+    public DaoIF<PessoaFisica> getDaoPessoaFisica() {
+        logger.log(Level.INFO, "Dao Pregao Local");
         return new DaoLocal<>();
     }
     

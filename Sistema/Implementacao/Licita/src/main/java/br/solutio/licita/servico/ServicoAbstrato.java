@@ -24,7 +24,7 @@ public abstract class ServicoAbstrato<T> implements ServicoIF<T>{
         return getDao().contagem();
     }
     
-    @Transacional
+    
     @Override
     public void criar(T entidade) {
         try {
@@ -35,13 +35,13 @@ public abstract class ServicoAbstrato<T> implements ServicoIF<T>{
         
     }
 
-    @Transacional
+    
     @Override
     public void editar(T entidade) {
         getDao().editar(entidade);
     }
     
-    @Transacional
+    
     @Override
     public void deletar(T entidade) {
         getDao().deletar(entidade);

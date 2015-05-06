@@ -9,6 +9,8 @@ import br.solutio.licita.modelo.EmpresaLicitante;
 import br.solutio.licita.modelo.InstituicaoLicitadora;
 import br.solutio.licita.modelo.ItemPregao;
 import br.solutio.licita.modelo.Login;
+import br.solutio.licita.modelo.PessoaFisica;
+import br.solutio.licita.modelo.Pregao;
 import br.solutio.licita.modelo.Pregoeiro;
 
 /**
@@ -22,6 +24,8 @@ public interface FabricaDaoIF {
     public DaoIF<Login> getDaoLogin();
     public DaoIF<EmpresaLicitante> getDaoEmpresaLicitante();
     public DaoIF<ItemPregao> getDaoItemPregao();
+    public DaoIF<Pregao> getDaoPregao();
+    public DaoIF<PessoaFisica> getDaoPessoaFisica();
     
     
 }

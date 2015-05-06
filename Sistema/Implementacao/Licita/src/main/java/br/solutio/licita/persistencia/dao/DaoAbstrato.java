@@ -5,14 +5,11 @@
  */
 package br.solutio.licita.persistencia.dao;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
-import javax.persistence.Parameter;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
 /**
@@ -23,7 +20,7 @@ import javax.persistence.Query;
 public abstract class DaoAbstrato<T> implements DaoIF<T> {
 
     private Class<T> entidade;
-    static final Logger logger = Logger.getGlobal();
+    protected static final Logger logger = Logger.getGlobal();
 
     /**
      *
@@ -49,7 +46,15 @@ public abstract class DaoAbstrato<T> implements DaoIF<T> {
 
     @Override
     public void criar(T entidade) {
-        getEntityManager().persist(entidade);
+        logger.log(Level.INFO, "Criar");
+        EntityManager em = getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        
+        tx.begin();
+        em.persist(entidade);
+        em.flush();
+        tx.commit();
+        em.close();
     }
 
     @Override

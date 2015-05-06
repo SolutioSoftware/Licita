@@ -10,9 +10,12 @@ import br.solutio.licita.modelo.EmpresaLicitante;
 import br.solutio.licita.modelo.InstituicaoLicitadora;
 import br.solutio.licita.modelo.ItemPregao;
 import br.solutio.licita.modelo.Login;
+import br.solutio.licita.modelo.PessoaFisica;
+import br.solutio.licita.modelo.Pregao;
 import br.solutio.licita.modelo.Pregoeiro;
 import br.solutio.licita.persistencia.dao.local.FabricaDaoLocal;
 import br.solutio.licita.persistencia.dao.remoto.FabricaDaoRemoto;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,6 +23,7 @@ import br.solutio.licita.persistencia.dao.remoto.FabricaDaoRemoto;
  */
 public abstract class FabricaDAO implements FabricaDaoIF{
     
+    protected static final Logger logger = Logger.getGlobal();
     
     public static FabricaDAO getFabricaDAO(TipoDAO tipo){
         
@@ -50,6 +54,11 @@ public abstract class FabricaDAO implements FabricaDaoIF{
     @Override
     public abstract DaoIF<ItemPregao> getDaoItemPregao();
     
+    @Override 
+    public abstract DaoIF<Pregao> getDaoPregao();
+    
+    @Override
+    public abstract DaoIF<PessoaFisica> getDaoPessoaFisica();
     
     
     

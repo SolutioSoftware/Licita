@@ -7,6 +7,7 @@ package br.solutio.licita.persistencia.dao.local;
 
 import br.solutio.licita.persistencia.dao.DaoAbstrato;
 import br.solutio.licita.persistencia.dao.DaoIF;
+import java.util.logging.Level;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -33,6 +34,7 @@ public class DaoLocal<T> extends DaoAbstrato<T> implements DaoIF<T>{
     @Override
     protected EntityManager getEntityManager() {
         if (emf == null){
+            logger.log(Level.INFO, "EMF Local");
             emf = Persistence.createEntityManagerFactory("Licita_PU_Local");
         }
         
