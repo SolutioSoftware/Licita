@@ -20,6 +20,7 @@ public class PregoeiroPK implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private long id;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_pessoa_fisica")

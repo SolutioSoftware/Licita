@@ -13,6 +13,7 @@ import br.solutio.licita.modelo.PregoeiroPK;
 import br.solutio.licita.persistencia.dao.DaoIF;
 import br.solutio.licita.persistencia.dao.FabricaDAO;
 import br.solutio.licita.persistencia.dao.TipoDAO;
+import br.solutio.licita.servico.ServicoIF;
 import br.solutio.licita.servico.ServicoLogin;
 import br.solutio.licita.servico.ServicoLoginIF;
 
@@ -31,7 +32,7 @@ public class Licita {
         
         DaoIF<PessoaFisica> daoPF = FabricaDAO.getFabricaDAO(TipoDAO.Local).getDaoPessoaFisica();
         DaoIF<Pregoeiro> daoPR = FabricaDAO.getFabricaDAO(TipoDAO.Local).getDaoPregoeiro();
-        DaoIF<Login> daoLO = FabricaDAO.getFabricaDAO(TipoDAO.Local).getDaoLogin();
+        ServicoIF servico = new ServicoLogin();
         
         PessoaFisica pessoa = new PessoaFisica();
         Login login = new Login();
@@ -39,25 +40,27 @@ public class Licita {
         
         
         
-        pessoa.setCpf("00011122266");
-        pessoa.setNome("Matheus");
+        pessoa.setCpf("00311193326");
+        pessoa.setNome("Witalo");
         pessoa.setRg("1232344");
         daoPF.criar(pessoa);
         
         PregoeiroPK pregoeiroPk = new PregoeiroPK();
         
+        pregoeiroPk.setId(pessoa.getId());
         pregoeiroPk.setIdPessoaFisica(pessoa.getId());
         
         pregoeiro.setPregoeiroPK(pregoeiroPk);
         daoPR.criar(pregoeiro);
         
-        login.setUsuario("matheuss");
-        login.setSenha("1232");
         login.setIdPregoeiro(pregoeiro);
+        login.setUsuario("witaloc");
+        login.setSenha("1232");
         
         
         
-        daoLO.criar(login);
+        
+        servico.criar(login);
         
         
     }

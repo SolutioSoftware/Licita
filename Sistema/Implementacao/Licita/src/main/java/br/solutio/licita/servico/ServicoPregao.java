@@ -17,6 +17,7 @@ import java.util.List;
  */
 public class ServicoPregao implements ServicoIF<Pregao>{
 
+    
     private DaoIF<Pregao> dao;
     
     public ServicoPregao(){

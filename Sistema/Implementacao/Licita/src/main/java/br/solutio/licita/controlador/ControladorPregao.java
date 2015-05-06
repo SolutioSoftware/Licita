@@ -7,6 +7,7 @@ package br.solutio.licita.controlador;
 
 import br.solutio.licita.modelo.Pregao;
 import br.solutio.licita.servico.ServicoIF;
+import br.solutio.licita.servico.ServicoPregao;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 
@@ -19,13 +20,15 @@ public class ControladorPregao extends ControladorAbstrato<Pregao>{
     
     private Pregao pregao = new Pregao();
     private List<Pregao> pregoes;
+    private ServicoIF<Pregao> servico = new ServicoPregao();
+    
 
     public Pregao getPregao() {
         return pregao;
     }
 
     public void setPregao(Pregao pregao) {
-        this.pregao = pregao;
+        this.pregao = pregao; 
     }
 
     public List<Pregao> getPregoes() {
@@ -34,6 +37,13 @@ public class ControladorPregao extends ControladorAbstrato<Pregao>{
 
     public void setPregoes(List<Pregao> pregoes) {
         this.pregoes = pregoes;
+    }
+    
+    @Override
+    public void criar(Pregao pregao){
+        pregao = getPregao();
+        this.servico.criar(pregao);
+        
     }
     
     @Override
