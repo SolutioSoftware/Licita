@@ -57,7 +57,7 @@ public class ServicoPregao implements ServicoIF<Pregao>{
 
     @Override
     public List<Pregao> buscarTodos() {
-        return (List<Pregao>) getDao().buscarTodos();
+        return getDao().consultar("Pregao.findAll", null, null);
     }
     
 }

@@ -9,33 +9,33 @@
     <ui:define name="pn_info">
 
         <div style="padding: 5px;margin-bottom: 15px;margin-top: 15px">
-        <p:button value="Novo" style="width: 80px" outcome="/restrito/pregao/pregaoSalvar.xhtml" icon="fa fa-plus"/>
-        <p:button value="Excluir" style="margin-left: 12px; width: 80px" icon="fa fa-trash"/>
-        <b><h:outputText value="Buscar: " style="margin-left: 12px; color: #045491 "/></b>
-        <p:inputText label="Buscar" placeholder="Digite sua busca" style="margin-left: 2px;width: 185px;" />
+            <p:button value="Novo" style="width: 80px" outcome="/restrito/pregao/pregaoSalvar.xhtml" icon="fa fa-plus"/>
+            <p:button value="Excluir" style="margin-left: 12px; width: 80px" icon="fa fa-trash"/>
+            <b><h:outputText value="Buscar: " style="margin-left: 12px; color: #045491 "/></b>
+            <p:inputText label="Buscar" placeholder="Digite sua busca" style="margin-left: 2px;width: 185px;" />
         </div>
 
-        <p:dataTable id='dt_pregoes' var="pregoes" widgetVar="tbl_pregoes" paginator="true" style="padding:5px" rowsPerPageTemplate="5,10,20,50,100, 200"  emptyMessage="Nenhum pregão cadastrado"  paginatorAlwaysVisible="false">
+        <p:dataTable id='dt_pregoes' var="pregoes" value="#{controladorPregao.pregoes}" widgetVar="tbl_pregoes" paginator="true" style="padding:5px" rowsPerPageTemplate="5,10,20,50,100, 200"  emptyMessage="Nenhum pregão cadastrado"  paginatorAlwaysVisible="false">
 
-            <p:column headerText="Número pregão">
-                <h:outputText value="" />
+
+            <p:column headerText="Número do processo">
+                <h:outputText value="#{pregoes.numeroProcesso}" />
             </p:column>
-            
-            <p:column headerText="Número processo">
-                <h:outputText value="" />
+
+            <p:column headerText="Número do pregão">
+                <h:outputText value="#{pregoes.numeroPregao}" />
             </p:column>
 
             <p:column headerText="Status">
-                <h:outputText value="" />
+                <h:outputText value="#{pregoes.statusPregao}" />
             </p:column>
 
         </p:dataTable>
-
     </ui:define>
 
     <ui:define name="pn_conteudo">
 
     </ui:define> 
-    
+
 
 </ui:composition>
