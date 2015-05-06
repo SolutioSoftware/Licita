@@ -5,7 +5,6 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/template/TemplateLicitaPaineis.xhtml"
-                xmlns:pe="http://primefaces.org/ui/extensions"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="pn_info">
@@ -47,35 +46,43 @@
                 <h:panelGrid columns="2" id="panelGridSavePregao">
 
                     <p:outputLabel value="Número do Processo:" for="numeroProcesso"/>
-                    <pe:inputNumber id="numeroProcesso" value="" title="Número do Processo" required="true"
-                                    requiredMessage="O campo Número do Processo é obrigatorio" maxValue="99999999999" decimalPlaces="0" decimalSeparator="" thousandSeparator=""/>
+                    <p:inputText id="numeroProcesso" value="#{controladorPregao.pregao.numeroProcesso}" title="Número do Processo" required="true"
+                                 requiredMessage="O campo Número do Processo é obrigatorio" maxlength="20" style="width: 212px"/>
 
                     <p:outputLabel value="Número do Pregão:" for="numeroPregao"/>
-                    <pe:inputNumber id="numeroPregao" value="" title="Número do Pregão" required="true" 
-                                    requiredMessage="O Campo Número do pregão é obrigatorio" maxValue="99999999999" decimalPlaces="0" decimalSeparator="" thousandSeparator=""/> 
+                    <p:inputText id="numeroPregao" value="#{controladorPregao.pregao.numeroPregao}" title="Número do Pregão" required="true" 
+                                 requiredMessage="O Campo Número do pregão é obrigatorio" maxlength="20" style="width: 212px" /> 
 
                     <p:outputLabel value="Status:" for="statusDoPregao"/>
-                    <p:selectOneMenu id="statusDoPregao" value="" style="width: 210px">
+                    <p:selectOneMenu id="statusDoPregao" value="#{controladorPregao.pregao.statusPregao}" style="width: 210px">
 
                         <f:selectItem noSelectionOption="true" />
-                        <f:selectItem itemLabel="Aberto" itemValue="Aberto" />
-                        <f:selectItem itemLabel="Anulado" itemValue="Anulado" />
-                        <f:selectItem itemLabel="Cancelado" itemValue="Cancelado" />
-                        <f:selectItem itemLabel="Concluído COM Recurso" itemValue="Concluído COM Recurso" />
-                        <f:selectItem itemLabel="Concluído SEM Recurso" itemValue="Concluído SEM Recurso" />
-                        <f:selectItem itemLabel="Deserto" itemValue="Deserto" />
-                        <f:selectItem itemLabel="Fracassado" itemValue="Fracassado" />
-
-
+                        <f:selectItem itemLabel="Aberto" itemValue="aberto" />
+                        <f:selectItem itemLabel="Anulado" itemValue="anulado" />
+                        <f:selectItem itemLabel="Cancelado" itemValue="cancelado" />
+                        <f:selectItem itemLabel="Concluído COM Recurso" itemValue="semRecurso" />
+                        <f:selectItem itemLabel="Concluído SEM Recurso" itemValue="comRecurso" />
+                        <f:selectItem itemLabel="Deserto" itemValue="deserto" />
+                        <f:selectItem itemLabel="Fracassado" itemValue="fracassad" />
 
                     </p:selectOneMenu>
+
+                    <p:outputLabel value="Descrição:"  for="descricao"/>
+                    <p:inputTextarea id="descricao" value="#{controladorPregao.pregao.descricao}" title="Descrição" placeholder="Descrição" 
+                                     rows="5" cols="30" counter="display" maxlength="255" counterTemplate="{0} caracteres restantes." 
+                                     autoResize="true" style="width:212px" />
+
+                    <p:outputLabel/>
+                    <p:outputLabel/>
+                    <p:outputLabel/>
+                    <p:outputLabel id="display" />
 
                 </h:panelGrid>
             </div>
 
             <div style="margin-left: 2%; margin-top: 2%; margin-right: 2%">
 
-                <p:commandButton  id="btSalvarPregao" value="Salvar" icon="fa fa-save" update="growPregao" ajax="false"/>
+                <p:commandButton  id="btSalvarPregao" value="Salvar" icon="fa fa-save" actionListener="#{controladorPregao.criar()}" update="growPregao" ajax="false"/>
 
             </div>
 
