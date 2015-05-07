@@ -10,8 +10,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -42,7 +40,7 @@ public class Pregoeiro implements Serializable{
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPregoeiro")
     private Set<Sessao> sessaoSet;
     
-    @OneToOne(mappedBy = "idPregoeiro")
+    @OneToOne(cascade = CascadeType.ALL ,mappedBy = "idPregoeiro")
     private Login login;
     
     @JoinColumn(name = "id_pessoa_fisica", referencedColumnName = "id", insertable = false, updatable = false)

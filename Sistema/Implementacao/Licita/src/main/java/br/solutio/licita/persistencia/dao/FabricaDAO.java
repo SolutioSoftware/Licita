@@ -10,6 +10,7 @@ import br.solutio.licita.modelo.EmpresaLicitante;
 import br.solutio.licita.modelo.InstituicaoLicitadora;
 import br.solutio.licita.modelo.ItemPregao;
 import br.solutio.licita.modelo.Login;
+import br.solutio.licita.modelo.MembroApoio;
 import br.solutio.licita.modelo.PessoaFisica;
 import br.solutio.licita.modelo.Pregao;
 import br.solutio.licita.modelo.Pregoeiro;
@@ -59,6 +60,9 @@ public abstract class FabricaDAO implements FabricaDaoIF{
     
     @Override
     public abstract DaoIF<PessoaFisica> getDaoPessoaFisica();
+    
+    @Override
+    public abstract DaoIF<MembroApoio> getDaoMembroApoio();
     
     
     

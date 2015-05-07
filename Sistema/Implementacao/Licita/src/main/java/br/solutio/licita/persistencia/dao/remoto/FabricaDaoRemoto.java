@@ -9,14 +9,13 @@ import br.solutio.licita.modelo.EmpresaLicitante;
 import br.solutio.licita.modelo.InstituicaoLicitadora;
 import br.solutio.licita.modelo.ItemPregao;
 import br.solutio.licita.modelo.Login;
+import br.solutio.licita.modelo.MembroApoio;
 import br.solutio.licita.modelo.PessoaFisica;
 import br.solutio.licita.modelo.Pregao;
 import br.solutio.licita.modelo.Pregoeiro;
 import br.solutio.licita.persistencia.dao.DaoIF;
 import br.solutio.licita.persistencia.dao.FabricaDAO;
-import br.solutio.licita.persistencia.dao.local.DaoLocal;
 import java.util.logging.Level;
-
 
 /**
  *
@@ -48,20 +47,23 @@ public class FabricaDaoRemoto extends FabricaDAO {
     public DaoIF<ItemPregao> getDaoItemPregao() {
         return new DaoRemoto<>();
     }
-    
+
     @Override
     public DaoIF<Pregao> getDaoPregao() {
         return new DaoRemoto<>();
     }
-    
+
     @Override
     public DaoIF<PessoaFisica> getDaoPessoaFisica() {
         logger.log(Level.INFO, "Dao Pregao Local");
         return new DaoRemoto<>();
     }
-    
-//    
 
-   
-    
+//    
+    @Override
+    public DaoIF<MembroApoio> getDaoMembroApoio() {
+        logger.log(Level.INFO, "Dao Membro Apoio Remoto");
+        return new DaoRemoto<>();
+    }
+
 }

@@ -5,7 +5,12 @@
  */
 package br.solutio.licita.controlador;
 
+import br.solutio.licita.modelo.Login;
 import br.solutio.licita.modelo.PessoaFisica;
+import br.solutio.licita.modelo.Pregoeiro;
+import br.solutio.licita.modelo.PregoeiroPK;
+import br.solutio.licita.servico.ServicoEquipe;
+import br.solutio.licita.servico.ServicoEquipeIF;
 import br.solutio.licita.servico.ServicoIF;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -15,24 +20,42 @@ import javax.faces.bean.ManagedBean;
  * @author WitaloCarlos
  */
 @ManagedBean
-public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> {
+public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> implements ControladorAbstratoIF<PessoaFisica> {
 
-    private PessoaFisica entidade;
+    private PessoaFisica entidade = new PessoaFisica();
+    private Pregoeiro pregoeiro = new Pregoeiro();
+    private Login login = new Login();
     private List<PessoaFisica> pessoasfisica;
     private boolean cargoPregoeiro = false;
     private boolean cargoMembrodeApoio = false;
     private String valor;
-    
-    public void tipoPessoaFisica(){
-        
-        if("Pregoeiro".equals(valor)){
+    private ServicoEquipeIF servico = new ServicoEquipe();
+
+    public void tipoPessoaFisica() {
+
+        if ("Pregoeiro".equals(valor)) {
             setCargoPregoeiro(true);
             setCargoMembrodeApoio(false);
-        }else{
+        } else {
             setCargoPregoeiro(false);
             setCargoMembrodeApoio(true);
         }
-            
+
+    }
+
+    @Override
+    public void criar(PessoaFisica entidade) {
+        entidade = getEntidade();
+//        pregoeiro.setLogin(login);
+//        entidade.setPregoeiro(pregoeiro);
+//        pregoeiro.setPregoeiroPK(new PregoeiroPK(entidade.getId(), entidade.getId()));
+        entidade.setCpf(entidade.getCpf().replace(".", ""));
+        entidade.setCpf(entidade.getCpf().replace("-", ""));
+        servico.criar(entidade);
+//        entidade.setPregoeiro(pregoeiro);
+//        entidade.getPregoeiro().getPregoeiroPK().setId(entidade.getId());
+//        entidade.getPregoeiro().getPregoeiroPK().setIdPessoaFisica(entidade.getId());
+//        servico.criar(entidade);
     }
 
     public boolean isCargoPregoeiro() {
@@ -73,12 +96,20 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> {
     }
 
     @Override
-    public ServicoIF getServico() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setEntidade(PessoaFisica entidade) {
+        this.entidade = entidade;
+    }
+
+    public Pregoeiro getPregoeiro() {
+        return pregoeiro;
+    }
+
+    public Login getLogin() {
+        return login;
     }
 
     @Override
-    public void setEntidade(PessoaFisica entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ServicoIF getServico() {
+        return this.servico;
     }
 }
