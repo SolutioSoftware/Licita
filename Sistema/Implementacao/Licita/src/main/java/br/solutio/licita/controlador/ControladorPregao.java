@@ -9,7 +9,6 @@ import br.solutio.licita.controlador.util.JsfUtil;
 import br.solutio.licita.modelo.Pregao;
 import br.solutio.licita.servico.ServicoIF;
 import br.solutio.licita.servico.ServicoPregao;
-import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 
@@ -22,10 +21,10 @@ public class ControladorPregao extends ControladorAbstrato<Pregao>{
     
     private Pregao pregao = new Pregao();
     private ServicoIF<Pregao> servico = new ServicoPregao();
-    private ArrayList<Pregao> pregoes; 
+    private List<Pregao> pregoes; 
     
     public ControladorPregao(){
-        pregoes = new ArrayList<>();
+        pregoes = servico.buscarTodos();
     }
 
     public Pregao getPregao() {
@@ -41,7 +40,7 @@ public class ControladorPregao extends ControladorAbstrato<Pregao>{
     }
 
     public void setPregoes(List<Pregao> pregoes) {
-        this.pregoes = (ArrayList<Pregao>) pregoes;
+        this.pregoes = pregoes;
     }
     
     @Override

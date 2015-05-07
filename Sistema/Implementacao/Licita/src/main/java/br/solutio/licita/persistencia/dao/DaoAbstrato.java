@@ -49,7 +49,7 @@ public abstract class DaoAbstrato<T> implements DaoIF<T> {
         logger.log(Level.INFO, "Criar");
         EntityManager em = getEntityManager();
         EntityTransaction tx = em.getTransaction();
-        
+
         tx.begin();
         em.persist(entidade);
         em.flush();
@@ -85,15 +85,21 @@ public abstract class DaoAbstrato<T> implements DaoIF<T> {
 
         Query query = getEntityManager().createNamedQuery(namedQuery, entidade);
 
-        if (parametros.length == valores.length) {
-            for (int i = 0; i < parametros.length; i++) {
+        if (parametros != null && valores != null) {
+            if (parametros.length == valores.length) {
+                for (int i = 0; i < parametros.length; i++) {
 
-                query.setParameter(parametros[i], valores[i]);
+                    query.setParameter(parametros[i], valores[i]);
 
+                }
+
+                return query.getResultList();
+            } else {
+                return null;
             }
-
+        } else if (parametros == null && valores == null) {
             return query.getResultList();
-        } else{
+        } else {
             return null;
         }
 
