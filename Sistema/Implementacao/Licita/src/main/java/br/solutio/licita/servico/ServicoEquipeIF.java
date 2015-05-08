@@ -6,12 +6,18 @@
 
 package br.solutio.licita.servico;
 
+import br.solutio.licita.modelo.Login;
+import br.solutio.licita.modelo.MembroApoio;
 import br.solutio.licita.modelo.PessoaFisica;
+import br.solutio.licita.modelo.Pregoeiro;
 
 /**
  *
  * @author Matheus Oliveira
  */
 public interface ServicoEquipeIF extends ServicoIF<PessoaFisica>{
-    public void criar(PessoaFisica pessoaFisica);
+    
+    void criarPregoeiro(PessoaFisica pessoaFisica, Pregoeiro pregoeiro, Login login);
+    void criarMembroApoio(PessoaFisica pessoaFisica, MembroApoio membroApoio);
+    
 }

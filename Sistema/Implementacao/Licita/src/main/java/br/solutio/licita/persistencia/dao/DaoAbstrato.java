@@ -59,7 +59,13 @@ public abstract class DaoAbstrato<T> implements DaoIF<T> {
 
     @Override
     public void editar(T entidade) {
-        getEntityManager().merge(entidade);
+        EntityManager em = getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+        em.merge(entidade);
+        em.flush();
+        tx.commit();
+        em.close();
 
     }
 

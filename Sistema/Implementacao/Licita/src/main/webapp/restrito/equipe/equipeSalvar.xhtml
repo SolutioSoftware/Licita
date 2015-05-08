@@ -111,8 +111,8 @@
                     <p:outputLabel value="CEP:" for="cep"/>
                     <p:inputMask id="cep"  title="CPF" mask="99.999-999" placeholder="CPF"/>
 
-                    <p:outputLabel value="Login:" for="login" rendered="#{controladorEquipe.cargoPregoeiro}"/>
-                    <p:inputText id="login" value="#{controladorEquipe.login.usuario}"  rendered="#{controladorEquipe.cargoPregoeiro}" required="true" 
+                    <p:outputLabel value="Login:" for="it_login" rendered="#{controladorEquipe.cargoPregoeiro}"/>
+                    <p:inputText id="it_login" value="#{controladorEquipe.login.usuario}" rendered="#{controladorEquipe.cargoPregoeiro}" required="true" 
                                  requiredMessage="O campo login é obrigatório" placeholder="Login"/>
 
                     <p:outputLabel value="Senha:" for="senha" rendered="#{controladorEquipe.cargoPregoeiro}"/>
@@ -121,12 +121,12 @@
                                 weakLabel="Senha Fraca" promptLabel="Digite Sua Senha"/>
 
                     <p:outputLabel value="Confirma Senha:" for="confirmarSenha" rendered="#{controladorEquipe.cargoPregoeiro}"/>
-                    <p:password id="confirmarSenha" value="" rendered="#{controladorEquipe.cargoPregoeiro}" feedback="true" required="true" 
+                    <p:password id="confirmarSenha" value="#{controladorEquipe.confirmaSenha}" rendered="#{controladorEquipe.cargoPregoeiro}" feedback="true" required="true" 
                                 requiredMessage="O campo Confirmar Senha é obrigatório" placeholder="Confirmar Senha" strongLabel="Senha Forte" goodLabel="Senha Boa" 
                                 weakLabel="Senha Fraca" promptLabel="Digite Sua Senha"/>
 
                     <p:outputLabel value="Função:" for="funcao" rendered="#{controladorEquipe.cargoMembrodeApoio}"/>
-                    <p:inputText id="funcao" value="#{controladorEquipe.entidade.membroApoio.funcao}" rendered="#{controladorEquipe.cargoMembrodeApoio}" placeholder="Função"/>
+                    <p:inputText id="funcao" value="#{controladorEquipe.membroApoio.funcao}" rendered="#{controladorEquipe.cargoMembrodeApoio}" placeholder="Função"/>
 
                     <p:outputLabel value="Telefone:" for="telefone"/>
                     <p:inputText id="telefone"  title="Telefone" placeholder="(DDD) 9999-9999" maxlength="14"/>
