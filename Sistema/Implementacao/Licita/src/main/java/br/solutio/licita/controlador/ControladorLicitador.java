@@ -5,18 +5,62 @@
  */
 package br.solutio.licita.controlador;
 
+import br.solutio.licita.modelo.ContatoPessoaJuridica;
+import br.solutio.licita.modelo.Endereco;
 import br.solutio.licita.modelo.InstituicaoLicitadora;
+import br.solutio.licita.modelo.PessoaJuridica;
 import br.solutio.licita.servico.ServicoIF;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 
 /**
  * @author ricardocaldeira
  */
-@ManagedBean
-public class ControladorLicitador extends ControladorAbstrato<InstituicaoLicitadora> {
+@ManagedBean(name="Licitador")
+@ViewScoped
+public class ControladorLicitador extends ControladorAbstrato<InstituicaoLicitadora> implements ControladorAbstratoIF<InstituicaoLicitadora>{
     
+    private PessoaJuridica pessoaJuridica = new PessoaJuridica();
+    private InstituicaoLicitadora instituicaoLicitadora = new InstituicaoLicitadora();
+    private Endereco endereco = new Endereco();
+    private ContatoPessoaJuridica contato = new ContatoPessoaJuridica();
     
+    public PessoaJuridica getPessoaJuridica() {
+        return pessoaJuridica;
+    }
 
+    public void setPessoaJuridica(PessoaJuridica pessoaJuridica) {
+        this.pessoaJuridica = pessoaJuridica;
+    }
+
+    public InstituicaoLicitadora getInstituicaoLicitadora() {
+        return instituicaoLicitadora;
+    }
+
+    public void setInstituicaoLicitadora(InstituicaoLicitadora instituicaoLicitadora) {
+        this.instituicaoLicitadora = instituicaoLicitadora;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public ContatoPessoaJuridica getContato() {
+        return contato;
+    }
+
+    public void setContato(ContatoPessoaJuridica contato) {
+        this.contato = contato;
+    }
+    
+    
+    
+    
+    
     @Override
     public ServicoIF getServico() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
