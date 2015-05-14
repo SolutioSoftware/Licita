@@ -13,18 +13,21 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 
 /**
- *
  * @author ricardocaldeira
  */
 @ManagedBean
-public class ControladorPregao extends ControladorAbstrato<Pregao>{
-    
+public class ControladorPregao extends ControladorAbstrato<Pregao> {
+
     private Pregao pregao = new Pregao();
+    private List<Pregao> pregoes;
     private ServicoIF<Pregao> servico = new ServicoPregao();
-    private List<Pregao> pregoes; 
-    
-    public ControladorPregao(){
+
+    public ControladorPregao() {
         pregoes = servico.buscarTodos();
+    }
+
+    public boolean getEditando() {
+        return this.pregao.getId() != null;
     }
 
     public Pregao getPregao() {
@@ -32,7 +35,7 @@ public class ControladorPregao extends ControladorAbstrato<Pregao>{
     }
 
     public void setPregao(Pregao pregao) {
-        this.pregao = pregao; 
+        this.pregao = pregao;
     }
 
     public List<Pregao> getPregoes() {
@@ -42,15 +45,20 @@ public class ControladorPregao extends ControladorAbstrato<Pregao>{
     public void setPregoes(List<Pregao> pregoes) {
         this.pregoes = pregoes;
     }
-    
+
+    public void setServico(ServicoIF<Pregao> servico) {
+        this.servico = servico;
+    }
+
     @Override
-    public void criar(Pregao pregao){
+    public void criar(Pregao pregao) {
         pregao = getPregao();
         this.servico.criar(pregao);
         pregao = null;
         JsfUtil.addSuccessMessage("Salvo com Sucesso!");
+        pregoes = servico.buscarTodos();
     }
-    
+
     @Override
     public ServicoIF getServico() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -65,5 +73,5 @@ public class ControladorPregao extends ControladorAbstrato<Pregao>{
     public void setEntidade(Pregao entidade) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

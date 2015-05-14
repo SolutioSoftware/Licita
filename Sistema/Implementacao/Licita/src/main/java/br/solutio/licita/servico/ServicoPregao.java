@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author WitaloCarlos
  */
-public class ServicoPregao implements ServicoIF<Pregao>{
+public class ServicoPregao extends ServicoAbstrato<Pregao> implements ServicoPregaoIF{
 
     
     private DaoIF<Pregao> dao;

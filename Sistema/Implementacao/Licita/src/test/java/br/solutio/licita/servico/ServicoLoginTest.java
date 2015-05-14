@@ -3,39 +3,42 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.solutio.licita.servico;
 
 //import static org.junit.Assert.assertEquals;
+import br.solutio.licita.dao.teste.DaoTeste;
+import br.solutio.licita.modelo.Pregao;
+import static org.junit.Assert.assertEquals;
+import org.junit.Before;
+import org.junit.Test;
+
 //import org.junit.Before;
 //import org.junit.Test;
-
 /**
  *
  * @author Matheus Oliveira
  */
 public class ServicoLoginTest {
-    
-//    ServicoLoginIF servicoLogin;
-//    
-//    @Before
-//    public void setUp(){
-//        servicoLogin = new ServicoLogin();
-//        
-//    }
-//    
-//    @Test
-//    /**
-//     *Verificacao do metodo <verificarDados(String usuario, String senha)>,
-//     * que invoca um metodo do dao para verificar se os valores inseridos
-//     * sao validos para fazerem o login.
-//     */
-//    public void testVerificarDados(){
-//        assertEquals(false, servicoLogin.verificarDados("ads", "123"));
-//        assertEquals(false, servicoLogin.verificarDados("abs", "123"));
-//        assertEquals(false, servicoLogin.verificarDados("abs", null));
-//        assertEquals(false, servicoLogin.verificarDados(null, "123"));
-//        assertEquals(false, servicoLogin.verificarDados(null, null));
-//    }
-    
+
+    private DaoTeste dao = new DaoTeste();
+
+    @Before
+    public void setUp() {
+        dao.getEntityManager();
+    }
+
+    @Test
+    public void salvarPregao() {
+        Pregao pregao = new Pregao();
+        Pregao pregao2;
+        pregao.setDescricao("vai começar a ccyber lluta");
+        pregao.setNumeroPregao("123123");
+        pregao.setNumeroProcesso("74367463");
+        pregao.setStatusPregao("Aberto");
+        pregao.setSincronizado(Boolean.TRUE);
+        pregao2 = pregao;
+        dao.criar(pregao2);
+        assertEquals(true, pregao2.equals(pregao));
+    }
+
 }

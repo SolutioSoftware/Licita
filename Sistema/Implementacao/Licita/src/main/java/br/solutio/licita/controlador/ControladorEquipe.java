@@ -29,7 +29,7 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
     private Pregoeiro pregoeiro = new Pregoeiro();
     private MembroApoio membroApoio = new MembroApoio();
     private Login login = new Login();
-    private List<PessoaFisica> pessoasfisica;
+    private transient List<PessoaFisica> pessoasfisica;
     private boolean cargoPregoeiro = false;
     private boolean cargoMembrodeApoio = false;
     private String valor;
