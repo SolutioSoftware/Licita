@@ -7,6 +7,10 @@
                 template="/WEB-INF/template/TemplateLicitaPaineis.xhtml"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+    <f:metadata>
+        <f:viewParam name="pregao" value="#{controladorPregao.pregao}" />
+    </f:metadata>
+
     <ui:define name="pn_info">
 
         <div style="padding: 5px;margin-bottom: 15px;margin-top: 15px">
@@ -33,9 +37,9 @@
 
             <p:column headerText="Ações" width="50">
 
-                <p:button id="btEditar" icon="ui-icon-pencil" style="font-size: 10px" outcome="/restrito/pregao/pregaoEditar.xhtml">
-                    <f:param name="pregao" value="#{pregao.id}" />
-                    <p:tooltip for="btEditar" value="Editar Pregão"/>
+                <p:button id="btEditar" icon="ui-icon-pencil" style="font-size: 10px" >
+                    <f:param name="pregao" value="#{pregao.id}"/>
+                    <p:tooltip for="btEditar" value="Editar Pregão" />
                 </p:button>
 
                 <p:commandButton id="btExcluir" icon="fa fa-trash" style="font-size: 10px">
@@ -48,7 +52,10 @@
 
     </ui:define>
 
+
     <ui:define name="pn_conteudo">
+
+
 
         <h:form id="pregao_form" title="Pregão" style="text-align: center"  >
 
@@ -56,7 +63,7 @@
 
             <div style="margin-left: 25%; margin-top: 2%">
 
-                <h:panelGrid columns="2" id="panelGridSavePregao">
+                <h:panelGrid columns="2" id="panelGridEditPregao">
 
                     <p:outputLabel value="Número do Processo:" for="numeroProcesso"/>
                     <p:inputText id="numeroProcesso" value="#{controladorPregao.pregao.numeroProcesso}" title="Número do Processo" required="true"
@@ -95,13 +102,12 @@
 
             <div style="margin-left: 2%; margin-top: 2%; margin-right: 2%">
 
-                <p:commandButton  id="btSalvarPregao" value="Salvar" icon="fa fa-save" actionListener="#{controladorPregao.criar(pregao)}" update="pn_info,:dt_pregoes" ajax="false" />
+                <p:commandButton  id="btAtualizarPregao" value="Atualizar" icon="fa fa-refresh" actionListener="#{controladorPregao.editar(entidade)}" update="pn_info : dt_pregoes" ajax="false" />
 
             </div>
 
         </h:form>
 
     </ui:define> 
-
 
 </ui:composition>

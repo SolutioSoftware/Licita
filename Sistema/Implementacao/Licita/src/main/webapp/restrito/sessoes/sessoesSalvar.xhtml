@@ -46,8 +46,8 @@
                 <h:panelGrid columns="2" id="panelGridSaveSessao">
 
                     <p:outputLabel value="Numero do Pregão:" for="numeroDoPregao"/>
-                    <p:selectOneMenu id="numeroDoPregao" value="" style="width: 188px" required="true" requiredMessage="O campo Numero de Pregão deve ser selecionado">
-
+                    <p:selectOneMenu id="numeroDoPregao" value="#{controladorPregao.pregoes.numeroProcesso}" style="width: 188px" required="true" requiredMessage="O campo Numero de Pregão deve ser selecionado">
+                        <f:selectItems value="#{controladorPregao.pregoes.numeroProcesso}" />
                     </p:selectOneMenu>
 
                     <p:outputLabel value="Horário Previsto:" for="horarioPrevisto"/>

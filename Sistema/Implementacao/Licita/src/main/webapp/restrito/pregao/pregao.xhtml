@@ -4,10 +4,11 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
-                template="/WEB-INF/template/TemplateLicitaPaineis.xhtml">
+                template="/WEB-INF/template/TemplateLicitaPaineis.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:define name="pn_info">
-
+        <ui:define name="pn_info">
+    
         <div style="padding: 5px;margin-bottom: 15px;margin-top: 15px">
             <p:button value="Novo" style="width: 80px" outcome="/restrito/pregao/pregaoSalvar.xhtml" icon="fa fa-plus"/>
             <p:button value="Excluir" style="margin-left: 12px; width: 80px" icon="fa fa-trash"/>
@@ -15,20 +16,34 @@
             <p:inputText label="Buscar" placeholder="Digite sua busca" style="margin-left: 2px;width: 185px;" />
         </div>
 
-        <p:dataTable id='dt_pregoes' var="pregoes" value="#{controladorPregao.pregoes}" widgetVar="tbl_pregoes" paginator="true" style="padding:5px" rowsPerPageTemplate="5,10,20,50,100, 200"  emptyMessage="Nenhum pregão cadastrado"  paginatorAlwaysVisible="false">
+        <p:dataTable id='dt_pregoes' var="pregao" value="#{controladorPregao.pregoes}" widgetVar="tbl_pregoes" paginator="true" style="padding:5px" rowsPerPageTemplate="5,10,20,50,100, 200"  emptyMessage="Nenhum pregão cadastrado"  paginatorAlwaysVisible="false">
 
 
             <p:column headerText="Número do processo">
-                <h:outputText value="#{pregoes.numeroProcesso}" />
+                <h:outputText value="#{pregao.numeroProcesso}" />
             </p:column>
 
             <p:column headerText="Número do pregão">
-                <h:outputText value="#{pregoes.numeroPregao}" />
+                <h:outputText value="#{pregao.numeroPregao}" />
             </p:column>
 
             <p:column headerText="Status">
-                <h:outputText value="#{pregoes.statusPregao}" />
+                <h:outputText value="#{pregao.statusPregao}" />
             </p:column>
+            
+             <p:column headerText="Ações" width="50">
+                
+                 <p:button id="btEditar" icon="ui-icon-pencil" style="font-size: 10px" outcome="/restrito/pregao/pregaoEditar.xhtml"  >
+                     <f:param name="pregao" value="#{pregao.id}" />
+                     <p:tooltip for="btEditar" value="Editar Pregão" />
+                 </p:button>
+                
+                 <p:commandButton id="btExcluir" icon="fa fa-trash" style="font-size: 10px">
+                     <p:tooltip for="btExcluir" value="Excluir Pregão" />
+                 </p:commandButton>
+                
+            </p:column>
+
 
         </p:dataTable>
     </ui:define>
