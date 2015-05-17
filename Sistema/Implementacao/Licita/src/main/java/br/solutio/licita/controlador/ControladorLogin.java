@@ -73,4 +73,9 @@ public class ControladorLogin extends ControladorAbstrato<Login> {
         return "/restrito/login/login.xhtml?faces-redirect=true";
     }
 
+    @Override
+    public String criar(Login entidade) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

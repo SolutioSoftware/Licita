@@ -51,14 +51,15 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
     }
 
     @Override
-    public void criar(Pregao pregao) {
+    public String criar(Pregao pregao) {
         pregao = getPregao();
         this.servico.criar(pregao);
         pregao = null;
         JsfUtil.addSuccessMessage("Salvo com Sucesso!");
         pregoes = servico.buscarTodos();
+        return "pregao";
     }
-
+    
     @Override
     public ServicoIF getServico() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

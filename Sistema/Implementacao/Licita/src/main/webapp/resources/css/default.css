@@ -77,6 +77,15 @@ a:link:hover, a:visited:hover  {
     margin: 0px 170px 0px 170px;
 }
 
+.ui-growl{
+    margin-top: 6%;
+}
+
+.botaoNovo  {
+left: -6%;
+}
+
+
 #top a:link, #top a:visited {
   color: white;
   font-weight : bold;
@@ -119,7 +128,12 @@ footer {
       
 }
 
-
+.colunaDireita{  
+    text-align: left;  
+}  
+.colunaEsquerda{  
+    text-align: right;    
+} 
 
 .bt_pregoes{
     background-image: url("../resources/icons/pregao_ic.png");

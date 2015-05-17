@@ -25,7 +25,7 @@ public interface ControladorAbstratoIF<T> extends Serializable{
      * Cria um registro de uma entidade na base de dados.
      * @param entidade
      */
-    public void criar(T entidade);
+    public String criar(T entidade);
     
     /**
      * Modifica um registro de uma entidade na base de dados.

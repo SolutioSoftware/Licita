@@ -23,9 +23,8 @@ public abstract class ControladorAbstrato<T> implements ControladorAbstratoIF<T>
     }
 
     @Override
-    public void criar(T entidade) {
-        getServico().criar(entidade);
-    }
+    public abstract String criar(T entidade);
+    
 
     @Override
     public void editar(T entidade) {
