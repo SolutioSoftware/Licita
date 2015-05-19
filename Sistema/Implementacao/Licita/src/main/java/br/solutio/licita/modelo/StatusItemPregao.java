@@ -43,7 +43,7 @@ public class StatusItemPregao implements Serializable{
     @Column(name = "valor")
     private String valor;
     @ManyToMany(mappedBy = "statusItemPregaoSet")
-    private Set<ItemPregao> itemPregaoSet;
+    private transient Set<ItemPregao> itemPregaoSet;
 
     public StatusItemPregao() {
     }

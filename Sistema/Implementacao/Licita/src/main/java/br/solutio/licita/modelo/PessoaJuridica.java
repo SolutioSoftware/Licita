@@ -65,7 +65,7 @@ public class PessoaJuridica implements Serializable{
     private EmpresaLicitante empresaLicitante;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPessoaJuridica")
-    private Set<ContatoPessoaJuridica> contatoPessoaJuridicaSet;
+    private transient Set<ContatoPessoaJuridica> contatoPessoaJuridicaSet;
     
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoaJuridica")
     private InstituicaoLicitadora instituicaoLicitadora;

@@ -38,7 +38,7 @@ public class Pregoeiro implements Serializable{
     protected PregoeiroPK pregoeiroPK;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPregoeiro")
-    private Set<Sessao> sessaoSet;
+    private transient Set<Sessao> sessaoSet;
     
     @OneToOne(cascade = CascadeType.ALL ,mappedBy = "idPregoeiro")
     private Login login;

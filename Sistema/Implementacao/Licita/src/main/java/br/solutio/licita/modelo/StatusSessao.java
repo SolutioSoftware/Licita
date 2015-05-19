@@ -43,7 +43,7 @@ public class StatusSessao implements Serializable{
     @Column(name = "valor")
     private String valor;
     @ManyToMany(mappedBy = "statusSessaoSet")
-    private Set<Sessao> sessaoSet;
+    private transient Set<Sessao> sessaoSet;
 
     public StatusSessao() {
     }

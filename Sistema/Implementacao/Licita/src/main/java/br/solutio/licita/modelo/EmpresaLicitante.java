@@ -59,14 +59,14 @@ public class EmpresaLicitante implements Serializable {
     private String complemento;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idLicitante")
-    private Set<Lance> lanceSet;
+    private transient Set<Lance> lanceSet;
     
     @JoinColumn(name = "id_pessoa_juridica", referencedColumnName = "id", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
     private PessoaJuridica pessoaJuridica;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idLicitante")
-    private Set<Proposta> propostaSet;
+    private transient Set<Proposta> propostaSet;
     
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "empresaLicitante")
     private ContaBancaria contaBancaria;
