@@ -26,14 +26,14 @@
             <version>2.2.8</version>
         </dependency>
 
-        <!-- Implementação JSF -->
+        <!-- ImplementaÃ§Ã£o JSF -->
         <dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>javax.faces</artifactId>
             <version>2.2.8</version><!-- <scope>provided</scope> -->
         </dependency>
         
-        <!-- Implementação JavaEE -->
+        <!-- ImplementaÃ§Ã£o JavaEE -->
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>eclipselink</artifactId>
@@ -67,12 +67,21 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        
         <!--DBUNIT -->
         <dependency>
             <groupId>org.dbunit</groupId>
             <artifactId>dbunit</artifactId>
             <version>2.4.3</version>
         </dependency>
+        
+        <!--Mockito-->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.9.5</version>
+        </dependency>
+
         
         <!-- Temas do Primefaces -->
         <dependency>

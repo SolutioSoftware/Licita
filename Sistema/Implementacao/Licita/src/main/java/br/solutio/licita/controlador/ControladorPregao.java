@@ -10,17 +10,25 @@ import br.solutio.licita.modelo.Pregao;
 import br.solutio.licita.servico.ServicoIF;
 import br.solutio.licita.servico.ServicoPregao;
 import java.util.List;
+import java.util.logging.Level;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 /**
  * @author ricardocaldeira
  */
 @ManagedBean
+@SessionScoped
 public class ControladorPregao extends ControladorAbstrato<Pregao> {
 
     private Pregao pregao = new Pregao();
     private List<Pregao> pregoes;
     private ServicoIF<Pregao> servico = new ServicoPregao();
+    
+    public String preparaEditar(){
+        logger.log(Level.INFO, "Editar funfando");
+        return "pregaoEditar";
+    }
 
     public ControladorPregao() {
         pregoes = servico.buscarTodos();
@@ -51,14 +59,25 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
     }
 
     @Override
-    public void criar(Pregao pregao) {
+    public String criar(Pregao pregao) {
         pregao = getPregao();
         this.servico.criar(pregao);
-        pregao = null;
+        pregao = new Pregao();
         JsfUtil.addSuccessMessage("Salvo com Sucesso!");
         pregoes = servico.buscarTodos();
+        return "pregao";
     }
-
+    
+    @Override
+    public void editar(Pregao pregao) {
+        pregao = getPregao();
+        this.servico.editar(pregao);
+        logger.log(Level.INFO, pregao.getNumeroPregao());
+        pregao = new Pregao();
+        JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
+        pregoes = servico.buscarTodos();
+    }
+    
     @Override
     public ServicoIF getServico() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

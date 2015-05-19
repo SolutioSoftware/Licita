@@ -42,7 +42,7 @@
 
             <div style="margin-left: 2%; margin-top: 2%; margin-right: 2%">
 
-                <h:panelGrid columns="4" id="panelGridSaveLicitante">
+                <h:panelGrid columns="4" id="panelGridSaveLicitante" columnClasses="colunaEsquerda,colunaDireita,colunaEsquerda,colunaDireita">
 
                     <p:outputLabel value="CNPJ:" for="cnpj"/>
                     <p:inputMask id="cnpj" value="" title="CNPJ" required="true" requiredMessage="O campo CNPJ é obrigatorio" 
@@ -58,7 +58,7 @@
                     <p:outputLabel value="Nome de Fantasia:" for="nomeDeFantasia"/>
                     <p:inputText id="nomeDeFantasia" value="" title="Nome de Fantasia" placeholder="Nome de Fantasia"/>
 
-                    <p:outputLabel value="Tipo da Empresa" for="tipoDaEmpresa"/>
+                    <p:outputLabel value="Tipo da Empresa:" for="tipoDaEmpresa"/>
                     <p:selectOneMenu id="tipoDaEmpresa" value="" required="true" style="width:260px" 
                                      requiredMessage="O campo Tipo da Empresa é obrigatório">
 
@@ -116,10 +116,10 @@
                     <p:outputLabel value="CEP:" for="cep"/>
                     <p:inputMask id="cep" value="" title="CEP" mask="99.999-999" placeholder="CEP"/>
 
-                    <p:outputLabel value="Complemento"  for="complemento"/>
+                    <p:outputLabel value="Complemento:"  for="complemento"/>
                     <p:inputTextarea id="complemento" value="" title="Complemento" placeholder="Complemento" 
                                      rows="3" cols="30" counter="display" maxlength="50" counterTemplate="{0} caracteres restantes." 
-                                     autoResize="true" />
+                                     autoResize="true" style="width:260px" />
 
                     <p:outputLabel/>
                     <p:outputLabel/>

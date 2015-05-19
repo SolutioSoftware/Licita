@@ -15,21 +15,22 @@ import java.util.List;
  *
  * @author WitaloCarlos
  */
-public class ServicoPregao extends ServicoAbstrato<Pregao> implements ServicoPregaoIF{
+public class ServicoPregao extends ServicoAbstrato<Pregao> implements ServicoPregaoIF {
 
-    
     private DaoIF<Pregao> dao;
-    
-    public ServicoPregao(){
-       this.dao = FabricaDAO.getFabricaDAO(TipoDAO.Local).getDaoPregao();
+
+    public ServicoPregao() {
+        this.dao = FabricaDAO.getFabricaDAO(TipoDAO.Local).getDaoPregao();
     }
 
     public DaoIF<Pregao> getDao() {
         return dao;
     }
-    
-    
-    
+
+    public void setDao(DaoIF<Pregao> dao) {
+        this.dao = dao;
+    }
+
     @Override
     public int contagem() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -42,7 +43,7 @@ public class ServicoPregao extends ServicoAbstrato<Pregao> implements ServicoPre
 
     @Override
     public void editar(Pregao entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        getDao().editar(entidade);
     }
 
     @Override
@@ -59,5 +60,5 @@ public class ServicoPregao extends ServicoAbstrato<Pregao> implements ServicoPre
     public List<Pregao> buscarTodos() {
         return getDao().consultar("Pregao.findAll", null, null);
     }
-    
+
 }

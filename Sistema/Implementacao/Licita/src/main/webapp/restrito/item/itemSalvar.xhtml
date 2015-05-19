@@ -44,7 +44,7 @@
 
             <div style="margin-left: 2%; margin-top: 2%; margin-right: 2%">
 
-                <h:panelGrid columns="4" id="panelGridSaveItem">
+                <h:panelGrid columns="4" id="panelGridSaveItem" columnClasses="colunaEsquerda,colunaDireita,colunaEsquerda,colunaDireita">
 
                     <p:outputLabel value="Nome do Item:" for="nome"/>
                     <p:inputText id="nome" value="" title="Nome" required="true"  
@@ -82,7 +82,7 @@
                     <p:outputLabel value="Quantidade:" for="quantidade"/>
                     <pe:inputNumber id="quantidade" value="" title="Quantidade" maxValue="99999999999" decimalPlaces="2"/>
 
-                    <p:outputLabel value="Descrição" for="descricao"/>
+                    <p:outputLabel value="Descrição:" for="descricao"/>
                     <p:inputTextarea id="descricao" value="" title="Descrição" placeholder="Descrição" 
                                      rows="3" cols="30" counter="display" maxlength="50" counterTemplate="{0} caracteres restantes." 
                                      autoResize="true" style="width:190px" />

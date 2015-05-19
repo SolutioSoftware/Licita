@@ -27,6 +27,10 @@ public class DaoTeste extends DaoAbstrato<Pregao>{
     public DaoTeste(){
     }
     
+    public DaoTeste(Class entidade){
+        super(entidade);
+    }
+    
     public EntityManager getEntityManager() {
         if (emf == null){
             logger.log(Level.INFO, "EMF Teste");

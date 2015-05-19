@@ -8,9 +8,10 @@
 
     <ui:define name="corpo">
         <h:form>
-            <p:dialog visible="true" closable="false" draggable="false" resizable="false"  hideEffect="explode">
 
-                <p:messages/>
+            <p:growl id="growlogin" showDetail="false" life="3000" class="ui-growl" />
+
+            <p:dialog visible="true" closable="false" draggable="false" resizable="false"  hideEffect="explode">
 
                 <h:panelGrid columns="1" cellpadding="1">
                     <p:outputLabel style="color: #036fab;">Login</p:outputLabel>
@@ -29,7 +30,8 @@
                                      class="bt_sair"
                                      style="margin-left: 30%; margin-top: 10px" 
                                      action="#{Login.concerderAcesso}"
-                                     icon="fa fa-sign-in"/>
+                                     icon="fa fa-sign-in"
+                                     update="growlogin"/>
 
                 </h:panelGrid>
             </p:dialog>

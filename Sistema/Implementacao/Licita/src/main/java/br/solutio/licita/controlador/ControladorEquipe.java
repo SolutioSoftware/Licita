@@ -50,7 +50,7 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
     }
 
     @Override
-    public void criar(PessoaFisica entidade) {
+    public String criar(PessoaFisica entidade) {
         entidade = getEntidade();
         corrigirCPF(entidade);
         if( (isCargoPregoeiro()) && (pregoeiro != null) && (login != null) ){
@@ -61,6 +61,7 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
             log.warning("Nenhuma funcao selecionada");
         }
         limparDados();
+        return "equipe";
     }
 
     /**
