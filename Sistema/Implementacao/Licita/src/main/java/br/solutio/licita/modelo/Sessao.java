@@ -79,10 +79,10 @@ public class Sessao implements Serializable{
         @JoinColumn(name = "id_sessao", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_status", referencedColumnName = "id")})
     @ManyToMany
-    private Set<StatusSessao> statusSessaoSet;
+    private transient Set<StatusSessao> statusSessaoSet;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idSessao")
-    private Set<Lance> lanceSet;
+    private transient Set<Lance> lanceSet;
     
     @JoinColumn(name = "id_pregao", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -93,7 +93,7 @@ public class Sessao implements Serializable{
     private Pregoeiro idPregoeiro;
     
     @OneToMany(mappedBy = "idSessao")
-    private Set<Proposta> propostaSet;
+    private transient Set<Proposta> propostaSet;
 
     public Sessao() {
     }

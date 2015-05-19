@@ -13,6 +13,7 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -59,14 +60,15 @@ public class EmpresaLicitante implements Serializable {
     private String complemento;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idLicitante")
-    private Set<Lance> lanceSet;
+    private transient Set<Lance> lanceSet;
     
-    @JoinColumn(name = "id_pessoa_juridica", referencedColumnName = "id", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    @MapsId("idPessoaJuridica")
+    @JoinColumn(name = "id_pessoa_juridica", referencedColumnName = "id")
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
     private PessoaJuridica pessoaJuridica;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idLicitante")
-    private Set<Proposta> propostaSet;
+    private transient Set<Proposta> propostaSet;
     
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "empresaLicitante")
     private ContaBancaria contaBancaria;
@@ -75,6 +77,8 @@ public class EmpresaLicitante implements Serializable {
     private RepresentanteLegal representanteLegal;
 
     public EmpresaLicitante() {
+        pessoaJuridica = new PessoaJuridica();
+        empresaLicitantePK = new EmpresaLicitantePK();
     }
 
     public EmpresaLicitante(EmpresaLicitantePK empresaLicitantePK) {

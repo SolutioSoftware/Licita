@@ -65,7 +65,7 @@ public class PessoaFisica implements Serializable{
     private MembroApoio membroApoio;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPessoaFisica")
-    private Set<ContatoPessoaFisica> contatoPessoaFisicaSet;
+    private transient Set<ContatoPessoaFisica> contatoPessoaFisicaSet;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoaFisica")
     private RepresentanteLegal representanteLegal;

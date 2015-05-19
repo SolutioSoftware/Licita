@@ -90,14 +90,14 @@ public class ItemPregao implements Serializable{
         @JoinColumn(name = "id_item_pregao", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_status", referencedColumnName = "id")})
     @ManyToMany
-    private Set<StatusItemPregao> statusItemPregaoSet;
+    private transient Set<StatusItemPregao> statusItemPregaoSet;
     @JoinColumn(name = "id_pregao", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Pregao idPregao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idItemPregao")
-    private Set<Lance> lanceSet;
+    private transient Set<Lance> lanceSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idItemPregao")
-    private Set<Proposta> propostaSet;
+    private transient Set<Proposta> propostaSet;
 
     public ItemPregao() {
     }
