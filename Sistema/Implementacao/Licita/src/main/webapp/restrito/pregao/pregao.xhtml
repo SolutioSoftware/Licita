@@ -23,16 +23,13 @@
                         <p:inputText id="pregaoFilter" onkeyup="PF('tbl_pregoes').filter()" style="width:250px" placeholder="Digite sua busca" />
                     </p:outputPanel>
                 </f:facet>
-                
-                <p:column headerText="ID">
-                    <h:outputText value="#{pregao.id}" />
-                </p:column>
+           
 
                 <p:column headerText="Número do processo">
                     <h:outputText value="#{pregao.numeroProcesso}" />
                 </p:column>
-
-                <p:column headerText="Número do pregão">
+                
+                 <p:column headerText="Número do pregão">
                     <h:outputText value="#{pregao.numeroPregao}" />
                 </p:column>
 
@@ -62,3 +59,5 @@
 
 
 </ui:composition>
+               
+
