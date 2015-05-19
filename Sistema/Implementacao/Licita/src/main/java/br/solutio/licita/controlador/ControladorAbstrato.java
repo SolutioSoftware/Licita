@@ -31,14 +31,10 @@ public abstract class ControladorAbstrato<T> implements ControladorAbstratoIF<T>
     
 
     @Override
-    public void editar(T entidade) {
-        getServico().editar(entidade);
-    }
+    public abstract String editar(T entidade);
 
     @Override
-    public void deletar(T entidade) {
-         getServico().deletar(entidade);
-    }
+    public abstract String deletar(T entidade);
 
     @Override
     public T buscarPorId(Long id) {

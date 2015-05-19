@@ -11,40 +11,30 @@
 
         <h:form id="formDtPregao">
 
-            <p:dataTable id='dt_pregoes' var="pregao" value="#{controladorPregao.pregoes}" 
+            <p:dataTable id='dt_pregoes' var="entidade" sortBy="#{entidade.id}" sortOrder="DESCENDING" value="#{controladorPregao.pregoes}" 
                          widgetVar="tbl_pregoes" paginator="true" style="padding:5px" rows="10" rowsPerPageTemplate="5,10"  
-                         emptyMessage="Nenhum pregão cadastrado"  paginatorAlwaysVisible="true">
+                         emptyMessage="Nenhum pregão cadastrado"  paginatorAlwaysVisible="true" >
 
                 <f:facet name="header">
                     <p:outputPanel>
-                        <p:button value="Novo" style="width: 80px" outcome="/restrito/pregao/pregaoSalvar.xhtml" icon="fa fa-plus" 
-                                  class="botaoNovo"/>
-                        <p:outputLabel value="Buscar:" for="pregaoFilter"/>
-                        <p:inputText id="pregaoFilter" onkeyup="" style="width:250px" placeholder="Digite sua busca" />
+                        <p:commandButton value="Novo" style="width: 80px" action="#{controladorPregao.limparDados}"  icon="fa fa-plus" 
+                                         class="botaoNovo"/>
+                       <p:inputText id="globalFilter" onkeyup="PF('tbl_pregoes').filter()" style="width:250px" placeholder="Digite sua busca" />
                     </p:outputPanel>
                 </f:facet>
 
-                <p:column headerText="Número do processo">
-                    <h:outputText value="#{pregao.numeroProcesso}" />
+                <p:column headerText="Número do processo" filterBy="#{entidade.numeroProcesso}" filterMatchMode="contains">
+                    <h:outputText value="#{entidade.numeroProcesso}" />
                 </p:column>
 
-                <p:column headerText="Número do pregão">
-                    <h:outputText value="#{pregao.numeroPregao}" />
+                <p:column headerText="Número do pregão" filterBy="#{entidade.numeroPregao}" filterMatchMode="contains">
+                    <h:outputText value="#{entidade.numeroPregao}" />
                 </p:column>
 
-                <p:column headerText="Status">
-                    <h:outputText value="#{pregao.statusPregao}" />
+                <p:column headerText="Status" filterBy="#{entidade.statusPregao}" filterMatchMode="contains">
+                    <h:outputText value="#{entidade.statusPregao}" />
                 </p:column>
 
-                <p:column headerText="Ações" width="50">
-
-                    
-
-                    <p:commandButton id="btExcluir" icon="fa fa-trash" style="font-size: 10px">
-                        <p:tooltip for="btExcluir" value="Excluir Pregão" />
-                    </p:commandButton>
-
-                </p:column>
 
             </p:dataTable>
         </h:form>
@@ -61,20 +51,17 @@
 
                 <h:panelGrid columns="2" id="panelGridEditPregao" columnClasses="colunaEsquerda,colunaDireita">
 
-                    <p:outputLabel value="ID:" for="numeroID"/>
-                    <p:outputLabel value="#{controladorPregao.pregao.id}" id="numeroID"/>
-                    
                     <p:outputLabel value="Número do Processo:" for="numeroProcesso"/>
-                    <p:inputText id="numeroProcesso" value="#{controladorPregao.pregao.numeroProcesso}" title="Número do Processo" 
+                    <p:inputText id="numeroProcesso" value="#{controladorPregao.entidade.numeroProcesso}" title="Número do Processo" 
                                  required="true"
                                  requiredMessage="O campo Número do Processo é obrigatorio" maxlength="20" style="width: 212px"/>
 
                     <p:outputLabel value="Número do Pregão:" for="numeroPregao"/>
-                    <p:inputText id="numeroPregao" value="#{controladorPregao.pregao.numeroPregao}" title="Número do Pregão" required="true" 
+                    <p:inputText id="numeroPregao" value="#{controladorPregao.entidade.numeroPregao}" title="Número do Pregão" required="true" 
                                  requiredMessage="O Campo Número do pregão é obrigatorio" maxlength="20" style="width: 212px" /> 
 
                     <p:outputLabel value="Status:" for="statusDoPregao"/>
-                    <h:selectOneMenu id="statusDoPregao" value="#{controladorPregao.pregao.statusPregao}" style="width: 213px">
+                    <h:selectOneMenu id="statusDoPregao" value="#{controladorPregao.entidade.statusPregao}" style="width: 213px">
 
                         <f:selectItem noSelectionOption="true" />
                         <f:selectItem itemLabel="Aberto" itemValue="aberto" />
@@ -88,7 +75,7 @@
                     </h:selectOneMenu>
 
                     <p:outputLabel value="Descrição:"  for="descricao"/>
-                    <p:inputTextarea id="descricao" value="#{controladorPregao.pregao.descricao}" title="Descrição" placeholder="Descrição" 
+                    <p:inputTextarea id="descricao" value="#{controladorPregao.entidade.descricao}" title="Descrição" placeholder="Descrição" 
                                      rows="5" cols="30" counter="display" maxlength="255" counterTemplate="{0} caracteres restantes." 
                                      autoResize="true" style="width:212px" />
 
@@ -102,7 +89,8 @@
 
             <div style="margin-left: 2%; margin-top: 2%; margin-right: 2%">
 
-                <p:commandButton  id="btAtualizarPregao" value="Atualizar" icon="fa fa-refresh" action="#{controladorPregao.editar(pregao)}" update="pn_info : dt_pregoes" ajax="false" />
+                <p:commandButton  id="btAtualizarPregao" value="Atualizar" icon="fa fa-refresh" action="#{controladorPregao.editar(entidade)}" 
+                                  update="pn_info : dt_pregoes" ajax="false" />
 
             </div>
 

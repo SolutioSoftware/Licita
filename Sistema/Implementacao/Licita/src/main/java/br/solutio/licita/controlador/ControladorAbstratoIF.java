@@ -24,20 +24,23 @@ public interface ControladorAbstratoIF<T> extends Serializable{
     /**
      * Cria um registro de uma entidade na base de dados.
      * @param entidade
+     * @return String que sera a pagian chamada
      */
     public String criar(T entidade);
     
     /**
      * Modifica um registro de uma entidade na base de dados.
      * @param entidade
+     * @return String que sera a pagian chamada
      */
-    public void editar(T entidade);
+    public String editar(T entidade);
     
     /**
      * Remove um registro de uma entidade na base de dados.
      * @param entidade
+     * @return String que sera a pagian chamada
      */
-    public void deletar(T entidade);
+    public String deletar(T entidade);
     
 
     /**

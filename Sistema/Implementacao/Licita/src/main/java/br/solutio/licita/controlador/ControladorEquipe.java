@@ -63,6 +63,12 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
         limparDados();
         return "equipe";
     }
+    
+     @Override
+    public String editar(PessoaFisica entidade) {
+        return null;
+    }
+
 
     /**
      * Realiza a remocao dos caracteres especiais, caso haja, presentes
@@ -151,4 +157,10 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
         this.confirmaSenha = confirmaSenha;
     }
 
+    @Override
+    public String deletar(PessoaFisica entidade) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+   
 }

@@ -21,29 +21,79 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class ControladorPregao extends ControladorAbstrato<Pregao> {
 
-    private Pregao pregao = new Pregao();
+    private Pregao entidade = new Pregao();
     private List<Pregao> pregoes;
     private ServicoIF<Pregao> servico = new ServicoPregao();
-    
-    public String preparaEditar(){
-        logger.log(Level.INFO, "Editar funfando");
-        return "pregaoEditar";
-    }
 
     public ControladorPregao() {
         pregoes = servico.buscarTodos();
     }
 
+    @Override
+    public String criar(Pregao entidade) {
+        entidade = getPregao();
+        getServico().criar(entidade);
+        entidade = new Pregao();
+        JsfUtil.addSuccessMessage("Salvo com Sucesso!");
+        pregoes = servico.buscarTodos();
+        return "pregao";
+    }
+
+    @Override
+    public String editar(Pregao entidade) {
+        entidade = getPregao();
+        getServico().editar(entidade);
+        entidade = new Pregao();
+        JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
+        pregoes = servico.buscarTodos();
+        return "pregao";
+    }
+
+    @Override
+    public String deletar(Pregao entidade) {
+        entidade = getPregao();
+        getServico().deletar(entidade);
+        entidade = new Pregao();
+        JsfUtil.addSuccessMessage("Excluido com Sucesso!");
+        pregoes = servico.buscarTodos();
+        return "pregao";
+    }
+
+    public String limparDados() {
+        entidade = new Pregao();
+        return "pregaoSalvar";
+    }
+
+    public String preparaEditar() {
+        logger.log(Level.INFO, "Editar funfando");
+        return "pregaoEditar";
+    }
+
+    @Override
+    public ServicoIF getServico() {
+        return this.servico;
+    }
+
+    @Override
+    public Pregao getEntidade() {
+        return entidade;
+    }
+
+    @Override
+    public void setEntidade(Pregao entidade) {
+        this.entidade = entidade;
+    }
+
     public boolean getEditando() {
-        return this.pregao.getId() != null;
+        return this.entidade.getId() != null;
     }
 
     public Pregao getPregao() {
-        return pregao;
+        return entidade;
     }
 
     public void setPregao(Pregao pregao) {
-        this.pregao = pregao;
+        this.entidade = pregao;
     }
 
     public List<Pregao> getPregoes() {
@@ -56,41 +106,6 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
 
     public void setServico(ServicoIF<Pregao> servico) {
         this.servico = servico;
-    }
-
-    @Override
-    public String criar(Pregao pregao) {
-        pregao = getPregao();
-        this.servico.criar(pregao);
-        pregao = new Pregao();
-        JsfUtil.addSuccessMessage("Salvo com Sucesso!");
-        pregoes = servico.buscarTodos();
-        return "pregao";
-    }
-    
-    @Override
-    public void editar(Pregao pregao) {
-        pregao = getPregao();
-        this.servico.editar(pregao);
-        logger.log(Level.INFO, pregao.getNumeroPregao());
-        pregao = new Pregao();
-        JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
-        pregoes = servico.buscarTodos();
-    }
-    
-    @Override
-    public ServicoIF getServico() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Pregao getEntidade() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setEntidade(Pregao entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

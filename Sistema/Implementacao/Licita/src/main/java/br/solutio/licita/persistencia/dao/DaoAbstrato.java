@@ -72,6 +72,7 @@ public abstract class DaoAbstrato<T> implements DaoIF<T> {
 
     @Override
     public void deletar(T entidade) {
+        logger.log(Level.INFO, "Deletar");
         EntityManager em = getEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();

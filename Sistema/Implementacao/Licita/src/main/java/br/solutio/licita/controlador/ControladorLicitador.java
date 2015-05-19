@@ -80,5 +80,15 @@ public class ControladorLicitador extends ControladorAbstrato<InstituicaoLicitad
     public String criar(InstituicaoLicitadora entidade) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public String editar(InstituicaoLicitadora entidade) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String deletar(InstituicaoLicitadora entidade) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
