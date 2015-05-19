@@ -5,7 +5,7 @@
  */
 package br.solutio.licita.dao;
 
-import br.solutio.licita.dao.teste.DaoTeste;
+import br.solutio.licita.dao.teste.DAOTestes;
 import br.solutio.licita.modelo.Pregao;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
@@ -17,7 +17,7 @@ import org.junit.Test;
  */
 public class DaoPregaoTest {
     
-    private DaoTeste dao = new DaoTeste(Pregao.class);
+    private DAOTestes dao = new DAOTestes(Pregao.class);
     private Pregao pregao;
     private Pregao pregao2, pregaoVazio, pregaoAtualizado;
     
@@ -65,15 +65,13 @@ public class DaoPregaoTest {
         dao.editar(pregao2);
         
         //Verificando buscaPorId
-        pregaoAtualizado = dao.buscarPorId(pregao2.getId());
+        pregaoAtualizado = (Pregao) dao.buscarPorId(pregao2.getId());
         assertEquals(true, pregao2.equals(pregaoAtualizado));
         
         //Verificando remocao do banco
         dao.deletar(pregao);
         dao.deletar(pregao2);
         
-        System.out.println(pregao.getId());
-        System.out.println(pregao2.getId());
         assertEquals(true, !pregao.equals(pregaoVazio));
         assertEquals(false, pregao.equals(pregao2));
         assertEquals(false, pregao.equals(pregaoVazio));
