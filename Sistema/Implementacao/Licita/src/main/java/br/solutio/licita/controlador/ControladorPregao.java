@@ -12,11 +12,13 @@ import br.solutio.licita.servico.ServicoPregao;
 import java.util.List;
 import java.util.logging.Level;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 /**
  * @author ricardocaldeira
  */
 @ManagedBean
+@SessionScoped
 public class ControladorPregao extends ControladorAbstrato<Pregao> {
 
     private Pregao pregao = new Pregao();
@@ -60,7 +62,7 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
     public String criar(Pregao pregao) {
         pregao = getPregao();
         this.servico.criar(pregao);
-        pregao = null;
+        pregao = new Pregao();
         JsfUtil.addSuccessMessage("Salvo com Sucesso!");
         pregoes = servico.buscarTodos();
         return "pregao";
@@ -71,8 +73,7 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
         pregao = getPregao();
         this.servico.editar(pregao);
         logger.log(Level.INFO, pregao.getNumeroPregao());
-         logger.log(Level.INFO, pregao.getDescricao());
-        pregao = null;
+        pregao = new Pregao();
         JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
         pregoes = servico.buscarTodos();
     }

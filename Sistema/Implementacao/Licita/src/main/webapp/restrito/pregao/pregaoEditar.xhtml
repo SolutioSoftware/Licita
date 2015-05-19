@@ -61,6 +61,9 @@
 
                 <h:panelGrid columns="2" id="panelGridEditPregao" columnClasses="colunaEsquerda,colunaDireita">
 
+                    <p:outputLabel value="ID:" for="numeroID"/>
+                    <p:outputLabel value="#{controladorPregao.pregao.id}" id="numeroID"/>
+                    
                     <p:outputLabel value="Número do Processo:" for="numeroProcesso"/>
                     <p:inputText id="numeroProcesso" value="#{controladorPregao.pregao.numeroProcesso}" title="Número do Processo" 
                                  required="true"

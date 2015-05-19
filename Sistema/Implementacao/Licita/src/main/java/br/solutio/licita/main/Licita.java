@@ -40,7 +40,7 @@ public class Licita {
         
         
         
-        pessoa.setCpf("00311193326");
+        pessoa.setCpf("00311194326");
         pessoa.setNome("Witalo");
         pessoa.setRg("1232344");
         daoPF.criar(pessoa);
@@ -54,7 +54,7 @@ public class Licita {
         daoPR.criar(pregoeiro);
         
         login.setIdPregoeiro(pregoeiro);
-        login.setUsuario("witaloc");
+        login.setUsuario("ads");
         login.setSenha("1232");
         
         
