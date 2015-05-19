@@ -7,19 +7,18 @@
                 template="/WEB-INF/template/TemplateLicitaPaineis.xhtml"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <f:metadata>
-        <f:viewParam name="pregao" value="#{controladorPregao.pregao}" />
-    </f:metadata>
-
     <ui:define name="pn_info">
 
         <h:form id="formDtPregao">
 
-           <p:dataTable id='dt_pregoes' var="pregao" sortBy="#{pregao.id}" sortOrder="DESCENDING" value="#{controladorPregao.pregoes}" widgetVar="tbl_pregoes" paginator="true" style="padding:5px" rows="10" rowsPerPageTemplate="5,10"  emptyMessage="Nenhum pregão cadastrado"  paginatorAlwaysVisible="true">
+            <p:dataTable id='dt_pregoes' var="pregao" value="#{controladorPregao.pregoes}" 
+                         widgetVar="tbl_pregoes" paginator="true" style="padding:5px" rows="10" rowsPerPageTemplate="5,10"  
+                         emptyMessage="Nenhum pregão cadastrado"  paginatorAlwaysVisible="true">
 
                 <f:facet name="header">
                     <p:outputPanel>
-                        <p:button value="Novo" style="width: 80px" outcome="/restrito/pregao/pregaoSalvar.xhtml" icon="fa fa-plus" class="botaoNovo"/>
+                        <p:button value="Novo" style="width: 80px" outcome="/restrito/pregao/pregaoSalvar.xhtml" icon="fa fa-plus" 
+                                  class="botaoNovo"/>
                         <p:outputLabel value="Buscar:" for="pregaoFilter"/>
                         <p:inputText id="pregaoFilter" onkeyup="" style="width:250px" placeholder="Digite sua busca" />
                     </p:outputPanel>
@@ -39,10 +38,7 @@
 
                 <p:column headerText="Ações" width="50">
 
-                    <p:button id="btEditar" icon="ui-icon-pencil" style="font-size: 10px" outcome="/restrito/pregao/pregaoEditar.xhtml"  >
-                        <f:param name="pregao" value="#{pregao.id}" />
-                        <p:tooltip for="btEditar" value="Editar Pregão" />
-                    </p:button>
+                    
 
                     <p:commandButton id="btExcluir" icon="fa fa-trash" style="font-size: 10px">
                         <p:tooltip for="btExcluir" value="Excluir Pregão" />
@@ -57,7 +53,7 @@
 
     <ui:define name="pn_conteudo">
 
-        <h:form id="pregao_form" title="Pregão" style="text-align: center"  >
+        <h:form id="pregao_form" title="Pregão" style="text-align: center">
 
             <p:growl id="growPregaoSalvar" showDetail="false" life="3000" class="ui-growl" />
 
@@ -66,7 +62,8 @@
                 <h:panelGrid columns="2" id="panelGridEditPregao" columnClasses="colunaEsquerda,colunaDireita">
 
                     <p:outputLabel value="Número do Processo:" for="numeroProcesso"/>
-                    <p:inputText id="numeroProcesso" value="#{controladorPregao.pregao.numeroProcesso}" title="Número do Processo" required="true"
+                    <p:inputText id="numeroProcesso" value="#{controladorPregao.pregao.numeroProcesso}" title="Número do Processo" 
+                                 required="true"
                                  requiredMessage="O campo Número do Processo é obrigatorio" maxlength="20" style="width: 212px"/>
 
                     <p:outputLabel value="Número do Pregão:" for="numeroPregao"/>
@@ -74,7 +71,7 @@
                                  requiredMessage="O Campo Número do pregão é obrigatorio" maxlength="20" style="width: 212px" /> 
 
                     <p:outputLabel value="Status:" for="statusDoPregao"/>
-                    <p:selectOneMenu id="statusDoPregao" value="#{controladorPregao.pregao.statusPregao}" style="width: 210px">
+                    <h:selectOneMenu id="statusDoPregao" value="#{controladorPregao.pregao.statusPregao}" style="width: 213px">
 
                         <f:selectItem noSelectionOption="true" />
                         <f:selectItem itemLabel="Aberto" itemValue="aberto" />
@@ -85,7 +82,7 @@
                         <f:selectItem itemLabel="Deserto" itemValue="deserto" />
                         <f:selectItem itemLabel="Fracassado" itemValue="fracassad" />
 
-                    </p:selectOneMenu>
+                    </h:selectOneMenu>
 
                     <p:outputLabel value="Descrição:"  for="descricao"/>
                     <p:inputTextarea id="descricao" value="#{controladorPregao.pregao.descricao}" title="Descrição" placeholder="Descrição" 
@@ -102,7 +99,7 @@
 
             <div style="margin-left: 2%; margin-top: 2%; margin-right: 2%">
 
-                <p:commandButton  id="btAtualizarPregao" value="Atualizar" icon="fa fa-refresh" actionListener="#{controladorPregao.editar(entidade)}" update="pn_info : dt_pregoes" ajax="false" />
+                <p:commandButton  id="btAtualizarPregao" value="Atualizar" icon="fa fa-refresh" action="#{controladorPregao.editar(pregao)}" update="pn_info : dt_pregoes" ajax="false" />
 
             </div>
 

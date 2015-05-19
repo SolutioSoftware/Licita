@@ -43,7 +43,7 @@ public class ServicoPregao extends ServicoAbstrato<Pregao> implements ServicoPre
 
     @Override
     public void editar(Pregao entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        getDao().editar(entidade);
     }
 
     @Override

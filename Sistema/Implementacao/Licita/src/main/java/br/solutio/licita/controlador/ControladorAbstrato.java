@@ -7,6 +7,7 @@ package br.solutio.licita.controlador;
 
 import br.solutio.licita.servico.ServicoIF;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,6 +16,9 @@ import java.util.List;
 
 public abstract class ControladorAbstrato<T> implements ControladorAbstratoIF<T>{
 
+    
+    static final Logger logger = Logger.getGlobal();
+            
     public abstract ServicoIF getServico();
     
     @Override

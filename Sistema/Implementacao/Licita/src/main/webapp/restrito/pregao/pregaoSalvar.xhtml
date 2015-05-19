@@ -17,7 +17,8 @@
 
                 <f:facet name="header">
                     <p:outputPanel>
-                        <p:button value="Novo" style="width: 80px" outcome="/restrito/pregao/pregaoSalvar.xhtml" icon="fa fa-plus" class="botaoNovo"/>
+                        <p:button value="Novo" style="width: 80px" outcome="/restrito/pregao/pregaoSalvar.xhtml" icon="fa fa-plus" 
+                                  class="botaoNovo"/>
                         <p:outputLabel value="Buscar:" for="pregaoFilter"/>
                         <p:inputText id="pregaoFilter" onkeyup="" style="width:250px" placeholder="Digite sua busca" />
                     </p:outputPanel>
@@ -37,10 +38,9 @@
 
                 <p:column headerText="Ações" width="50">
 
-                    <p:button id="btEditar" icon="ui-icon-pencil" style="font-size: 10px" outcome="/restrito/pregao/pregaoEditar.xhtml">
-                        <f:param name="pregao" value="#{pregao.id}" />
-                        <p:tooltip for="btEditar" value="Editar Pregão"/>
-                    </p:button>
+                    <p:commandButton id="btEditar" icon="ui-icon-pencil" action="#{controladorPregao.preparaEditar}" update="@form"  style="font-size: 10px">
+                        <f:setPropertyActionListener value="#{pregao}" target="#{controladorPregao.pregao}"  />
+                    </p:commandButton>
 
                     <p:commandButton id="btExcluir" icon="fa fa-trash" style="font-size: 10px">
                         <p:tooltip for="btExcluir" value="Excluir Pregão" />
@@ -71,7 +71,7 @@
                                  requiredMessage="O Campo Número do pregão é obrigatorio" maxlength="20" style="width: 212px" /> 
 
                     <p:outputLabel value="Status:" for="statusDoPregao" style="text-align:right"/>
-                    <p:selectOneMenu id="statusDoPregao" value="#{controladorPregao.pregao.statusPregao}" style="width: 210px">
+                    <h:selectOneMenu id="statusDoPregao" value="#{controladorPregao.pregao.statusPregao}" style="width: 213px">
 
                         <f:selectItem noSelectionOption="true" />
                         <f:selectItem itemLabel="Aberto" itemValue="aberto" />
@@ -82,7 +82,7 @@
                         <f:selectItem itemLabel="Deserto" itemValue="deserto" />
                         <f:selectItem itemLabel="Fracassado" itemValue="fracassad" />
 
-                    </p:selectOneMenu>
+                    </h:selectOneMenu>
 
                     <p:outputLabel value="Descrição:"  for="descricao" />
                     <p:inputTextarea id="descricao" value="#{controladorPregao.pregao.descricao}" title="Descrição" placeholder="Descrição" 

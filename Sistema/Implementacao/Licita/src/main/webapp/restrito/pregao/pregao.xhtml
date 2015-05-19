@@ -11,15 +11,16 @@
 
         <h:form id="formDtPregao">
 
-            <p:dataTable id='dt_pregoes' var="pregao" sortBy="#{pregao.id}" sortOrder="DESCENDING" value="#{controladorPregao.pregoes}" 
+            <p:dataTable id='dt_pregoes' var="pregao" value="#{controladorPregao.pregoes}" 
                          widgetVar="tbl_pregoes" paginator="true" style="padding:5px" rows="10" rowsPerPageTemplate="5,10"  
-                         emptyMessage="Nenhum pregão cadastrado"  paginatorAlwaysVisible="true">
+                         emptyMessage="Nenhum pregão cadastrado"  paginatorAlwaysVisible="true" filteredValue="#{controladorPregao.pregoes}">
 
                 <f:facet name="header">
                     <p:outputPanel>
-                        <p:button value="Novo" style="width: 80px" outcome="/restrito/pregao/pregaoSalvar.xhtml" icon="fa fa-plus" class="botaoNovo"/>
+                        <p:button value="Novo" style="width: 80px" outcome="/restrito/pregao/pregaoSalvar.xhtml" icon="fa fa-plus" 
+                                  class="botaoNovo"/>
                         <p:outputLabel value="Buscar:" for="pregaoFilter"/>
-                        <p:inputText id="pregaoFilter" onkeyup="" style="width:250px" placeholder="Digite sua busca" />
+                        <p:inputText id="pregaoFilter" onkeyup="PF('tbl_pregoes').filter()" style="width:250px" placeholder="Digite sua busca" />
                     </p:outputPanel>
                 </f:facet>
 
@@ -37,10 +38,9 @@
 
                 <p:column headerText="Ações" width="50">
 
-                    <p:button id="btEditar" icon="ui-icon-pencil" style="font-size: 10px" outcome="/restrito/pregao/pregaoEditar.xhtml"  >
-                        <f:param name="pregao" value="#{pregao.id}" />
-                        <p:tooltip for="btEditar" value="Editar Pregão" />
-                    </p:button>
+                    <p:commandButton id="btEditar" icon="ui-icon-pencil" action="#{controladorPregao.preparaEditar}" update="@form"  style="font-size: 10px">
+                        <f:setPropertyActionListener value="#{pregao}" target="#{controladorPregao.pregao}"  />
+                    </p:commandButton>
 
                     <p:commandButton id="btExcluir" icon="fa fa-trash" style="font-size: 10px">
                         <p:tooltip for="btExcluir" value="Excluir Pregão" />

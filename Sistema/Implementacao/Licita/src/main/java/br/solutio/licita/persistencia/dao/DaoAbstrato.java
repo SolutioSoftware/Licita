@@ -59,6 +59,7 @@ public abstract class DaoAbstrato<T> implements DaoIF<T> {
 
     @Override
     public void editar(T entidade) {
+        logger.log(Level.INFO, "Editar");
         EntityManager em = getEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();

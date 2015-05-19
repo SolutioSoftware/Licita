@@ -10,6 +10,7 @@ import br.solutio.licita.modelo.Pregao;
 import br.solutio.licita.servico.ServicoIF;
 import br.solutio.licita.servico.ServicoPregao;
 import java.util.List;
+import java.util.logging.Level;
 import javax.faces.bean.ManagedBean;
 
 /**
@@ -21,6 +22,11 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
     private Pregao pregao = new Pregao();
     private List<Pregao> pregoes;
     private ServicoIF<Pregao> servico = new ServicoPregao();
+    
+    public String preparaEditar(){
+        logger.log(Level.INFO, "Editar funfando");
+        return "pregaoEditar";
+    }
 
     public ControladorPregao() {
         pregoes = servico.buscarTodos();
@@ -58,6 +64,17 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
         JsfUtil.addSuccessMessage("Salvo com Sucesso!");
         pregoes = servico.buscarTodos();
         return "pregao";
+    }
+    
+    @Override
+    public void editar(Pregao pregao) {
+        pregao = getPregao();
+        this.servico.editar(pregao);
+        logger.log(Level.INFO, pregao.getNumeroPregao());
+         logger.log(Level.INFO, pregao.getDescricao());
+        pregao = null;
+        JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
+        pregoes = servico.buscarTodos();
     }
     
     @Override
