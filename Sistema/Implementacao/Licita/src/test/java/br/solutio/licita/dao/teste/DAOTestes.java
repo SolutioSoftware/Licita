@@ -6,7 +6,6 @@
 
 package br.solutio.licita.dao.teste;
 
-import br.solutio.licita.modelo.Pregao;
 import br.solutio.licita.persistencia.dao.DaoAbstrato;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,16 +17,16 @@ import javax.persistence.Persistence;
  *
  * @author Matheus Oliveira
  */
-public class DaoTeste extends DaoAbstrato<Pregao>{
+public class DAOTestes<T> extends DaoAbstrato<T>{
     
     private EntityManagerFactory emf;
     private EntityManager em;
     private Logger logger = Logger.getGlobal();
     
-    public DaoTeste(){
+    public DAOTestes(){
     }
     
-    public DaoTeste(Class entidade){
+    public DAOTestes(Class<T> entidade){
         super(entidade);
     }
     

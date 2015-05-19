@@ -75,6 +75,8 @@ public class EmpresaLicitante implements Serializable {
     private RepresentanteLegal representanteLegal;
 
     public EmpresaLicitante() {
+        pessoaJuridica = new PessoaJuridica();
+        empresaLicitantePK = new EmpresaLicitantePK();
     }
 
     public EmpresaLicitante(EmpresaLicitantePK empresaLicitantePK) {
