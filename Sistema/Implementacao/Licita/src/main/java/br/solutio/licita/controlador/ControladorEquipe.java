@@ -53,41 +53,42 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
     public String criar(PessoaFisica entidade) {
         entidade = getEntidade();
         corrigirCPF(entidade);
-        if( (isCargoPregoeiro()) && (pregoeiro != null) && (login != null) ){
+        if ((isCargoPregoeiro()) && (pregoeiro != null) && (login != null)) {
             servico.criarPregoeiro(entidade, pregoeiro, login);
-        }else if(isCargoMembrodeApoio() &&  (membroApoio != null) ){
+        } else if (isCargoMembrodeApoio() && (membroApoio != null)) {
             servico.criarMembroApoio(entidade, membroApoio);
-        }else{
+        } else {
             log.warning("Nenhuma funcao selecionada");
         }
         limparDados();
         return "equipe";
     }
-    
-     @Override
+
+    @Override
     public String editar(PessoaFisica entidade) {
         return null;
     }
 
-
     /**
-     * Realiza a remocao dos caracteres especiais, caso haja, presentes
-     * na variavel do CPF
-     * @param entidade 
+     * Realiza a remocao dos caracteres especiais, caso haja, presentes na
+     * variavel do CPF
+     *
+     * @param entidade
      */
     private void corrigirCPF(PessoaFisica entidade) {
         entidade.setCpf(entidade.getCpf().replace(".", ""));
         entidade.setCpf(entidade.getCpf().replace("-", ""));
     }
-    
-      private void limparDados() {
-          this.login = null;
-          this.pessoasfisica = null;
-          this.membroApoio = null;
-          this.pregoeiro = null;
-          this.cargoPregoeiro = false;
-          this.cargoMembrodeApoio = false;
-          this.confirmaSenha = "";
+
+    public String limparDados() {
+        this.login = null;
+        this.pessoasfisica = null;
+        this.membroApoio = null;
+        this.pregoeiro = null;
+        this.cargoPregoeiro = false;
+        this.cargoMembrodeApoio = false;
+        this.confirmaSenha = "";
+        return "equipeSalvar";
     }
 
     public boolean isCargoPregoeiro() {
@@ -135,11 +136,11 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
     public Pregoeiro getPregoeiro() {
         return this.pregoeiro;
     }
-    
-    public MembroApoio getMembroApoio(){
+
+    public MembroApoio getMembroApoio() {
         return this.membroApoio;
     }
-    
+
     public Login getLogin() {
         return this.login;
     }
@@ -148,12 +149,12 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
     public ServicoIF getServico() {
         return this.servico;
     }
-    
-    public String getConfirmaSenha(){
+
+    public String getConfirmaSenha() {
         return this.confirmaSenha;
     }
-    
-    public void setConfirmaSenha(String confirmaSenha){
+
+    public void setConfirmaSenha(String confirmaSenha) {
         this.confirmaSenha = confirmaSenha;
     }
 
@@ -162,5 +163,4 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-   
 }

@@ -45,7 +45,7 @@ public class ControladorItemPregao extends ControladorAbstrato<ItemPregao> {
         JsfUtil.addSuccessMessage("Salvo com Sucesso!");
         itens = servico.buscarTodos();
         pregoes = servico.listarPregoes();
-        return "itemSalvar";
+        return "item";
     }
 
     @Override

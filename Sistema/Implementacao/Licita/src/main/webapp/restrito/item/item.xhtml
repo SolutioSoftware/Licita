@@ -11,7 +11,7 @@
 
         <h:form id="formDtItemPregao">
 
-            <p:dataTable id='dt_pregoes' var="entidade" sortBy="#{entidade.id}" sortOrder="DESCENDING" value="#{controladorItemPregao.itens}" 
+            <p:dataTable id='dt_itens' var="entidade" sortBy="#{entidade.id}" sortOrder="DESCENDING" value="#{controladorItemPregao.itens}" 
                          widgetVar="tbl_itens" paginator="true" style="padding:5px" rows="10" rowsPerPageTemplate="5,10"  
                          emptyMessage="Nenhum Item Cadastrado"  paginatorAlwaysVisible="true">
 
@@ -23,16 +23,16 @@
                     </p:outputPanel>
                 </f:facet>
 
-                <p:column headerText="Codigo do item" filterBy="#{controladorItemPregao.entidade.id}" filterMatchMode="contains">
-                    <h:outputText value="#{controladorItemPregao.entidade.id}" />
+                <p:column headerText="Codigo do item" filterBy="#{entidade.id}" filterMatchMode="contains">
+                    <h:outputText value="#{entidade.id}" />
                 </p:column>
 
-                <p:column headerText="Nome do item" filterBy="#{controladorItemPregao.entidade.nome}" filterMatchMode="contains">
-                    <h:outputText value="#{controladorItemPregao.entidade.nome}" />
+                <p:column headerText="Nome do item" filterBy="#{entidade.nome}" filterMatchMode="contains">
+                    <h:outputText value="#{entidade.nome}" />
                 </p:column>
 
-                <p:column headerText="Valor de Referência" filterBy="#{controladorItemPregao.entidade.valorReferencia}" filterMatchMode="contains">
-                    <h:outputText value="#{controladorItemPregao.entidade.valorReferencia}" />
+                <p:column headerText="Valor de Referência" filterBy="#{entidade.valorReferencia}" filterMatchMode="contains">
+                    <h:outputText value="#{entidade.valorReferencia}" />
                 </p:column>
 
                 <p:column headerText="Ações" width="50">

@@ -12,6 +12,57 @@
         <h:form id="formDtItemPregao">
 
             <p:dataTable id='dt_itens' var="entidade" sortBy="#{entidade.id}" sortOrder="DESCENDING" value="#{controladorItemPregao.itens}" 
+                         widgetVar="tbl_itensPregao" paginator="true" style="padding:5px" rows="10" rowsPerPageTemplate="5,10"  
+                         emptyMessage="Nenhum Item Cadastrado"  paginatorAlwaysVisible="true">
+
+                <f:facet name="header">
+                    <p:outputPanel>
+                        <p:commandButton value="Novo" style="width: 80px" action="#{controladorItemPregao.limparDados}" update="@form"  icon="fa fa-plus" 
+                                         class="botaoNovo"/>
+                        <p:inputText id="globalFilter" onkeyup="PF('tbl_itensPregao').filter()" style="width:250px" placeholder="Digite sua busca" />
+                    </p:outputPanel>
+                </f:facet>
+
+
+                <p:column headerText="Nome do item" filterBy="#{entidade.nome}" filterMatchMode="contains">
+                    <h:outputText value="#{entidade.nome}" />
+                </p:column>
+
+                <p:column headerText="Valor de Referência" filterBy="#{entidade.valorReferencia}" filterMatchMode="contains">
+                    <h:outputText value="#{entidade.valorReferencia}" />
+                </p:column>
+
+                <p:column headerText="Unidade" filterBy="#{entidade.unidade}" filterMatchMode="contains">
+                    <h:outputText value="#{entidade.unidade}" />
+                </p:column>
+
+
+                <p:column headerText="Ações" width="50">
+
+                    <p:commandButton id="btEditar" icon="ui-icon-pencil" action="#{controladorItemPregao.preparaEditar()}" update="@form"  
+                                     style="font-size: 10px">
+                        <f:setPropertyActionListener value="#{entidade}" target="#{controladorItemPregao.entidade}"  />
+                        <p:tooltip for="btEditar" value="Editar"/>
+                    </p:commandButton>
+
+                    <p:commandButton id="btExcluir" icon="fa fa-trash" action="#{controladorItemPregao.deletar(entidade)}" update="@form" 
+                                     style="font-size: 10px">
+                        <f:setPropertyActionListener value="#{entidade}" target="#{controladorItemPregao.entidade}"  />
+                        <p:tooltip for="btExcluir" value="Excluir"/>
+                        <p:confirm icon="ui-icon-alert" header="Excluir Item" message="Deseja realmente excluir este Item"/>
+                    </p:commandButton>
+
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+
+    <ui:define name="pn_conteudo">
+        
+         <h:form id="formDtItemPregao">
+
+            <p:dataTable id='dt_pregoes' var="entidade" sortBy="#{entidade.id}" sortOrder="DESCENDING" value="#{controladorItemPregao.itens}" 
                          widgetVar="tbl_itens" paginator="true" style="padding:5px" rows="10" rowsPerPageTemplate="5,10"  
                          emptyMessage="Nenhum Item Cadastrado"  paginatorAlwaysVisible="true">
 
@@ -36,24 +87,6 @@
                     <h:outputText value="#{entidade.valorReferencia}" />
                 </p:column>
 
-
-                <p:column headerText="Ações" width="50">
-
-                    <p:commandButton id="btEditar" icon="ui-icon-pencil" action="#{controladorItemPregao.preparaEditar()}" update="@form"  
-                                     style="font-size: 10px">
-                        <f:setPropertyActionListener value="#{entidade}" target="#{controladorItemPregao.entidade}"  />
-                        <p:tooltip for="btEditar" value="Editar"/>
-                    </p:commandButton>
-
-                    <p:commandButton id="btExcluir" icon="fa fa-trash" action="#{controladorItemPregao.deletar(entidade)}" update="@form" 
-                                     style="font-size: 10px">
-                        <f:setPropertyActionListener value="#{entidade}" target="#{controladorItemPregao.entidade}"  />
-                        <p:tooltip for="btExcluir" value="Excluir"/>
-                        <p:confirm icon="ui-icon-alert" header="Excluir Item" message="Deseja realmente excluir este Item"/>
-                    </p:commandButton>
-
-                </p:column>
-
             </p:dataTable>
         </h:form>
     </ui:define> 
@@ -67,6 +100,9 @@
             <div style="margin-left: 25%; margin-top: 2%">
 
                 <h:panelGrid columns="2" id="panelGridSavePregao" columnClasses="colunaEsquerda,colunaDireita">
+                    
+                    <p:outputLabel value="Codigo Do Item:" for="codigoItem"/>
+                    <p:outputLabel id="codigoItem" value="#{controladorItemPregao.entidade.id}"/>
 
                     <p:outputLabel value="Nome:" for="nome"/>
                     <p:inputText id="nome" value="#{controladorItemPregao.entidade.nome}" title="Nome" 
@@ -134,12 +170,15 @@
 
             <div style="margin-left: 2%; margin-top: 2%; margin-right: 2%">
 
-                <p:commandButton  id="btSalvarItemPregao" value="Salvar" icon="fa fa-save" action="#{controladorItemPregao.criar(entidade)}" update="growItemPregao" process="@this" ajax="false" />
+                <p:commandButton  id="btAtualizarItem" value="Atualizar" icon="fa fa-refresh" action="#{controladorItemPregao.editar(entidade)}" 
+                                  update="pn_info : dt_itens" ajax="false" />
 
             </div>
 
         </h:form>
 
+
     </ui:define> 
+
 
 </ui:composition>

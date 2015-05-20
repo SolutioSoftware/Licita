@@ -7,7 +7,6 @@ package br.solutio.licita.modelo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -93,9 +92,6 @@ public class ItemPregao implements Serializable {
     @ManyToMany
     private transient Set<StatusItemPregao> statusItemPregaoSet;
     
-    @JoinColumn(name = "id_pregao", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Pregao idPregao;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idItemPregao")
     private transient Set<Lance> lanceSet;
@@ -188,14 +184,6 @@ public class ItemPregao implements Serializable {
 
     public void setStatusItemPregaoSet(Set<StatusItemPregao> statusItemPregaoSet) {
         this.statusItemPregaoSet = statusItemPregaoSet;
-    }
-
-    public Pregao getIdPregao() {
-        return idPregao;
-    }
-
-    public void setIdPregao(Pregao idPregao) {
-        this.idPregao = idPregao;
     }
 
     @XmlTransient

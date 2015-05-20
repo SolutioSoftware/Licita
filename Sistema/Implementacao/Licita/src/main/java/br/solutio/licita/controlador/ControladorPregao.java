@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.logging.Level;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.persistence.PersistenceException;
 
 /**
  * @author ricardocaldeira
@@ -32,13 +33,19 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
 
     @Override
     public String criar(Pregao entidade) {
-        entidade = getEntidade();
-        getServico().criar(entidade);
-        setEntidade(null);
-        setEntidade(new Pregao());
-        JsfUtil.addSuccessMessage("Salvo com Sucesso!");
-        pregoes = servico.buscarTodos();
-        return "pregao";
+        try {
+            entidade = getEntidade();
+            getServico().criar(entidade);
+            setEntidade(null);
+            setEntidade(new Pregao());
+            JsfUtil.addSuccessMessage("Salvo com Sucesso!");
+            pregoes = servico.buscarTodos();
+            return "pregao";
+        }catch(PersistenceException e){
+            JsfUtil.addErrorMessage("Pregao ou Processo já existe");
+            return "pregaoSalvar";
+        }
+
     }
 
     @Override

@@ -18,42 +18,42 @@ import org.junit.Test;
  */
 public class DaoEmpresaLicitanteTest {
     
-    private EmpresaLicitante empresaLicitante;
-    private DAOTestes<EmpresaLicitante> daoEmpresaLicitante;
-    
-    @Before
-    public void setUp(){
-        
-        empresaLicitante = new EmpresaLicitante();
-        empresaLicitante.setComplemento("Empresa que vende cal");
-        empresaLicitante.setInscricaoEstadual("1231237812");
-        empresaLicitante.setTipoEmpresa("ME");
-        empresaLicitante.getPessoaJuridica().setCnpj("123123123");
-        empresaLicitante.getPessoaJuridica().setRazaoSocial("Alooohaa");
-        empresaLicitante.getPessoaJuridica().setNomeFantasia("Real Auto");
-        
-        daoEmpresaLicitante = new DAOTestes<>();
-    }
-    
-    @Test
-    public void testeSalvar(){
-        daoEmpresaLicitante.criar(empresaLicitante);
-        assertEquals(true ,empresaLicitante.getId() == 0);
-        assertEquals(false ,empresaLicitante.getId() == 1);
-        assertEquals(true ,empresaLicitante.getPessoaJuridica().getId() == 2);
-    }
-    
-    @Test
-    public void testeEditar(){
-        empresaLicitante.setTipoEmpresa("MEI");
-        daoEmpresaLicitante.editar(empresaLicitante);
-        assertEquals(true, empresaLicitante.getTipoEmpresa().equals("MEI"));
-    }
-    
-    @Test
-    public void testeDeletar(){
-        daoEmpresaLicitante.deletar(empresaLicitante);
-    }
-    
-    
+//    private EmpresaLicitante empresaLicitante;
+//    private DAOTestes<EmpresaLicitante> daoEmpresaLicitante;
+//    
+//    @Before
+//    public void setUp(){
+//        
+//        empresaLicitante = new EmpresaLicitante();
+//        empresaLicitante.setComplemento("Empresa que vende cal");
+//        empresaLicitante.setInscricaoEstadual("1231237812");
+//        empresaLicitante.setTipoEmpresa("ME");
+//        empresaLicitante.getPessoaJuridica().setCnpj("123123123");
+//        empresaLicitante.getPessoaJuridica().setRazaoSocial("Alooohaa");
+//        empresaLicitante.getPessoaJuridica().setNomeFantasia("Real Auto");
+//        
+//        daoEmpresaLicitante = new DAOTestes<>();
+//    }
+//    
+//    @Test
+//    public void testeSalvar(){
+//        daoEmpresaLicitante.criar(empresaLicitante);
+//        assertEquals(true ,empresaLicitante.getId() == 0);
+//        assertEquals(false ,empresaLicitante.getId() == 1);
+//        assertEquals(true ,empresaLicitante.getPessoaJuridica().getId() == 2);
+//    }
+//    
+//    @Test
+//    public void testeEditar(){
+//        empresaLicitante.setTipoEmpresa("MEI");
+//        daoEmpresaLicitante.editar(empresaLicitante);
+//        assertEquals(true, empresaLicitante.getTipoEmpresa().equals("MEI"));
+//    }
+//    
+//    @Test
+//    public void testeDeletar(){
+//        daoEmpresaLicitante.deletar(empresaLicitante);
+//    }
+//    
+//    
 }
