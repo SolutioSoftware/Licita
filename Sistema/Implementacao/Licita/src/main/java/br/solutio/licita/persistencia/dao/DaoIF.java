@@ -64,4 +64,17 @@ public interface DaoIF<T>{
      */
     public List<T> consultar(String namedQuery, String[] parametros, Object[] valores);
     
+    /**
+     * Realiza consultas para localizar os embeddedIds das classes
+     * @param classe
+     * @param embeddedId
+     * @return
+     */
+    public T buscarEmbeddedId(T classe,Object embeddedId);
+    
+    /**
+     * @param classe
+     * @return
+     */
+    public List<T> buscarTodosEmbedded(Class classe);
 }

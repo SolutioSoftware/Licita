@@ -11,6 +11,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -43,11 +44,14 @@ public class Pregoeiro implements Serializable{
     @OneToOne(cascade = CascadeType.ALL ,mappedBy = "idPregoeiro")
     private Login login;
     
-    @JoinColumn(name = "id_pessoa_fisica", referencedColumnName = "id", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    @MapsId("idPessoaFisica")
+    @JoinColumn(name = "id_pessoa_fisica", referencedColumnName = "id")
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
     private PessoaFisica pessoaFisica;
 
     public Pregoeiro() {
+        pessoaFisica = new PessoaFisica();
+        login = new Login();
     }
 
     public Pregoeiro(PregoeiroPK pregoeiroPK) {

@@ -118,5 +118,16 @@ public abstract class DaoAbstrato<T> implements DaoIF<T> {
         }
 
     }
-
+    
+    @Override
+    public T buscarEmbeddedId(T classe,Object embeddedId){
+        return (T) getEntityManager().find(classe.getClass(), embeddedId);
+    }
+    
+    @Override
+    public List<T> buscarTodosEmbedded(Class classe) {
+        javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
+        cq.select(cq.from(classe));
+        return getEntityManager().createQuery(cq).getResultList();
+    }
 }
