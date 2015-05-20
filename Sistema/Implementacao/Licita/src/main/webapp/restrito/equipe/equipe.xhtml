@@ -4,35 +4,56 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
-                template="/WEB-INF/template/TemplateLicitaPaineis.xhtml">
+                template="/WEB-INF/template/TemplateLicitaPaineis.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="pn_info">
 
-        <div style="padding: 5px;margin-bottom: 15px;margin-top: 15px">
-        <p:button value="Novo" style="width: 80px" outcome="/restrito/equipe/equipeSalvar.xhtml" icon="fa fa-plus"/>
-        <p:button value="Excluir" style="margin-left: 12px; width: 80px" icon="fa fa-trash"/>
-        <b><h:outputText value="Buscar: " style="margin-left: 12px; color: #045491 "/></b>
-        <p:inputText label="Buscar" placeholder="Digite sua busca" style="margin-left: 2px;width: 185px;" />
-        </div>
+        <h:form id="formDtequipe">
 
-        <p:dataTable id='dt_equipes' var="equipes" widgetVar="tbl_equipes" paginator="true" style="padding:5px" rowsPerPageTemplate="5,10,20,50,100, 200"  emptyMessage="Nenhum Membro Cadastrado"  paginatorAlwaysVisible="false">
+            <p:dataTable id='dt_equipe' var="entidade" sortBy="#{entidade.id}" sortOrder="DESCENDING" value="#{controladorEquipe.pessoasfisica}" 
+                         widgetVar="tbl_equipe" paginator="true" style="padding:5px" rows="10" rowsPerPageTemplate="5,10"  
+                         emptyMessage="Nenhum Membro Cadastrado"  paginatorAlwaysVisible="true">
 
-           
-            <p:column headerText="CPF">
-                <h:outputText value="" />
-            </p:column>
+                <f:facet name="header">
+                    <p:outputPanel>
+                        <p:commandButton value="Novo" style="width: 80px" action="#{controladorEquipe.limparDados}" update="@form"  icon="fa fa-plus" 
+                                         class="botaoNovo"/>
+                        <p:inputText id="globalFilter" onkeyup="PF('tbl_equipe').filter()" style="width:250px" placeholder="Digite sua busca" />
+                    </p:outputPanel>
+                </f:facet>
 
-            <p:column headerText="Nome">
-                <h:outputText value="" />
-            </p:column>
-            
-             <p:column headerText="Função">
-                <h:outputText value="" />
-            </p:column>
+                <p:column headerText="CPF: " filterBy="#{entidade.cpf}" filterMatchMode="contains">
+                    <h:outputText value="#{entidade.cpf}" />
+                </p:column>
 
-            
+                <p:column headerText="Nome: " filterBy="#{entidade.nome}" filterMatchMode="contains">
+                    <h:outputText value="#{entidade.nome}" />
+                </p:column>
 
-        </p:dataTable>
+                <p:column headerText="Função: " filterBy="" filterMatchMode="contains">
+                    <h:outputText value="" />
+                </p:column>
+
+                <p:column headerText="Ações" width="50">
+
+                    <p:commandButton id="btEditar" icon="ui-icon-pencil" action="#{controladorItemPregao.preparaEditar()}" update="@form"  
+                                     style="font-size: 10px">
+                        <f:setPropertyActionListener value="#{entidade}" target="#{controladorItemPregao.entidade}"  />
+                        <p:tooltip for="btEditar" value="Editar"/>
+                    </p:commandButton>
+
+                    <p:commandButton id="btExcluir" icon="fa fa-trash" action="#{controladorItemPregao.deletar(entidade)}" update="@form" 
+                                     style="font-size: 10px">
+                        <f:setPropertyActionListener value="#{entidade}" target="#{controladorItemPregao.entidade}"  />
+                        <p:tooltip for="btExcluir" value="Excluir"/>
+                        <p:confirm icon="ui-icon-alert" header="Excluir Item" message="Deseja realmente excluir este Item"/>
+                    </p:commandButton>
+
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
 
     </ui:define>
 

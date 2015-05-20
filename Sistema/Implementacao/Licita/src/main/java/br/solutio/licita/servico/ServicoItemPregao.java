@@ -6,6 +6,7 @@
 package br.solutio.licita.servico;
 
 import br.solutio.licita.modelo.ItemPregao;
+import br.solutio.licita.modelo.Pregao;
 import br.solutio.licita.persistencia.dao.DaoIF;
 import br.solutio.licita.persistencia.dao.FabricaDAO;
 import br.solutio.licita.persistencia.dao.TipoDAO;
@@ -18,11 +19,14 @@ import java.util.List;
 public class ServicoItemPregao extends ServicoAbstrato<ItemPregao> implements ServicoItemPregaoIF {
 
     private DaoIF<ItemPregao> dao;
+    public DaoIF<Pregao> daoPregao;
 
     public ServicoItemPregao() {
         this.dao = FabricaDAO.getFabricaDAO(TipoDAO.Local).getDaoItemPregao();
+        this.daoPregao = FabricaDAO.getFabricaDAO(TipoDAO.Local).getDaoPregao();
     }
 
+    @Override
     public DaoIF<ItemPregao> getDao() {
         return dao;
     }
@@ -31,9 +35,19 @@ public class ServicoItemPregao extends ServicoAbstrato<ItemPregao> implements Se
         this.dao = dao;
     }
 
+    public DaoIF<Pregao> getDaoPregao() {
+        return daoPregao;
+    }
+
+    public void setDaoPregao(DaoIF<Pregao> daoPregao) {
+        this.daoPregao = daoPregao;
+    }
+    
+    
+
     @Override
     public int contagem() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getDao().contagem();
     }
 
     @Override
@@ -53,12 +67,17 @@ public class ServicoItemPregao extends ServicoAbstrato<ItemPregao> implements Se
 
     @Override
     public ItemPregao buscarPorId(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getDao().buscarPorId(id);
     }
 
     @Override
     public List<ItemPregao> buscarTodos() {
-        return getDao().consultar("Pregao.findAll", null, null);
+         return getDao().consultar("ItemPregao.findAll", null, null);
+    }
+
+    @Override
+    public List<Pregao> listarPregoes() {
+        return getDaoPregao().consultar("Pregao.findAll", null, null);
     }
 
     

@@ -54,11 +54,11 @@ public class Pregao implements Serializable{
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
-    @Column(name = "numero_processo")
+    @Column(name = "numero_processo", unique = true)
     private String numeroProcesso;
     
     @Size(max = 20)
-    @Column(name = "numero_pregao")
+    @Column(name = "numero_pregao", unique = true)
     private String numeroPregao;
     
     @Size(max = 255)

@@ -5,14 +5,10 @@
  */
 package br.solutio.licita.main;
 
-import br.solutio.licita.modelo.Login;
-import br.solutio.licita.modelo.PessoaFisica;
 import br.solutio.licita.modelo.Pregoeiro;
 import br.solutio.licita.persistencia.dao.DaoIF;
 import br.solutio.licita.persistencia.dao.FabricaDAO;
 import br.solutio.licita.persistencia.dao.TipoDAO;
-import br.solutio.licita.servico.ServicoIF;
-import br.solutio.licita.servico.ServicoLogin;
 import br.solutio.licita.servico.util.Criptografar;
 
 /**

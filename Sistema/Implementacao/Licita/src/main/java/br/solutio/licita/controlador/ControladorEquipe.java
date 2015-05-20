@@ -69,31 +69,32 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
         limparDados();
         return "equipe";
     }
-    
-     @Override
+
+    @Override
     public String editar(PessoaFisica entidade) {
         return null;
     }
 
-
     /**
-     * Realiza a remocao dos caracteres especiais, caso haja, presentes
-     * na variavel do CPF
-     * @param entidade 
+     * Realiza a remocao dos caracteres especiais, caso haja, presentes na
+     * variavel do CPF
+     *
+     * @param entidade
      */
     private void corrigirCPF(PessoaFisica entidade) {
         entidade.setCpf(entidade.getCpf().replace(".", ""));
         entidade.setCpf(entidade.getCpf().replace("-", ""));
     }
-    
-      private void limparDados() {
-          this.login = null;
-          this.pessoasfisica = null;
-          this.membroApoio = null;
-          this.pregoeiro = null;
-          this.cargoPregoeiro = false;
-          this.cargoMembrodeApoio = false;
-          this.confirmaSenha = "";
+
+    public String limparDados() {
+        this.login = null;
+        this.pessoasfisica = null;
+        this.membroApoio = null;
+        this.pregoeiro = null;
+        this.cargoPregoeiro = false;
+        this.cargoMembrodeApoio = false;
+        this.confirmaSenha = "";
+        return "equipeSalvar";
     }
 
     public boolean isCargoPregoeiro() {
@@ -141,11 +142,11 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
     public Pregoeiro getPregoeiro() {
         return this.pregoeiro;
     }
-    
-    public MembroApoio getMembroApoio(){
+
+    public MembroApoio getMembroApoio() {
         return this.membroApoio;
     }
-    
+
     public Login getLogin() {
         return this.login;
     }
@@ -154,12 +155,12 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
     public ServicoIF getServico() {
         return this.servicoMembro;
     }
-    
-    public String getConfirmaSenha(){
+
+    public String getConfirmaSenha() {
         return this.confirmaSenha;
     }
-    
-    public void setConfirmaSenha(String confirmaSenha){
+
+    public void setConfirmaSenha(String confirmaSenha) {
         this.confirmaSenha = confirmaSenha;
     }
 
@@ -168,5 +169,4 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-   
 }

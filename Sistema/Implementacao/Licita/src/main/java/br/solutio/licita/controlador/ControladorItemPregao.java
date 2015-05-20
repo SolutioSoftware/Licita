@@ -7,8 +7,10 @@ package br.solutio.licita.controlador;
 
 import br.solutio.licita.controlador.util.JsfUtil;
 import br.solutio.licita.modelo.ItemPregao;
+import br.solutio.licita.modelo.Pregao;
 import br.solutio.licita.servico.ServicoIF;
 import br.solutio.licita.servico.ServicoItemPregao;
+import br.solutio.licita.servico.ServicoItemPregaoIF;
 import java.util.List;
 import java.util.logging.Level;
 import javax.faces.bean.ManagedBean;
@@ -22,21 +24,27 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class ControladorItemPregao extends ControladorAbstrato<ItemPregao> {
 
-    private ItemPregao entidade = new ItemPregao();
-    private List<ItemPregao> itensPregao;
-    private ServicoIF<ItemPregao> servico = new ServicoItemPregao();
-    
+    private ItemPregao entidade;
+    private List<ItemPregao> itens;
+    private List<Pregao> pregoes;
+    private ServicoItemPregaoIF servico;
+
     public ControladorItemPregao() {
-        itensPregao = servico.buscarTodos();
+        this.entidade = new ItemPregao();
+        this.servico = new ServicoItemPregao();
+        itens = servico.buscarTodos();
+        pregoes = servico.listarPregoes();
     }
 
     @Override
     public String criar(ItemPregao entidade) {
         entidade = getEntidade();
         getServico().criar(entidade);
-        entidade = new ItemPregao();
+        setEntidade(null);
+        setEntidade(new ItemPregao());
         JsfUtil.addSuccessMessage("Salvo com Sucesso!");
-        itensPregao = servico.buscarTodos();
+        itens = servico.buscarTodos();
+        pregoes = servico.listarPregoes();
         return "item";
     }
 
@@ -46,7 +54,8 @@ public class ControladorItemPregao extends ControladorAbstrato<ItemPregao> {
         getServico().editar(entidade);
         entidade = new ItemPregao();
         JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
-        itensPregao = servico.buscarTodos();
+        itens = servico.buscarTodos();
+        pregoes = servico.listarPregoes();
         return "item";
     }
 
@@ -56,18 +65,20 @@ public class ControladorItemPregao extends ControladorAbstrato<ItemPregao> {
         getServico().deletar(entidade);
         entidade = new ItemPregao();
         JsfUtil.addSuccessMessage("Excluido com Sucesso!");
-        itensPregao = servico.buscarTodos();
+        itens = servico.buscarTodos();
+        pregoes = servico.listarPregoes();
         return "item";
     }
 
     public String limparDados() {
-        entidade = new ItemPregao();
+        setEntidade(null);
+        setEntidade(new ItemPregao());
         return "itemSalvar";
     }
 
     public String preparaEditar() {
         logger.log(Level.INFO, "Editar funfando");
-        return "pregaoEditar";
+        return "itemEditar";
     }
 
     @Override
@@ -89,16 +100,31 @@ public class ControladorItemPregao extends ControladorAbstrato<ItemPregao> {
         return this.entidade.getId() != null;
     }
 
-    public List<ItemPregao> getItensPregao() {
-        return itensPregao;
+    public List<ItemPregao> getItens() {
+        return itens;
     }
 
-    public void setItensPregao(List<ItemPregao> itens) {
-        this.itensPregao = itens;
+    public void setItens(List<ItemPregao> pregoes) {
+        this.itens = pregoes;
     }
 
-    public void setServico(ServicoIF<ItemPregao> servico) {
+    public List<Pregao> getPregoes() {
+        return pregoes;
+    }
+
+    public void setPregoes(List<Pregao> pregoes) {
+        this.pregoes = pregoes;
+    }
+
+    public ServicoItemPregaoIF getServicoItemPregaoIF() {
+        return servico;
+    }
+
+    public void setServico(ServicoItemPregaoIF servico) {
         this.servico = servico;
     }
+
+   
+
 
 }

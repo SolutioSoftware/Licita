@@ -6,7 +6,7 @@
 package br.solutio.licita.modelo;
 
 import java.io.Serializable;
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,23 +36,29 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Proposta.findByClassificada", query = "SELECT p FROM Proposta p WHERE p.classificada = :classificada")})
 public class Proposta implements Serializable{
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "valor_unitario")
-    private BigInteger valorUnitario;
+    private BigDecimal valorUnitario;
+   
     @Column(name = "classificada")
     private Boolean classificada;
+    
     @PrimaryKeyJoinColumn(name = "id_licitante", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private EmpresaLicitante idLicitante;
+    
     @JoinColumn(name = "id_item_pregao", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private ItemPregao idItemPregao;
+    
     @JoinColumn(name = "id_sessao", referencedColumnName = "id")
     @ManyToOne
     private Sessao idSessao;
@@ -64,7 +70,7 @@ public class Proposta implements Serializable{
         this.id = id;
     }
 
-    public Proposta(Long id, BigInteger valorUnitario) {
+    public Proposta(Long id, BigDecimal valorUnitario) {
         this.id = id;
         this.valorUnitario = valorUnitario;
     }
@@ -78,11 +84,11 @@ public class Proposta implements Serializable{
         this.id = id;
     }
 
-    public BigInteger getValorUnitario() {
+    public BigDecimal getValorUnitario() {
         return valorUnitario;
     }
 
-    public void setValorUnitario(BigInteger valorUnitario) {
+    public void setValorUnitario(BigDecimal valorUnitario) {
         this.valorUnitario = valorUnitario;
     }
 

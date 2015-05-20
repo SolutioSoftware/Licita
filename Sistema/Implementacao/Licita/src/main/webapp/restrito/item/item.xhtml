@@ -11,7 +11,7 @@
 
         <h:form id="formDtItemPregao">
 
-            <p:dataTable id='dt_pregoes' var="entidade" sortBy="#{entidade.id}" sortOrder="DESCENDING" value="#{controladorItemPregao.itensPregao}" 
+            <p:dataTable id='dt_itens' var="entidade" sortBy="#{entidade.id}" sortOrder="DESCENDING" value="#{controladorItemPregao.itens}" 
                          widgetVar="tbl_itens" paginator="true" style="padding:5px" rows="10" rowsPerPageTemplate="5,10"  
                          emptyMessage="Nenhum Item Cadastrado"  paginatorAlwaysVisible="true">
 
@@ -23,31 +23,31 @@
                     </p:outputPanel>
                 </f:facet>
 
-
-                <p:column headerText="Nome do item" filterBy="#{controladorItemPregao.entidade.nome}" filterMatchMode="contains">
-                    <h:outputText value="#{controladorItemPregao.entidade.nome}" />
+                <p:column headerText="Codigo do item" filterBy="#{entidade.id}" filterMatchMode="contains">
+                    <h:outputText value="#{entidade.id}" />
                 </p:column>
 
-                <p:column headerText="Valor de Referência" filterBy="#{controladorItemPregao.entidade.valorReferencia}" filterMatchMode="contains">
-                    <h:outputText value="#{controladorItemPregao.entidade.valorReferencia}" />
+                <p:column headerText="Nome do item" filterBy="#{entidade.nome}" filterMatchMode="contains">
+                    <h:outputText value="#{entidade.nome}" />
                 </p:column>
 
-                <p:column headerText="Unidade" filterBy="#{controladorItemPregao.entidade.unidade}" filterMatchMode="contains">
-                    <h:outputText value="#{controladorItemPregao.entidade.unidade}" />
+                <p:column headerText="Valor de Referência" filterBy="#{entidade.valorReferencia}" filterMatchMode="contains">
+                    <h:outputText value="#{entidade.valorReferencia}" />
                 </p:column>
-
 
                 <p:column headerText="Ações" width="50">
 
-                    <p:commandButton id="btEditar" icon="ui-icon-pencil" action="#{controladorItemPregao.preparaEditar()}" update="@form"  style="font-size: 10px">
+                    <p:commandButton id="btEditar" icon="ui-icon-pencil" action="#{controladorItemPregao.preparaEditar()}" update="@form"  
+                                     style="font-size: 10px">
                         <f:setPropertyActionListener value="#{entidade}" target="#{controladorItemPregao.entidade}"  />
                         <p:tooltip for="btEditar" value="Editar"/>
                     </p:commandButton>
 
-                    <p:commandButton id="btExcluir" icon="fa fa-trash" action="" update="@form" style="font-size: 10px">
-                        <f:setPropertyActionListener value="#{entidade}" target="}"  />
+                    <p:commandButton id="btExcluir" icon="fa fa-trash" action="#{controladorItemPregao.deletar(entidade)}" update="@form" 
+                                     style="font-size: 10px">
+                        <f:setPropertyActionListener value="#{entidade}" target="#{controladorItemPregao.entidade}"  />
                         <p:tooltip for="btExcluir" value="Excluir"/>
-                        <p:confirm icon="ui-icon-alert" header="Excluir Pregão" message="Deseja realmente excluir este pregão"/>
+                        <p:confirm icon="ui-icon-alert" header="Excluir Item" message="Deseja realmente excluir este Item"/>
                     </p:commandButton>
 
                 </p:column>
@@ -57,7 +57,7 @@
     </ui:define>
 
     <ui:define name="pn_conteudo">
-
+        <p:growl id="growItemPregao" showDetail="false" life="3000" class="ui-growl" />
     </ui:define> 
 
 
