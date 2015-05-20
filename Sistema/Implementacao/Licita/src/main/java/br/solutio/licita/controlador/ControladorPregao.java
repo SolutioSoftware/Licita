@@ -21,11 +21,12 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class ControladorPregao extends ControladorAbstrato<Pregao> {
 
-    private Pregao entidade = new Pregao();
+    private Pregao entidade;
     private List<Pregao> pregoes;
     private ServicoIF<Pregao> servico = new ServicoPregao();
 
     public ControladorPregao() {
+        entidade = new Pregao();
         pregoes = servico.buscarTodos();
     }
 
@@ -89,8 +90,6 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
     public boolean getEditando() {
         return this.entidade.getId() != null;
     }
-
-   
 
     public List<Pregao> getPregoes() {
         return pregoes;

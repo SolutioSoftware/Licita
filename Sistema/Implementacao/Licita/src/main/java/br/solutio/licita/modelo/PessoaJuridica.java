@@ -58,7 +58,7 @@ public class PessoaJuridica implements Serializable{
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 14)
-    @Column(name = "cnpj")
+    @Column(name = "cnpj", unique = true)
     private String cnpj;
     
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoaJuridica")

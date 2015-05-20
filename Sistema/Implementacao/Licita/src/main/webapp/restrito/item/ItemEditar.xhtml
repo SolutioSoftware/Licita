@@ -12,20 +12,17 @@
         <h:form id="formDtItemPregao">
 
             <p:dataTable id='dt_pregoes' var="entidade" sortBy="#{entidade.id}" sortOrder="DESCENDING" value="#{controladorItemPregao.itens}" 
-                         widgetVar="tbl_itens" paginator="true" style="padding:5px" rows="10" rowsPerPageTemplate="5,10"  
+                         widgetVar="tbl_itensPregao" paginator="true" style="padding:5px" rows="10" rowsPerPageTemplate="5,10"  
                          emptyMessage="Nenhum Item Cadastrado"  paginatorAlwaysVisible="true">
 
                 <f:facet name="header">
                     <p:outputPanel>
                         <p:commandButton value="Novo" style="width: 80px" action="#{controladorItemPregao.limparDados}" update="@form"  icon="fa fa-plus" 
                                          class="botaoNovo"/>
-                        <p:inputText id="globalFilter" onkeyup="PF('tbl_itens').filter()" style="width:250px" placeholder="Digite sua busca" />
+                        <p:inputText id="globalFilter" onkeyup="PF('tbl_itensPregao').filter()" style="width:250px" placeholder="Digite sua busca" />
                     </p:outputPanel>
                 </f:facet>
 
-                <p:column headerText="Codigo do item" filterBy="#{controladorItemPregao.entidade.id}" filterMatchMode="contains">
-                    <h:outputText value="#{controladorItemPregao.entidade.id}" />
-                </p:column>
 
                 <p:column headerText="Nome do item" filterBy="#{controladorItemPregao.entidade.nome}" filterMatchMode="contains">
                     <h:outputText value="#{controladorItemPregao.entidade.nome}" />
@@ -34,6 +31,11 @@
                 <p:column headerText="Valor de Referência" filterBy="#{controladorItemPregao.entidade.valorReferencia}" filterMatchMode="contains">
                     <h:outputText value="#{controladorItemPregao.entidade.valorReferencia}" />
                 </p:column>
+
+                <p:column headerText="Unidade" filterBy="#{controladorItemPregao.entidade.unidade}" filterMatchMode="contains">
+                    <h:outputText value="#{controladorItemPregao.entidade.unidade}" />
+                </p:column>
+
 
                 <p:column headerText="Ações" width="50">
 
@@ -57,7 +59,7 @@
     </ui:define>
 
     <ui:define name="pn_conteudo">
-        <p:growl id="growItemPregao" showDetail="false" life="3000" class="ui-growl" />
+
     </ui:define> 
 
 

@@ -20,10 +20,17 @@ import javax.faces.bean.ViewScoped;
 @ViewScoped
 public class ControladorLicitador extends ControladorAbstrato<InstituicaoLicitadora> implements ControladorAbstratoIF<InstituicaoLicitadora>{
     
-    private PessoaJuridica pessoaJuridica = new PessoaJuridica();
-    private InstituicaoLicitadora instituicaoLicitadora = new InstituicaoLicitadora();
-    private Endereco endereco = new Endereco();
-    private ContatoPessoaJuridica contato = new ContatoPessoaJuridica();
+    private PessoaJuridica pessoaJuridica;
+    private InstituicaoLicitadora instituicaoLicitadora;
+    private Endereco endereco;
+    private ContatoPessoaJuridica contato;
+
+    public ControladorLicitador() {
+        this.endereco = new Endereco();
+        this.instituicaoLicitadora = new InstituicaoLicitadora();
+        this.pessoaJuridica = new PessoaJuridica();
+        this.contato = new ContatoPessoaJuridica();
+    }
     
     public PessoaJuridica getPessoaJuridica() {
         return pessoaJuridica;
@@ -56,10 +63,6 @@ public class ControladorLicitador extends ControladorAbstrato<InstituicaoLicitad
     public void setContato(ContatoPessoaJuridica contato) {
         this.contato = contato;
     }
-    
-    
-    
-    
     
     @Override
     public ServicoIF getServico() {
