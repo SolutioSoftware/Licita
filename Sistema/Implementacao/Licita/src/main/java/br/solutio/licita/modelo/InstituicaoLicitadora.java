@@ -6,8 +6,11 @@
 package br.solutio.licita.modelo;
 
 import java.io.Serializable;
-import javax.persistence.EmbeddedId;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -24,12 +27,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "InstituicaoLicitadora.findAll", query = "SELECT i FROM InstituicaoLicitadora i"),
-    @NamedQuery(name = "InstituicaoLicitadora.findById", query = "SELECT i FROM InstituicaoLicitadora i WHERE i.instituicaoLicitadoraPK.id = :id"),
-    @NamedQuery(name = "InstituicaoLicitadora.findByIdPessoaJuridica", query = "SELECT i FROM InstituicaoLicitadora i WHERE i.instituicaoLicitadoraPK.idPessoaJuridica = :idPessoaJuridica")})
+    @NamedQuery(name = "InstituicaoLicitadora.findById", query = "SELECT i FROM InstituicaoLicitadora i WHERE i.id = :id"),
+    @NamedQuery(name = "InstituicaoLicitadora.findByIdPessoaJuridica", query = "SELECT i FROM InstituicaoLicitadora i WHERE i.pessoaJuridica = :idPessoaJuridica")})
 public class InstituicaoLicitadora implements Serializable{
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected InstituicaoLicitadoraPK instituicaoLicitadoraPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @JoinColumn(name = "id_pessoa_juridica", referencedColumnName = "id", insertable = false, updatable = false)
     @OneToOne(optional = false)
     private PessoaJuridica pessoaJuridica;
@@ -37,20 +41,17 @@ public class InstituicaoLicitadora implements Serializable{
     public InstituicaoLicitadora() {
     }
 
-    public InstituicaoLicitadora(InstituicaoLicitadoraPK instituicaoLicitadoraPK) {
-        this.instituicaoLicitadoraPK = instituicaoLicitadoraPK;
+    public InstituicaoLicitadora(Long id) {
+        this.id = id;
     }
 
-    public InstituicaoLicitadora(long id, long idPessoaJuridica) {
-        this.instituicaoLicitadoraPK = new InstituicaoLicitadoraPK(id, idPessoaJuridica);
+
+    public Long getId() {
+        return id;
     }
 
-    public InstituicaoLicitadoraPK getInstituicaoLicitadoraPK() {
-        return instituicaoLicitadoraPK;
-    }
-
-    public void setInstituicaoLicitadoraPK(InstituicaoLicitadoraPK instituicaoLicitadoraPK) {
-        this.instituicaoLicitadoraPK = instituicaoLicitadoraPK;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public PessoaJuridica getPessoaJuridica() {
@@ -64,7 +65,7 @@ public class InstituicaoLicitadora implements Serializable{
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (instituicaoLicitadoraPK != null ? instituicaoLicitadoraPK.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -74,7 +75,7 @@ public class InstituicaoLicitadora implements Serializable{
             return false;
         }
         InstituicaoLicitadora other = (InstituicaoLicitadora) object;
-        if ((this.instituicaoLicitadoraPK == null && other.instituicaoLicitadoraPK != null) || (this.instituicaoLicitadoraPK != null && !this.instituicaoLicitadoraPK.equals(other.instituicaoLicitadoraPK))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -82,12 +83,8 @@ public class InstituicaoLicitadora implements Serializable{
 
     @Override
     public String toString() {
-        return "br.solutio.licita.modelo.InstituicaoLicitadora[ instituicaoLicitadoraPK=" + instituicaoLicitadoraPK + " ]";
+        return "br.solutio.licita.modelo.InstituicaoLicitadora[ instituicaoLicitadoraPK=" + id + " ]";
     }
 
-    
-    public Long getId() {
-        return getInstituicaoLicitadoraPK().getId();
-    }
     
 }

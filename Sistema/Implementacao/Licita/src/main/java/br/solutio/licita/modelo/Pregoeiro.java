@@ -8,10 +8,11 @@ package br.solutio.licita.modelo;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.CascadeType;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -29,14 +30,15 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Pregoeiro.findAll", query = "SELECT p FROM Pregoeiro p"),
-    @NamedQuery(name = "Pregoeiro.findById", query = "SELECT p FROM Pregoeiro p WHERE p.pregoeiroPK.id = :id"),
-    @NamedQuery(name = "Pregoeiro.findByIdPessoaFisica", query = "SELECT p FROM Pregoeiro p WHERE p.pregoeiroPK.idPessoaFisica = :idPessoaFisica")})
+    @NamedQuery(name = "Pregoeiro.findById", query = "SELECT p FROM Pregoeiro p WHERE p.id = :id"),
+    @NamedQuery(name = "Pregoeiro.findByIdPessoaFisica", query = "SELECT p FROM Pregoeiro p WHERE p.pessoaFisica = :idPessoaFisica")})
 public class Pregoeiro implements Serializable{
     
     private static final long serialVersionUID = 1L;
     
-    @EmbeddedId
-    protected PregoeiroPK pregoeiroPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected Long id;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPregoeiro")
     private transient Set<Sessao> sessaoSet;
@@ -44,7 +46,6 @@ public class Pregoeiro implements Serializable{
     @OneToOne(cascade = CascadeType.ALL ,mappedBy = "idPregoeiro")
     private Login login;
     
-    @MapsId("idPessoaFisica")
     @JoinColumn(name = "id_pessoa_fisica", referencedColumnName = "id")
     @OneToOne(optional = false, cascade = CascadeType.ALL)
     private PessoaFisica pessoaFisica;
@@ -54,20 +55,17 @@ public class Pregoeiro implements Serializable{
         login = new Login();
     }
 
-    public Pregoeiro(PregoeiroPK pregoeiroPK) {
-        this.pregoeiroPK = pregoeiroPK;
+    public Pregoeiro(Long id) {
+        this.id = id;
     }
 
-    public Pregoeiro(long id, long idPessoaFisica) {
-        this.pregoeiroPK = new PregoeiroPK(id, idPessoaFisica);
+
+    public Long getId() {
+        return id;
     }
 
-    public PregoeiroPK getPregoeiroPK() {
-        return pregoeiroPK;
-    }
-
-    public void setPregoeiroPK(PregoeiroPK pregoeiroPK) {
-        this.pregoeiroPK = pregoeiroPK;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @XmlTransient
@@ -99,7 +97,7 @@ public class Pregoeiro implements Serializable{
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (pregoeiroPK != null ? pregoeiroPK.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -109,7 +107,7 @@ public class Pregoeiro implements Serializable{
             return false;
         }
         Pregoeiro other = (Pregoeiro) object;
-        if ((this.pregoeiroPK == null && other.pregoeiroPK != null) || (this.pregoeiroPK != null && !this.pregoeiroPK.equals(other.pregoeiroPK))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -118,12 +116,8 @@ public class Pregoeiro implements Serializable{
     @Override
     public String toString() {
         //TODO refazer método ToString de Login imprimindo todos os atributos do mesmo.
-        return "br.solutio.licita.modelo.Pregoeiro[ pregoeiroPK=" + pregoeiroPK + " ]";
+        return "br.solutio.licita.modelo.Pregoeiro[ pregoeiroPK=" + id + " ]";
     }
 
-    
-    public Long getId() {
-        return getPregoeiroPK().getId();
-    }
     
 }

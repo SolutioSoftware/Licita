@@ -10,10 +10,11 @@ import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -33,8 +34,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "EmpresaLicitante.findAll", query = "SELECT e FROM EmpresaLicitante e"),
-    @NamedQuery(name = "EmpresaLicitante.findById", query = "SELECT e FROM EmpresaLicitante e WHERE e.empresaLicitantePK.id = :id"),
-    @NamedQuery(name = "EmpresaLicitante.findByIdPessoaJuridica", query = "SELECT e FROM EmpresaLicitante e WHERE e.empresaLicitantePK.idPessoaJuridica = :idPessoaJuridica"),
+    @NamedQuery(name = "EmpresaLicitante.findById", query = "SELECT e FROM EmpresaLicitante e WHERE e.id = :id"),
+    @NamedQuery(name = "EmpresaLicitante.findByIdPessoaJuridica", query = "SELECT e FROM EmpresaLicitante e WHERE e.pessoaJuridica = :idPessoaJuridica"),
     @NamedQuery(name = "EmpresaLicitante.findByInscricaoEstadual", query = "SELECT e FROM EmpresaLicitante e WHERE e.inscricaoEstadual = :inscricaoEstadual"),
     @NamedQuery(name = "EmpresaLicitante.findByTipoEmpresa", query = "SELECT e FROM EmpresaLicitante e WHERE e.tipoEmpresa = :tipoEmpresa"),
     @NamedQuery(name = "EmpresaLicitante.findByComplemento", query = "SELECT e FROM EmpresaLicitante e WHERE e.complemento = :complemento")})
@@ -42,8 +43,9 @@ public class EmpresaLicitante implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
-    @EmbeddedId
-    protected EmpresaLicitantePK empresaLicitantePK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     
     @Size(max = 25)
     @Column(name = "inscricao_estadual")
@@ -62,7 +64,6 @@ public class EmpresaLicitante implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idLicitante")
     private transient Set<Lance> lanceSet;
     
-    @MapsId("idPessoaJuridica")
     @JoinColumn(name = "id_pessoa_juridica", referencedColumnName = "id")
     @OneToOne(optional = false, cascade = CascadeType.ALL)
     private PessoaJuridica pessoaJuridica;
@@ -78,28 +79,17 @@ public class EmpresaLicitante implements Serializable {
 
     public EmpresaLicitante() {
         pessoaJuridica = new PessoaJuridica();
-        empresaLicitantePK = new EmpresaLicitantePK();
+        representanteLegal = new RepresentanteLegal();
+        contaBancaria = new ContaBancaria();
     }
 
-    public EmpresaLicitante(EmpresaLicitantePK empresaLicitantePK) {
-        this.empresaLicitantePK = empresaLicitantePK;
+
+    public Long getId() {
+        return this.id;
     }
 
-    public EmpresaLicitante(EmpresaLicitantePK empresaLicitantePK, String tipoEmpresa) {
-        this.empresaLicitantePK = empresaLicitantePK;
-        this.tipoEmpresa = tipoEmpresa;
-    }
-
-    public EmpresaLicitante(long id, long idPessoaJuridica) {
-        this.empresaLicitantePK = new EmpresaLicitantePK(id, idPessoaJuridica);
-    }
-
-    public EmpresaLicitantePK getEmpresaLicitantePK() {
-        return empresaLicitantePK;
-    }
-
-    public void setEmpresaLicitantePK(EmpresaLicitantePK empresaLicitantePK) {
-        this.empresaLicitantePK = empresaLicitantePK;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getInscricaoEstadual() {
@@ -171,7 +161,7 @@ public class EmpresaLicitante implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (empresaLicitantePK != null ? empresaLicitantePK.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -181,7 +171,7 @@ public class EmpresaLicitante implements Serializable {
             return false;
         }
         EmpresaLicitante other = (EmpresaLicitante) object;
-        if ((this.empresaLicitantePK == null && other.empresaLicitantePK != null) || (this.empresaLicitantePK != null && !this.empresaLicitantePK.equals(other.empresaLicitantePK))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -189,12 +179,9 @@ public class EmpresaLicitante implements Serializable {
 
     @Override
     public String toString() {
-        return "br.solutio.licita.modelo.EmpresaLicitante[ empresaLicitantePK=" + empresaLicitantePK + " ]";
+        return "br.solutio.licita.modelo.EmpresaLicitante[ empresaLicitantePK=" + id + " ]";
     }
 
     
-    public Long getId() {
-        return getEmpresaLicitantePK().getId();
-    }
     
 }

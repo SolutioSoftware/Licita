@@ -7,15 +7,13 @@ package br.solutio.licita.main;
 
 import br.solutio.licita.modelo.Login;
 import br.solutio.licita.modelo.PessoaFisica;
-import br.solutio.licita.modelo.Pregao;
 import br.solutio.licita.modelo.Pregoeiro;
-import br.solutio.licita.modelo.PregoeiroPK;
 import br.solutio.licita.persistencia.dao.DaoIF;
 import br.solutio.licita.persistencia.dao.FabricaDAO;
 import br.solutio.licita.persistencia.dao.TipoDAO;
 import br.solutio.licita.servico.ServicoIF;
 import br.solutio.licita.servico.ServicoLogin;
-import br.solutio.licita.servico.ServicoLoginIF;
+import br.solutio.licita.servico.util.Criptografar;
 
 /**
  *
@@ -29,38 +27,18 @@ public class Licita {
     public static void main(String[] args) {
         // TODO code application logic here
         
+        DaoIF<Pregoeiro> dao = FabricaDAO.getFabricaDAO(TipoDAO.Local).getDaoPregoeiro();
         
-        DaoIF<PessoaFisica> daoPF = FabricaDAO.getFabricaDAO(TipoDAO.Local).getDaoPessoaFisica();
-        DaoIF<Pregoeiro> daoPR = FabricaDAO.getFabricaDAO(TipoDAO.Local).getDaoPregoeiro();
-        ServicoIF servico = new ServicoLogin();
-        
-        PessoaFisica pessoa = new PessoaFisica();
-        Login login = new Login();
         Pregoeiro pregoeiro = new Pregoeiro();
+        String senha = Criptografar.getInstance().criptografar("admin");
+        pregoeiro.getLogin().setSenha(senha);
+        pregoeiro.getLogin().setUsuario("admin");
+        pregoeiro.getPessoaFisica().setCpf("12143343543");
+        pregoeiro.getPessoaFisica().setNome("Matheus");
+        pregoeiro.getPessoaFisica().setRg("1233123");
         
         
-        
-        pessoa.setCpf("00311194326");
-        pessoa.setNome("Witalo");
-        pessoa.setRg("1232344");
-        daoPF.criar(pessoa);
-        
-        PregoeiroPK pregoeiroPk = new PregoeiroPK();
-        
-        pregoeiroPk.setId(pessoa.getId());
-        pregoeiroPk.setIdPessoaFisica(pessoa.getId());
-        
-        pregoeiro.setPregoeiroPK(pregoeiroPk);
-        daoPR.criar(pregoeiro);
-        
-        login.setIdPregoeiro(pregoeiro);
-        login.setUsuario("ads");
-        login.setSenha("1232");
-        
-        
-        
-        
-        servico.criar(login);
+        dao.criar(pregoeiro);
         
         
     }

@@ -7,13 +7,14 @@ package br.solutio.licita.modelo;
 
 import java.io.Serializable;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -27,8 +28,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "ContaBancaria.findAll", query = "SELECT c FROM ContaBancaria c"),
-    @NamedQuery(name = "ContaBancaria.findById", query = "SELECT c FROM ContaBancaria c WHERE c.contaBancariaPK.id = :id"),
-    @NamedQuery(name = "ContaBancaria.findByIdLicitante", query = "SELECT c FROM ContaBancaria c WHERE c.contaBancariaPK.idLicitante = :idLicitante"),
+    @NamedQuery(name = "ContaBancaria.findById", query = "SELECT c FROM ContaBancaria c WHERE c.id = :id"),
+    @NamedQuery(name = "ContaBancaria.findByIdLicitante", query = "SELECT c FROM ContaBancaria c WHERE c.empresaLicitante = :idLicitante"),
     @NamedQuery(name = "ContaBancaria.findByBanco", query = "SELECT c FROM ContaBancaria c WHERE c.banco = :banco"),
     @NamedQuery(name = "ContaBancaria.findByNome", query = "SELECT c FROM ContaBancaria c WHERE c.nome = :nome"),
     @NamedQuery(name = "ContaBancaria.findByAgencia", query = "SELECT c FROM ContaBancaria c WHERE c.agencia = :agencia"),
@@ -36,8 +37,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "ContaBancaria.findByOperacao", query = "SELECT c FROM ContaBancaria c WHERE c.operacao = :operacao")})
 public class ContaBancaria implements Serializable {
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected ContaBancariaPK contaBancariaPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected Long id;
     @Column(name = "banco")
     private Integer banco;
     @Size(max = 50)
@@ -53,27 +55,20 @@ public class ContaBancaria implements Serializable {
     @Column(name = "operacao")
     private String operacao;
     
-    @PrimaryKeyJoinColumn(name = "id_licitante", referencedColumnName = "id")
+    @JoinColumn(name = "id_licitante", referencedColumnName = "id")
     @OneToOne(optional = false)
     private EmpresaLicitante empresaLicitante;
 
     public ContaBancaria() {
     }
 
-    public ContaBancaria(ContaBancariaPK contaBancariaPK) {
-        this.contaBancariaPK = contaBancariaPK;
+
+    public Long getId() {
+        return this.id;
     }
 
-    public ContaBancaria(long id, long idLicitante) {
-        this.contaBancariaPK = new ContaBancariaPK(id, idLicitante);
-    }
-
-    public ContaBancariaPK getContaBancariaPK() {
-        return contaBancariaPK;
-    }
-
-    public void setContaBancariaPK(ContaBancariaPK contaBancariaPK) {
-        this.contaBancariaPK = contaBancariaPK;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Integer getBanco() {
@@ -127,7 +122,7 @@ public class ContaBancaria implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (contaBancariaPK != null ? contaBancariaPK.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -137,7 +132,7 @@ public class ContaBancaria implements Serializable {
             return false;
         }
         ContaBancaria other = (ContaBancaria) object;
-        if ((this.contaBancariaPK == null && other.contaBancariaPK != null) || (this.contaBancariaPK != null && !this.contaBancariaPK.equals(other.contaBancariaPK))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -145,7 +140,7 @@ public class ContaBancaria implements Serializable {
 
     @Override
     public String toString() {
-        return "br.solutio.licita.modelo.ContaBancaria[ contaBancariaPK=" + contaBancariaPK + " ]";
+        return "br.solutio.licita.modelo.ContaBancaria[ contaBancariaPK=" + id + " ]";
     }
     
 }

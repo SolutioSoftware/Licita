@@ -6,10 +6,14 @@
 package br.solutio.licita.modelo;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -26,37 +30,38 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "MembroApoio.findAll", query = "SELECT m FROM MembroApoio m"),
-    @NamedQuery(name = "MembroApoio.findById", query = "SELECT m FROM MembroApoio m WHERE m.membroApoioPK.id = :id"),
-    @NamedQuery(name = "MembroApoio.findByIdPessoaFisica", query = "SELECT m FROM MembroApoio m WHERE m.membroApoioPK.idPessoaFisica = :idPessoaFisica"),
+    @NamedQuery(name = "MembroApoio.findById", query = "SELECT m FROM MembroApoio m WHERE m.id = :id"),
+    @NamedQuery(name = "MembroApoio.findByIdPessoaFisica", query = "SELECT m FROM MembroApoio m WHERE m.pessoaFisica = :idPessoaFisica"),
     @NamedQuery(name = "MembroApoio.findByFuncao", query = "SELECT m FROM MembroApoio m WHERE m.funcao = :funcao")})
 public class MembroApoio implements Serializable{
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected MembroApoioPK membroApoioPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
     @Size(max = 25)
     @Column(name = "funcao")
     private String funcao;
-    @JoinColumn(name = "id_pessoa_fisica", referencedColumnName = "id", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    
+    @JoinColumn(name = "id_pessoa_fisica", referencedColumnName = "id")
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
     private PessoaFisica pessoaFisica;
 
     public MembroApoio() {
+        pessoaFisica = new PessoaFisica();
     }
 
-    public MembroApoio(MembroApoioPK membroApoioPK) {
-        this.membroApoioPK = membroApoioPK;
+    public MembroApoio(Long id) {
+        this.id = id;
     }
 
-    public MembroApoio(long id, long idPessoaFisica) {
-        this.membroApoioPK = new MembroApoioPK(id, idPessoaFisica);
+
+    public Long getId() {
+        return id;
     }
 
-    public MembroApoioPK getMembroApoioPK() {
-        return membroApoioPK;
-    }
-
-    public void setMembroApoioPK(MembroApoioPK membroApoioPK) {
-        this.membroApoioPK = membroApoioPK;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFuncao() {
@@ -78,7 +83,7 @@ public class MembroApoio implements Serializable{
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (membroApoioPK != null ? membroApoioPK.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -88,7 +93,7 @@ public class MembroApoio implements Serializable{
             return false;
         }
         MembroApoio other = (MembroApoio) object;
-        if ((this.membroApoioPK == null && other.membroApoioPK != null) || (this.membroApoioPK != null && !this.membroApoioPK.equals(other.membroApoioPK))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -96,12 +101,8 @@ public class MembroApoio implements Serializable{
 
     @Override
     public String toString() {
-        return "br.solutio.licita.modelo.MembroApoio[ membroApoioPK=" + membroApoioPK + " ]";
+        return "br.solutio.licita.modelo.MembroApoio[ membroApoioPK=" + id + " ]";
     }
 
    
-    public Long getId() {
-        return getMembroApoioPK().getId();
-    }
-    
 }

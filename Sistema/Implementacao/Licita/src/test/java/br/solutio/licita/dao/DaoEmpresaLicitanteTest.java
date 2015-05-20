@@ -31,6 +31,14 @@ public class DaoEmpresaLicitanteTest {
         empresaLicitante.getPessoaJuridica().setCnpj("123123123");
         empresaLicitante.getPessoaJuridica().setRazaoSocial("Alooohaa");
         empresaLicitante.getPessoaJuridica().setNomeFantasia("Real Auto");
+        empresaLicitante.getRepresentanteLegal().getPessoaFisica().setCpf("12345678900");
+        empresaLicitante.getRepresentanteLegal().getPessoaFisica().setNome("Mahtues");
+        empresaLicitante.getRepresentanteLegal().getPessoaFisica().setRg("1231231");
+        empresaLicitante.getContaBancaria().setAgencia("3315");
+        empresaLicitante.getContaBancaria().setBanco(102);
+        empresaLicitante.getContaBancaria().setNome("CEF");
+        empresaLicitante.getContaBancaria().setNumeroConta("102933");
+        empresaLicitante.getContaBancaria().setOperacao("013");
         
         daoEmpresaLicitante = new DAOTestes<>();
     }
@@ -38,22 +46,8 @@ public class DaoEmpresaLicitanteTest {
     @Test
     public void testeSalvar(){
         daoEmpresaLicitante.criar(empresaLicitante);
-        assertEquals(true ,empresaLicitante.getId() == 0);
-        assertEquals(false ,empresaLicitante.getId() == 1);
-        assertEquals(true ,empresaLicitante.getPessoaJuridica().getId() == 2);
+        assertEquals(true ,empresaLicitante.getId() == 1);
+        assertEquals(true ,empresaLicitante.getPessoaJuridica().getId() == 1);
     }
-    
-    @Test
-    public void testeEditar(){
-        empresaLicitante.setTipoEmpresa("MEI");
-        daoEmpresaLicitante.editar(empresaLicitante);
-        assertEquals(true, empresaLicitante.getTipoEmpresa().equals("MEI"));
-    }
-    
-    @Test
-    public void testeDeletar(){
-        daoEmpresaLicitante.deletar(empresaLicitante);
-    }
-    
     
 }

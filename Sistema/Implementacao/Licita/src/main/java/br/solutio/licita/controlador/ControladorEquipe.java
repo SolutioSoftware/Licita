@@ -9,9 +9,11 @@ import br.solutio.licita.modelo.Login;
 import br.solutio.licita.modelo.MembroApoio;
 import br.solutio.licita.modelo.PessoaFisica;
 import br.solutio.licita.modelo.Pregoeiro;
-import br.solutio.licita.servico.ServicoEquipe;
-import br.solutio.licita.servico.ServicoEquipeIF;
+import br.solutio.licita.servico.ServicoMembroApoio;
+import br.solutio.licita.servico.ServicoMembroApoioIF;
 import br.solutio.licita.servico.ServicoIF;
+import br.solutio.licita.servico.ServicoPregoeiro;
+import br.solutio.licita.servico.ServicoPregoeiroIF;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
@@ -34,7 +36,8 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
     private boolean cargoMembrodeApoio = false;
     private String valor;
     private String confirmaSenha = "";
-    private ServicoEquipeIF servico = new ServicoEquipe();
+    private ServicoMembroApoioIF servicoMembro = new ServicoMembroApoio();
+    private ServicoPregoeiroIF servicoPregoeiro = new ServicoPregoeiro();
     private Logger log = Logger.getGlobal();
 
     public void tipoPessoaFisica() {
@@ -54,9 +57,12 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
         entidade = getEntidade();
         corrigirCPF(entidade);
         if( (isCargoPregoeiro()) && (pregoeiro != null) && (login != null) ){
-            servico.criarPregoeiro(entidade, pregoeiro, login);
+            pregoeiro.setPessoaFisica(entidade);
+            pregoeiro.setLogin(login);
+            servicoPregoeiro.criar(pregoeiro);
         }else if(isCargoMembrodeApoio() &&  (membroApoio != null) ){
-            servico.criarMembroApoio(entidade, membroApoio);
+            membroApoio.setPessoaFisica(entidade);
+            servicoMembro.criar(membroApoio);
         }else{
             log.warning("Nenhuma funcao selecionada");
         }
@@ -146,7 +152,7 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
 
     @Override
     public ServicoIF getServico() {
-        return this.servico;
+        return this.servicoMembro;
     }
     
     public String getConfirmaSenha(){

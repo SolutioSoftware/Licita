@@ -20,7 +20,6 @@ public class DaoPregoeiroTest {
     private Pregoeiro pregoeiro;
     private Pregoeiro pregoeiroAux;
     private DAOTestes<Pregoeiro> dao;
-    private Pregoeiro pregoeiroEditado;
 
     @Before
     public void setUp() {
@@ -42,7 +41,6 @@ public class DaoPregoeiroTest {
         pregoeiroAux.getLogin().setUsuario("admin");
         pregoeiroAux.getLogin().setSenha("123");
 
-        pregoeiroEditado = new Pregoeiro();
 
     }
 
@@ -54,35 +52,19 @@ public class DaoPregoeiroTest {
         
         //Verificando pregoeiro
         assertEquals(true, pregoeiro.getId() == 1);
-        assertEquals(true, pregoeiro.getPessoaFisica().getId() == 1);
-        assertEquals(true, pregoeiro.getLogin().getId() == 1);
         assertEquals(false, pregoeiro.equals(pregoeiroAux));
 
         //Verificando pregoeiroAux
         assertEquals(false, pregoeiroAux.equals(pregoeiro));
-        assertEquals(true, pregoeiroAux.getId() == 2);
-        assertEquals(true, pregoeiroAux.getPessoaFisica().getId() == 2);
-        assertEquals(true, pregoeiroAux.getLogin().getId() == 2);
         
-        //Verificando busca
-        pregoeiroEditado = dao.buscarEmbeddedId(pregoeiroAux, pregoeiroAux.getPregoeiroPK());
-        assertEquals(true, pregoeiroEditado.equals(pregoeiroAux));
         
         //Verificando edicao
         pregoeiroAux.getPessoaFisica().setCpf("12312312312");
         dao.editar(pregoeiroAux);
-        assertEquals(false, pregoeiroEditado.getPessoaFisica().getCpf().equals("12312312312"));
-        assertEquals(true, pregoeiroEditado.getPessoaFisica().getCpf().equals("06953601400"));
-        
-        //Verificando edicao
-        pregoeiroEditado = dao.buscarEmbeddedId(pregoeiroAux, pregoeiroAux.getPregoeiroPK());
-        assertEquals(true, pregoeiroEditado.getPessoaFisica().getCpf().equals("12312312312"));
         
         //Verificando remocao
         dao.deletar(pregoeiro);
         dao.deletar(pregoeiroAux);
-        
-        assertEquals(true, dao.buscarTodosEmbedded(Pregoeiro.class).size() < 1);
         
     }
 

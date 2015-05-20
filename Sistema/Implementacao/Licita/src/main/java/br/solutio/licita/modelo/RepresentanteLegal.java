@@ -6,13 +6,15 @@
 package br.solutio.licita.modelo;
 
 import java.io.Serializable;
-import javax.persistence.EmbeddedId;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -25,39 +27,38 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "RepresentanteLegal.findAll", query = "SELECT r FROM RepresentanteLegal r"),
-    @NamedQuery(name = "RepresentanteLegal.findById", query = "SELECT r FROM RepresentanteLegal r WHERE r.representanteLegalPK.id = :id"),
-    @NamedQuery(name = "RepresentanteLegal.findByIdPessoaFisica", query = "SELECT r FROM RepresentanteLegal r WHERE r.representanteLegalPK.idPessoaFisica = :idPessoaFisica"),
-    @NamedQuery(name = "RepresentanteLegal.findByIdLicitante", query = "SELECT r FROM RepresentanteLegal r WHERE r.representanteLegalPK.idLicitante = :idLicitante")})
+    @NamedQuery(name = "RepresentanteLegal.findById", query = "SELECT r FROM RepresentanteLegal r WHERE r.id = :id"),
+    @NamedQuery(name = "RepresentanteLegal.findByIdPessoaFisica", query = "SELECT r FROM RepresentanteLegal r WHERE r.pessoaFisica = :idPessoaFisica"),
+    @NamedQuery(name = "RepresentanteLegal.findByIdLicitante", query = "SELECT r FROM RepresentanteLegal r WHERE r.empresaLicitante = :idLicitante")})
 public class RepresentanteLegal implements Serializable{
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected RepresentanteLegalPK representanteLegalPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected Long id;
     
-    @PrimaryKeyJoinColumn(name = "id_licitante", referencedColumnName = "id")
-    @OneToOne(optional = false)
+    @JoinColumn(name = "id_licitante", referencedColumnName = "id")
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
     private EmpresaLicitante empresaLicitante;
     
-    @JoinColumn(name = "id_pessoa_fisica", referencedColumnName = "id", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    @JoinColumn(name = "id_pessoa_fisica", referencedColumnName = "id")
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
     private PessoaFisica pessoaFisica;
 
     public RepresentanteLegal() {
+        pessoaFisica = new PessoaFisica();
     }
 
-    public RepresentanteLegal(RepresentanteLegalPK representanteLegalPK) {
-        this.representanteLegalPK = representanteLegalPK;
+    public RepresentanteLegal(Long id) {
+        this.id = id;
     }
 
-    public RepresentanteLegal(long id, long idPessoaFisica, long idLicitante) {
-        this.representanteLegalPK = new RepresentanteLegalPK(id, idPessoaFisica, idLicitante);
+
+    public Long getId() {
+        return id;
     }
 
-    public RepresentanteLegalPK getRepresentanteLegalPK() {
-        return representanteLegalPK;
-    }
-
-    public void setRepresentanteLegalPK(RepresentanteLegalPK representanteLegalPK) {
-        this.representanteLegalPK = representanteLegalPK;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public EmpresaLicitante getEmpresaLicitante() {
@@ -79,7 +80,7 @@ public class RepresentanteLegal implements Serializable{
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (representanteLegalPK != null ? representanteLegalPK.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -89,7 +90,7 @@ public class RepresentanteLegal implements Serializable{
             return false;
         }
         RepresentanteLegal other = (RepresentanteLegal) object;
-        if ((this.representanteLegalPK == null && other.representanteLegalPK != null) || (this.representanteLegalPK != null && !this.representanteLegalPK.equals(other.representanteLegalPK))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -97,12 +98,8 @@ public class RepresentanteLegal implements Serializable{
 
     @Override
     public String toString() {
-        return "br.solutio.licita.modelo.RepresentanteLegal[ representanteLegalPK=" + representanteLegalPK + " ]";
+        return "br.solutio.licita.modelo.RepresentanteLegal[ representanteLegalPK=" + id + " ]";
     }
 
   
-    public Long getId() {
-        return getRepresentanteLegalPK().getId();
-    }
-    
 }
