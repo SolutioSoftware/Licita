@@ -28,17 +28,18 @@ public class DaoPregaoTest {
         pregaoVazio = new Pregao();
         pregaoAtualizado = new Pregao();
         dao.getEntityManager();
+        
         pregao.setDescricao("vai começar a ccyber lluta");
         pregao.setNumeroPregao("123123");
         pregao.setNumeroProcesso("74367463");
         pregao.setStatusPregao("Aberto");
         pregao.setSincronizado(Boolean.TRUE);
         
-        pregao.setDescricao("vai terminar a ccyber lluta");
-        pregao.setNumeroPregao("1111");
-        pregao.setNumeroProcesso("76666");
-        pregao.setStatusPregao("Fechado");
-        pregao.setSincronizado(Boolean.FALSE);
+        pregao2.setDescricao("vai terminar a ccyber lluta");
+        pregao2.setNumeroPregao("1111");
+        pregao2.setNumeroProcesso("76666");
+        pregao2.setStatusPregao("Fechado");
+        pregao2.setSincronizado(Boolean.FALSE);
     }
     
     @Test

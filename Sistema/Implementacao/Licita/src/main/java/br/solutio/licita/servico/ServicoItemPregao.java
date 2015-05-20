@@ -47,7 +47,7 @@ public class ServicoItemPregao extends ServicoAbstrato<ItemPregao> implements Se
 
     @Override
     public int contagem() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getDao().contagem();
     }
 
     @Override
@@ -67,7 +67,7 @@ public class ServicoItemPregao extends ServicoAbstrato<ItemPregao> implements Se
 
     @Override
     public ItemPregao buscarPorId(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getDao().buscarPorId(id);
     }
 
     @Override

@@ -7,6 +7,7 @@
 package br.solutio.licita.dao.teste;
 
 import br.solutio.licita.persistencia.dao.DaoAbstrato;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -30,6 +31,7 @@ public class DAOTestes<T> extends DaoAbstrato<T>{
         super(entidade);
     }
     
+    @Override
     public EntityManager getEntityManager() {
         if (emf == null){
             logger.log(Level.INFO, "EMF Teste");

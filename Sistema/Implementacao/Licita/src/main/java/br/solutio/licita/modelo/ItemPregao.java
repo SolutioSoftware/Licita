@@ -6,6 +6,7 @@
 package br.solutio.licita.modelo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -66,8 +67,8 @@ public class ItemPregao implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "valor_referencia")
-    private BigInteger valorReferencia;
-
+    private BigDecimal valorReferencia;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
@@ -91,14 +92,14 @@ public class ItemPregao implements Serializable {
         @JoinColumn(name = "id_status", referencedColumnName = "id")})
     @ManyToMany
     private transient Set<StatusItemPregao> statusItemPregaoSet;
-
+    
     @JoinColumn(name = "id_pregao", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Pregao idPregao;
-
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idItemPregao")
     private transient Set<Lance> lanceSet;
-
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idItemPregao")
     private transient Set<Proposta> propostaSet;
 
@@ -109,7 +110,7 @@ public class ItemPregao implements Serializable {
         this.id = id;
     }
 
-    public ItemPregao(Long id, int quantidade, BigInteger valorReferencia, String nome) {
+    public ItemPregao(Long id, int quantidade, BigDecimal valorReferencia, String nome) {
         this.id = id;
         this.quantidade = quantidade;
         this.valorReferencia = valorReferencia;
@@ -140,11 +141,11 @@ public class ItemPregao implements Serializable {
         this.quantidade = quantidade;
     }
 
-    public BigInteger getValorReferencia() {
+    public BigDecimal getValorReferencia() {
         return valorReferencia;
     }
 
-    public void setValorReferencia(BigInteger valorReferencia) {
+    public void setValorReferencia(BigDecimal valorReferencia) {
         this.valorReferencia = valorReferencia;
     }
 
