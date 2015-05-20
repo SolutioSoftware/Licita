@@ -17,7 +17,7 @@
 
                 <f:facet name="header">
                     <p:outputPanel>
-                        <p:commandButton value="Novo" style="width: 80px" action="#{controladorPregao.limparDados}"  icon="fa fa-plus" 
+                        <p:commandButton value="Novo" style="width: 80px" action="#{controladorPregao.limparDados}" update="@form"  icon="fa fa-plus" 
                                          class="botaoNovo"/>
                         <p:inputText id="globalFilter" onkeyup="PF('tbl_pregoes').filter()" style="width:250px" placeholder="Digite sua busca" />
                     </p:outputPanel>

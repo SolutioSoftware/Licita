@@ -6,64 +6,63 @@
 package br.solutio.licita.controlador;
 
 import br.solutio.licita.controlador.util.JsfUtil;
-import br.solutio.licita.modelo.Pregao;
+import br.solutio.licita.modelo.ItemPregao;
 import br.solutio.licita.servico.ServicoIF;
-import br.solutio.licita.servico.ServicoPregao;
+import br.solutio.licita.servico.ServicoItemPregao;
 import java.util.List;
 import java.util.logging.Level;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 /**
+ *
  * @author ricardocaldeira
  */
 @ManagedBean
 @SessionScoped
-public class ControladorPregao extends ControladorAbstrato<Pregao> {
+public class ControladorItemPregao extends ControladorAbstrato<ItemPregao> {
 
-    private Pregao entidade = new Pregao();
-    private List<Pregao> pregoes;
-    private ServicoIF<Pregao> servico = new ServicoPregao();
-
-    public ControladorPregao() {
-        pregoes = servico.buscarTodos();
+    private ItemPregao entidade = new ItemPregao();
+    private List<ItemPregao> itensPregao;
+    private ServicoIF<ItemPregao> servico = new ServicoItemPregao();
+    
+    public ControladorItemPregao() {
+        itensPregao = servico.buscarTodos();
     }
 
     @Override
-    public String criar(Pregao entidade) {
+    public String criar(ItemPregao entidade) {
         entidade = getEntidade();
         getServico().criar(entidade);
-        setEntidade(null);
-        setEntidade(new Pregao());
+        entidade = new ItemPregao();
         JsfUtil.addSuccessMessage("Salvo com Sucesso!");
-        pregoes = servico.buscarTodos();
-        return "pregao";
+        itensPregao = servico.buscarTodos();
+        return "item";
     }
 
     @Override
-    public String editar(Pregao entidade) {
+    public String editar(ItemPregao entidade) {
         entidade = getEntidade();
         getServico().editar(entidade);
-        entidade = new Pregao();
+        entidade = new ItemPregao();
         JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
-        pregoes = servico.buscarTodos();
-        return "pregao";
+        itensPregao = servico.buscarTodos();
+        return "item";
     }
 
     @Override
-    public String deletar(Pregao entidade) {
+    public String deletar(ItemPregao entidade) {
         entidade = getEntidade();
         getServico().deletar(entidade);
-        entidade = new Pregao();
+        entidade = new ItemPregao();
         JsfUtil.addSuccessMessage("Excluido com Sucesso!");
-        pregoes = servico.buscarTodos();
-        return "pregao";
+        itensPregao = servico.buscarTodos();
+        return "item";
     }
 
     public String limparDados() {
-        setEntidade(null);
-        setEntidade(new Pregao());
-        return "pregaoSalvar";
+        entidade = new ItemPregao();
+        return "itemSalvar";
     }
 
     public String preparaEditar() {
@@ -77,12 +76,12 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
     }
 
     @Override
-    public Pregao getEntidade() {
+    public ItemPregao getEntidade() {
         return entidade;
     }
 
     @Override
-    public void setEntidade(Pregao entidade) {
+    public void setEntidade(ItemPregao entidade) {
         this.entidade = entidade;
     }
 
@@ -90,17 +89,15 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
         return this.entidade.getId() != null;
     }
 
-   
-
-    public List<Pregao> getPregoes() {
-        return pregoes;
+    public List<ItemPregao> getItensPregao() {
+        return itensPregao;
     }
 
-    public void setPregoes(List<Pregao> pregoes) {
-        this.pregoes = pregoes;
+    public void setItensPregao(List<ItemPregao> itens) {
+        this.itensPregao = itens;
     }
 
-    public void setServico(ServicoIF<Pregao> servico) {
+    public void setServico(ServicoIF<ItemPregao> servico) {
         this.servico = servico;
     }
 

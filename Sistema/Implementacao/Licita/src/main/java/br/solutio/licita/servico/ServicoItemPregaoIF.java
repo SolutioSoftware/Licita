@@ -5,12 +5,12 @@
  */
 package br.solutio.licita.servico;
 
-import br.solutio.licita.modelo.Pregao;
+import br.solutio.licita.modelo.ItemPregao;
 
 /**
  *
  * @author ricardocaldeira
  */
-public interface ServicoPregaoIF extends ServicoIF<Pregao> {
+public interface ServicoItemPregaoIF extends ServicoIF<ItemPregao> {
     
 }
