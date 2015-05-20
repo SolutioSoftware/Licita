@@ -23,6 +23,7 @@ public class ServicoItemPregao extends ServicoAbstrato<ItemPregao> implements Se
         this.dao = FabricaDAO.getFabricaDAO(TipoDAO.Local).getDaoItemPregao();
     }
 
+    @Override
     public DaoIF<ItemPregao> getDao() {
         return dao;
     }
@@ -33,7 +34,7 @@ public class ServicoItemPregao extends ServicoAbstrato<ItemPregao> implements Se
 
     @Override
     public int contagem() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getDao().contagem();
     }
 
     @Override
@@ -53,12 +54,12 @@ public class ServicoItemPregao extends ServicoAbstrato<ItemPregao> implements Se
 
     @Override
     public ItemPregao buscarPorId(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getDao().buscarPorId(id);
     }
 
     @Override
     public List<ItemPregao> buscarTodos() {
-        return getDao().consultar("Pregao.findAll", null, null);
+        return getDao().consultar("ItemPregao.findAll", null, null);
     }
 
     
