@@ -50,14 +50,8 @@ public abstract class ServicoAbstrato<T> implements ServicoIF<T> {
             GerenciadorTransacao.abrirTransacao(getDao().getEntityManager());
             getDao().editar(entidade);
             GerenciadorTransacao.encerrarTransacao(getDao().getEntityManager());
-        } catch (DatabaseException dbe) {
+        } catch (DatabaseException | TransactionException | TransactionRequiredException dbe) {
             logger.log(Level.SEVERE, null ,dbe);
-            GerenciadorTransacao.rollbackTransacao(getDao().getEntityManager());
-        } catch (TransactionException te){
-            logger.log(Level.SEVERE, null, te);
-            GerenciadorTransacao.rollbackTransacao(getDao().getEntityManager());
-        } catch (TransactionRequiredException tr){
-            logger.log(Level.SEVERE, null, tr);
             GerenciadorTransacao.rollbackTransacao(getDao().getEntityManager());
         }
     }

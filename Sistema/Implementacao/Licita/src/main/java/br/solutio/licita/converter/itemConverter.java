@@ -59,7 +59,8 @@ public class itemConverter implements Converter,Serializable{
     }
 
     private void addAttribute(UIComponent component, ItemPregao entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         String key = entity.getId().toString(); // codigo da empresa como chave neste caso
+        this.getAttributesFrom(component).put(key, entity);
     }
 
 }

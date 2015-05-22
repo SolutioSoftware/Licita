@@ -10,7 +10,6 @@ import br.solutio.licita.persistencia.DaoIF;
 import br.solutio.licita.persistencia.FabricaDAO;
 import br.solutio.licita.persistencia.FabricaDaoIF;
 import java.util.List;
-import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 
 /**
@@ -46,10 +45,6 @@ public class ServicoPregao extends ServicoAbstrato<Pregao> implements ServicoPre
             entityLocal = ProdutorEntityManager.getInstancia().getEmLocal();
         }
         return entityLocal;
-    }
-
-    private EntityManager getEntityRemoto() {
-        return ProdutorEntityManager.getInstancia().getEmRemoto();
     }
 
     @Override
