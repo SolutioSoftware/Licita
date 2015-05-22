@@ -22,7 +22,6 @@ public class ServicoPregao extends ServicoAbstrato<Pregao> implements ServicoPre
     private DaoIF<Pregao> dao;
     private FabricaDaoIF fabricaDao;
     private EntityManager entityLocal;
-    private static final Logger log = Logger.getGlobal();
 
     public ServicoPregao() {
     }

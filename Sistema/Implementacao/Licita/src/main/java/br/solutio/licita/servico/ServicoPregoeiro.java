@@ -20,9 +20,7 @@ import javax.persistence.EntityManager;
  */
 public class ServicoPregoeiro extends ServicoAbstrato<Pregoeiro> implements ServicoPregoeiroIF {
 
-    private final static Logger log = Logger.getGlobal();
     private EntityManager entityLocal;
-    private EntityManager entityRemoto;
     private DaoIF<Pregoeiro> dao;
     private FabricaDaoIF fabricaDao;
 

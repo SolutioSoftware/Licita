@@ -8,8 +8,11 @@ package br.solutio.licita.servico;
 
 import br.solutio.licita.persistencia.DaoIF;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.TransactionRequiredException;
 import org.eclipse.persistence.exceptions.DatabaseException;
+import org.eclipse.persistence.exceptions.TransactionException;
 
 /**
  *
@@ -18,7 +21,7 @@ import org.eclipse.persistence.exceptions.DatabaseException;
  */
 public abstract class ServicoAbstrato<T> implements ServicoIF<T> {
     
-    protected static final Logger logger = Logger.getGlobal();
+    protected static final Logger logger = Logger.getLogger(ServicoAbstrato.class.getName());
 
     public abstract DaoIF getDao();
 
@@ -33,11 +36,10 @@ public abstract class ServicoAbstrato<T> implements ServicoIF<T> {
         try {
             GerenciadorTransacao.abrirTransacao(getDao().getEntityManager());
             getDao().criar(entidade);
-            System.out.println("Salvo com sucessoooo");
             GerenciadorTransacao.encerrarTransacao(getDao().getEntityManager());
         } catch (Exception e) {
             GerenciadorTransacao.rollbackTransacao(getDao().getEntityManager());
-            logger.info(e.getLocalizedMessage());
+            logger.log(Level.SEVERE, null, e);
         }
         
     }
@@ -49,6 +51,13 @@ public abstract class ServicoAbstrato<T> implements ServicoIF<T> {
             getDao().editar(entidade);
             GerenciadorTransacao.encerrarTransacao(getDao().getEntityManager());
         } catch (DatabaseException dbe) {
+            logger.log(Level.SEVERE, null ,dbe);
+            GerenciadorTransacao.rollbackTransacao(getDao().getEntityManager());
+        } catch (TransactionException te){
+            logger.log(Level.SEVERE, null, te);
+            GerenciadorTransacao.rollbackTransacao(getDao().getEntityManager());
+        } catch (TransactionRequiredException tr){
+            logger.log(Level.SEVERE, null, tr);
             GerenciadorTransacao.rollbackTransacao(getDao().getEntityManager());
         }
     }

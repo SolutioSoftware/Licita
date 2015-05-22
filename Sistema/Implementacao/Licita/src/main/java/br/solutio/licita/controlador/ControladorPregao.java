@@ -11,6 +11,7 @@ import br.solutio.licita.servico.ServicoIF;
 import br.solutio.licita.servico.ServicoPregao;
 import java.util.List;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.PersistenceException;
@@ -23,8 +24,8 @@ import javax.persistence.PersistenceException;
 public class ControladorPregao extends ControladorAbstrato<Pregao> {
 
     private Pregao entidade;
-    private List<Pregao> pregoes;
-    private ServicoIF<Pregao> servico = new ServicoPregao();
+    private transient List<Pregao> pregoes;
+    private transient ServicoIF<Pregao> servico = new ServicoPregao();
 
     public ControladorPregao() {
         entidade = new Pregao();
@@ -42,6 +43,7 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
             pregoes = servico.buscarTodos();
             return "pregao";
         }catch(PersistenceException e){
+            Logger.getLogger(ControladorPregao.class.getName()).log(Level.SEVERE, null, e);
             JsfUtil.addErrorMessage("Pregao ou Processo já existe");
             return "pregaoSalvar";
         }

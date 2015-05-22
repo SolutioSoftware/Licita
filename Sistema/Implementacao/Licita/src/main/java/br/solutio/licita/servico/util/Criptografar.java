@@ -9,6 +9,7 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -20,13 +21,12 @@ public class Criptografar {
     private final String algoritmo;
     private final String encoding;
     private MessageDigest md;
-    private Logger log;
+    private static final Logger log = Logger.getLogger(Criptografar.class.getName());
     private static Criptografar cript;
 
     private Criptografar() {
         this.algoritmo = "MD5";
         this.encoding = "UTF-8";
-        this.log = Logger.getGlobal();
     }
 
     public String criptografar(String senha) {
@@ -36,7 +36,7 @@ public class Criptografar {
             log.info("Criptografia Realizada com sucesso!");
             return hash.toString(32);
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
-            log.severe(e.getMessage());
+            log.log(Level.SEVERE, null, e);
             return null;
         }
 

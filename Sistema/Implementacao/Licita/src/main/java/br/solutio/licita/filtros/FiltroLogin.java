@@ -28,6 +28,7 @@ public class FiltroLogin implements Filter {
     
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
+        //TODO
     }
     
     @Override
@@ -54,6 +55,7 @@ public class FiltroLogin implements Filter {
     
     @Override
     public void destroy() {
+        //TODO
     }
     
 }

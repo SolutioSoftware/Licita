@@ -21,6 +21,9 @@ public class Licita {
     /**
      * @param args the command line arguments
      */
+    
+    private Licita(){
+    }
     public static void main(String[] args) {
         // TODO code application logic here
         

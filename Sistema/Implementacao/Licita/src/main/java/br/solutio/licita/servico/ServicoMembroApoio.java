@@ -19,7 +19,6 @@ import javax.persistence.EntityManager;
  */
 public class ServicoMembroApoio extends ServicoAbstrato<MembroApoio> implements ServicoMembroApoioIF {
 
-    private final static Logger log = Logger.getGlobal();
     private FabricaDaoIF fabricaDao;
     private EntityManager entityLocal;
     

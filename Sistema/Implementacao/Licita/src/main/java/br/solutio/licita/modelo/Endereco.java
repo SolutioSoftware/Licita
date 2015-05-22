@@ -139,6 +139,22 @@ public class Endereco implements Serializable{
     public void setComplemento(String complemento) {
         this.complemento = complemento;
     }
+    
+    public PessoaJuridica getPessoaJuridica(){
+        return this.pessoaJuridica;
+    }
+    
+    public void setPessoaJuridica(PessoaJuridica pessoaJuridica){
+        this.pessoaJuridica = pessoaJuridica;
+    }
+    
+    public PessoaFisica getPessoaFisica(){
+        return this.pessoaFisica;
+    }
+    
+    public void setPessoaFisica(PessoaFisica pessoaFisica){
+        this.pessoaFisica = pessoaFisica;
+    }
 
     @Override
     public int hashCode() {

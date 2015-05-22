@@ -25,9 +25,8 @@ import javax.faces.bean.SessionScoped;
 public class ControladorItemPregao extends ControladorAbstrato<ItemPregao> {
 
     private ItemPregao entidade;
-    private List<ItemPregao> itens;
-    private List<Pregao> pregoes;
-    private ServicoItemPregaoIF servico;
+    private transient List<ItemPregao> itens;
+    private transient ServicoItemPregaoIF servico;
 
     public ControladorItemPregao() {
         this.entidade = new ItemPregao();

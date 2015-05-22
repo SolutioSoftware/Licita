@@ -5,6 +5,7 @@
  */
 package br.solutio.licita.persistencia;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -89,6 +90,7 @@ public class Dao<T> implements DaoIF<T> {
 
         Query query = getEntityManager().createNamedQuery(namedQuery, entidade);
 
+        List<T> list = new ArrayList<>();
         if (parametros != null && valores != null) {
             if (parametros.length == valores.length) {
                 for (int i = 0; i < parametros.length; i++) {
@@ -96,15 +98,16 @@ public class Dao<T> implements DaoIF<T> {
                     query.setParameter(parametros[i], valores[i]);
 
                 }
-
-                return query.getResultList();
+                list = query.getResultList();
+                return list;
             } else {
-                return null;
+                return list;
             }
         } else if (parametros == null && valores == null) {
-            return query.getResultList();
+            list = query.getResultList();
+            return list;
         } else {
-            return null;
+            return list;
         }
 
     }

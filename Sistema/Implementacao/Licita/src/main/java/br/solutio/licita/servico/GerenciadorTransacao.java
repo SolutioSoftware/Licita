@@ -6,7 +6,6 @@
 package br.solutio.licita.servico;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
 /**
@@ -15,6 +14,9 @@ import javax.persistence.EntityTransaction;
  */
 public class GerenciadorTransacao {
 
+    private GerenciadorTransacao(){
+    }
+    
     public static void abrirTransacao(EntityManager entity) {
         EntityTransaction et = entity.getTransaction();
         et.begin();

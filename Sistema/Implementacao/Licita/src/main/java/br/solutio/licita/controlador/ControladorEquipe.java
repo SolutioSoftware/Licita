@@ -36,9 +36,9 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
     private boolean cargoMembrodeApoio = false;
     private String valor;
     private String confirmaSenha = "";
-    private ServicoMembroApoioIF servicoMembro = new ServicoMembroApoio();
-    private ServicoPregoeiroIF servicoPregoeiro = new ServicoPregoeiro();
-    private Logger log = Logger.getGlobal();
+    private transient ServicoMembroApoioIF servicoMembro = new ServicoMembroApoio();
+    private transient ServicoPregoeiroIF servicoPregoeiro = new ServicoPregoeiro();
+    private transient static final Logger log = Logger.getGlobal();
 
     public void tipoPessoaFisica() {
 

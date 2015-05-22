@@ -51,7 +51,7 @@ public class ServicoLogin extends ServicoAbstrato<Login> implements ServicoLogin
             String[] parametros = {"usuario", "senha"};
             Object[] valores = {usuario, senhaCript};
             List<Login> list = getDao().consultar("Login.buscaPorLogin", parametros, valores);
-            return list.size() >= 1;
+            return list.isEmpty();
         } else {
             return false;
         }
