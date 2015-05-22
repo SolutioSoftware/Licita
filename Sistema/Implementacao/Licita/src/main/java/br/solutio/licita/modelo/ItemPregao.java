@@ -29,7 +29,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
+ * TODO. refatorar entidade para resolver o problema do relacionamento com pregão. A entidade será dividida em duas: Item e ItemDePregao, onde Item terá somente a característica dos itens e ItemDePregao o Id do item, o id do pregao e o valor do item para o referido pregao.
+ *  
  * @author WitaloCarlos
  */
 @Entity
