@@ -72,8 +72,12 @@ public class PessoaFisica implements Serializable{
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoaFisica")
     private Pregoeiro pregoeiro;
-
+    
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoaFisica")
+    private Endereco endereco;
+    
     public PessoaFisica() {
+        endereco = new Endereco();
     }
 
     public PessoaFisica(Long id) {
@@ -149,6 +153,14 @@ public class PessoaFisica implements Serializable{
 
     public void setPregoeiro(Pregoeiro pregoeiro) {
         this.pregoeiro = pregoeiro;
+    }
+    
+    public Endereco getEndereco(){
+        return this.endereco;
+    }
+    
+    public void setEndereco(Endereco endereco){
+        this.endereco = endereco;
     }
 
     @Override

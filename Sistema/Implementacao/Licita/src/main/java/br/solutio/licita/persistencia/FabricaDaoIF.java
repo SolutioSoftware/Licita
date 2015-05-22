@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.solutio.licita.persistencia.dao;
+package br.solutio.licita.persistencia;
 
 import br.solutio.licita.modelo.EmpresaLicitante;
 import br.solutio.licita.modelo.InstituicaoLicitadora;
@@ -28,6 +28,5 @@ public interface FabricaDaoIF {
     public DaoIF<Pregao> getDaoPregao();
     public DaoIF<PessoaFisica> getDaoPessoaFisica();
     public DaoIF<MembroApoio> getDaoMembroApoio();
-    
     
 }

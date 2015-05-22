@@ -5,44 +5,31 @@
  */
 package br.solutio.licita.servico;
 
-import br.solutio.licita.modelo.Login;
 import br.solutio.licita.modelo.MembroApoio;
-import br.solutio.licita.modelo.Pregoeiro;
-import br.solutio.licita.persistencia.dao.DaoIF;
-import br.solutio.licita.persistencia.dao.FabricaDAO;
-import br.solutio.licita.persistencia.dao.TipoDAO;
-import br.solutio.licita.servico.util.Criptografar;
+import br.solutio.licita.persistencia.DaoIF;
+import br.solutio.licita.persistencia.FabricaDAO;
+import br.solutio.licita.persistencia.FabricaDaoIF;
 import java.util.List;
 import java.util.logging.Logger;
+import javax.persistence.EntityManager;
 
 /**
  *
  * @author Matheus Oliveira
  */
-public class ServicoMembroApoio implements ServicoMembroApoioIF {
+public class ServicoMembroApoio extends ServicoAbstrato<MembroApoio> implements ServicoMembroApoioIF {
 
-    private DaoIF<MembroApoio> dao = FabricaDAO.getFabricaDAO(TipoDAO.Local).getDaoMembroApoio();
-    private static Logger log = Logger.getGlobal();
+    private final static Logger log = Logger.getGlobal();
+    private FabricaDaoIF fabricaDao;
+    private EntityManager entityLocal;
+    
+    private DaoIF<MembroApoio> dao;
 
     @Override
     public int contagem() {
         return dao.contagem();
     }
 
-    @Override
-    public void criar(MembroApoio entidade) {
-        dao.criar(entidade);
-    }
-
-    @Override
-    public void editar(MembroApoio entidade) {
-        dao.editar(entidade);
-    }
-
-    @Override
-    public void deletar(MembroApoio entidade) {
-        dao.deletar(entidade);
-    }
 
     @Override
     public MembroApoio buscarPorId(Long id) {
@@ -54,7 +41,25 @@ public class ServicoMembroApoio implements ServicoMembroApoioIF {
         return dao.buscarTodos();
     }
 
-    public void setDao(DaoIF dao){
+    public void setDao(DaoIF<MembroApoio> dao){
         this.dao = dao;
+    }
+
+    @Override
+    public DaoIF<MembroApoio> getDao() {
+        if (fabricaDao == null) {
+            fabricaDao = new FabricaDAO(getEntityLocal());
+        }
+        if (dao == null) {
+            dao = fabricaDao.getDaoMembroApoio();
+        }
+        return dao;
+    }
+
+    public EntityManager getEntityLocal() {
+        if (entityLocal == null) {
+            entityLocal = ProdutorEntityManager.getInstancia().getEmLocal();
+        }
+        return entityLocal;
     }
 }

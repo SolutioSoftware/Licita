@@ -69,8 +69,12 @@ public class PessoaJuridica implements Serializable{
     
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoaJuridica")
     private InstituicaoLicitadora instituicaoLicitadora;
+    
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoaJuridica")
+    private Endereco endereco;
 
     public PessoaJuridica() {
+        endereco = new Endereco();
     }
 
     public PessoaJuridica(Long id) {
@@ -138,6 +142,14 @@ public class PessoaJuridica implements Serializable{
 
     public void setInstituicaoLicitadora(InstituicaoLicitadora instituicaoLicitadora) {
         this.instituicaoLicitadora = instituicaoLicitadora;
+    }
+    
+    public Endereco getEndereco(){
+        return this.endereco;
+    }
+    
+    public void setEndereco(Endereco endereco){
+        this.endereco = endereco;
     }
 
     @Override

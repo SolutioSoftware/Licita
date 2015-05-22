@@ -6,8 +6,6 @@
 package br.solutio.licita.servico;
 
 import br.solutio.licita.modelo.ItemPregao;
-import br.solutio.licita.modelo.Pregao;
-import java.util.List;
 
 /**
  *
@@ -15,6 +13,4 @@ import java.util.List;
  */
 public interface ServicoItemPregaoIF extends ServicoIF<ItemPregao> {
 
-    public List<Pregao> listarPregoes();
-    
 }

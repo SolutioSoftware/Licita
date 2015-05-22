@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.solutio.licita.dao;
 
-import br.solutio.licita.dao.teste.DAOTestes;
 import br.solutio.licita.modelo.EmpresaLicitante;
+import br.solutio.licita.persistencia.DaoIF;
+import br.solutio.licita.persistencia.FabricaDAO;
+import br.solutio.licita.servico.GerenciadorTransacao;
+import br.solutio.licita.servico.ProdutorEntityManager;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,13 +19,14 @@ import org.junit.Test;
  * @author Matheus Oliveira
  */
 public class DaoEmpresaLicitanteTest {
-    
+
     private EmpresaLicitante empresaLicitante;
-    private DAOTestes<EmpresaLicitante> daoEmpresaLicitante;
-    
+    private DaoIF<EmpresaLicitante> daoEmpresaLicitante;
+    private FabricaDAO fabrica;
+
     @Before
-    public void setUp(){
-        
+    public void setUp() {
+
         empresaLicitante = new EmpresaLicitante();
         empresaLicitante.setComplemento("Empresa que vende cal");
         empresaLicitante.setInscricaoEstadual("1231237812");
@@ -39,15 +42,21 @@ public class DaoEmpresaLicitanteTest {
         empresaLicitante.getContaBancaria().setNome("CEF");
         empresaLicitante.getContaBancaria().setNumeroConta("102933");
         empresaLicitante.getContaBancaria().setOperacao("013");
-        
-        daoEmpresaLicitante = new DAOTestes<>();
+
+        fabrica = new FabricaDAO(ProdutorEntityManager.getInstancia().getEmTestes());
+        daoEmpresaLicitante = fabrica.getDaoEmpresaLicitante();
+        GerenciadorTransacao.abrirTransacao(daoEmpresaLicitante.getEntityManager());
     }
-    
+
     @Test
-    public void testeSalvar(){
+    public void testeSalvar() {
+
         daoEmpresaLicitante.criar(empresaLicitante);
-        assertEquals(true ,empresaLicitante.getId() == 1);
-        assertEquals(true ,empresaLicitante.getPessoaJuridica().getId() == 1);
+        GerenciadorTransacao.encerrarTransacao(daoEmpresaLicitante.getEntityManager());
+        
+        assertEquals(true, empresaLicitante.getId() == 1);
+        assertEquals(true, empresaLicitante.getPessoaJuridica().getId() == 1);
     }
     
+
 }

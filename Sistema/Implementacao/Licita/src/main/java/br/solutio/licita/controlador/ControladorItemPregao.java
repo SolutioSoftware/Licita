@@ -33,7 +33,6 @@ public class ControladorItemPregao extends ControladorAbstrato<ItemPregao> {
         this.entidade = new ItemPregao();
         this.servico = new ServicoItemPregao();
         itens = servico.buscarTodos();
-        pregoes = servico.listarPregoes();
     }
 
     @Override
@@ -44,7 +43,6 @@ public class ControladorItemPregao extends ControladorAbstrato<ItemPregao> {
         setEntidade(new ItemPregao());
         JsfUtil.addSuccessMessage("Salvo com Sucesso!");
         itens = servico.buscarTodos();
-        pregoes = servico.listarPregoes();
         return "item";
     }
 
@@ -55,7 +53,6 @@ public class ControladorItemPregao extends ControladorAbstrato<ItemPregao> {
         entidade = new ItemPregao();
         JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
         itens = servico.buscarTodos();
-        pregoes = servico.listarPregoes();
         return "item";
     }
 
@@ -66,7 +63,6 @@ public class ControladorItemPregao extends ControladorAbstrato<ItemPregao> {
         entidade = new ItemPregao();
         JsfUtil.addSuccessMessage("Excluido com Sucesso!");
         itens = servico.buscarTodos();
-        pregoes = servico.listarPregoes();
         return "item";
     }
 
@@ -106,14 +102,6 @@ public class ControladorItemPregao extends ControladorAbstrato<ItemPregao> {
 
     public void setItens(List<ItemPregao> pregoes) {
         this.itens = pregoes;
-    }
-
-    public List<Pregao> getPregoes() {
-        return pregoes;
-    }
-
-    public void setPregoes(List<Pregao> pregoes) {
-        this.pregoes = pregoes;
     }
 
     public ServicoItemPregaoIF getServicoItemPregaoIF() {
