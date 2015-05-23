@@ -6,11 +6,11 @@
 package br.solutio.licita.servico;
 
 import br.solutio.licita.modelo.ItemPregao;
-import br.solutio.licita.modelo.Pregao;
-import br.solutio.licita.persistencia.dao.DaoIF;
-import br.solutio.licita.persistencia.dao.FabricaDAO;
-import br.solutio.licita.persistencia.dao.TipoDAO;
+import br.solutio.licita.persistencia.DaoIF;
+import br.solutio.licita.persistencia.FabricaDAO;
+import br.solutio.licita.persistencia.FabricaDaoIF;
 import java.util.List;
+import javax.persistence.EntityManager;
 
 /**
  *
@@ -19,50 +19,25 @@ import java.util.List;
 public class ServicoItemPregao extends ServicoAbstrato<ItemPregao> implements ServicoItemPregaoIF {
 
     private DaoIF<ItemPregao> dao;
-    public DaoIF<Pregao> daoPregao;
+    private EntityManager entityLocal;
+    private FabricaDaoIF fabricaDao;
 
     public ServicoItemPregao() {
-        this.dao = FabricaDAO.getFabricaDAO(TipoDAO.Local).getDaoItemPregao();
-        this.daoPregao = FabricaDAO.getFabricaDAO(TipoDAO.Local).getDaoPregao();
     }
 
     @Override
     public DaoIF<ItemPregao> getDao() {
+        if (fabricaDao == null) {
+            fabricaDao = new FabricaDAO(getEntityLocal());
+        }
+        if (dao == null) {
+            dao = fabricaDao.getDaoItemPregao();
+        }
         return dao;
     }
 
     public void setDao(DaoIF<ItemPregao> dao) {
         this.dao = dao;
-    }
-
-    public DaoIF<Pregao> getDaoPregao() {
-        return daoPregao;
-    }
-
-    public void setDaoPregao(DaoIF<Pregao> daoPregao) {
-        this.daoPregao = daoPregao;
-    }
-    
-    
-
-    @Override
-    public int contagem() {
-        return getDao().contagem();
-    }
-
-    @Override
-    public void criar(ItemPregao entidade) {
-        getDao().criar(entidade);
-    }
-
-    @Override
-    public void editar(ItemPregao entidade) {
-        getDao().editar(entidade);
-    }
-
-    @Override
-    public void deletar(ItemPregao entidade) {
-        getDao().deletar(entidade);
     }
 
     @Override
@@ -72,14 +47,15 @@ public class ServicoItemPregao extends ServicoAbstrato<ItemPregao> implements Se
 
     @Override
     public List<ItemPregao> buscarTodos() {
-         return getDao().consultar("ItemPregao.findAll", null, null);
+        getDao().setEntityManager(ProdutorEntityManager.getInstancia().getEmLocal());
+        return getDao().consultar("ItemPregao.findAll", null, null);
     }
 
-    @Override
-    public List<Pregao> listarPregoes() {
-        return getDaoPregao().consultar("Pregao.findAll", null, null);
+    public EntityManager getEntityLocal() {
+       if (entityLocal == null) {
+            entityLocal = ProdutorEntityManager.getInstancia().getEmLocal();
+        }
+        return entityLocal;
     }
 
-    
-    
 }

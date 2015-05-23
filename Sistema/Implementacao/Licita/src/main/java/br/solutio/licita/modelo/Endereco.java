@@ -12,8 +12,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -65,7 +67,15 @@ public class Endereco implements Serializable{
     @Size(max = 50)
     @Column(name = "complemento")
     private String complemento;
-
+    
+    @JoinColumn(name = "id_pessoa_fisica", referencedColumnName = "id")
+    @OneToOne
+    private PessoaFisica pessoaFisica;
+    
+    @JoinColumn(referencedColumnName = "id", name = "id_pessoa_juridica")
+    @OneToOne
+    private PessoaJuridica pessoaJuridica;
+    
     public Endereco() {
     }
 
@@ -128,6 +138,22 @@ public class Endereco implements Serializable{
 
     public void setComplemento(String complemento) {
         this.complemento = complemento;
+    }
+    
+    public PessoaJuridica getPessoaJuridica(){
+        return this.pessoaJuridica;
+    }
+    
+    public void setPessoaJuridica(PessoaJuridica pessoaJuridica){
+        this.pessoaJuridica = pessoaJuridica;
+    }
+    
+    public PessoaFisica getPessoaFisica(){
+        return this.pessoaFisica;
+    }
+    
+    public void setPessoaFisica(PessoaFisica pessoaFisica){
+        this.pessoaFisica = pessoaFisica;
     }
 
     @Override

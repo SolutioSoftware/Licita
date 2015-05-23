@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.solutio.licita.persistencia.dao;
+package br.solutio.licita.persistencia;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
 /**
@@ -17,22 +17,31 @@ import javax.persistence.Query;
  * @author WitaloCarlos
  * @param <T>
  */
-public abstract class DaoAbstrato<T> implements DaoIF<T> {
+public class Dao<T> implements DaoIF<T> {
 
     private Class<T> entidade;
     protected static final Logger logger = Logger.getGlobal();
+    private EntityManager entityManager;
 
-    /**
-     *
-     * @return EntityManager
-     */
-    protected abstract EntityManager getEntityManager();
-
-    public DaoAbstrato(Class<T> entidade) {
+    public Dao(Class<T> entidade) {
         this.entidade = entidade;
     }
 
-    public DaoAbstrato() {
+    public Dao(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
+    public Dao() {
+    }
+
+    @Override
+    public EntityManager getEntityManager() {
+        return this.entityManager;
+    }
+    
+    @Override
+    public void setEntityManager(EntityManager entityManager){
+        this.entityManager = entityManager;
     }
 
     @Override
@@ -47,44 +56,26 @@ public abstract class DaoAbstrato<T> implements DaoIF<T> {
     @Override
     public void criar(T entidade) {
         logger.log(Level.INFO, "Criar");
-        EntityManager em = getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-
-        tx.begin();
-        em.persist(entidade);
-        em.flush();
-        tx.commit();
-        em.close();
+        getEntityManager().persist(entidade);
     }
 
     @Override
     public void editar(T entidade) {
         logger.log(Level.INFO, "Editar");
-        EntityManager em = getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        tx.begin();
-        em.merge(entidade);
-        em.flush();
-        tx.commit();
-        em.close();
+        getEntityManager().merge(entidade);
 
     }
 
     @Override
     public void deletar(T entidade) {
         logger.log(Level.INFO, "Deletar");
-        EntityManager em = getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        tx.begin();
-        entidade = em.merge(entidade);
-        em.remove(entidade);
-        tx.commit();
-        em.close();
+        entidade = getEntityManager().merge(entidade);
+        getEntityManager().remove(entidade);
     }
 
     @Override
     public T buscarPorId(Long id) {
-        return getEntityManager().find(entidade, id);
+        return (T) getEntityManager().find(entidade, id);
     }
 
     @Override
@@ -99,6 +90,7 @@ public abstract class DaoAbstrato<T> implements DaoIF<T> {
 
         Query query = getEntityManager().createNamedQuery(namedQuery, entidade);
 
+        List<T> list = new ArrayList<>();
         if (parametros != null && valores != null) {
             if (parametros.length == valores.length) {
                 for (int i = 0; i < parametros.length; i++) {
@@ -106,28 +98,18 @@ public abstract class DaoAbstrato<T> implements DaoIF<T> {
                     query.setParameter(parametros[i], valores[i]);
 
                 }
-
-                return query.getResultList();
+                list = query.getResultList();
+                return list;
             } else {
-                return null;
+                return list;
             }
         } else if (parametros == null && valores == null) {
-            return query.getResultList();
+            list = query.getResultList();
+            return list;
         } else {
-            return null;
+            return list;
         }
 
     }
-    
-    @Override
-    public T buscarEmbeddedId(T classe,Object embeddedId){
-        return (T) getEntityManager().find(classe.getClass(), embeddedId);
-    }
-    
-    @Override
-    public List<T> buscarTodosEmbedded(Class classe) {
-        javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
-        cq.select(cq.from(classe));
-        return getEntityManager().createQuery(cq).getResultList();
-    }
+
 }

@@ -13,6 +13,6 @@ import br.solutio.licita.modelo.Login;
  * @author Matheus Oliveira
  */
 public interface ServicoLoginIF extends ServicoIF<Login>{
-    public boolean verificarDados(String login, String senha);
     
+    public boolean verificarDados(String usuario, String senha);
 }

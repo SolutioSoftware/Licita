@@ -31,6 +31,9 @@ public class JsfUtil {
         }
         return items;
     }
+     
+     private JsfUtil(){
+     }
 
     public static boolean isValidationFailed() {
         return FacesContext.getCurrentInstance().isValidationFailed();

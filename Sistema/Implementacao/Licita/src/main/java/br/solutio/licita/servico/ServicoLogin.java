@@ -3,57 +3,58 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package br.solutio.licita.servico;
 
 import br.solutio.licita.modelo.Login;
-import br.solutio.licita.persistencia.dao.DaoIF;
-import br.solutio.licita.persistencia.dao.FabricaDAO;
-import br.solutio.licita.persistencia.dao.TipoDAO;
+import br.solutio.licita.persistencia.DaoIF;
+import br.solutio.licita.persistencia.FabricaDAO;
+import br.solutio.licita.persistencia.FabricaDaoIF;
 import br.solutio.licita.servico.util.Criptografar;
 import java.util.List;
+import javax.persistence.EntityManager;
 
 /**
  *
  * @author Matheus Oliveira
  */
-public class ServicoLogin extends ServicoAbstrato<Login> implements ServicoLoginIF {
+public class ServicoLogin extends ServicoAbstrato<Login> implements ServicoLoginIF{
 
-    private final DaoIF<Login> dao = FabricaDAO.getFabricaDAO(TipoDAO.Local).getDaoLogin();
 
+    private FabricaDaoIF fabricaDao;
+    private EntityManager entityLocal;
+    private DaoIF<Login> dao;
+    
     @Override
-    public void criar(Login login) {
-        try {
-            String senhaCript = Criptografar.getInstance().criptografar(login.getSenha());
-            login.setSenha(senhaCript);
-            getDao().criar(login);
-        } catch (Exception e) {
-            logger.info(e.getLocalizedMessage());
+    public DaoIF getDao() {
+        if (fabricaDao == null) {
+            fabricaDao = new FabricaDAO(getEntityLocal());
         }
+        if (dao == null) {
+            dao = fabricaDao.getDaoLogin();
+        }
+        return dao;
     }
 
-    /**
-     *
-     * @param usuario
-     * @param senha
-     * @return
-     */
+    public EntityManager getEntityLocal() {
+         if (entityLocal == null) {
+            entityLocal = ProdutorEntityManager.getInstancia().getEmLocal();
+        }
+        return entityLocal;
+    }
+
     @Override
     public boolean verificarDados(String usuario, String senha) {
-        if (usuario != null && senha != null) {
+         if (usuario != null && senha != null) {
             String senhaCript;
             senhaCript = Criptografar.getInstance().criptografar(senha);
             String[] parametros = {"usuario", "senha"};
             Object[] valores = {usuario, senhaCript};
             List<Login> list = getDao().consultar("Login.buscaPorLogin", parametros, valores);
-            return list.size() >= 1;
+            return list.isEmpty();
         } else {
             return false;
         }
     }
-
-    @Override
-    public DaoIF getDao() {
-        return dao;
-    }
-
+    
 }

@@ -21,9 +21,8 @@ import javax.faces.context.FacesContext;
 @ManagedBean(name = "Login")
 public class ControladorLogin extends ControladorAbstrato<Login> {
 
-    private static final Logger log = Logger.getGlobal();
     private Login login;
-    private ServicoLoginIF servico;
+    private transient ServicoLoginIF servico;
 
     public ControladorLogin() {
         login = new Login();
