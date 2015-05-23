@@ -18,7 +18,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -56,9 +55,6 @@ public class ItemPregao implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "numero_item")
-    private Integer numeroItem;
-
     @Basic(optional = false)
     @NotNull
     @Column(name = "quantidade")
@@ -68,20 +64,7 @@ public class ItemPregao implements Serializable {
     @NotNull
     @Column(name = "valor_referencia")
     private BigDecimal valorReferencia;
-    
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
-    @Column(name = "nome")
-    private String nome;
-
-    @Size(max = 50)
-    @Column(name = "descricao")
-    private String descricao;
-
-    @Size(max = 15)
-    @Column(name = "unidade")
-    private String unidade;
+  
 
     @Size(max = 15)
     @Column(name = "status_item")
@@ -107,11 +90,11 @@ public class ItemPregao implements Serializable {
         this.id = id;
     }
 
-    public ItemPregao(Long id, int quantidade, BigDecimal valorReferencia, String nome) {
+    public ItemPregao(Long id, int quantidade, BigDecimal valorReferencia) {
         this.id = id;
         this.quantidade = quantidade;
         this.valorReferencia = valorReferencia;
-        this.nome = nome;
+        
     }
 
     public Long getId() {
@@ -122,13 +105,9 @@ public class ItemPregao implements Serializable {
         this.id = id;
     }
 
-    public Integer getNumeroItem() {
-        return numeroItem;
-    }
+   
 
-    public void setNumeroItem(Integer numeroItem) {
-        this.numeroItem = numeroItem;
-    }
+   
 
     public int getQuantidade() {
         return quantidade;
@@ -146,30 +125,7 @@ public class ItemPregao implements Serializable {
         this.valorReferencia = valorReferencia;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public String getUnidade() {
-        return unidade;
-    }
-
-    public void setUnidade(String unidade) {
-        this.unidade = unidade;
-    }
-
+  
     public String getStatusItem() {
         return statusItem;
     }
