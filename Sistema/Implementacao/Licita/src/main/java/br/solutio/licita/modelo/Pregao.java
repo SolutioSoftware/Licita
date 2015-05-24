@@ -78,8 +78,8 @@ public class Pregao implements Serializable{
     @ManyToMany
     private transient Set<StatusPregao> statusPregaoSet;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPregao")
-    private transient Set<ItemPregao> itemPregaoSet;
+    @OneToMany(mappedBy = "pregao")
+    private Set<ItemPregao> itensPregoes;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPregao")
     private transient Set<Sessao> sessaoSet;
@@ -153,15 +153,15 @@ public class Pregao implements Serializable{
         this.statusPregaoSet = statusPregaoSet;
     }
 
-    @XmlTransient
-    public Set<ItemPregao> getItemPregaoSet() {
-        return itemPregaoSet;
+    public Set<ItemPregao> getItensPregoes() {
+        return itensPregoes;
     }
 
-    public void setItemPregaoSet(Set<ItemPregao> itemPregaoSet) {
-        this.itemPregaoSet = itemPregaoSet;
+    public void setItensPregoes(Set<ItemPregao> itensPregoes) {
+        this.itensPregoes = itensPregoes;
     }
 
+    
     @XmlTransient
     public Set<Sessao> getSessaoSet() {
         return sessaoSet;

@@ -7,6 +7,7 @@ package br.solutio.licita.modelo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -18,32 +19,33 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- * TODO. refatorar entidade para resolver o problema do relacionamento com pregão. A entidade será dividida em duas: Item e ItemDePregao, onde Item terá somente a característica dos itens e ItemDePregao o Id do item, o id do pregao e o valor do item para o referido pregao.
- *  
+ * TODO. refatorar entidade para resolver o problema do relacionamento com
+ * pregão. A entidade será dividida em duas: Item e ItemDePregao, onde Item terá
+ * somente a característica dos itens e ItemDePregao o Id do item, o id do
+ * pregao e o valor do item para o referido pregao.
+ *
  * @author WitaloCarlos
  */
 @Entity
-@Table(name = "tbl_item_pregao")
+@Table(name = "tbl_item_pregao", uniqueConstraints = @UniqueConstraint(columnNames = {"id_pregao", "id_item"}))
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "ItemPregao.findAll", query = "SELECT i FROM ItemPregao i"),
     @NamedQuery(name = "ItemPregao.findById", query = "SELECT i FROM ItemPregao i WHERE i.id = :id"),
-    @NamedQuery(name = "ItemPregao.findByNumeroItem", query = "SELECT i FROM ItemPregao i WHERE i.numeroItem = :numeroItem"),
     @NamedQuery(name = "ItemPregao.findByQuantidade", query = "SELECT i FROM ItemPregao i WHERE i.quantidade = :quantidade"),
     @NamedQuery(name = "ItemPregao.findByValorReferencia", query = "SELECT i FROM ItemPregao i WHERE i.valorReferencia = :valorReferencia"),
-    @NamedQuery(name = "ItemPregao.findByNome", query = "SELECT i FROM ItemPregao i WHERE i.nome = :nome"),
-    @NamedQuery(name = "ItemPregao.findByDescricao", query = "SELECT i FROM ItemPregao i WHERE i.descricao = :descricao"),
-    @NamedQuery(name = "ItemPregao.findByUnidade", query = "SELECT i FROM ItemPregao i WHERE i.unidade = :unidade"),
     @NamedQuery(name = "ItemPregao.findByStatusItem", query = "SELECT i FROM ItemPregao i WHERE i.statusItem = :statusItem")})
 public class ItemPregao implements Serializable {
 
@@ -55,6 +57,14 @@ public class ItemPregao implements Serializable {
     @Column(name = "id")
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "id_pregao", referencedColumnName = "id")
+    private Pregao pregao;
+
+    @ManyToOne
+    @JoinColumn(name = "id_item", referencedColumnName = "id")
+    private Item item;
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "quantidade")
@@ -64,7 +74,6 @@ public class ItemPregao implements Serializable {
     @NotNull
     @Column(name = "valor_referencia")
     private BigDecimal valorReferencia;
-  
 
     @Size(max = 15)
     @Column(name = "status_item")
@@ -75,39 +84,15 @@ public class ItemPregao implements Serializable {
         @JoinColumn(name = "id_status", referencedColumnName = "id")})
     @ManyToMany
     private transient Set<StatusItemPregao> statusItemPregaoSet;
-    
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idItemPregao")
     private transient Set<Lance> lanceSet;
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idItemPregao")
     private transient Set<Proposta> propostaSet;
 
     public ItemPregao() {
     }
-
-    public ItemPregao(Long id) {
-        this.id = id;
-    }
-
-    public ItemPregao(Long id, int quantidade, BigDecimal valorReferencia) {
-        this.id = id;
-        this.quantidade = quantidade;
-        this.valorReferencia = valorReferencia;
-        
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-   
-
-   
 
     public int getQuantidade() {
         return quantidade;
@@ -125,7 +110,6 @@ public class ItemPregao implements Serializable {
         this.valorReferencia = valorReferencia;
     }
 
-  
     public String getStatusItem() {
         return statusItem;
     }
@@ -163,26 +147,81 @@ public class ItemPregao implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.pregao);
+        hash = 97 * hash + Objects.hashCode(this.item);
+        hash = 97 * hash + this.quantidade;
+        hash = 97 * hash + Objects.hashCode(this.valorReferencia);
+        hash = 97 * hash + Objects.hashCode(this.statusItem);
+        hash = 97 * hash + Objects.hashCode(this.statusItemPregaoSet);
+        hash = 97 * hash + Objects.hashCode(this.lanceSet);
+        hash = 97 * hash + Objects.hashCode(this.propostaSet);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof ItemPregao)) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
-        ItemPregao other = (ItemPregao) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ItemPregao other = (ItemPregao) obj;
+        if (!Objects.equals(this.pregao, other.pregao)) {
+            return false;
+        }
+        if (!Objects.equals(this.item, other.item)) {
+            return false;
+        }
+        if (this.quantidade != other.quantidade) {
+            return false;
+        }
+        if (!Objects.equals(this.valorReferencia, other.valorReferencia)) {
+            return false;
+        }
+        if (!Objects.equals(this.statusItem, other.statusItem)) {
+            return false;
+        }
+        if (!Objects.equals(this.statusItemPregaoSet, other.statusItemPregaoSet)) {
+            return false;
+        }
+        if (!Objects.equals(this.lanceSet, other.lanceSet)) {
+            return false;
+        }
+        if (!Objects.equals(this.propostaSet, other.propostaSet)) {
             return false;
         }
         return true;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Pregao getPregao() {
+        return pregao;
+    }
+
+    public void setPregao(Pregao pregao) {
+        this.pregao = pregao;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
     @Override
     public String toString() {
-        return "br.solutio.licita.modelo.ItemPregao[ id=" + id + " ]";
+        return "ItemPregao{" + "id=" + id + ", pregao=" + pregao + ", item=" + item + ", quantidade=" + quantidade + ", valorReferencia=" + valorReferencia + ", statusItem=" + statusItem + ", statusItemPregaoSet=" + statusItemPregaoSet + ", lanceSet=" + lanceSet + ", propostaSet=" + propostaSet + '}';
     }
 
 }
