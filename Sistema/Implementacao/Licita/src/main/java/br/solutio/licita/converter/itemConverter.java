@@ -5,7 +5,7 @@
  */
 package br.solutio.licita.converter;
 
-import br.solutio.licita.modelo.ItemPregao;
+import br.solutio.licita.modelo.Item;
 import br.solutio.licita.modelo.Pregao;
 import java.io.Serializable;
 import java.util.Map;
@@ -35,7 +35,7 @@ public class itemConverter implements Converter,Serializable{
         if (value != null
                 && !"".equals(value)) {
 
-            ItemPregao entity = (ItemPregao) value;
+            Item entity = (Item) value;
 
             // adiciona item como atributo do componente
             this.addAttribute(component, entity);
@@ -54,11 +54,11 @@ public class itemConverter implements Converter,Serializable{
         this.getAttributesFrom(component).put(key, o);
     }
 
-    protected Map<String, Object> getAttributesFrom(UIComponent component) {
+   protected Map<String, Object> getAttributesFrom(UIComponent component) {
         return component.getAttributes();
     }
 
-    private void addAttribute(UIComponent component, ItemPregao entity) {
+    private void addAttribute(UIComponent component, Item entity) {
          String key = entity.getId().toString(); // codigo da empresa como chave neste caso
         this.getAttributesFrom(component).put(key, entity);
     }
