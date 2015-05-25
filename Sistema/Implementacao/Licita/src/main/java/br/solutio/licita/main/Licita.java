@@ -42,7 +42,7 @@ public class Licita {
         
         GerenciadorTransacao.abrirTransacao(dao.getEntityManager());
         dao.criar(pregoeiro);
-        GerenciadorTransacao.encerrarTransacao(dao.getEntityManager());
+        GerenciadorTransacao.executarTransacao(dao.getEntityManager());
         
         
     }

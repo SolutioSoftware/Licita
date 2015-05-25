@@ -9,7 +9,7 @@ import br.solutio.licita.modelo.EmpresaLicitante;
 import br.solutio.licita.persistencia.DaoIF;
 import br.solutio.licita.persistencia.FabricaDAO;
 import br.solutio.licita.servico.GerenciadorTransacao;
-import br.solutio.licita.servico.ProdutorEntityManager;
+import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +18,7 @@ import org.junit.Test;
  *
  * @author Matheus Oliveira
  */
-public class DaoEmpresaLicitanteTest {
+public class DaoEmpresaLicitanteTest extends DaoTestesAbstrato{
 
     private EmpresaLicitante empresaLicitante;
     private DaoIF<EmpresaLicitante> daoEmpresaLicitante;
@@ -43,19 +43,24 @@ public class DaoEmpresaLicitanteTest {
         empresaLicitante.getContaBancaria().setNumeroConta("102933");
         empresaLicitante.getContaBancaria().setOperacao("013");
 
-        fabrica = new FabricaDAO(ProdutorEntityManager.getInstancia().getEmTestes());
+        fabrica = new FabricaDAO(emf.createEntityManager());
         daoEmpresaLicitante = fabrica.getDaoEmpresaLicitante();
-        GerenciadorTransacao.abrirTransacao(daoEmpresaLicitante.getEntityManager());
     }
 
     @Test
     public void testeSalvar() {
+        GerenciadorTransacao.abrirTransacao(daoEmpresaLicitante.getEntityManager());
 
         daoEmpresaLicitante.criar(empresaLicitante);
-        GerenciadorTransacao.encerrarTransacao(daoEmpresaLicitante.getEntityManager());
+        GerenciadorTransacao.executarTransacao(daoEmpresaLicitante.getEntityManager());
         
         assertEquals(true, empresaLicitante.getId() == 1);
         assertEquals(true, empresaLicitante.getPessoaJuridica().getId() == 1);
+    }
+    
+    @After
+    public void tearDown(){
+        GerenciadorTransacao.encerrarTransacoes(daoEmpresaLicitante.getEntityManager());
     }
     
 

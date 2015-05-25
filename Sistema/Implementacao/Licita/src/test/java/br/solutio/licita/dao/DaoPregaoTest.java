@@ -19,7 +19,7 @@ import org.junit.Test;
  *
  * @author Matheus Oliveira
  */
-public class DaoPregaoTest {
+public class DaoPregaoTest extends DaoTestesAbstrato{
     
     private DaoIF<Pregao> dao;
     private FabricaDaoIF fabrica;
@@ -28,7 +28,7 @@ public class DaoPregaoTest {
     
     @Before
     public void setUp() {
-        fabrica = new FabricaDAO(ProdutorEntityManager.getInstancia().getEmTestes());
+        fabrica = new FabricaDAO(emf.createEntityManager());
         dao = fabrica.getDaoPregao();
         pregao = new Pregao();
         pregao2 = new Pregao();
@@ -53,13 +53,8 @@ public class DaoPregaoTest {
         //Salvando no banco(HSQL) os pregoes.
         GerenciadorTransacao.abrirTransacao(dao.getEntityManager());
         dao.criar(pregao);
-        GerenciadorTransacao.encerrarTransacao(dao.getEntityManager());
-        dao.setEntityManager(ProdutorEntityManager.getInstancia().getEmTestes());
-        
-        GerenciadorTransacao.abrirTransacao(dao.getEntityManager());
         dao.criar(pregao2);
-        GerenciadorTransacao.encerrarTransacao(dao.getEntityManager());
-        dao.setEntityManager(ProdutorEntityManager.getInstancia().getEmTestes());
+        GerenciadorTransacao.executarTransacao(dao.getEntityManager());
         /**
          * 1 - Falso, caso o pregao2.id = pregao.id
          * 2 - Verdade, caso o pregao2.id <> pregao.id
@@ -73,26 +68,18 @@ public class DaoPregaoTest {
         
         
         //Atualizando os valores de PRegao2
+        GerenciadorTransacao.abrirTransacao(dao.getEntityManager());
         pregao2.setDescricao("eu quero mudança meu filho");
         pregao2.setSincronizado(Boolean.TRUE);
-        GerenciadorTransacao.abrirTransacao(dao.getEntityManager());
         dao.editar(pregao2);
-        GerenciadorTransacao.encerrarTransacao(dao.getEntityManager());
-        dao.setEntityManager(ProdutorEntityManager.getInstancia().getEmTestes());
+        GerenciadorTransacao.executarTransacao(dao.getEntityManager());
         
-        //Verificando buscaPorId
-//        pregaoAtualizado = dao.buscarPorId(pregao2.getId());
-//        assertEquals(true, pregao2.equals(pregaoAtualizado));
         
         //Verificando remocao do banco
         GerenciadorTransacao.abrirTransacao(dao.getEntityManager());
         dao.deletar(pregao);
-        GerenciadorTransacao.encerrarTransacao(dao.getEntityManager());
-        
-        dao.setEntityManager(ProdutorEntityManager.getInstancia().getEmTestes());
-        GerenciadorTransacao.abrirTransacao(dao.getEntityManager());
         dao.deletar(pregao2);
-        GerenciadorTransacao.encerrarTransacao(dao.getEntityManager());
+        GerenciadorTransacao.executarTransacao(dao.getEntityManager());
         
         assertEquals(true, !pregao.equals(pregaoVazio));
         assertEquals(false, pregao.equals(pregao2));

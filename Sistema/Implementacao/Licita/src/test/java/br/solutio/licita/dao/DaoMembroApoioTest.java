@@ -11,7 +11,7 @@ import br.solutio.licita.persistencia.DaoIF;
 import br.solutio.licita.persistencia.FabricaDAO;
 import br.solutio.licita.persistencia.FabricaDaoIF;
 import br.solutio.licita.servico.GerenciadorTransacao;
-import br.solutio.licita.servico.ProdutorEntityManager;
+import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +20,7 @@ import org.junit.Test;
  *
  * @author Matheus Oliveira
  */
-public class DaoMembroApoioTest {
+public class DaoMembroApoioTest extends DaoTestesAbstrato{
     
     private DaoIF<MembroApoio> dao;
     private MembroApoio membro;
@@ -29,23 +29,26 @@ public class DaoMembroApoioTest {
     @Before
     public void setUp(){
         membro = new MembroApoio();
-        fabrica = new FabricaDAO(ProdutorEntityManager.getInstancia().getEmTestes());
+        fabrica = new FabricaDAO(emf.createEntityManager());
         dao = fabrica.getDaoMembroApoio();
         
         membro.getPessoaFisica().setCpf("12312312312");
         membro.getPessoaFisica().setNome("Matheus");
         membro.getPessoaFisica().setRg("11221312");
         membro.setFuncao("Avaliador");
-        GerenciadorTransacao.abrirTransacao(dao.getEntityManager());
     }
     
     @Test
     public void teste(){
+        GerenciadorTransacao.abrirTransacao(dao.getEntityManager());
         dao.criar(membro);
         membro.setFuncao("Aviador");
-//        dao.editar(membro);
-//        dao.deletar(membro);
-        GerenciadorTransacao.encerrarTransacao(dao.getEntityManager());
+        GerenciadorTransacao.executarTransacao(dao.getEntityManager());
         assertEquals(true, membro.getId() == 1);
+    }
+    
+    @After
+    public void tearDown(){
+        GerenciadorTransacao.encerrarTransacoes(dao.getEntityManager());
     }
 }

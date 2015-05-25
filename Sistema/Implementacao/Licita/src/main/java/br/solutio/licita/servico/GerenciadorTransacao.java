@@ -17,20 +17,21 @@ public class GerenciadorTransacao {
     private GerenciadorTransacao(){
     }
     
-    public static void abrirTransacao(EntityManager entity) {
-        EntityTransaction et = entity.getTransaction();
+    public static void abrirTransacao(EntityManager entityManager) {
+        EntityTransaction et = entityManager.getTransaction();
         et.begin();
     }
 
-    public static void encerrarTransacao(EntityManager entity) {
-        entity.flush();
-        entity.getTransaction().commit();
-        entity.close();
+    public static void executarTransacao(EntityManager entityManager) {
+        entityManager.getTransaction().commit();
+    }
+    
+    public static void encerrarTransacoes(EntityManager entityManager){
+        entityManager.close();
     }
 
     public static void rollbackTransacao(EntityManager entity) {
         entity.getTransaction().rollback();
-        entity.close();
     }
 
 }

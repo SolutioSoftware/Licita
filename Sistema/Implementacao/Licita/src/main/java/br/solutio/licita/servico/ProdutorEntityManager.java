@@ -17,10 +17,8 @@ public class ProdutorEntityManager {
 
     private EntityManagerFactory emfRemoto;
     private EntityManagerFactory emfLocal;
-    private EntityManagerFactory emfTeste;
     private EntityManager entityManagerLocal;
     private EntityManager entityManagerRemoto;
-    private EntityManager entityManagerTeste;
     private static ProdutorEntityManager instancia;
 
     private ProdutorEntityManager() {
@@ -49,12 +47,5 @@ public class ProdutorEntityManager {
         return entityManagerRemoto;
     }
 
-    public EntityManager getEmTestes() {
-        if (emfTeste == null) {
-            emfTeste = Persistence.createEntityManagerFactory("Licita_PU_Teste");
-        }
-        entityManagerTeste = emfTeste.createEntityManager();
-        return entityManagerTeste;
-    }
 
 }

@@ -34,7 +34,7 @@ public class ServicoPregoeiro extends ServicoAbstrato<Pregoeiro> implements Serv
         criptografandoSenha(entidade);
         GerenciadorTransacao.abrirTransacao(getEntityLocal());
         getDao().criar(entidade);
-        GerenciadorTransacao.encerrarTransacao(getEntityLocal());
+        GerenciadorTransacao.executarTransacao(getEntityLocal());
     }
 
 

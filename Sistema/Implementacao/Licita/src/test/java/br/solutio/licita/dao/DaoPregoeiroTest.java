@@ -6,13 +6,13 @@
 package br.solutio.licita.dao;
 
 import br.solutio.licita.modelo.Pregoeiro;
-import br.solutio.licita.persistencia.Dao;
 import br.solutio.licita.persistencia.DaoIF;
 import br.solutio.licita.persistencia.FabricaDAO;
 import br.solutio.licita.persistencia.FabricaDaoIF;
 import br.solutio.licita.servico.GerenciadorTransacao;
-import br.solutio.licita.servico.ProdutorEntityManager;
+import org.junit.After;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,18 +20,17 @@ import org.junit.Test;
  *
  * @author Matheus Oliveira
  */
-public class DaoPregoeiroTest {
+public class DaoPregoeiroTest extends DaoTestesAbstrato {
 
     private Pregoeiro pregoeiro;
     private Pregoeiro pregoeiroAux;
+    private Pregoeiro pregoeiroEditar;
     private DaoIF<Pregoeiro> dao;
     private FabricaDaoIF fabrica;
 
     @Before
     public void setUp() {
-        fabrica = new FabricaDAO(ProdutorEntityManager.getInstancia().getEmTestes());
-        dao = fabrica.getDaoPregoeiro();
-        dao.getEntityManager();
+
         pregoeiro = new Pregoeiro();
         pregoeiro.getPessoaFisica().setCpf("06953601400");
         pregoeiro.getPessoaFisica().setNome("Matheus");
@@ -45,7 +44,7 @@ public class DaoPregoeiroTest {
         pregoeiro.getPessoaFisica().getEndereco().setEstado("PB");
         pregoeiro.getPessoaFisica().getEndereco().setLogradouro("Braz");
         pregoeiro.getPessoaFisica().getEndereco().setNumero(94);
-        
+
         pregoeiroAux = new Pregoeiro();
         pregoeiroAux.getPessoaFisica().setCpf("06953601400");
         pregoeiroAux.getPessoaFisica().setNome("Matheus");
@@ -54,49 +53,51 @@ public class DaoPregoeiroTest {
         pregoeiroAux.getLogin().setUsuario("admin");
         pregoeiroAux.getLogin().setSenha("123");
 
+        pregoeiroEditar = new Pregoeiro();
+        pregoeiroEditar.getPessoaFisica().setCpf("06953601400");
+        pregoeiroEditar.getPessoaFisica().setNome("Matheus");
+        pregoeiroEditar.getPessoaFisica().setRg("35229");
+        pregoeiroEditar.getLogin().setLogado(Boolean.TRUE);
+        pregoeiroEditar.getLogin().setUsuario("admin");
+        pregoeiroEditar.getLogin().setSenha("123");
+
+        fabrica = new FabricaDAO(emf.createEntityManager());
+        dao = fabrica.getDaoPregoeiro();
+    }
+
+    @Test
+    public void testeSalvar() {
+        //Salvando Pregoeiros
+        GerenciadorTransacao.abrirTransacao(dao.getEntityManager());
+        dao.criar(pregoeiro);
+        dao.criar(pregoeiroAux);
+        GerenciadorTransacao.executarTransacao(dao.getEntityManager());
+
+        //Verificando pregoeiro
+        assertNotNull(pregoeiro.getId());
+        assertNotNull(pregoeiroAux.getId());
+        assertEquals(false, pregoeiro.equals(pregoeiroAux));
 
     }
 
     @Test
-    public void testeSalvarEditarBuscar() {
-        //Salvando Pregoeiros
+    public void testeEditarBuscar() {
         GerenciadorTransacao.abrirTransacao(dao.getEntityManager());
-        dao.criar(pregoeiro);
-        GerenciadorTransacao.encerrarTransacao(dao.getEntityManager());
-        
-        
-        dao.setEntityManager(ProdutorEntityManager.getInstancia().getEmTestes());
-        GerenciadorTransacao.abrirTransacao(dao.getEntityManager());
-        dao.criar(pregoeiroAux);
-        GerenciadorTransacao.encerrarTransacao(dao.getEntityManager());
-        dao.setEntityManager(ProdutorEntityManager.getInstancia().getEmTestes());
-        
-        //Verificando pregoeiro
-        assertEquals(true, pregoeiro.getId() == 1);
-        assertEquals(false, pregoeiro.equals(pregoeiroAux));
-
-        //Verificando pregoeiroAux
-        assertEquals(false, pregoeiroAux.equals(pregoeiro));
-        
-        
-        //Verificando edicao
-        pregoeiroAux.getPessoaFisica().setCpf("12312312312");
-        GerenciadorTransacao.abrirTransacao(dao.getEntityManager());
-        dao.editar(pregoeiroAux);
-        GerenciadorTransacao.encerrarTransacao(dao.getEntityManager());
-        dao.setEntityManager(ProdutorEntityManager.getInstancia().getEmTestes());
-        
-        //Verificando remocao
-        GerenciadorTransacao.abrirTransacao(dao.getEntityManager());
-        dao.deletar(pregoeiro);
-        GerenciadorTransacao.encerrarTransacao(dao.getEntityManager());
-        dao.setEntityManager(ProdutorEntityManager.getInstancia().getEmTestes());
+        dao.criar(pregoeiroEditar);
+        GerenciadorTransacao.executarTransacao(dao.getEntityManager());
         
         GerenciadorTransacao.abrirTransacao(dao.getEntityManager());
-        dao.deletar(pregoeiroAux);
-        GerenciadorTransacao.encerrarTransacao(dao.getEntityManager());
-        dao.setEntityManager(ProdutorEntityManager.getInstancia().getEmTestes());
+        pregoeiroEditar.getPessoaFisica().setCpf("05434576623");
+        dao.editar(pregoeiroEditar);
+        GerenciadorTransacao.executarTransacao(dao.getEntityManager());
         
+        assertEquals(true, pregoeiroEditar.getId() == 3);
+        
+    }
+    
+    @After
+    public void tearDown(){
+        GerenciadorTransacao.encerrarTransacoes(dao.getEntityManager());
     }
 
 }

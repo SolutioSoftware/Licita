@@ -36,7 +36,7 @@ public abstract class ServicoAbstrato<T> implements ServicoIF<T> {
         try {
             GerenciadorTransacao.abrirTransacao(getDao().getEntityManager());
             getDao().criar(entidade);
-            GerenciadorTransacao.encerrarTransacao(getDao().getEntityManager());
+            GerenciadorTransacao.executarTransacao(getDao().getEntityManager());
         } catch (Exception e) {
             GerenciadorTransacao.rollbackTransacao(getDao().getEntityManager());
             logger.log(Level.SEVERE, null, e);
@@ -49,7 +49,7 @@ public abstract class ServicoAbstrato<T> implements ServicoIF<T> {
         try {
             GerenciadorTransacao.abrirTransacao(getDao().getEntityManager());
             getDao().editar(entidade);
-            GerenciadorTransacao.encerrarTransacao(getDao().getEntityManager());
+            GerenciadorTransacao.executarTransacao(getDao().getEntityManager());
         } catch (DatabaseException | TransactionException | TransactionRequiredException dbe) {
             logger.log(Level.SEVERE, null ,dbe);
             GerenciadorTransacao.rollbackTransacao(getDao().getEntityManager());
@@ -60,7 +60,7 @@ public abstract class ServicoAbstrato<T> implements ServicoIF<T> {
     public void deletar(T entidade) {
         GerenciadorTransacao.abrirTransacao(getDao().getEntityManager());
         getDao().deletar(entidade);
-        GerenciadorTransacao.encerrarTransacao(getDao().getEntityManager());
+        GerenciadorTransacao.executarTransacao(getDao().getEntityManager());
     }
     
     @Override

@@ -75,7 +75,8 @@ public class Dao<T> implements DaoIF<T> {
 
     @Override
     public T buscarPorId(Long id) {
-        return (T) getEntityManager().find(entidade, id);
+        T entity = getEntityManager().find(this.entidade, id);
+        return entity;
     }
 
     @Override
