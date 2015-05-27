@@ -8,6 +8,7 @@ package br.solutio.licita.persistencia;
 
 import br.solutio.licita.modelo.EmpresaLicitante;
 import br.solutio.licita.modelo.InstituicaoLicitadora;
+import br.solutio.licita.modelo.Item;
 import br.solutio.licita.modelo.ItemPregao;
 import br.solutio.licita.modelo.Login;
 import br.solutio.licita.modelo.MembroApoio;
@@ -76,6 +77,11 @@ public class FabricaDAO implements FabricaDaoIF{
     
     @Override
     public  DaoIF<MembroApoio> getDaoMembroApoio(){
+        return new Dao<>(entityManager);
+    }
+
+    @Override
+    public DaoIF<Item> getDaoItem() {
         return new Dao<>(entityManager);
     }
     

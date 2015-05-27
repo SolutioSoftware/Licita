@@ -16,7 +16,7 @@ import javax.faces.bean.ViewScoped;
 /**
  * @author ricardocaldeira
  */
-@ManagedBean(name="Licitador")
+@ManagedBean
 @ViewScoped
 public class ControladorLicitador extends ControladorAbstrato<InstituicaoLicitadora> implements ControladorAbstratoIF<InstituicaoLicitadora>{
     

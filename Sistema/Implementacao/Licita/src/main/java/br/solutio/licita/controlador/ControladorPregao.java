@@ -13,22 +13,23 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.persistence.PersistenceException;
 
 /**
  * @author ricardocaldeira
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class ControladorPregao extends ControladorAbstrato<Pregao> {
 
     private Pregao entidade;
     private transient List<Pregao> pregoes;
-    private transient ServicoIF<Pregao> servico = new ServicoPregao();
+    private transient ServicoIF<Pregao> servico;
 
     public ControladorPregao() {
         entidade = new Pregao();
+        servico = new ServicoPregao();
         pregoes = servico.buscarTodos();
     }
 
@@ -42,7 +43,7 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
             JsfUtil.addSuccessMessage("Salvo com Sucesso!");
             pregoes = servico.buscarTodos();
             return "pregao";
-        }catch(PersistenceException e){
+        } catch (PersistenceException | IllegalStateException e) {
             Logger.getLogger(ControladorPregao.class.getName()).log(Level.SEVERE, null, e);
             JsfUtil.addErrorMessage("Pregao ou Processo já existe");
             return "pregaoSalvar";
@@ -54,7 +55,7 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
     public String editar(Pregao entidade) {
         entidade = getEntidade();
         getServico().editar(entidade);
-        entidade = new Pregao();
+        setEntidade(new Pregao());
         JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
         pregoes = servico.buscarTodos();
         return "pregao";
@@ -64,7 +65,7 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
     public String deletar(Pregao entidade) {
         entidade = getEntidade();
         getServico().deletar(entidade);
-        entidade = new Pregao();
+        setEntidade(new Pregao());
         JsfUtil.addSuccessMessage("Excluido com Sucesso!");
         pregoes = servico.buscarTodos();
         return "pregao";
