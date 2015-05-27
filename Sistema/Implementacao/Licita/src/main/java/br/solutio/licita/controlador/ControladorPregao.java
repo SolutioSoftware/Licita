@@ -8,27 +8,32 @@ package br.solutio.licita.controlador;
 import br.solutio.licita.controlador.util.JsfUtil;
 import br.solutio.licita.modelo.Pregao;
 import br.solutio.licita.servico.ServicoIF;
-import br.solutio.licita.servico.ServicoPregao;
+import br.solutio.licita.servico.ServicoPregaoIF;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.PersistenceException;
 
 /**
  * @author ricardocaldeira
  */
-@ManagedBean
-@SessionScoped
+@RequestScoped
+@Named(value = "controladorPregao")
 public class ControladorPregao extends ControladorAbstrato<Pregao> {
 
+    @Inject
     private Pregao entidade;
+   
     private transient List<Pregao> pregoes;
-    private transient ServicoIF<Pregao> servico = new ServicoPregao();
+    
+    @Inject
+    private transient ServicoPregaoIF servico;
 
     public ControladorPregao() {
-        entidade = new Pregao();
+        
         pregoes = servico.buscarTodos();
     }
 
@@ -108,7 +113,7 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
         this.pregoes = pregoes;
     }
 
-    public void setServico(ServicoIF<Pregao> servico) {
+    public void setServico(ServicoPregaoIF servico) {
         this.servico = servico;
     }
 
