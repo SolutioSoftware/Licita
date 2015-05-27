@@ -7,8 +7,8 @@
 package br.solutio.licita.dao;
 
 import br.solutio.licita.modelo.MembroApoio;
+import br.solutio.licita.persistencia.Dao;
 import br.solutio.licita.persistencia.DaoIF;
-import br.solutio.licita.persistencia.FabricaDAO;
 import br.solutio.licita.persistencia.FabricaDaoIF;
 import br.solutio.licita.servico.GerenciadorTransacao;
 import org.junit.After;
@@ -29,8 +29,7 @@ public class DaoMembroApoioTest extends DaoTestesAbstrato{
     @Before
     public void setUp(){
         membro = new MembroApoio();
-        fabrica = new FabricaDAO(emf.createEntityManager());
-        dao = fabrica.getDaoMembroApoio();
+        dao = new Dao<>(emf.createEntityManager());
         
         membro.getPessoaFisica().setCpf("12312312312");
         membro.getPessoaFisica().setNome("Matheus");

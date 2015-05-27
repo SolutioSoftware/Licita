@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -17,6 +18,7 @@ import javax.persistence.Query;
  * @author WitaloCarlos
  * @param <T>
  */
+@Default
 public class Dao<T> implements DaoIF<T> {
 
     private Class<T> entidade;

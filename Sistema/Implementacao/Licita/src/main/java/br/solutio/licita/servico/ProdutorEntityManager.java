@@ -17,8 +17,10 @@ public class ProdutorEntityManager {
 
     private EntityManagerFactory emfRemoto;
     private EntityManagerFactory emfLocal;
+    
     private EntityManager entityManagerLocal;
     private EntityManager entityManagerRemoto;
+    
     private static ProdutorEntityManager instancia;
 
     private ProdutorEntityManager() {

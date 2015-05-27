@@ -27,22 +27,6 @@ public class Licita {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        DaoIF<Pregoeiro> dao;
-        ProdutorEntityManager produtor = ProdutorEntityManager.getInstancia();
-        FabricaDAO fabricaDAO = new FabricaDAO(produtor.getEmLocal());
-        dao = fabricaDAO.getDaoPregoeiro();
-        
-        Pregoeiro pregoeiro = new Pregoeiro();
-        String senha = Criptografar.getInstance().criptografar("admin");
-        pregoeiro.getLogin().setSenha(senha);
-        pregoeiro.getLogin().setUsuario("admin");
-        pregoeiro.getPessoaFisica().setCpf("12143343543");
-        pregoeiro.getPessoaFisica().setNome("Matheus");
-        pregoeiro.getPessoaFisica().setRg("1233123");
-        
-        GerenciadorTransacao.abrirTransacao(dao.getEntityManager());
-        dao.criar(pregoeiro);
-        GerenciadorTransacao.executarTransacao(dao.getEntityManager());
         
         
     }

@@ -6,6 +6,7 @@
 package br.solutio.licita.dao;
 
 import br.solutio.licita.modelo.EmpresaLicitante;
+import br.solutio.licita.persistencia.Dao;
 import br.solutio.licita.persistencia.DaoIF;
 import br.solutio.licita.persistencia.FabricaDAO;
 import br.solutio.licita.servico.GerenciadorTransacao;
@@ -43,8 +44,8 @@ public class DaoEmpresaLicitanteTest extends DaoTestesAbstrato{
         empresaLicitante.getContaBancaria().setNumeroConta("102933");
         empresaLicitante.getContaBancaria().setOperacao("013");
 
-        fabrica = new FabricaDAO(emf.createEntityManager());
-        daoEmpresaLicitante = fabrica.getDaoEmpresaLicitante();
+       
+        daoEmpresaLicitante = new Dao<>(emf.createEntityManager());
     }
 
     @Test

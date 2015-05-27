@@ -11,6 +11,7 @@ import br.solutio.licita.persistencia.FabricaDAO;
 import br.solutio.licita.persistencia.FabricaDaoIF;
 import java.util.List;
 import java.util.logging.Logger;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 /**
@@ -21,7 +22,8 @@ public class ServicoMembroApoio extends ServicoAbstrato<MembroApoio> implements 
 
     private FabricaDaoIF fabricaDao;
     private EntityManager entityLocal;
-    
+
+    @Inject
     private DaoIF<MembroApoio> dao;
 
     @Override
@@ -46,12 +48,7 @@ public class ServicoMembroApoio extends ServicoAbstrato<MembroApoio> implements 
 
     @Override
     public DaoIF<MembroApoio> getDao() {
-        if (fabricaDao == null) {
-            fabricaDao = new FabricaDAO(getEntityLocal());
-        }
-        if (dao == null) {
-            dao = fabricaDao.getDaoMembroApoio();
-        }
+
         return dao;
     }
 

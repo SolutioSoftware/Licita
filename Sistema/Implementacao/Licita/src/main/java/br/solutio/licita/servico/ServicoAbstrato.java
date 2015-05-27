@@ -10,6 +10,7 @@ import br.solutio.licita.persistencia.DaoIF;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.enterprise.inject.Default;
 import javax.persistence.TransactionRequiredException;
 import org.eclipse.persistence.exceptions.DatabaseException;
 import org.eclipse.persistence.exceptions.TransactionException;
@@ -19,6 +20,7 @@ import org.eclipse.persistence.exceptions.TransactionException;
  * @author Matheus Oliveira
  * @param <T>
  */
+@Default
 public abstract class ServicoAbstrato<T> implements ServicoIF<T> {
     
     protected static final Logger logger = Logger.getLogger(ServicoAbstrato.class.getName());

@@ -9,10 +9,12 @@ import br.solutio.licita.controlador.util.JsfUtil;
 import br.solutio.licita.modelo.Pregao;
 import br.solutio.licita.servico.ServicoIF;
 import br.solutio.licita.servico.ServicoPregaoIF;
+import br.solutio.licita.servico.qualificador.ServicoPregao;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.New;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.PersistenceException;
@@ -20,20 +22,20 @@ import javax.persistence.PersistenceException;
 /**
  * @author ricardocaldeira
  */
-@RequestScoped
 @Named(value = "controladorPregao")
+@RequestScoped
 public class ControladorPregao extends ControladorAbstrato<Pregao> {
 
-    @Inject
+   
     private Pregao entidade;
    
     private transient List<Pregao> pregoes;
     
-    @Inject
-    private transient ServicoPregaoIF servico;
+    @Inject @ServicoPregao
+    private ServicoPregaoIF servico;
 
     public ControladorPregao() {
-        
+        entidade = new Pregao();
         pregoes = servico.buscarTodos();
     }
 

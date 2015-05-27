@@ -7,9 +7,9 @@ package br.solutio.licita.servico;
 
 import br.solutio.licita.modelo.ItemPregao;
 import br.solutio.licita.persistencia.DaoIF;
-import br.solutio.licita.persistencia.FabricaDAO;
-import br.solutio.licita.persistencia.FabricaDaoIF;
+import br.solutio.licita.persistencia.qualificador.ItemPregaoDao;
 import java.util.List;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 /**
@@ -18,21 +18,18 @@ import javax.persistence.EntityManager;
  */
 public class ServicoItemPregao extends ServicoAbstrato<ItemPregao> implements ServicoItemPregaoIF {
 
+    @Inject
     private DaoIF<ItemPregao> dao;
+    
     private EntityManager entityLocal;
-    private FabricaDaoIF fabricaDao;
+    
 
     public ServicoItemPregao() {
     }
 
     @Override
     public DaoIF<ItemPregao> getDao() {
-        if (fabricaDao == null) {
-            fabricaDao = new FabricaDAO(getEntityLocal());
-        }
-        if (dao == null) {
-            dao = fabricaDao.getDaoItemPregao();
-        }
+       
         return dao;
     }
 

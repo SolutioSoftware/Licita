@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 /**
  *
  * @author WitaloCarlos
+ * @param <T>
  */
 
 public abstract class ControladorAbstrato<T> implements ControladorAbstratoIF<T>{

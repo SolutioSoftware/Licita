@@ -6,6 +6,7 @@
 
 package br.solutio.licita.servico;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ import java.util.List;
  * @author Matheus Oliveira
  * @param <T>
  */
-public interface ServicoIF<T>{
+public interface ServicoIF<T> extends Serializable{
 
     /**
      * Retorna a quantidade de registros da entidade na base de dados.

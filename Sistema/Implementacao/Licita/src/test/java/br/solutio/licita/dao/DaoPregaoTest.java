@@ -6,6 +6,7 @@
 package br.solutio.licita.dao;
 
 import br.solutio.licita.modelo.Pregao;
+import br.solutio.licita.persistencia.Dao;
 import br.solutio.licita.persistencia.DaoIF;
 import br.solutio.licita.persistencia.FabricaDAO;
 import br.solutio.licita.persistencia.FabricaDaoIF;
@@ -28,8 +29,7 @@ public class DaoPregaoTest extends DaoTestesAbstrato{
     
     @Before
     public void setUp() {
-        fabrica = new FabricaDAO(emf.createEntityManager());
-        dao = fabrica.getDaoPregao();
+        dao = new Dao<>(emf.createEntityManager());
         pregao = new Pregao();
         pregao2 = new Pregao();
         pregaoVazio = new Pregao();

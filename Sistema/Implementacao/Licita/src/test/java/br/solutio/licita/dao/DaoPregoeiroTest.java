@@ -6,6 +6,7 @@
 package br.solutio.licita.dao;
 
 import br.solutio.licita.modelo.Pregoeiro;
+import br.solutio.licita.persistencia.Dao;
 import br.solutio.licita.persistencia.DaoIF;
 import br.solutio.licita.persistencia.FabricaDAO;
 import br.solutio.licita.persistencia.FabricaDaoIF;
@@ -61,8 +62,8 @@ public class DaoPregoeiroTest extends DaoTestesAbstrato {
         pregoeiroEditar.getLogin().setUsuario("admin");
         pregoeiroEditar.getLogin().setSenha("123");
 
-        fabrica = new FabricaDAO(emf.createEntityManager());
-        dao = fabrica.getDaoPregoeiro();
+        
+        dao = new Dao<>(emf.createEntityManager());
     }
 
     @Test

@@ -7,8 +7,6 @@ package br.solutio.licita.servico;
 
 import br.solutio.licita.modelo.Pregao;
 import br.solutio.licita.persistencia.DaoIF;
-import br.solutio.licita.persistencia.FabricaDAO;
-import br.solutio.licita.persistencia.FabricaDaoIF;
 import java.util.List;
 import javax.persistence.EntityManager;
 
@@ -16,10 +14,14 @@ import javax.persistence.EntityManager;
  *
  * @author WitaloCarlos
  */
+@br.solutio.licita.servico.qualificador.ServicoPregao
 public class ServicoPregao extends ServicoAbstrato<Pregao> implements ServicoPregaoIF {
 
+    
     private DaoIF<Pregao> dao;
-    private FabricaDaoIF fabricaDao;
+    
+
+    
     private EntityManager entityLocal;
 
     public ServicoPregao() {
@@ -27,12 +29,6 @@ public class ServicoPregao extends ServicoAbstrato<Pregao> implements ServicoPre
 
     @Override
     public DaoIF<Pregao> getDao() {
-        if (fabricaDao == null) {
-            fabricaDao = new FabricaDAO(getEntityLocal());
-        }
-        if (dao == null) {
-            dao = fabricaDao.getDaoPregao();
-        }
         return dao;
     }
 

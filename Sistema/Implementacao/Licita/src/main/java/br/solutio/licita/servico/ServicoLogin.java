@@ -12,6 +12,7 @@ import br.solutio.licita.persistencia.FabricaDAO;
 import br.solutio.licita.persistencia.FabricaDaoIF;
 import br.solutio.licita.servico.util.Criptografar;
 import java.util.List;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 /**
@@ -21,18 +22,17 @@ import javax.persistence.EntityManager;
 public class ServicoLogin extends ServicoAbstrato<Login> implements ServicoLoginIF{
 
 
-    private FabricaDaoIF fabricaDao;
+    
     private EntityManager entityLocal;
+    
+    @Inject
     private DaoIF<Login> dao;
     
     @Override
     public DaoIF getDao() {
-        if (fabricaDao == null) {
-            fabricaDao = new FabricaDAO(getEntityLocal());
-        }
-        if (dao == null) {
-            dao = fabricaDao.getDaoLogin();
-        }
+        
+    
+        
         return dao;
     }
 
@@ -51,10 +51,9 @@ public class ServicoLogin extends ServicoAbstrato<Login> implements ServicoLogin
             String[] parametros = {"usuario", "senha"};
             Object[] valores = {usuario, senhaCript};
             List<Login> list = getDao().consultar("Login.buscaPorLogin", parametros, valores);
-            return list.isEmpty();
-        } else {
-            return false;
+            return !list.isEmpty();
         }
+         return false;
     }
     
 }

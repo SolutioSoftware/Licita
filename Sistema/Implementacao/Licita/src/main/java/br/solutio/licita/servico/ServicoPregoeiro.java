@@ -12,6 +12,7 @@ import br.solutio.licita.persistencia.FabricaDaoIF;
 import br.solutio.licita.servico.util.Criptografar;
 import java.util.List;
 import java.util.logging.Logger;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 /**
@@ -21,8 +22,10 @@ import javax.persistence.EntityManager;
 public class ServicoPregoeiro extends ServicoAbstrato<Pregoeiro> implements ServicoPregoeiroIF {
 
     private EntityManager entityLocal;
+
+    @Inject
     private DaoIF<Pregoeiro> dao;
-    private FabricaDaoIF fabricaDao;
+
 
     @Override
     public int contagem() {
@@ -66,12 +69,6 @@ public class ServicoPregoeiro extends ServicoAbstrato<Pregoeiro> implements Serv
 
     @Override
     public DaoIF<Pregoeiro> getDao() {
-         if (fabricaDao == null) {
-            fabricaDao = new FabricaDAO(getEntityLocal());
-        }
-        if (dao == null) {
-            dao = fabricaDao.getDaoPregoeiro();
-        }
         return dao;
     }
 
