@@ -1,6 +1,6 @@
 body {
     background-color: #ffffff;
-    font-size: 12px;
+    font-size: 75%;
     font-family: Verdana, "Verdana CE",  Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
     color: #000000;  
     margin: 0px;
@@ -144,7 +144,8 @@ footer {
     box-shadow: none;
     width: 80px;
     height: 100%; 
-    background-repeat: no-repeat
+    background-repeat: no-repeat; 
+    min-height: 80px;
 }
 
 .bt_pregoes:hover{
@@ -168,7 +169,8 @@ footer {
     box-shadow: none;
     width: 80px;
     height: 100%; 
-    background-repeat: no-repeat
+    background-repeat: no-repeat;
+    min-height: 80px;
 }
 
 .bt_sessoes:hover{
@@ -192,7 +194,8 @@ footer {
     box-shadow: none;
     width: 80px;
     height: 100%; 
-    background-repeat: no-repeat
+    background-repeat: no-repeat;
+    min-height: 80px;
 }
 
 .bt_licitantes:hover{
@@ -215,7 +218,8 @@ footer {
     box-shadow: none;
     width: 80px;
     height: 100%; 
-    background-repeat: no-repeat
+    background-repeat: no-repeat;
+    min-height: 80px;
 }
 
 .bt_itens:hover{
@@ -239,7 +243,8 @@ footer {
     box-shadow: none;
     width: 80px;
     height: 100%; 
-    background-repeat: no-repeat
+    background-repeat: no-repeat;
+    min-height: 80px;
 }
 
 .bt_equipe:hover{
@@ -263,7 +268,8 @@ footer {
     box-shadow: none;
     width: 80px;
     height: 100%; 
-    background-repeat: no-repeat
+    background-repeat: no-repeat;
+    min-height: 80px;
 }
 
 .bt_licitadores:hover{
@@ -286,7 +292,8 @@ footer {
     box-shadow: none;
     width: 80px;
     height: 100%; 
-    background-repeat: no-repeat
+    background-repeat: no-repeat;
+    min-height: 80px;
 }
 
 .bt_ajustes:hover{

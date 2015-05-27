@@ -5,9 +5,10 @@
  */
 package br.solutio.licita.servico;
 
-import br.solutio.licita.modelo.ItemPregao;
+import br.solutio.licita.modelo.Item;
 import br.solutio.licita.persistencia.DaoIF;
-import br.solutio.licita.persistencia.qualificador.ItemPregaoDao;
+import br.solutio.licita.persistencia.FabricaDAO;
+import br.solutio.licita.persistencia.FabricaDaoIF;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -16,36 +17,36 @@ import javax.persistence.EntityManager;
  *
  * @author ricardocaldeira
  */
-public class ServicoItemPregao extends ServicoAbstrato<ItemPregao> implements ServicoItemPregaoIF {
+public class ServicoItem extends ServicoAbstrato<Item> implements ServicoItemIF {
 
     @Inject
-    private DaoIF<ItemPregao> dao;
+    private DaoIF<Item> dao;
     
     private EntityManager entityLocal;
-    
+    private FabricaDaoIF fabricaDao;
 
-    public ServicoItemPregao() {
+    public ServicoItem() {
     }
 
     @Override
-    public DaoIF<ItemPregao> getDao() {
-       
+    public DaoIF<Item> getDao() {
+        
         return dao;
     }
 
-    public void setDao(DaoIF<ItemPregao> dao) {
+    public void setDao(DaoIF<Item> dao) {
         this.dao = dao;
     }
 
     @Override
-    public ItemPregao buscarPorId(Long id) {
+    public Item buscarPorId(Long id) {
         return getDao().buscarPorId(id);
     }
 
     @Override
-    public List<ItemPregao> buscarTodos() {
+    public List<Item> buscarTodos() {
         getDao().setEntityManager(ProdutorEntityManager.getInstancia().getEmLocal());
-        return getDao().consultar("ItemPregao.findAll", null, null);
+        return getDao().consultar("Item.findAll", null, null);
     }
 
     public EntityManager getEntityLocal() {

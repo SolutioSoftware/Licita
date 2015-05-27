@@ -24,15 +24,15 @@
                 </f:facet>
            
 
-               <p:column headerText="Número do processo" filterBy="#{entidade.numeroProcesso}" filterMatchMode="contains">
+                <p:column headerText="Número do processo" filterBy="#{entidade.numeroProcesso}" filterMatchMode="contains" filterStyle="display:none" >
                     <h:outputText value="#{entidade.numeroProcesso}" />
                 </p:column>
 
-                <p:column headerText="Número do pregão" filterBy="#{entidade.numeroPregao}" filterMatchMode="contains">
+                <p:column headerText="Número do pregão" filterBy="#{entidade.numeroPregao}" filterMatchMode="contains" filterStyle="display:none">
                     <h:outputText value="#{entidade.numeroPregao}" />
                 </p:column>
 
-                <p:column headerText="Status" filterBy="#{entidade.statusPregao}" filterMatchMode="contains">
+                <p:column headerText="Status" filterBy="#{entidade.statusPregao}" filterMatchMode="contains" filterStyle="display:none">
                     <h:outputText value="#{entidade.statusPregao}" />
                 </p:column>
 

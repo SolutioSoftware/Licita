@@ -7,6 +7,7 @@ package br.solutio.licita.persistencia;
 
 import br.solutio.licita.modelo.EmpresaLicitante;
 import br.solutio.licita.modelo.InstituicaoLicitadora;
+import br.solutio.licita.modelo.Item;
 import br.solutio.licita.modelo.ItemPregao;
 import br.solutio.licita.modelo.Login;
 import br.solutio.licita.modelo.MembroApoio;
@@ -25,8 +26,9 @@ public interface FabricaDaoIF {
     public DaoIF<Login> getDaoLogin();
     public DaoIF<EmpresaLicitante> getDaoEmpresaLicitante();
     public DaoIF<ItemPregao> getDaoItemPregao();
+    public DaoIF<Item> getDaoItem();
     public DaoIF<Pregao> getDaoPregao();
     public DaoIF<PessoaFisica> getDaoPessoaFisica();
     public DaoIF<MembroApoio> getDaoMembroApoio();
-    
+
 }

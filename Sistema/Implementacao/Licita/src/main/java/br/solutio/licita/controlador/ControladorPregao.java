@@ -8,34 +8,28 @@ package br.solutio.licita.controlador;
 import br.solutio.licita.controlador.util.JsfUtil;
 import br.solutio.licita.modelo.Pregao;
 import br.solutio.licita.servico.ServicoIF;
-import br.solutio.licita.servico.ServicoPregaoIF;
-import br.solutio.licita.servico.qualificador.ServicoPregao;
+import br.solutio.licita.servico.ServicoPregao;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.New;
-import javax.inject.Inject;
-import javax.inject.Named;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.persistence.PersistenceException;
 
 /**
  * @author ricardocaldeira
  */
-@Named(value = "controladorPregao")
+@ManagedBean
 @RequestScoped
 public class ControladorPregao extends ControladorAbstrato<Pregao> {
 
-   
     private Pregao entidade;
-   
     private transient List<Pregao> pregoes;
-    
-    @Inject @ServicoPregao
-    private ServicoPregaoIF servico;
+    private transient ServicoIF<Pregao> servico;
 
     public ControladorPregao() {
         entidade = new Pregao();
+        servico = new ServicoPregao();
         pregoes = servico.buscarTodos();
     }
 
@@ -49,7 +43,7 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
             JsfUtil.addSuccessMessage("Salvo com Sucesso!");
             pregoes = servico.buscarTodos();
             return "pregao";
-        }catch(PersistenceException e){
+        } catch (PersistenceException | IllegalStateException e) {
             Logger.getLogger(ControladorPregao.class.getName()).log(Level.SEVERE, null, e);
             JsfUtil.addErrorMessage("Pregao ou Processo já existe");
             return "pregaoSalvar";
@@ -61,7 +55,7 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
     public String editar(Pregao entidade) {
         entidade = getEntidade();
         getServico().editar(entidade);
-        entidade = new Pregao();
+        setEntidade(new Pregao());
         JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
         pregoes = servico.buscarTodos();
         return "pregao";
@@ -71,7 +65,7 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
     public String deletar(Pregao entidade) {
         entidade = getEntidade();
         getServico().deletar(entidade);
-        entidade = new Pregao();
+        setEntidade(new Pregao());
         JsfUtil.addSuccessMessage("Excluido com Sucesso!");
         pregoes = servico.buscarTodos();
         return "pregao";
@@ -115,7 +109,7 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
         this.pregoes = pregoes;
     }
 
-    public void setServico(ServicoPregaoIF servico) {
+    public void setServico(ServicoIF<Pregao> servico) {
         this.servico = servico;
     }
 
