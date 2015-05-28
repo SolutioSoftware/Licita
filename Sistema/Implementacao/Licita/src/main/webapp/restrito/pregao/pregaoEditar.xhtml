@@ -11,7 +11,7 @@
 
         <h:form id="formDtPregao">
 
-            <p:dataTable id='dt_pregoes' var="entidade" sortBy="#{entidade.id}" sortOrder="DESCENDING" value="#{controladorPregao.pregoes}" 
+            <p:dataTable id='dt_pregoes' var="entidade" value="#{controladorPregao.pregoes}" 
                          widgetVar="tbl_pregoes" paginator="true" style="padding:5px" rows="10" rowsPerPageTemplate="5,10"  
                          emptyMessage="Nenhum pregão cadastrado"  paginatorAlwaysVisible="true" >
 

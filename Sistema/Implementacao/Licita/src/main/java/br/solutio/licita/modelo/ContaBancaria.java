@@ -36,21 +36,28 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "ContaBancaria.findByNumeroConta", query = "SELECT c FROM ContaBancaria c WHERE c.numeroConta = :numeroConta"),
     @NamedQuery(name = "ContaBancaria.findByOperacao", query = "SELECT c FROM ContaBancaria c WHERE c.operacao = :operacao")})
 public class ContaBancaria implements Serializable {
+    
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
+    
     @Column(name = "banco")
-    private Integer banco;
+    private String banco;
+    
     @Size(max = 50)
     @Column(name = "nome")
     private String nome;
+    
     @Size(max = 10)
     @Column(name = "agencia")
     private String agencia;
+    
     @Size(max = 15)
     @Column(name = "numero_conta")
     private String numeroConta;
+    
     @Size(max = 6)
     @Column(name = "operacao")
     private String operacao;
@@ -62,7 +69,6 @@ public class ContaBancaria implements Serializable {
     public ContaBancaria() {
     }
 
-
     public Long getId() {
         return this.id;
     }
@@ -71,11 +77,11 @@ public class ContaBancaria implements Serializable {
         this.id = id;
     }
 
-    public Integer getBanco() {
+    public String getBanco() {
         return banco;
     }
 
-    public void setBanco(Integer banco) {
+    public void setBanco(String banco) {
         this.banco = banco;
     }
 

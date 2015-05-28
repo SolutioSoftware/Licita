@@ -38,7 +38,7 @@ public class DaoEmpresaLicitanteTest extends DaoTestesAbstrato{
         empresaLicitante.getRepresentanteLegal().getPessoaFisica().setNome("Mahtues");
         empresaLicitante.getRepresentanteLegal().getPessoaFisica().setRg("1231231");
         empresaLicitante.getContaBancaria().setAgencia("3315");
-        empresaLicitante.getContaBancaria().setBanco(102);
+        empresaLicitante.getContaBancaria().setBanco("102");
         empresaLicitante.getContaBancaria().setNome("CEF");
         empresaLicitante.getContaBancaria().setNumeroConta("102933");
         empresaLicitante.getContaBancaria().setOperacao("013");

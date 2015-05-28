@@ -103,7 +103,7 @@
                     <p:inputText id="celular" value="#{Licitador.contato.valor}" title="Celular" placeholder="(DDD) 9999-9999" maxlength="14"/>
 
                     <p:outputLabel value="E-mail:" for="email"/>
-                    <p:inputText id="email" styleClass="lower" value="" size="25" validatorMessage="E-mail incorreto" title="E-mail" placeholder="E-mail">
+                    <p:inputText id="email" styleClass="lower" value="#{Licitador.contato.valor}" size="25" validatorMessage="E-mail incorreto" title="E-mail" placeholder="E-mail">
                         <f:validateRegex pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})$"/>
                     </p:inputText>
 

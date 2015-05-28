@@ -13,7 +13,7 @@ h1 {
     font-weight: bold;
     margin: 0px;
     padding: 0px;
-    color: #D20005;
+    color: #036fab;
 }
 
 a:link, a:visited {
@@ -64,6 +64,7 @@ a:link:hover, a:visited:hover  {
     position: relative;
     padding: 5px;
 }
+
 
 .left_content {
     background-color: #dddddd;

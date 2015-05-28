@@ -11,7 +11,7 @@
 
         <h:form id="formDtPregao">
 
-            <p:dataTable id='dt_pregoes' var="entidade" sortBy="#{entidade.id}" sortOrder="DESCENDING" value="#{controladorPregao.pregoes}" 
+            <p:dataTable id='dt_pregoes' var="entidade"  value="#{controladorPregao.pregoes}" 
                          widgetVar="tbl_pregoes" paginator="true" style="padding:5px" rows="10" rowsPerPageTemplate="5,10"  
                          emptyMessage="Nenhum pregão cadastrado"  paginatorAlwaysVisible="true" >
 
@@ -55,15 +55,15 @@
         </h:form>
     </ui:define>
 
-    <ui:define name="pn_conteudo">
+    <ui:define name="pn_conteudo" >
 
         <p:growl id="growPregaoSalvar" showDetail="false" life="3000" class="ui-growl" />
 
-        <h:form id="pregao_form" title="Pregão" style="text-align: center"  >
+        <h:form id="pregao_form" title="Pregão" style="text-align: center">
 
-            <div style="margin-left: 25%; margin-top: 2%">
+            <div style="margin-left: 25%; margin-top: 2%" >
 
-                <h:panelGrid columns="2"  id="panelGridSavePregao" columnClasses="colunaEsquerda,colunaDireita">
+                <h:panelGrid columns="2"  id="panelGridSavePregao" columnClasses="colunaEsquerda,colunaDireita" >
 
                     <p:outputLabel value="Número do Processo:" for="numeroProcesso" />
                     <p:inputText id="numeroProcesso" value="#{controladorPregao.entidade.numeroProcesso}" title="Número do Processo" 
