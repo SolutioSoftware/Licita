@@ -53,6 +53,7 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
 
     @Override
     public String editar(Pregao entidade) {
+        
         entidade = getEntidade();
         getServico().editar(entidade);
         setEntidade(new Pregao());
@@ -107,10 +108,6 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
 
     public void setPregoes(List<Pregao> pregoes) {
         this.pregoes = pregoes;
-    }
-
-    public void setServico(ServicoIF<Pregao> servico) {
-        this.servico = servico;
     }
 
 }

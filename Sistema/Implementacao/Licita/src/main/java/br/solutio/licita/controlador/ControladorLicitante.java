@@ -63,7 +63,7 @@ public class ControladorLicitante extends ControladorAbstrato<EmpresaLicitante> 
         setEntidade(new EmpresaLicitante());
         JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
         empresas = servico.buscarTodos();
-        return "licitanteEditar";
+        return "licitante";
     }
 
     @Override

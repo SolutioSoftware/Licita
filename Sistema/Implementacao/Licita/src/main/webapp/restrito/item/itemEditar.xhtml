@@ -17,102 +17,45 @@
 
                 <f:facet name="header">
                     <p:outputPanel>
-                        <p:commandButton value="Novo" style="width: 80px" action="#{controladorItem.limparDados}" update="@form"  icon="fa fa-plus" 
+                        <p:commandButton value="Novo" style="width: 80px" action="#{controladorItem.limparDados}" update="@form"  
+                                         icon="fa fa-plus" 
                                          class="botaoNovo"/>
-                        <p:inputText id="globalFilter" onkeyup="PF('tbl_itensPregao').filter()" style="width:250px" placeholder="Digite sua busca" />
+                        <p:inputText id="globalFilter" onkeyup="PF('tbl_itensPregao').filter()" style="width:250px" 
+                                     placeholder="Digite sua busca" />
                     </p:outputPanel>
                 </f:facet>
 
 
-                <p:column headerText="Nome do item" filterBy="#{entidade.item.nome}" filterMatchMode="contains">
-                    <h:outputText value="#{entidade.item.nome}" />
+               <p:column headerText="Codigo do item" filterBy="#{entidade.id}" filterMatchMode="contains" filterStyle="display:none">
+                    <h:outputText value="#{entidade.id}" />
                 </p:column>
 
-                <p:column headerText="Valor de Referência" filterBy="#{entidade.valorReferencia}" filterMatchMode="contains">
-                    <h:outputText value="#{entidade.valorReferencia}" />
+                <p:column headerText="Nome do item" filterBy="#{entidade.nome}" filterMatchMode="contains" filterStyle="display:none">
+                    <h:outputText value="#{entidade.nome}" />
                 </p:column>
 
-                <p:column headerText="Unidade" filterBy="#{entidade.item.unidade}" filterMatchMode="contains">
-                    <h:outputText value="#{entidade.item.unidade}" />
-                </p:column>
-
-
-                <p:column headerText="Ações" width="50">
-
-                    <p:commandButton id="btEditar" icon="ui-icon-pencil" action="#{controladorItem.preparaEditar()}" update="@form"  
-                                     style="font-size: 10px">
-                        <f:setPropertyActionListener value="#{entidade}" target="#{controladorItem.entidade}"  />
-                        <p:tooltip for="btEditar" value="Editar"/>
-                    </p:commandButton>
-
-                    <p:commandButton id="btExcluir" icon="fa fa-trash" action="#{controladorItem.deletar(entidade)}" update="@form" 
-                                     style="font-size: 10px">
-                        <f:setPropertyActionListener value="#{entidade}" target="#{controladorItem.entidade}"  />
-                        <p:tooltip for="btExcluir" value="Excluir"/>
-                        <p:confirm icon="ui-icon-alert" header="Excluir Item" message="Deseja realmente excluir este Item"/>
-                    </p:commandButton>
-
+                <p:column headerText="Unidade" filterBy="#{entidade.unidade}" filterMatchMode="contains" filterStyle="display:none">
+                    <h:outputText value="#{entidade.unidade}" />
                 </p:column>
 
             </p:dataTable>
         </h:form>
     </ui:define>
 
-    <ui:define name="pn_conteudo">
-        
-         <h:form id="formDtItemPregao">
-
-            <p:dataTable id='dt_pregoes' var="entidade" sortBy="#{entidade.id}" sortOrder="DESCENDING" value="#{controladorItem.itens}" 
-                         widgetVar="tbl_itens" paginator="true" style="padding:5px" rows="10" rowsPerPageTemplate="5,10"  
-                         emptyMessage="Nenhum Item Cadastrado"  paginatorAlwaysVisible="true">
-
-                <f:facet name="header">
-                    <p:outputPanel>
-                        <p:commandButton value="Novo" style="width: 80px" action="#{controladorItem.limparDados}" update="@form"  icon="fa fa-plus" 
-                                         class="botaoNovo"/>
-                        <p:inputText id="globalFilter" onkeyup="PF('tbl_itens').filter()" style="width:250px" placeholder="Digite sua busca" />
-                    </p:outputPanel>
-                </f:facet>
-
-
-                <p:column headerText="Codigo do item" filterBy="#{entidade.id}" filterMatchMode="contains">
-                    <h:outputText value="#{entidade.id}" />
-                </p:column>
-
-                <p:column headerText="Nome do item" filterBy="#{entidade.item.nome}" filterMatchMode="contains">
-                    <h:outputText value="#{entidade.item.nome}" />
-                </p:column>
-
-                <p:column headerText="Valor de Referência" filterBy="#{entidade.valorReferencia}" filterMatchMode="contains">
-                    <h:outputText value="#{entidade.valorReferencia}" />
-                </p:column>
-
-            </p:dataTable>
-        </h:form>
-    </ui:define> 
 
     <ui:define name="pn_conteudo">
-
-        
 
         <h:form id="itemPregao_form" title="Item" style="text-align: center"  >
-            
+
             <p:growl id="growItemPregaoSalvar" showDetail="false" life="3000" class="ui-growl" />
 
             <div style="margin-left: 25%; margin-top: 2%">
 
                 <h:panelGrid columns="2" id="panelGridSavePregao" columnClasses="colunaEsquerda,colunaDireita">
-                    
-                    <p:outputLabel value="Codigo Do Item:" for="codigoItem"/>
-                    <p:outputLabel id="codigoItem" value="#{controladorItem.entidade.id}"/>
 
                     <p:outputLabel value="Nome:" for="nome"/>
                     <p:inputText id="nome" value="#{controladorItem.entidade.nome}" title="Nome" 
                                  required="true" requiredMessage="O campo nome é obrigatorio" maxlength="30" style="width: 212px"/>
-
-                    <p:outputLabel value="Quantidade:" for="quantidade"/>
-                    <p:spinner id="quantidade" value="#{controladorItem.entidade.quantidade}"
-                               required="true" requiredMessage="O campo quantidade é obrigatorio" style="width: 212px" min="0"/>
 
                     <p:outputLabel value="Unidade:" for="unidade" style="text-align:right"/>
                     <h:selectOneMenu id="unidade" value="#{controladorItem.entidade.unidade}" style="width: 213px">
@@ -152,10 +95,6 @@
                         <f:selectItem itemLabel="Unidade" itemValue="unidade"/>
 
                     </h:selectOneMenu>
-
-                    <p:outputLabel value="Valor de Referencia:" for="valorDeReferencia"/>
-                    <p:spinner id="valorDeReferencia" value="#{controladorItem.entidade.valorReferencia}"
-                               required="true" requiredMessage="O campo quantidade é obrigatorio" style="width: 212px" min="0"/>
 
                     <p:outputLabel value="Descrição:"  for="descricao" />
                     <p:inputTextarea id="descricao" value="#{controladorItem.entidade.descricao}" title="Descrição" placeholder="Descrição" 

@@ -15,6 +15,7 @@ import br.solutio.licita.modelo.MembroApoio;
 import br.solutio.licita.modelo.PessoaFisica;
 import br.solutio.licita.modelo.Pregao;
 import br.solutio.licita.modelo.Pregoeiro;
+import br.solutio.licita.modelo.Sessao;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 
@@ -82,6 +83,11 @@ public class FabricaDAO implements FabricaDaoIF{
 
     @Override
     public DaoIF<Item> getDaoItem() {
+        return new Dao<>(entityManager);
+    }
+    
+    @Override
+    public DaoIF<Sessao> getDaoSessao() {
         return new Dao<>(entityManager);
     }
     

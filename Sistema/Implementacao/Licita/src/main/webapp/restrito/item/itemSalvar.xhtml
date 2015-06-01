@@ -60,8 +60,6 @@
 
     <ui:define name="pn_conteudo">
 
-        
-
         <h:form id="itemPregao_form" title="Item" style="text-align: center"  >
 
             <p:growl id="growItemPregaoSalvar" showDetail="false" life="3000" class="ui-growl" />
@@ -128,7 +126,8 @@
 
             <div style="margin-left: 2%; margin-top: 2%; margin-right: 2%">
 
-                <p:commandButton  id="btSalvarItemPregao" value="Salvar" icon="fa fa-save" action="#{controladorItem.criar(entidade)}" update="growItem" process="@this" ajax="false" />
+                <p:commandButton  id="btSalvarItemPregao" value="Salvar" icon="fa fa-save" action="#{controladorItem.criar(entidade)}" 
+                                  update="growItem" process="@this" ajax="false" />
 
             </div>
 
