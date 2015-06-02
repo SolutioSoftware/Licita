@@ -17,7 +17,7 @@
 
                 <f:facet name="header">
                     <p:outputPanel>
-                        <p:commandButton value="Novo" style="width: 80px" action="" update="@form"  icon="fa fa-plus" 
+                        <p:commandButton value="Novo" style="width: 80px" update="@form"  icon="fa fa-plus" 
                                          class="botaoNovo"/>
                         <p:inputText id="globalFilter" onkeyup="PF('tbl_licitadores').filter()" style="width:250px" placeholder="Digite sua busca" />
                     </p:outputPanel>
@@ -37,13 +37,13 @@
 
                 <p:column headerText="Ações" width="50">
 
-                    <p:commandButton id="btEditar" icon="ui-icon-pencil" action="" update="@form"  
+                    <p:commandButton id="btEditar" icon="ui-icon-pencil"  update="@form"  
                                      style="font-size: 10px">
                         <f:setPropertyActionListener value="" target=""  />
                         <p:tooltip for="btEditar" value="Editar"/>
                     </p:commandButton>
 
-                    <p:commandButton id="btExcluir" icon="fa fa-trash" action="" update="@form" 
+                    <p:commandButton id="btExcluir" icon="fa fa-trash"  update="@form" 
                                      style="font-size: 10px">
                         <f:setPropertyActionListener value="" target=""  />
                         <p:tooltip for="btExcluir" value="Excluir"/>

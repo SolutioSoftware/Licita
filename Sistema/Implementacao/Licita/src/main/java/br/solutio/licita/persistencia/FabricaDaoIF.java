@@ -32,6 +32,5 @@ public interface FabricaDaoIF {
     public DaoIF<PessoaFisica> getDaoPessoaFisica();
     public DaoIF<MembroApoio> getDaoMembroApoio();
     public DaoIF<Sessao> getDaoSessao();
-   
 
 }

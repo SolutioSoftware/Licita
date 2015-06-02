@@ -37,26 +37,31 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Login.findBySenha", query = "SELECT l FROM Login l WHERE l.senha = :senha"),
     @NamedQuery(name = "Login.findByLogado", query = "SELECT l FROM Login l WHERE l.logado = :logado")})
 public class Login implements Serializable{
+    
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
     @Column(name = "usuario")
     private String usuario;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
     @Column(name = "senha")
     private String senha;
+    
     @Column(name = "logado")
     private Boolean logado;
     
-    @PrimaryKeyJoinColumn(name = "id_pregoeiro", referencedColumnName = "id")
+    @JoinColumn(name = "id_pregoeiro", referencedColumnName = "id")
     @OneToOne
     private Pregoeiro idPregoeiro;
 
