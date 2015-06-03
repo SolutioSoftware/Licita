@@ -11,6 +11,9 @@
 
         <h:form id="formDtequipe">
 
+            <h1>Membros de Apoio</h1>
+            <br/>
+
             <p:dataTable id='dt_equipe' var="entidade" value="#{controladorEquipe.pessoasfisica}" 
                          widgetVar="tbl_equipe" paginator="true" style="padding:5px" rows="10" rowsPerPageTemplate="5,10"  
                          emptyMessage="Nenhum Membro Cadastrado"  paginatorAlwaysVisible="true">
@@ -54,8 +57,8 @@
     </ui:define>
 
     <ui:define name="pn_conteudo">
-   
+
     </ui:define> 
-    
+
 
 </ui:composition>
