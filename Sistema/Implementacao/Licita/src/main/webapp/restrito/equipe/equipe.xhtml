@@ -11,7 +11,7 @@
 
         <h:form id="formDtequipe">
 
-            <p:dataTable id='dt_equipe' var="entidade" sortBy="#{entidade.id}" sortOrder="DESCENDING" value="#{controladorEquipe.pessoasfisica}" 
+            <p:dataTable id='dt_equipe' var="entidade" value="#{controladorEquipe.pessoasfisica}" 
                          widgetVar="tbl_equipe" paginator="true" style="padding:5px" rows="10" rowsPerPageTemplate="5,10"  
                          emptyMessage="Nenhum Membro Cadastrado"  paginatorAlwaysVisible="true">
 
@@ -31,23 +31,19 @@
                     <h:outputText value="#{entidade.nome}" />
                 </p:column>
 
-                <p:column headerText="Função: " filterBy="" filterMatchMode="contains" filterStyle="display:none">
-                    <h:outputText value="" />
-                </p:column>
-
                 <p:column headerText="Ações" width="50">
 
-                    <p:commandButton id="btEditar" icon="ui-icon-pencil" action="#{controladorItem.preparaEditar()}" update="@form"  
+                    <p:commandButton id="btEditar" icon="ui-icon-pencil" action="#{controladorEquipe.preparaEditar()}" update="@form"  
                                      style="font-size: 10px">
-                        <f:setPropertyActionListener value="#{entidade}" target="#{controladorItem.entidade}"  />
+                        <f:setPropertyActionListener value="#{entidade}" target="#{controladorEquipe.entidade}"  />
                         <p:tooltip for="btEditar" value="Editar"/>
                     </p:commandButton>
 
-                    <p:commandButton id="btExcluir" icon="fa fa-trash" action="#{controladorItem.deletar(entidade)}" update="@form" 
+                    <p:commandButton id="btExcluir" icon="fa fa-trash" action="#{controladorEquipe.deletar(entidade)}" update="@form" 
                                      style="font-size: 10px">
-                        <f:setPropertyActionListener value="#{entidade}" target="#{controladorItem.entidade}"  />
+                        <f:setPropertyActionListener value="#{entidade}" target="#{controladorEquipe.entidade}"  />
                         <p:tooltip for="btExcluir" value="Excluir"/>
-                        <p:confirm icon="ui-icon-alert" header="Excluir Item" message="Deseja realmente excluir este Item"/>
+                        <p:confirm icon="ui-icon-alert" header="Excluir Membro de equipe" message="Deseja realmente excluir este membro de equipe"/>
                     </p:commandButton>
 
                 </p:column>

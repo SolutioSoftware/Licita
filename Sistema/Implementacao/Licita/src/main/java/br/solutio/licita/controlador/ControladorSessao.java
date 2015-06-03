@@ -31,7 +31,6 @@ public class ControladorSessao extends ControladorAbstrato<Sessao> {
     public ControladorSessao() {
         entidade = new Sessao();
         servico = new ServicoSessao();
-        sessoes = servico.buscarTodos();
     }
 
     @Override
@@ -42,7 +41,6 @@ public class ControladorSessao extends ControladorAbstrato<Sessao> {
             setEntidade(null);
             setEntidade(new Sessao());
             JsfUtil.addSuccessMessage("Salvo com Sucesso!");
-            sessoes = servico.buscarTodos();
             return "sessao";
         } catch (PersistenceException | IllegalStateException e) {
             Logger.getLogger(ControladorSessao.class.getName()).log(Level.SEVERE, null, e);
@@ -54,12 +52,10 @@ public class ControladorSessao extends ControladorAbstrato<Sessao> {
 
     @Override
     public String editar(Sessao entidade) {
-        
         entidade = getEntidade();
         getServico().editar(entidade);
         setEntidade(new Sessao());
         JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
-        sessoes = servico.buscarTodos();
         return "sessao";
     }
 
@@ -69,7 +65,6 @@ public class ControladorSessao extends ControladorAbstrato<Sessao> {
         getServico().deletar(entidade);
         setEntidade(new Sessao());
         JsfUtil.addSuccessMessage("Excluido com Sucesso!");
-        sessoes = servico.buscarTodos();
         return "sessao";
     }
     
@@ -95,7 +90,7 @@ public class ControladorSessao extends ControladorAbstrato<Sessao> {
     }
 
     public List<Sessao> getSessoes() {
-        return sessoes;
+        return sessoes = servico.buscarTodos();
     }
 
     public void setSessoes(List<Sessao> sessoes) {

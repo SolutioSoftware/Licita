@@ -5,16 +5,19 @@
  */
 package br.solutio.licita.controlador;
 
+import br.solutio.licita.controlador.util.JsfUtil;
 import br.solutio.licita.modelo.Login;
 import br.solutio.licita.modelo.MembroApoio;
 import br.solutio.licita.modelo.PessoaFisica;
 import br.solutio.licita.modelo.Pregoeiro;
+import br.solutio.licita.servico.ServicoIF;
 import br.solutio.licita.servico.ServicoMembroApoio;
 import br.solutio.licita.servico.ServicoMembroApoioIF;
-import br.solutio.licita.servico.ServicoIF;
+import br.solutio.licita.servico.ServicoPessoaFisica;
 import br.solutio.licita.servico.ServicoPregoeiro;
 import br.solutio.licita.servico.ServicoPregoeiroIF;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -27,18 +30,29 @@ import javax.faces.bean.ViewScoped;
 @ViewScoped
 public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> implements ControladorAbstratoIF<PessoaFisica> {
 
-    private PessoaFisica entidade = new PessoaFisica();
-    private Pregoeiro pregoeiro = new Pregoeiro();
-    private MembroApoio membroApoio = new MembroApoio();
-    private Login login = new Login();
+    private PessoaFisica entidade;
+    private Pregoeiro pregoeiro;
+    private MembroApoio membroApoio;
+    private Login login;
     private transient List<PessoaFisica> pessoasfisica;
     private boolean cargoPregoeiro = false;
     private boolean cargoMembrodeApoio = false;
     private String valor;
     private String confirmaSenha = "";
-    private transient ServicoMembroApoioIF servicoMembro = new ServicoMembroApoio();
-    private transient ServicoPregoeiroIF servicoPregoeiro = new ServicoPregoeiro();
+    private final transient ServicoIF<PessoaFisica> servico;
+    private final transient ServicoMembroApoioIF servicoMembro;
+    private final transient ServicoPregoeiroIF servicoPregoeiro;
     private transient static final Logger log = Logger.getGlobal();
+
+    public ControladorEquipe() {
+        entidade = new PessoaFisica();
+        pregoeiro = new Pregoeiro();
+        membroApoio = new MembroApoio();
+        login = new Login();
+        servicoMembro = new ServicoMembroApoio();
+        servicoPregoeiro = new ServicoPregoeiro();
+        servico = new ServicoPessoaFisica();
+    }
 
     public void tipoPessoaFisica() {
 
@@ -56,15 +70,18 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
     public String criar(PessoaFisica entidade) {
         entidade = getEntidade();
         corrigirCPF(entidade);
-        if( (isCargoPregoeiro()) && (pregoeiro != null) && (login != null) ){
+        if ((isCargoPregoeiro()) && (pregoeiro != null) && (login != null)) {
             pregoeiro.setPessoaFisica(entidade);
             pregoeiro.setLogin(login);
             servicoPregoeiro.criar(pregoeiro);
-        }else if(isCargoMembrodeApoio() &&  (membroApoio != null) ){
+            JsfUtil.addSuccessMessage("Salvo com Sucesso!");
+        } else if (isCargoMembrodeApoio() && (membroApoio != null)) {
             membroApoio.setPessoaFisica(entidade);
             servicoMembro.criar(membroApoio);
-        }else{
-            log.warning("Nenhuma funcao selecionada");
+            JsfUtil.addSuccessMessage("Salvo com Sucesso!");
+        } else {
+            log.warning("Nenhuma função selecionada");
+            JsfUtil.addSuccessMessage("Nenhuma função selecionada");
         }
         limparDados();
         return "equipe";
@@ -72,7 +89,25 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
 
     @Override
     public String editar(PessoaFisica entidade) {
-        return null;
+        entidade = getEntidade();
+        getServico().editar(entidade);
+        setEntidade(new PessoaFisica());
+        JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
+        return "equipe";
+    }
+
+    @Override
+    public String deletar(PessoaFisica entidade) {
+        entidade = getEntidade();
+        getServico().deletar(entidade);
+        setEntidade(new PessoaFisica());
+        JsfUtil.addSuccessMessage("Excluido com Sucesso!");
+        return "equipe";
+    }
+    
+    public String preparaEditar() {
+        logger.log(Level.INFO, "Editar funfando");
+        return "equipeEditar";
     }
 
     /**
@@ -114,7 +149,7 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
     }
 
     public List<PessoaFisica> getPessoasfisica() {
-        return pessoasfisica;
+        return pessoasfisica = servico.buscarTodos();
     }
 
     public void setPessoasfisica(List<PessoaFisica> pessoasfisica) {
@@ -151,11 +186,6 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
         return this.login;
     }
 
-    @Override
-    public ServicoIF getServico() {
-        return this.servicoMembro;
-    }
-
     public String getConfirmaSenha() {
         return this.confirmaSenha;
     }
@@ -165,8 +195,32 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
     }
 
     @Override
-    public String deletar(PessoaFisica entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ServicoIF<PessoaFisica> getServico() {
+        return servico;
     }
 
+    public ServicoMembroApoioIF getServicoMembro() {
+        return servicoMembro;
+    }
+
+    public ServicoPregoeiroIF getServicoPregoeiro() {
+        return servicoPregoeiro;
+    }
+
+    public static Logger getLog() {
+        return log;
+    }
+
+    public void setPregoeiro(Pregoeiro pregoeiro) {
+        this.pregoeiro = pregoeiro;
+    }
+
+    public void setMembroApoio(MembroApoio membroApoio) {
+        this.membroApoio = membroApoio;
+    }
+
+    public void setLogin(Login login) {
+        this.login = login;
+    }
+    
 }

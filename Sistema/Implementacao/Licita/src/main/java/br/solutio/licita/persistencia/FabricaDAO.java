@@ -90,5 +90,5 @@ public class FabricaDAO implements FabricaDaoIF{
     public DaoIF<Sessao> getDaoSessao() {
         return new Dao<>(entityManager);
     }
-    
+   
 }

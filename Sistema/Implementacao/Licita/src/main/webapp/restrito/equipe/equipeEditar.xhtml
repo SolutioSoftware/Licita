@@ -32,23 +32,6 @@
                     <h:outputText value="#{entidade.nome}" />
                 </p:column>
 
-                <p:column headerText="Ações" width="50">
-
-                    <p:commandButton id="btEditar" icon="ui-icon-pencil" action="#{controladorEquipe.preparaEditar()}" update="@form"  
-                                     style="font-size: 10px">
-                        <f:setPropertyActionListener value="#{entidade}" target="#{controladorEquipe.entidade}"  />
-                        <p:tooltip for="btEditar" value="Editar"/>
-                    </p:commandButton>
-
-                    <p:commandButton id="btExcluir" icon="fa fa-trash" action="#{controladorEquipe.deletar(entidade)}" update="@form" 
-                                     style="font-size: 10px">
-                        <f:setPropertyActionListener value="#{entidade}" target="#{controladorEquipe.entidade}"  />
-                        <p:tooltip for="btExcluir" value="Excluir"/>
-                        <p:confirm icon="ui-icon-alert" header="Excluir Membro de equipe" message="Deseja realmente excluir este membro de equipe"/>
-                    </p:commandButton>
-
-                </p:column>
-
             </p:dataTable>
         </h:form>
     </ui:define>
@@ -170,7 +153,7 @@
 
             <div style="margin-left: 2%; margin-top: 2%; margin-right: 2%">
 
-                <p:commandButton  id="bt_salvar_Pessoa" value="Salvar" icon="fa fa-save" action="#{controladorEquipe.criar(entidade)}" update="growEquipe" ajax="false"/>
+                <p:commandButton  id="bt_Atualizar_Pessoa" value="Atualizar" icon="fa fa-refresh" action="#{controladorEquipe.editar(entidade)}" update="growEquipe" ajax="false"/>
 
             </div>
         </h:form>
