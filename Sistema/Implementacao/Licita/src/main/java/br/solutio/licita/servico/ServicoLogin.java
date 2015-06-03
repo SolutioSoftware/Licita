@@ -7,6 +7,8 @@
 package br.solutio.licita.servico;
 
 import br.solutio.licita.modelo.Login;
+import br.solutio.licita.modelo.MembroApoio;
+import br.solutio.licita.modelo.Pregoeiro;
 import br.solutio.licita.persistencia.DaoIF;
 import br.solutio.licita.persistencia.FabricaDAO;
 import br.solutio.licita.persistencia.FabricaDaoIF;
@@ -51,7 +53,7 @@ public class ServicoLogin extends ServicoAbstrato<Login> implements ServicoLogin
             String[] parametros = {"usuario", "senha"};
             Object[] valores = {usuario, senhaCript};
             List<Login> list = getDao().consultar("Login.buscaPorLogin", parametros, valores);
-            return list.isEmpty();
+            return !list.isEmpty();
         } else {
             return false;
         }

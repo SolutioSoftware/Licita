@@ -115,9 +115,10 @@ public class Pregoeiro implements Serializable{
 
     @Override
     public String toString() {
-        //TODO refazer método ToString de Login imprimindo todos os atributos do mesmo.
-        return "br.solutio.licita.modelo.Pregoeiro[ pregoeiroPK=" + id + " ]";
+        return "Pregoeiro{" + "id=" + id + ", sessaoSet=" + sessaoSet + ", login=" + login + '}';
     }
+
+   
 
     
 }

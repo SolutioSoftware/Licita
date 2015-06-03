@@ -12,8 +12,11 @@
 
         <h:form id="formDtequipe">
 
-            <p:dataTable id='dt_equipe' var="entidade" sortBy="#{entidade.id}" sortOrder="DESCENDING" value="#{controladorEquipe.pessoasfisica}" 
-                         widgetVar="tbl_equipe" paginator="true" style="padding:5px" rows="10" rowsPerPageTemplate="5,10"  
+            <h1>Membros de Apoio</h1>
+            <br/>
+
+            <p:dataTable id='dt_membroDeApoio' var="entidade" value="#{controladorEquipe.membrosDeApoio}" 
+                         widgetVar="tbl_equipe" paginator="true" style="padding:5px" rows="5"
                          emptyMessage="Nenhum Membro Cadastrado"  paginatorAlwaysVisible="true">
 
                 <f:facet name="header">
@@ -24,12 +27,12 @@
                     </p:outputPanel>
                 </f:facet>
 
-                <p:column headerText="CPF: " filterBy="#{entidade.cpf}" filterMatchMode="contains" filterStyle="display:none">
-                    <h:outputText value="#{entidade.cpf}" />
+                <p:column headerText="CPF: " filterBy="#{entidade.pessoaFisica.cpf}" filterMatchMode="contains" filterStyle="display:none">
+                    <h:outputText value="#{entidade.pessoaFisica.cpf}" />
                 </p:column>
 
-                <p:column headerText="Nome: " filterBy="#{entidade.nome}" filterMatchMode="contains" filterStyle="display:none">
-                    <h:outputText value="#{entidade.nome}" />
+                <p:column headerText="Nome: " filterBy="#{entidade.pessoaFisica.nome}" filterMatchMode="contains" filterStyle="display:none">
+                    <h:outputText value="#{entidade.pessoaFisica.nome}" />
                 </p:column>
 
                 <p:column headerText="Ações" width="50">
@@ -44,20 +47,59 @@
                                      style="font-size: 10px">
                         <f:setPropertyActionListener value="#{entidade}" target="#{controladorEquipe.entidade}"  />
                         <p:tooltip for="btExcluir" value="Excluir"/>
-                        <p:confirm icon="ui-icon-alert" header="Excluir Membro de equipe" message="Deseja realmente excluir este membro de equipe"/>
+                        <p:confirm icon="ui-icon-alert" header="Excluir Membro de apoio" message="Deseja realmente excluir este membro de apoio"/>
                     </p:commandButton>
 
                 </p:column>
 
             </p:dataTable>
+            <br/>
+            <br/>
+            <h1>Pregoeiros</h1>
+            <br/>
+            
+            <p:dataTable id='dt_pregoeiro' var="entidade" value="#{controladorEquipe.pregoeiros}" 
+                         widgetVar="tbl_equipe" paginator="true" style="padding:5px" rows="3"
+                         emptyMessage="Nenhum Membro Cadastrado"  paginatorAlwaysVisible="true">
+
+                <f:facet name="header">
+                    <p:outputPanel>
+                        <p:commandButton value="Novo" style="width: 80px" action="#{controladorEquipe.limparDados}" update="@form"  icon="fa fa-plus" 
+                                         class="botaoNovo"/>
+                        <p:inputText id="globalFilter" onkeyup="PF('tbl_equipe').filter()" style="width:250px" placeholder="Digite sua busca" />
+                    </p:outputPanel>
+                </f:facet>
+
+                <p:column headerText="CPF: " filterBy="#{entidade.pessoaFisica.cpf}" filterMatchMode="contains" filterStyle="display:none">
+                    <h:outputText value="#{entidade.pessoaFisica.cpf}" />
+                </p:column>
+
+                <p:column headerText="Nome: " filterBy="#{entidade.pessoaFisica.nome}" filterMatchMode="contains" filterStyle="display:none">
+                    <h:outputText value="#{entidade.pessoaFisica.nome}" />
+                </p:column>
+
+                <p:column headerText="Ações" width="50">
+
+                    <p:commandButton id="btEditar" icon="ui-icon-pencil" action="#{controladorEquipe.preparaEditar()}" update="@form"  
+                                     style="font-size: 10px">
+                        <f:setPropertyActionListener value="#{entidade}" target="#{controladorEquipe.entidade}"  />
+                        <p:tooltip for="btEditar" value="Editar"/>
+                    </p:commandButton>
+
+                </p:column>
+
+            </p:dataTable>
+            
+            
         </h:form>
+
     </ui:define>
 
     <ui:define name="pn_conteudo">
 
         <h:form id="equipe_form" title="Membro Equipe" style="text-align: center"  >
 
-            <p:growl id="growEquipe" showDetail="false" for="equipe_form" />
+            <p:growl id="growEquipe" showDetail="false"  />
 
             <div style="margin-left: 2%; margin-top: 2%; margin-right: 2%">
 
@@ -129,11 +171,11 @@
                     <p:inputMask id="cep"  title="CPF" mask="99.999-999" placeholder="CPF"/>
 
                     <p:outputLabel value="Login:" for="it_login" rendered="#{controladorEquipe.cargoPregoeiro}"/>
-                    <p:inputText id="it_login" value="#{controladorEquipe.login.usuario}" rendered="#{controladorEquipe.cargoPregoeiro}" required="true" 
+                    <p:inputText id="it_login" value="#{controladorEquipe.pregoeiro.login.usuario}" rendered="#{controladorEquipe.cargoPregoeiro}" required="true" 
                                  requiredMessage="O campo login é obrigatório" placeholder="Login"/>
 
                     <p:outputLabel value="Senha:" for="senha" rendered="#{controladorEquipe.cargoPregoeiro}"/>
-                    <p:password id="senha" value="#{controladorEquipe.login.senha}" rendered="#{controladorEquipe.cargoPregoeiro}" feedback="true" required="true" 
+                    <p:password id="senha" value="#{controladorEquipe.pregoeiro.login.senha}" rendered="#{controladorEquipe.cargoPregoeiro}" feedback="true" required="true" 
                                 requiredMessage="O campo senha é obrigatório" placeholder="Senha" strongLabel="Senha Forte" goodLabel="Senha Boa" 
                                 weakLabel="Senha Fraca" promptLabel="Digite Sua Senha"/>
 

@@ -6,6 +6,8 @@
 
 package br.solutio.licita.servico;
 
+import br.solutio.licita.modelo.MembroApoio;
+import br.solutio.licita.modelo.Pregoeiro;
 import java.util.List;
 
 /**
@@ -53,7 +55,5 @@ public interface ServicoIF<T>{
      * @return entidade do tipo Persistivel
      */
     public List<T> buscarTodos();
-    
-    
-    
+
 }

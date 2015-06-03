@@ -5,12 +5,14 @@
  */
 package br.solutio.licita.servico;
 
+import br.solutio.licita.controlador.ControladorPregao;
 import br.solutio.licita.modelo.Pregoeiro;
 import br.solutio.licita.persistencia.DaoIF;
 import br.solutio.licita.persistencia.FabricaDAO;
 import br.solutio.licita.persistencia.FabricaDaoIF;
 import br.solutio.licita.servico.util.Criptografar;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 
@@ -31,21 +33,16 @@ public class ServicoPregoeiro extends ServicoAbstrato<Pregoeiro> implements Serv
 
     @Override
     public void criar(Pregoeiro entidade) {
+        Logger.getLogger(ControladorPregao.class.getName()).log(Level.INFO, "passou no servico", "");
         criptografandoSenha(entidade);
         GerenciadorTransacao.abrirTransacao(getEntityLocal());
         getDao().criar(entidade);
         GerenciadorTransacao.executarTransacao(getEntityLocal());
     }
 
-
     @Override
     public Pregoeiro buscarPorId(Long id) {
         return dao.buscarPorId(id);
-    }
-
-    @Override
-    public List<Pregoeiro> buscarTodos() {
-        return dao.buscarTodos();
     }
 
     /**
@@ -66,7 +63,7 @@ public class ServicoPregoeiro extends ServicoAbstrato<Pregoeiro> implements Serv
 
     @Override
     public DaoIF<Pregoeiro> getDao() {
-         if (fabricaDao == null) {
+        if (fabricaDao == null) {
             fabricaDao = new FabricaDAO(getEntityLocal());
         }
         if (dao == null) {
@@ -80,5 +77,11 @@ public class ServicoPregoeiro extends ServicoAbstrato<Pregoeiro> implements Serv
             entityLocal = ProdutorEntityManager.getInstancia().getEmLocal();
         }
         return entityLocal;
+    }
+
+    @Override
+    public List<Pregoeiro> buscarTodos() {
+        getDao().setEntityManager(ProdutorEntityManager.getInstancia().getEmLocal());
+        return getDao().consultar("Pregoeiro.findAll", null, null);
     }
 }

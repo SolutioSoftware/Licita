@@ -6,9 +6,9 @@
 package br.solutio.licita.controlador;
 
 import br.solutio.licita.controlador.util.JsfUtil;
-import br.solutio.licita.modelo.Pregao;
-import br.solutio.licita.servico.ServicoIF;
-import br.solutio.licita.servico.ServicoPregao;
+import br.solutio.licita.modelo.MembroApoio;
+import br.solutio.licita.servico.ServicoMembroApoio;
+import br.solutio.licita.servico.ServicoMembroApoioIF;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,94 +17,85 @@ import javax.faces.bean.SessionScoped;
 import javax.persistence.PersistenceException;
 
 /**
+ *
  * @author ricardocaldeira
  */
 @ManagedBean
 @SessionScoped
-public class ControladorPregao extends ControladorAbstrato<Pregao> {
-
-    private Pregao entidade;
-    private transient List<Pregao> pregoes;
-    private transient ServicoIF<Pregao> servico;
-
-    public ControladorPregao() {
-        entidade = new Pregao();
-        servico = new ServicoPregao();
-        
+public class ControladorMembroApoio extends ControladorAbstrato<MembroApoio> implements ControladorAbstratoIF<MembroApoio>  {
+    
+    private MembroApoio entidade;
+    private transient List<MembroApoio> membros;
+    private final transient ServicoMembroApoioIF servico;
+    
+    public ControladorMembroApoio(){
+        entidade = new MembroApoio();
+        servico = new ServicoMembroApoio();
     }
-
+    
     @Override
-    public String criar(Pregao entidade) {
+    public String criar(MembroApoio entidade) {
         try {
             entidade = getEntidade();
             getServico().criar(entidade);
             setEntidade(null);
-            setEntidade(new Pregao());
+            setEntidade(new MembroApoio());
             JsfUtil.addSuccessMessage("Salvo com Sucesso!");
-            return "pregao";
+            return "equipe";
         } catch (PersistenceException | IllegalStateException e) {
             Logger.getLogger(ControladorPregao.class.getName()).log(Level.SEVERE, null, e);
-            JsfUtil.addErrorMessage("Pregao ou Processo já existe");
-            return "pregaoSalvar";
+            return "equipeSalvarMembroApoio";
         }
 
     }
 
     @Override
-    public String editar(Pregao entidade) {
+    public String editar(MembroApoio entidade) {
         
         entidade = getEntidade();
         getServico().editar(entidade);
-        setEntidade(new Pregao());
+        setEntidade(new MembroApoio());
         JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
-        return "pregao";
+        return "equipe";
     }
 
     @Override
-    public String deletar(Pregao entidade) {
+    public String deletar(MembroApoio entidade) {
         entidade = getEntidade();
         getServico().deletar(entidade);
-        setEntidade(new Pregao());
+        setEntidade(new MembroApoio());
         JsfUtil.addSuccessMessage("Excluido com Sucesso!");
-        return "pregao";
+        return "equipe";
     }
 
     public String limparDados() {
         setEntidade(null);
-        setEntidade(new Pregao());
-        return "pregaoSalvar";
+        setEntidade(new MembroApoio());
+        return "equipeSalvarMembroApoio";
     }
 
     public String preparaEditar() {
         logger.log(Level.INFO, "Editar funfando");
-        return "pregaoEditar";
+        return "equipeEditarMembro";
     }
 
     @Override
-    public ServicoIF getServico() {
-        return this.servico;
-    }
-
-    @Override
-    public Pregao getEntidade() {
+    public MembroApoio getEntidade() {
         return entidade;
     }
 
     @Override
-    public void setEntidade(Pregao entidade) {
+    public void setEntidade(MembroApoio entidade) {
         this.entidade = entidade;
     }
 
-    public boolean getEditando() {
-        return this.entidade.getId() != null;
+    public List<MembroApoio> getMembros() {
+        return membros = servico.buscarTodos();
     }
 
-    public List<Pregao> getPregoes() {
-        return pregoes = servico.buscarTodos();
-    }
-
-    public void setPregoes(List<Pregao> pregoes) {
-        this.pregoes = pregoes;
+    @Override
+    public ServicoMembroApoioIF getServico() {
+        return servico;
     }
 
 }

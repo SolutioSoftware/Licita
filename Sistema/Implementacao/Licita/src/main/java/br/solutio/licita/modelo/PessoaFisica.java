@@ -75,6 +75,7 @@ public class PessoaFisica implements Serializable {
 
     public PessoaFisica() {
         endereco = new Endereco();
+        contatoPessoaFisica = new ContatoPessoaFisica();
     }
 
     public PessoaFisica(Long id) {

@@ -20,21 +20,22 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 /**
  *
  * @author WitaloCarlos
  */
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> implements ControladorAbstratoIF<PessoaFisica> {
 
     private PessoaFisica entidade;
     private Pregoeiro pregoeiro;
     private MembroApoio membroApoio;
     private Login login;
-    private transient List<PessoaFisica> pessoasfisica;
+    private transient List<MembroApoio> membrosDeApoio;
+    private transient List<Pregoeiro> pregoeiros;
     private boolean cargoPregoeiro = false;
     private boolean cargoMembrodeApoio = false;
     private String valor;
@@ -72,7 +73,7 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
         corrigirCPF(entidade);
         if ((isCargoPregoeiro()) && (pregoeiro != null) && (login != null)) {
             pregoeiro.setPessoaFisica(entidade);
-            pregoeiro.setLogin(login);
+//            pregoeiro.setLogin(login);
             servicoPregoeiro.criar(pregoeiro);
             JsfUtil.addSuccessMessage("Salvo com Sucesso!");
         } else if (isCargoMembrodeApoio() && (membroApoio != null)) {
@@ -104,7 +105,7 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
         JsfUtil.addSuccessMessage("Excluido com Sucesso!");
         return "equipe";
     }
-    
+
     public String preparaEditar() {
         logger.log(Level.INFO, "Editar funfando");
         return "equipeEditar";
@@ -123,7 +124,8 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
 
     public String limparDados() {
         this.login = null;
-        this.pessoasfisica = null;
+        this.membrosDeApoio = null;
+        this.pregoeiros = null;
         this.membroApoio = null;
         this.pregoeiro = null;
         this.cargoPregoeiro = false;
@@ -146,14 +148,6 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
 
     public void setCargoMembrodeApoio(boolean cargoMembrodeApoio) {
         this.cargoMembrodeApoio = cargoMembrodeApoio;
-    }
-
-    public List<PessoaFisica> getPessoasfisica() {
-        return pessoasfisica = servico.buscarTodos();
-    }
-
-    public void setPessoasfisica(List<PessoaFisica> pessoasfisica) {
-        this.pessoasfisica = pessoasfisica;
     }
 
     public String getValor() {
@@ -222,5 +216,15 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
     public void setLogin(Login login) {
         this.login = login;
     }
+
+    public List<MembroApoio> getMembrosDeApoio() {
+        return membrosDeApoio = servicoMembro.buscarTodos();
+    }
+
+    public List<Pregoeiro> getPregoeiros() {
+        return pregoeiros = servicoPregoeiro.buscarTodos();
+    }
     
+    
+
 }

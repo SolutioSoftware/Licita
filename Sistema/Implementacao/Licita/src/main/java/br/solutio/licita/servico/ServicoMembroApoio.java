@@ -10,7 +10,6 @@ import br.solutio.licita.persistencia.DaoIF;
 import br.solutio.licita.persistencia.FabricaDAO;
 import br.solutio.licita.persistencia.FabricaDaoIF;
 import java.util.List;
-import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 
 /**
@@ -21,7 +20,7 @@ public class ServicoMembroApoio extends ServicoAbstrato<MembroApoio> implements 
 
     private FabricaDaoIF fabricaDao;
     private EntityManager entityLocal;
-    
+
     private DaoIF<MembroApoio> dao;
 
     @Override
@@ -29,18 +28,12 @@ public class ServicoMembroApoio extends ServicoAbstrato<MembroApoio> implements 
         return dao.contagem();
     }
 
-
     @Override
     public MembroApoio buscarPorId(Long id) {
         return dao.buscarPorId(id);
     }
 
-    @Override
-    public List<MembroApoio> buscarTodos() {
-        return dao.buscarTodos();
-    }
-
-    public void setDao(DaoIF<MembroApoio> dao){
+    public void setDao(DaoIF<MembroApoio> dao) {
         this.dao = dao;
     }
 
@@ -60,5 +53,11 @@ public class ServicoMembroApoio extends ServicoAbstrato<MembroApoio> implements 
             entityLocal = ProdutorEntityManager.getInstancia().getEmLocal();
         }
         return entityLocal;
+    }
+    
+    @Override
+    public List<MembroApoio> buscarTodos() {
+        getDao().setEntityManager(ProdutorEntityManager.getInstancia().getEmLocal());
+        return getDao().consultar("MembroApoio.findAll", null, null);
     }
 }
