@@ -12,70 +12,67 @@
 
         <h:form id="formDtequipe">
 
-            <p:dataTable id='dt_equipe' var="entidade" sortBy="#{entidade.id}" sortOrder="DESCENDING" value="#{controladorEquipe.pessoasfisica}" 
-                         widgetVar="tbl_equipe" paginator="true" style="padding:5px" rows="10" rowsPerPageTemplate="5,10"  
+            <h1>Membros de Apoio</h1>
+            <br/>
+
+            <p:dataTable id='dt_membroDeApoio' var="entidade" value="#{controladorMembroApoio.membros}" 
+                         widgetVar="tbl_equipe" paginator="true" style="padding:5px" rows="5"
                          emptyMessage="Nenhum Membro Cadastrado"  paginatorAlwaysVisible="true">
 
                 <f:facet name="header">
                     <p:outputPanel>
-                        <p:commandButton value="Novo" style="width: 80px" action="#{controladorEquipe.limparDados}" update="@form"  icon="fa fa-plus" 
+                        <p:commandButton value="Novo" style="width: 80px" action="#{controladorMembroApoio.limparDados()}" update="@form"  icon="fa fa-plus" 
                                          class="botaoNovo"/>
                         <p:inputText id="globalFilter" onkeyup="PF('tbl_equipe').filter()" style="width:250px" placeholder="Digite sua busca" />
                     </p:outputPanel>
                 </f:facet>
 
-                <p:column headerText="CPF: " filterBy="#{entidade.cpf}" filterMatchMode="contains" filterStyle="display:none">
-                    <h:outputText value="#{entidade.cpf}" />
+                <p:column headerText="CPF: " filterBy="#{entidade.pessoaFisica.cpf}" filterMatchMode="contains" filterStyle="display:none">
+                    <h:outputText value="#{entidade.pessoaFisica.cpf}" />
                 </p:column>
 
-                <p:column headerText="Nome: " filterBy="#{entidade.nome}" filterMatchMode="contains" filterStyle="display:none">
-                    <h:outputText value="#{entidade.nome}" />
+                <p:column headerText="Nome: " filterBy="#{entidade.pessoaFisica.nome}" filterMatchMode="contains" filterStyle="display:none">
+                    <h:outputText value="#{entidade.pessoaFisica.nome}" />
                 </p:column>
 
             </p:dataTable>
+
         </h:form>
+
     </ui:define>
 
     <ui:define name="pn_conteudo">
 
         <h:form id="equipe_form" title="Membro Equipe" style="text-align: center"  >
 
-            <p:growl id="growEquipe" showDetail="false" for="equipe_form" />
+            <p:growl id="growEquipe" showDetail="false" life="3000" class="ui-growl"/>
 
             <div style="margin-left: 2%; margin-top: 2%; margin-right: 2%">
 
                 <h:panelGrid columns="4" id="panelGridSavePessoaFisica" cellpadding="5" columnClasses="colunaEsquerda,colunaDireita,colunaEsquerda,colunaDireita">
 
-                    <p:outputLabel value="Tipo Pessoa:" for="tipopessoa" />
-                    <h:selectOneMenu id="tipopessoa" value="#{controladorEquipe.valor}" required="true" requiredMessage="O campo tipo de pessoa é obrigatorio" style="width:188px">
-                        <f:selectItem noSelectionOption="true" />
-                        <f:selectItem itemValue="Pregoeiro" itemLabel="Pregoeiro"/>  
-                        <f:selectItem itemValue="Membro de Apoio" itemLabel="Membro de Apoio"/>  
-                        <p:ajax listener="#{controladorEquipe.tipoPessoaFisica}" process="tipopessoa" event="change" update="panelGridSavePessoaFisica"/>  
-                    </h:selectOneMenu>
-
                     <p:outputLabel value="Nome:" for="nome" />
-                    <p:inputText id="nome" value="#{controladorEquipe.entidade.nome}" title="Nome"  required="true"  
+                    <p:inputText id="nome" value="#{controladorMembroApoio.entidade.pessoaFisica.nome}" title="Nome"  required="true"  
                                  requiredMessage="O campo nome é obrigatório" placeholder="Nome" maxlength="80"/>
 
                     <p:outputLabel value="CPF:" for="cpf" />
-                    <p:inputMask id="cpf" value="#{controladorEquipe.entidade.cpf}" title="CPF" required="true" requiredMessage="O campo CPF é obrigatorio" 
+                    <p:inputMask id="cpf" value="#{controladorMembroApoio.entidade.pessoaFisica.cpf}" title="CPF" required="true" requiredMessage="O campo CPF é obrigatorio" 
                                  mask="999.999.999-99" placeholder="CPF"/>
 
                     <p:outputLabel value="RG:" for="rg" />
-                    <p:inputText id="rg" value="#{controladorEquipe.entidade.rg}" title="RG" placeholder="RG" maxlength="30" />
+                    <p:inputText id="rg" value="#{controladorMembroApoio.entidade.pessoaFisica.rg}" title="RG" placeholder="RG" maxlength="30" />
 
                     <p:outputLabel value="Logradouro:" for="logradouro" />
-                    <p:inputText id="logradouro" title="Logradouro" placeholder="Logradouro" maxlength="60"/>
+                    <p:inputText id="logradouro" value="#{controladorMembroApoio.entidade.pessoaFisica.endereco.logradouro}" title="Logradouro" placeholder="Logradouro" maxlength="60"/>
 
                     <p:outputLabel value="Numero:" for="numero"/>
-                    <pe:inputNumber id="numero"  title="Numero" maxValue="9999999" decimalPlaces="0"/>
+                    <pe:inputNumber id="numero" value="#{controladorMembroApoio.entidade.pessoaFisica.endereco.numero}"  title="Numero" maxValue="9999999" decimalPlaces="0"/>
 
                     <p:outputLabel value="Cidade:" for="cidade"/>
-                    <p:inputText id="cidade"  title="Cidade" placeholder="Cidade" maxlength="60"/>
+                    <p:inputText id="cidade" value="#{controladorMembroApoio.entidade.pessoaFisica.endereco.cidade}"  title="Cidade" placeholder="Cidade" maxlength="60"/>
 
                     <p:outputLabel value="Estado:" for="estado"/>
-                    <h:selectOneMenu id="estado"  style="width:188px">
+                    <h:selectOneMenu id="estado" value="#{controladorMembroApoio.entidade.pessoaFisica.endereco.estado}"  style="width:188px">
 
                         <f:selectItem noSelectionOption="true" />
                         <f:selectItem itemLabel="Acre" itemValue="AC" />
@@ -108,37 +105,23 @@
 
                     </h:selectOneMenu>
 
+                    <p:outputLabel value="Função:" for="funcao"/>
+                    <p:inputText id="funcao" value="#{controladorMembroApoio.entidade.funcao}" placeholder="Função"/>
+
                     <p:outputLabel value="CEP:" for="cep"/>
-                    <p:inputMask id="cep"  title="CPF" mask="99.999-999" placeholder="CPF"/>
-
-                    <p:outputLabel value="Login:" for="it_login" rendered="#{controladorEquipe.cargoPregoeiro}"/>
-                    <p:inputText id="it_login" value="#{controladorEquipe.login.usuario}" rendered="#{controladorEquipe.cargoPregoeiro}" required="true" 
-                                 requiredMessage="O campo login é obrigatório" placeholder="Login"/>
-
-                    <p:outputLabel value="Senha:" for="senha" rendered="#{controladorEquipe.cargoPregoeiro}"/>
-                    <p:password id="senha" value="#{controladorEquipe.login.senha}" rendered="#{controladorEquipe.cargoPregoeiro}" feedback="true" required="true" 
-                                requiredMessage="O campo senha é obrigatório" placeholder="Senha" strongLabel="Senha Forte" goodLabel="Senha Boa" 
-                                weakLabel="Senha Fraca" promptLabel="Digite Sua Senha"/>
-
-                    <p:outputLabel value="Confirma Senha:" for="confirmarSenha" rendered="#{controladorEquipe.cargoPregoeiro}"/>
-                    <p:password id="confirmarSenha" value="#{controladorEquipe.confirmaSenha}" rendered="#{controladorEquipe.cargoPregoeiro}" feedback="true" required="true" 
-                                requiredMessage="O campo Confirmar Senha é obrigatório" placeholder="Confirmar Senha" strongLabel="Senha Forte" goodLabel="Senha Boa" 
-                                weakLabel="Senha Fraca" promptLabel="Digite Sua Senha"/>
-
-                    <p:outputLabel value="Função:" for="funcao" rendered="#{controladorEquipe.cargoMembrodeApoio}"/>
-                    <p:inputText id="funcao" value="#{controladorEquipe.membroApoio.funcao}" rendered="#{controladorEquipe.cargoMembrodeApoio}" placeholder="Função"/>
+                    <p:inputMask id="cep" value="#{controladorMembroApoio.entidade.pessoaFisica.endereco.cep}"  title="CPF" mask="99.999-999" placeholder="CPF"/>
 
                     <p:outputLabel value="Telefone:" for="telefone"/>
-                    <p:inputText id="telefone"  title="Telefone" placeholder="(DDD) 9999-9999" maxlength="14"/>
+                    <p:inputText id="telefone" value="#{controladorMembroApoio.entidade.pessoaFisica.contatoPessoaFisica.telefone}" title="Telefone" placeholder="(DDD) 9999-9999" maxlength="14"/>
 
                     <p:outputLabel value="Celular:" for="celular"/>
-                    <p:inputText id="celular"  title="Celular" placeholder="(DDD) 9999-9999" maxlength="14"/>
+                    <p:inputText id="celular" value="#{controladorMembroApoio.entidade.pessoaFisica.contatoPessoaFisica.celular}"  title="Celular" placeholder="(DDD) 9999-9999" maxlength="14"/>
 
                     <p:outputLabel value="E-mail:" for="email"/>
-                    <p:inputText id="email"  title="E-mail" placeholder="E-mail"/>
+                    <p:inputText id="email" value="#{controladorMembroApoio.entidade.pessoaFisica.contatoPessoaFisica.email}"  title="E-mail" placeholder="E-mail"/>
 
                     <p:outputLabel value="Complemento:"  for="complemento"/>
-                    <p:inputTextarea id="complemento"  title="Complemento" placeholder="Complemento" 
+                    <p:inputTextarea id="complemento" value="#{controladorMembroApoio.entidade.pessoaFisica.endereco.complemento}"  title="Complemento" placeholder="Complemento" 
                                      rows="3" cols="30" counter="display" maxlength="50" counterTemplate="{0} caracteres restantes." 
                                      autoResize="true" style="width:190px" />
 
@@ -153,7 +136,7 @@
 
             <div style="margin-left: 2%; margin-top: 2%; margin-right: 2%">
 
-                <p:commandButton  id="bt_Atualizar_Pessoa" value="Atualizar" icon="fa fa-refresh" action="#{controladorEquipe.editar(entidade)}" update="growEquipe" ajax="false"/>
+                <p:commandButton  id="bt_editar_MembroApoio" value="Atualizar" icon="fa fa-refresh" action="#{controladorMembroApoio.editar(entidade)}" update="growMembroApoio" ajax="false"/>
 
             </div>
         </h:form>

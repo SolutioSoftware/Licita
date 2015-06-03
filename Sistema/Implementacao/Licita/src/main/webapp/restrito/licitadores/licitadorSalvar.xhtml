@@ -126,7 +126,7 @@
                     <p:inputMask id="telefone" value="#{controladorLicitador.entidade.pessoaJuridica.contatoPessoaJuridica.telefone}" title="Telefone" mask="(99)9999-9999" placeholder="(DDD) 9999-9999" maxlength="14"/>
 
                     <p:outputLabel value="Celular:" for="celular"/>
-                    <p:inputText id="celular" value="#{controladorLicitador.entidade.pessoaJuridica.contatoPessoaJuridica.celular}" title="Celular" placeholder="(DDD) 9999-9999" maxlength="14"/>
+                    <p:inputMask id="celular" value="#{controladorLicitador.entidade.pessoaJuridica.contatoPessoaJuridica.celular}" title="Celular" mask="(99)99999-9999" placeholder="(DDD) 99999-9999" maxlength="14"/>
 
                     <p:outputLabel value="E-mail:" for="email"/>
                     <p:inputText id="email" styleClass="lower" value="#{controladorLicitador.entidade.pessoaJuridica.contatoPessoaJuridica.email}" size="25" validatorMessage="E-mail incorreto" title="E-mail" placeholder="E-mail">

@@ -76,7 +76,7 @@ public class ControladorMembroApoio extends ControladorAbstrato<MembroApoio> imp
 
     public String preparaEditar() {
         logger.log(Level.INFO, "Editar funfando");
-        return "equipeEditarMembro";
+        return "equipeEditarMembroApoio";
     }
 
     @Override
