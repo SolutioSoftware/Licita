@@ -205,15 +205,15 @@
                     <h:panelGrid columns="2" id="panelGridSaveLicitanteContato" columnClasses="colunaEsquerda,colunaDireita,colunaEsquerda,colunaDireita">
 
                         <p:outputLabel value="Email:" for="email" />
-                        <p:inputText id="email" title="Email" placeholder="Email" 
+                        <p:inputText id="email" title="Email" placeholder="Email" value="#{controladorLicitante.entidade.pessoaJuridica.contatoPessoaJuridica.email}"
                                      maxlength="50" style="width:260px"/>
 
                         <p:outputLabel value="Telefone:" for="telefone" />
-                        <p:inputText id="telefone"  title="Telefone" placeholder="Telefone" 
+                        <p:inputText id="telefone"  title="Telefone" placeholder="Telefone" value="#{controladorLicitante.entidade.pessoaJuridica.contatoPessoaJuridica.telefone}"
                                      maxlength="15" style="width:260px"/>
 
                         <p:outputLabel value="Celular:" for="celular" />
-                        <p:inputText id="celular"  title="Celular" placeholder="Celular" 
+                        <p:inputText id="celular"  title="Celular" placeholder="Celular" value="#{controladorLicitante.entidade.pessoaJuridica.contatoPessoaJuridica.celular}"
                                      maxlength="15" style="width:260px" />
 
                     </h:panelGrid>

@@ -37,7 +37,7 @@
 
                 <p:column headerText="Ações" width="50">
 
-                    <p:commandButton id="btEditar" icon="ui-icon-pencil" action="#{controladorItem.preparaEditar()}" update="@form"  
+                    <p:commandButton id="btEditar" icon="ui-icon-pencil" action="#{controladorItem.preparaEditar}" update="@form"  
                                      style="font-size: 10px">
                         <f:setPropertyActionListener value="#{entidade}" target="#{controladorItem.entidade}"  />
                         <p:tooltip for="btEditar" value="Editar"/>

@@ -13,11 +13,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -30,9 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "ContatoPessoaJuridica.findAll", query = "SELECT c FROM ContatoPessoaJuridica c"),
-    @NamedQuery(name = "ContatoPessoaJuridica.findById", query = "SELECT c FROM ContatoPessoaJuridica c WHERE c.id = :id"),
-    @NamedQuery(name = "ContatoPessoaJuridica.findByTipoContato", query = "SELECT c FROM ContatoPessoaJuridica c WHERE c.tipoContato = :tipoContato"),
-    @NamedQuery(name = "ContatoPessoaJuridica.findByValor", query = "SELECT c FROM ContatoPessoaJuridica c WHERE c.valor = :valor")})
+    @NamedQuery(name = "ContatoPessoaJuridica.findById", query = "SELECT c FROM ContatoPessoaJuridica c WHERE c.id = :id")})
 public class ContatoPessoaJuridica implements Serializable {
     
     private static final long serialVersionUID = 1L;
@@ -43,18 +40,20 @@ public class ContatoPessoaJuridica implements Serializable {
     @Column(name = "id")
     private Long id;
     
-    @Size(max = 10)
-    @Column(name = "tipo_contato")
-    private String tipoContato;
+    @Size(min = 9, max = 13)
+    @Column(name = "telefone")
+    private String telefone;
     
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "valor")
-    private String valor;
+    @Size(max = 80)
+    @Column(name = "email")
+    private String email;
+    
+    @Size(min = 9, max = 13)
+    @Column(name = "celular")
+    private String celular;
     
     @JoinColumn(name = "id_pessoa_juridica", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @OneToOne(optional = false)
     private PessoaJuridica idPessoaJuridica;
 
     public ContatoPessoaJuridica() {
@@ -64,12 +63,7 @@ public class ContatoPessoaJuridica implements Serializable {
         this.id = id;
     }
 
-    public ContatoPessoaJuridica(Long id, String valor) {
-        this.id = id;
-        this.valor = valor;
-    }
-
-    
+   
     public Long getId() {
         return id;
     }
@@ -78,22 +72,32 @@ public class ContatoPessoaJuridica implements Serializable {
         this.id = id;
     }
 
-    public String getTipoContato() {
-        return tipoContato;
+    public String getTelefone() {
+        return telefone;
     }
 
-    public void setTipoContato(String tipoContato) {
-        this.tipoContato = tipoContato;
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
-    public String getValor() {
-        return valor;
+    public String getEmail() {
+        return email;
     }
 
-    public void setValor(String valor) {
-        this.valor = valor;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
+    public String getCelular() {
+        return celular;
+    }
+
+    public void setCelular(String celular) {
+        this.celular = celular;
+    }
+
+   
+    
     public PessoaJuridica getIdPessoaJuridica() {
         return idPessoaJuridica;
     }

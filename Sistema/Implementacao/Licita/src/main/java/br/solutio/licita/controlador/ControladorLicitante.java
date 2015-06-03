@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.persistence.PersistenceException;
 
 /**
@@ -21,26 +21,31 @@ import javax.persistence.PersistenceException;
  * @author ricardocaldeira
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class ControladorLicitante extends ControladorAbstrato<EmpresaLicitante> {
 
     private EmpresaLicitante entidade;
     private transient List<EmpresaLicitante> empresas;
-    private transient ServicoIF<EmpresaLicitante> servico;
+    private final transient ServicoIF<EmpresaLicitante> servico;
+
+   
 
     public ControladorLicitante() {
         entidade = new EmpresaLicitante();
         servico = new ServicoLicitante();
         empresas = servico.buscarTodos();
+
     }
 
     @Override
     public String criar(EmpresaLicitante entidade) {
         try {
             entidade = getEntidade();
+
             getServico().criar(entidade);
             setEntidade(null);
             setEntidade(new EmpresaLicitante());
+
             JsfUtil.addSuccessMessage("Salvo com Sucesso!");
             empresas = servico.buscarTodos();
             return "licitante";
@@ -48,7 +53,7 @@ public class ControladorLicitante extends ControladorAbstrato<EmpresaLicitante> 
             Logger.getLogger(ControladorLicitante.class.getName()).log(Level.SEVERE, null, e);
             JsfUtil.addErrorMessage("Servido fora do ar");
             return "licitanteSalvar";
-        } catch(IllegalStateException e){
+        } catch (IllegalStateException e) {
             Logger.getLogger(ControladorLicitante.class.getName()).log(Level.SEVERE, null, e);
             JsfUtil.addErrorMessage("Empresa já existe");
             return "licitanteSalvar";
@@ -81,7 +86,7 @@ public class ControladorLicitante extends ControladorAbstrato<EmpresaLicitante> 
         setEntidade(new EmpresaLicitante());
         return "licitanteSalvar";
     }
-    
+
     public String preparaEditar() {
         logger.log(Level.INFO, "Editar funfando");
         return "licitanteEditar";
@@ -109,5 +114,7 @@ public class ControladorLicitante extends ControladorAbstrato<EmpresaLicitante> 
     public void setEntidade(EmpresaLicitante entidade) {
         this.entidade = entidade;
     }
+
+
 
 }

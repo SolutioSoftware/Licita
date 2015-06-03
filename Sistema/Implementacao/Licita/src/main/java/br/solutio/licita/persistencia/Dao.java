@@ -57,6 +57,7 @@ public class Dao<T> implements DaoIF<T> {
     public void criar(T entidade) {
         logger.log(Level.INFO, "Criar");
         getEntityManager().persist(entidade);
+        
     }
 
     @Override

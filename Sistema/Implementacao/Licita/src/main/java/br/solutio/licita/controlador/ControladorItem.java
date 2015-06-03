@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.persistence.PersistenceException;
 
 /**
@@ -22,7 +22,7 @@ import javax.persistence.PersistenceException;
  * @author ricardocaldeira
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class ControladorItem extends ControladorAbstrato<Item> {
 
     private Item entidade;
@@ -43,6 +43,7 @@ public class ControladorItem extends ControladorAbstrato<Item> {
 
     public String preparaEditar() {
         logger.log(Level.INFO, "Editar funfando");
+        
         return "itemEditar";
     }
 
@@ -95,23 +96,28 @@ public class ControladorItem extends ControladorAbstrato<Item> {
     public String editar(Item entidade) {
         
         entidade = getEntidade();
-        getServico().editar(entidade);
-        setEntidade(new Item());
-        JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
-        itens = servico.buscarTodos();
+        if (entidade.getId() == null) {
+            JsfUtil.addSuccessMessage("Criada!");
+            criar(entidade);
+        } else {
+            getServico().editar(entidade);
+            setEntidade(new Item());
+            JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
+            itens = servico.buscarTodos();
+        }
         return "item";
     }
 
     @Override
     public String deletar(Item entidade) {
-        
+
         entidade = getEntidade();
         getServico().deletar(entidade);
         setEntidade(new Item());
         JsfUtil.addSuccessMessage("Excluido com Sucesso!");
         itens = servico.buscarTodos();
-        return "pregao";
-        
+        return "item";
+
     }
 
 }

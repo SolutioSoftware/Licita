@@ -6,7 +6,6 @@
 package br.solutio.licita.modelo;
 
 import java.io.Serializable;
-import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,13 +15,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -64,8 +61,8 @@ public class PessoaJuridica implements Serializable{
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoaJuridica")
     private EmpresaLicitante empresaLicitante;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPessoaJuridica")
-    private transient Set<ContatoPessoaJuridica> contatoPessoaJuridicaSet;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "idPessoaJuridica")
+    private ContatoPessoaJuridica contatoPessoaJuridica;
     
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoaJuridica")
     private InstituicaoLicitadora instituicaoLicitadora;
@@ -75,6 +72,7 @@ public class PessoaJuridica implements Serializable{
 
     public PessoaJuridica() {
         endereco = new Endereco();
+        contatoPessoaJuridica = new ContatoPessoaJuridica();
     }
 
     public PessoaJuridica(Long id) {
@@ -127,14 +125,15 @@ public class PessoaJuridica implements Serializable{
         this.empresaLicitante = empresaLicitante;
     }
 
-    @XmlTransient
-    public Set<ContatoPessoaJuridica> getContatoPessoaJuridicaSet() {
-        return contatoPessoaJuridicaSet;
+    public ContatoPessoaJuridica getContatoPessoaJuridica() {
+        return contatoPessoaJuridica;
     }
 
-    public void setContatoPessoaJuridicaSet(Set<ContatoPessoaJuridica> contatoPessoaJuridicaSet) {
-        this.contatoPessoaJuridicaSet = contatoPessoaJuridicaSet;
+    public void setContatoPessoaJuridica(ContatoPessoaJuridica contatoPessoaJuridica) {
+        this.contatoPessoaJuridica = contatoPessoaJuridica;
     }
+
+    
 
     public InstituicaoLicitadora getInstituicaoLicitadora() {
         return instituicaoLicitadora;

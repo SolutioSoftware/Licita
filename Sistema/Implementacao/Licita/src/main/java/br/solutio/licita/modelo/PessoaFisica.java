@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "PessoaFisica.findByNome", query = "SELECT p FROM PessoaFisica p WHERE p.nome = :nome"),
     @NamedQuery(name = "PessoaFisica.findByCpf", query = "SELECT p FROM PessoaFisica p WHERE p.cpf = :cpf"),
     @NamedQuery(name = "PessoaFisica.findByRg", query = "SELECT p FROM PessoaFisica p WHERE p.rg = :rg")})
-public class PessoaFisica implements Serializable{
+public class PessoaFisica implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -64,18 +64,18 @@ public class PessoaFisica implements Serializable{
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoaFisica")
     private MembroApoio membroApoio;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPessoaFisica")
-    private transient Set<ContatoPessoaFisica> contatoPessoaFisicaSet;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "idPessoaFisica")
+    private ContatoPessoaFisica contatoPessoaFisica;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoaFisica")
     private RepresentanteLegal representanteLegal;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoaFisica")
     private Pregoeiro pregoeiro;
-    
+
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoaFisica")
     private Endereco endereco;
-    
+
     public PessoaFisica() {
         endereco = new Endereco();
     }
@@ -89,7 +89,6 @@ public class PessoaFisica implements Serializable{
         this.cpf = cpf;
     }
 
-    
     public Long getId() {
         return id;
     }
@@ -130,13 +129,12 @@ public class PessoaFisica implements Serializable{
         this.membroApoio = membroApoio;
     }
 
-    @XmlTransient
-    public Set<ContatoPessoaFisica> getContatoPessoaFisicaSet() {
-        return contatoPessoaFisicaSet;
+    public ContatoPessoaFisica getContatoPessoaFisica() {
+        return contatoPessoaFisica;
     }
 
-    public void setContatoPessoaFisicaSet(Set<ContatoPessoaFisica> contatoPessoaFisicaSet) {
-        this.contatoPessoaFisicaSet = contatoPessoaFisicaSet;
+    public void setContatoPessoaFisica(ContatoPessoaFisica contatoPessoaFisica) {
+        this.contatoPessoaFisica = contatoPessoaFisica;
     }
 
     public RepresentanteLegal getRepresentanteLegal() {
@@ -154,12 +152,12 @@ public class PessoaFisica implements Serializable{
     public void setPregoeiro(Pregoeiro pregoeiro) {
         this.pregoeiro = pregoeiro;
     }
-    
-    public Endereco getEndereco(){
+
+    public Endereco getEndereco() {
         return this.endereco;
     }
-    
-    public void setEndereco(Endereco endereco){
+
+    public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
 

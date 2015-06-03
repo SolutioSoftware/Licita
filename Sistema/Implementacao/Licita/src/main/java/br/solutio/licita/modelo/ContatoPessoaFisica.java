@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -30,30 +31,30 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "ContatoPessoaFisica.findAll", query = "SELECT c FROM ContatoPessoaFisica c"),
-    @NamedQuery(name = "ContatoPessoaFisica.findById", query = "SELECT c FROM ContatoPessoaFisica c WHERE c.id = :id"),
-    @NamedQuery(name = "ContatoPessoaFisica.findByTipoContato", query = "SELECT c FROM ContatoPessoaFisica c WHERE c.tipoContato = :tipoContato"),
-    @NamedQuery(name = "ContatoPessoaFisica.findByValor", query = "SELECT c FROM ContatoPessoaFisica c WHERE c.valor = :valor")})
+    @NamedQuery(name = "ContatoPessoaFisica.findById", query = "SELECT c FROM ContatoPessoaFisica c WHERE c.id = :id")})
 public class ContatoPessoaFisica implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
-    
-    @Size(max = 10)
-    @Column(name = "tipo_contato")
-    private String tipoContato;
-    
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "valor")
-    private String valor;
-    
+
+    @Size(min = 9, max = 13)
+    @Column(name = "telefone")
+    private String telefone;
+
+    @Size(max = 80)
+    @Column(name = "email")
+    private String email;
+
+    @Size(min = 9, max = 13)
+    @Column(name = "celular")
+    private String celular;
+
     @JoinColumn(name = "id_pessoa_fisica", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @OneToOne(optional = false)
     private PessoaFisica idPessoaFisica;
 
     public ContatoPessoaFisica() {
@@ -63,12 +64,6 @@ public class ContatoPessoaFisica implements Serializable {
         this.id = id;
     }
 
-    public ContatoPessoaFisica(Long id, String valor) {
-        this.id = id;
-        this.valor = valor;
-    }
-
-    
     public Long getId() {
         return id;
     }
@@ -77,20 +72,28 @@ public class ContatoPessoaFisica implements Serializable {
         this.id = id;
     }
 
-    public String getTipoContato() {
-        return tipoContato;
+    public String getTelefone() {
+        return telefone;
     }
 
-    public void setTipoContato(String tipoContato) {
-        this.tipoContato = tipoContato;
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
-    public String getValor() {
-        return valor;
+    public String getEmail() {
+        return email;
     }
 
-    public void setValor(String valor) {
-        this.valor = valor;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCelular() {
+        return celular;
+    }
+
+    public void setCelular(String celular) {
+        this.celular = celular;
     }
 
     public PessoaFisica getIdPessoaFisica() {
@@ -124,5 +127,5 @@ public class ContatoPessoaFisica implements Serializable {
     public String toString() {
         return "br.solutio.licita.modelo.ContatoPessoaFisica[ id=" + id + " ]";
     }
-    
+
 }
