@@ -73,7 +73,8 @@
                                  required="true" requiredMessage="O campo nome é obrigatorio" maxlength="30" style="width: 212px"/>
 
                     <p:outputLabel value="Unidade:" for="unidade" style="text-align:right"/>
-                    <h:selectOneMenu id="unidade" value="#{controladorItem.entidade.unidade}" style="width: 213px">
+                    <h:selectOneMenu id="unidade" value="#{controladorItem.entidade.unidade}" style="width: 213px" 
+                                     required="true" requiredMessage="O campo unidade é obrigatorio">
 
                         <f:selectItem noSelectionOption="true" />
                         <f:selectItem itemLabel="Ampoula" itemValue="ampoula"/>

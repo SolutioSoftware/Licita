@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.persistence.PersistenceException;
 
 /**
@@ -21,7 +21,7 @@ import javax.persistence.PersistenceException;
  * @author ricardocaldeira
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class ControladorSessao extends ControladorAbstrato<Sessao> {
 
     private Sessao entidade;

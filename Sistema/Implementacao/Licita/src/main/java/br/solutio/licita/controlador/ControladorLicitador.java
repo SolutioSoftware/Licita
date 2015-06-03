@@ -5,93 +5,104 @@
  */
 package br.solutio.licita.controlador;
 
-import br.solutio.licita.modelo.ContatoPessoaJuridica;
-import br.solutio.licita.modelo.Endereco;
+import br.solutio.licita.controlador.util.JsfUtil;
 import br.solutio.licita.modelo.InstituicaoLicitadora;
-import br.solutio.licita.modelo.PessoaJuridica;
 import br.solutio.licita.servico.ServicoIF;
+import br.solutio.licita.servico.ServicoInstituicaoLicitadora;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
+import javax.persistence.PersistenceException;
 
 /**
  * @author ricardocaldeira
  */
 @ManagedBean
-@ViewScoped
-public class ControladorLicitador extends ControladorAbstrato<InstituicaoLicitadora> implements ControladorAbstratoIF<InstituicaoLicitadora>{
-    
-    private PessoaJuridica pessoaJuridica;
-    private InstituicaoLicitadora instituicaoLicitadora;
-    private Endereco endereco;
-    private ContatoPessoaJuridica contato;
+@SessionScoped
+public class ControladorLicitador extends ControladorAbstrato<InstituicaoLicitadora> implements ControladorAbstratoIF<InstituicaoLicitadora> {
+
+    private InstituicaoLicitadora entidade;
+    private transient List<InstituicaoLicitadora> instituicoes;
+    private final transient ServicoIF<InstituicaoLicitadora> servico;
 
     public ControladorLicitador() {
-        this.endereco = new Endereco();
-        this.instituicaoLicitadora = new InstituicaoLicitadora();
-        this.pessoaJuridica = new PessoaJuridica();
-        this.contato = new ContatoPessoaJuridica();
-    }
-    
-    public PessoaJuridica getPessoaJuridica() {
-        return pessoaJuridica;
-    }
-
-    public void setPessoaJuridica(PessoaJuridica pessoaJuridica) {
-        this.pessoaJuridica = pessoaJuridica;
-    }
-
-    public InstituicaoLicitadora getInstituicaoLicitadora() {
-        return instituicaoLicitadora;
-    }
-
-    public void setInstituicaoLicitadora(InstituicaoLicitadora instituicaoLicitadora) {
-        this.instituicaoLicitadora = instituicaoLicitadora;
-    }
-
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
-
-    public ContatoPessoaJuridica getContato() {
-        return contato;
-    }
-
-    public void setContato(ContatoPessoaJuridica contato) {
-        this.contato = contato;
-    }
-    
-    @Override
-    public ServicoIF getServico() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public InstituicaoLicitadora getEntidade() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setEntidade(InstituicaoLicitadora entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        entidade = new InstituicaoLicitadora();
+        servico = new ServicoInstituicaoLicitadora();
     }
 
     @Override
     public String criar(InstituicaoLicitadora entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            entidade = getEntidade();
+            getServico().criar(entidade);
+            setEntidade(null);
+            setEntidade(new InstituicaoLicitadora());
+            JsfUtil.addSuccessMessage("Salvo com Sucesso!");
+            return "licitador";
+        } catch (PersistenceException e) {
+            Logger.getLogger(ControladorLicitante.class.getName()).log(Level.SEVERE, null, e);
+            JsfUtil.addErrorMessage("Servido fora do ar");
+            return "licitadorSalvar";
+        } catch (IllegalStateException e) {
+            Logger.getLogger(ControladorLicitante.class.getName()).log(Level.SEVERE, null, e);
+            JsfUtil.addErrorMessage("Empresa já existe");
+            return "licitadorSalvar";
+        }
+
     }
 
     @Override
     public String editar(InstituicaoLicitadora entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        entidade = getEntidade();
+        getServico().editar(entidade);
+        setEntidade(new InstituicaoLicitadora());
+        JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
+        return "licitador";
     }
 
     @Override
     public String deletar(InstituicaoLicitadora entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        entidade = getEntidade();
+        getServico().deletar(entidade);
+        setEntidade(new InstituicaoLicitadora());
+        JsfUtil.addSuccessMessage("Excluido com Sucesso!");
+        return "licitador";
     }
-    
+
+    public String limparDados() {
+        setEntidade(null);
+        setEntidade(new InstituicaoLicitadora());
+        return "licitadorSalvar";
+    }
+
+    public String preparaEditar() {
+        logger.log(Level.INFO, "Editar funfando");
+        return "licitadorEditar";
+    }
+
+    @Override
+    public InstituicaoLicitadora getEntidade() {
+        return entidade;
+    }
+
+    @Override
+    public void setEntidade(InstituicaoLicitadora entidade) {
+        this.entidade = entidade;
+    }
+
+    public List<InstituicaoLicitadora> getInstituicoes() {
+        return instituicoes = servico.buscarTodos();
+    }
+
+    public void setInstituicoes(List<InstituicaoLicitadora> instituicoes) {
+        this.instituicoes = instituicoes;
+    }
+
+    @Override
+    public ServicoIF<InstituicaoLicitadora> getServico() {
+        return servico;
+    }
+
 }

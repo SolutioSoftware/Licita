@@ -28,24 +28,18 @@ public class ControladorLicitante extends ControladorAbstrato<EmpresaLicitante> 
     private transient List<EmpresaLicitante> empresas;
     private final transient ServicoIF<EmpresaLicitante> servico;
 
-   
-
     public ControladorLicitante() {
         entidade = new EmpresaLicitante();
         servico = new ServicoLicitante();
-        empresas = servico.buscarTodos();
-
     }
 
     @Override
     public String criar(EmpresaLicitante entidade) {
         try {
             entidade = getEntidade();
-
             getServico().criar(entidade);
             setEntidade(null);
             setEntidade(new EmpresaLicitante());
-
             JsfUtil.addSuccessMessage("Salvo com Sucesso!");
             empresas = servico.buscarTodos();
             return "licitante";
@@ -93,7 +87,7 @@ public class ControladorLicitante extends ControladorAbstrato<EmpresaLicitante> 
     }
 
     public List<EmpresaLicitante> getEmpresas() {
-        return empresas;
+        return empresas = servico.buscarTodos();
     }
 
     public void setEmpresas(List<EmpresaLicitante> empresas) {

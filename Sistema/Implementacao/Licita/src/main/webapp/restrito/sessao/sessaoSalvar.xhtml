@@ -65,10 +65,10 @@
     </ui:define>
 
     <ui:define name="pn_conteudo">
+        
+        <p:growl id="growSessao" showDetail="false" life="3000" class="ui-growl" />
 
         <h:form id="sessao_form" title="Sessão" style="text-align: center"  >
-
-            <p:growl id="growSessao" showDetail="false" for="sessao_form" />
 
             <div style="margin-left: 25%; margin-top: 2%">
 
@@ -113,6 +113,7 @@
 
                 <p:commandButton  id="bt_Salvar_Sessao" value="Salvar" icon="fa fa-save" action="#{controladorSessao.criar(entidade)}" 
                                   update="growSessao" ajax="false" style="width: 125px"/>
+                
                 <p:commandButton  id="bt_Iniciar_Sessao" value="Iniciar Sessão" icon="fa fa-youtube-play" update="growSessao" ajax="false" style="width: 125px"/>
 
             </div>

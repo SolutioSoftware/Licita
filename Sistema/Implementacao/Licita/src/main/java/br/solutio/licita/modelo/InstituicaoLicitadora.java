@@ -30,15 +30,19 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "InstituicaoLicitadora.findById", query = "SELECT i FROM InstituicaoLicitadora i WHERE i.id = :id"),
     @NamedQuery(name = "InstituicaoLicitadora.findByIdPessoaJuridica", query = "SELECT i FROM InstituicaoLicitadora i WHERE i.pessoaJuridica = :idPessoaJuridica")})
 public class InstituicaoLicitadora implements Serializable{
+    
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     @JoinColumn(name = "id_pessoa_juridica", referencedColumnName = "id", insertable = false, updatable = false)
     @OneToOne(optional = false)
     private PessoaJuridica pessoaJuridica;
 
     public InstituicaoLicitadora() {
+        pessoaJuridica = new PessoaJuridica();
     }
 
     public InstituicaoLicitadora(Long id) {

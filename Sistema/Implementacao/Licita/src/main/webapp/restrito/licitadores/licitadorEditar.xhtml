@@ -31,23 +31,6 @@
                     <h:outputText value="#{entidade.pessoaJuridica.nomeFantasia}" />
                 </p:column>
 
-                <p:column headerText="Ações" width="50">
-
-                    <p:commandButton id="btEditar" icon="ui-icon-pencil" action="#{controladorLicitador.preparaEditar}" update="@form"  
-                                     style="font-size: 10px">
-                        <f:setPropertyActionListener value="#{entidade}" target="#{controladorLicitador.entidade}"  />
-                        <p:tooltip for="btEditar" value="Editar"/>
-                    </p:commandButton>
-
-                    <p:commandButton id="btExcluir" icon="fa fa-trash" action="#{controladorLicitador.deletar(entidade)}" update="@form" 
-                                     style="font-size: 10px">
-                        <f:setPropertyActionListener value="#{entidade}" target="#{controladorLicitador.entidade}"  />
-                        <p:tooltip for="btExcluir" value="Excluir"/>
-                        <p:confirm icon="ui-icon-alert" header="Excluir Instituição" message="Deseja realmente excluir esta Instituição"/>
-                    </p:commandButton>
-
-                </p:column>
-
             </p:dataTable>
         </h:form>
 
@@ -144,7 +127,7 @@
 
             <div style="margin-left: 2%; margin-top: 2%; margin-right: 2%">
 
-                <p:commandButton  id="btSalvarLicitador" value="Salvar" icon="fa fa-save" action="#{controladorLicitador.criar(entidade)}" update="@form" ajax="false"/>
+                <p:commandButton  id="btAtualizarLicitador" value="Atualizar" icon="fa fa-refresh" action="#{controladorLicitador.editar(entidade)}" update="@form" ajax="false"/>
 
             </div>
 
