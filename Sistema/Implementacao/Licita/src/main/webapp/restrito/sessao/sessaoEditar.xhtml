@@ -68,7 +68,7 @@
                     </h:selectOneMenu>
                     
                     <p:outputLabel value="Data Prevista:" for="dataPrevista"/>
-                    <p:calendar id="dataPrevista" value="#{controladorSessao.entidade.dataRealizacao}" pattern="dd/MM/yyyy" style="width: 210px"/>
+                    <p:calendar id="dataPrevista" value="#{controladorSessao.entidade.dataRealizacao}" mindate="#{controladorSessao.dataAtual}" locale="pt_BR" style="width: 210px"/>
 
                     <p:outputLabel value="Horário Previsto:" for="horarioPrevisto"/>
                     <p:calendar id="horarioPrevisto" value="#{controladorSessao.entidade.horarioPrevisto}" pattern="HH:mm" timeOnly="true" style="width: 210px"/>

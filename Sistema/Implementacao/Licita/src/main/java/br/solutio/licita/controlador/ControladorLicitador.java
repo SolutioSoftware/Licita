@@ -9,6 +9,7 @@ import br.solutio.licita.controlador.util.JsfUtil;
 import br.solutio.licita.modelo.InstituicaoLicitadora;
 import br.solutio.licita.servico.ServicoIF;
 import br.solutio.licita.servico.ServicoInstituicaoLicitadora;
+import br.solutio.licita.servico.ServicoInstituicaoLicitadoraIF;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,7 +26,7 @@ public class ControladorLicitador extends ControladorAbstrato<InstituicaoLicitad
 
     private InstituicaoLicitadora entidade;
     private transient List<InstituicaoLicitadora> instituicoes;
-    private final transient ServicoIF<InstituicaoLicitadora> servico;
+    private final transient ServicoInstituicaoLicitadoraIF servico;
 
     public ControladorLicitador() {
         entidade = new InstituicaoLicitadora();
@@ -43,11 +44,12 @@ public class ControladorLicitador extends ControladorAbstrato<InstituicaoLicitad
             return "licitador";
         } catch (PersistenceException e) {
             Logger.getLogger(ControladorLicitante.class.getName()).log(Level.SEVERE, null, e);
-            JsfUtil.addErrorMessage("Servido fora do ar");
+            JsfUtil.addErrorMessage("Servidor fora do ar");
             return "licitadorSalvar";
         } catch (IllegalStateException e) {
             Logger.getLogger(ControladorLicitante.class.getName()).log(Level.SEVERE, null, e);
-            JsfUtil.addErrorMessage("Empresa já existe");
+            JsfUtil.addErrorMessage("CNPJ já cadastrado");
+            Logger.getLogger(e.getMessage());
             return "licitadorSalvar";
         }
 

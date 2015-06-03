@@ -58,7 +58,7 @@ public class Item implements Serializable {
     private String unidade;
     
     @OneToMany(mappedBy = "item")
-    private Set<ItemPregao> itensPregoes;
+    private transient Set<ItemPregao> itensPregoes;
 
     public Set<ItemPregao> getItensPregoes() {
         return itensPregoes;

@@ -41,7 +41,6 @@ public class ControladorLicitante extends ControladorAbstrato<EmpresaLicitante> 
             setEntidade(null);
             setEntidade(new EmpresaLicitante());
             JsfUtil.addSuccessMessage("Salvo com Sucesso!");
-            empresas = servico.buscarTodos();
             return "licitante";
         } catch (PersistenceException e) {
             Logger.getLogger(ControladorLicitante.class.getName()).log(Level.SEVERE, null, e);
@@ -49,7 +48,7 @@ public class ControladorLicitante extends ControladorAbstrato<EmpresaLicitante> 
             return "licitanteSalvar";
         } catch (IllegalStateException e) {
             Logger.getLogger(ControladorLicitante.class.getName()).log(Level.SEVERE, null, e);
-            JsfUtil.addErrorMessage("Empresa já existe");
+            JsfUtil.addErrorMessage("CNPJ já cadastrado");
             return "licitanteSalvar";
         }
 
@@ -61,7 +60,6 @@ public class ControladorLicitante extends ControladorAbstrato<EmpresaLicitante> 
         getServico().editar(entidade);
         setEntidade(new EmpresaLicitante());
         JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
-        empresas = servico.buscarTodos();
         return "licitante";
     }
 
@@ -71,7 +69,6 @@ public class ControladorLicitante extends ControladorAbstrato<EmpresaLicitante> 
         getServico().deletar(entidade);
         setEntidade(new EmpresaLicitante());
         JsfUtil.addSuccessMessage("Excluido com Sucesso!");
-        empresas = servico.buscarTodos();
         return "licitante";
     }
 

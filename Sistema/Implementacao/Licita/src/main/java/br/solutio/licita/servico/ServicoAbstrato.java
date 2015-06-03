@@ -39,11 +39,11 @@ public abstract class ServicoAbstrato<T> implements ServicoIF<T> {
             GerenciadorTransacao.executarTransacao(getDao().getEntityManager());
         } catch (Exception e) {
             GerenciadorTransacao.rollbackTransacao(getDao().getEntityManager());
-            logger.log(Level.SEVERE, null, e);
+            Logger.getLogger(ServicoAbstrato.class.getName()).log(Level.SEVERE, null, e);
             try {
                 GerenciadorTransacao.rollbackTransacao(getDao().getEntityManager());
             } catch (RollbackException dbe) {
-                logger.log(Level.SEVERE, null, dbe.getMessage());
+                Logger.getLogger(ServicoAbstrato.class.getName()).log(Level.SEVERE, null, dbe);
             }
         }
 
@@ -56,11 +56,11 @@ public abstract class ServicoAbstrato<T> implements ServicoIF<T> {
             getDao().editar(entidade);
             GerenciadorTransacao.executarTransacao(getDao().getEntityManager());
         } catch (DatabaseException | TransactionException | TransactionRequiredException dbe) {
-            logger.log(Level.SEVERE, null, dbe.getMessage());
+            Logger.getLogger(ServicoAbstrato.class.getName()).log(Level.SEVERE, null, dbe);
             try {
                 GerenciadorTransacao.rollbackTransacao(getDao().getEntityManager());
             } catch (RollbackException e) {
-                logger.log(Level.SEVERE, null, e.getMessage());
+                Logger.getLogger(ServicoAbstrato.class.getName()).log(Level.SEVERE, null, e);
             }
 
         }

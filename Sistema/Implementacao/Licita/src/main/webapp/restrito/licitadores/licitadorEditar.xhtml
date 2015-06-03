@@ -53,8 +53,11 @@
                     <p:outputLabel value="Razão Social:" for="razaoSocial"/>
                     <p:inputText id="razaoSocial" value="#{controladorLicitador.entidade.pessoaJuridica.razaoSocial}" title="Razão Social" required="true" 
                                  requiredMessage="O campo Razão Social é obrigatorio" placeholder="Razão Social"/>
+                    
+                    <p:outputLabel value="Nome de Fantasia:" for="nomeFantasia"/>
+                    <p:inputText id="nomeFantasia" value="#{controladorLicitador.entidade.pessoaJuridica.nomeFantasia}" title="Nome de Fantasia" required="true" 
+                                 requiredMessage="O campo nome de fantasia é obrigatorio" placeholder="Nome de Fantasia"/>
 
-                   
                     <p:outputLabel value="Logradouro:" for="logradouro" />
                     <p:inputText id="logradouro" value="#{controladorLicitador.entidade.pessoaJuridica.endereco.logradouro}" title="Logradouro" placeholder="Logradouro" maxlength="60"/>
 

@@ -9,6 +9,7 @@ import br.solutio.licita.controlador.util.JsfUtil;
 import br.solutio.licita.modelo.Sessao;
 import br.solutio.licita.servico.ServicoIF;
 import br.solutio.licita.servico.ServicoSessao;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -77,6 +78,10 @@ public class ControladorSessao extends ControladorAbstrato<Sessao> {
     public String preparaEditar() {
         logger.log(Level.INFO, "Editar funfando");
         return "sessaoEditar";
+    }
+    
+    public Date getDataAtual(){
+        return new Date();
     }
 
     @Override

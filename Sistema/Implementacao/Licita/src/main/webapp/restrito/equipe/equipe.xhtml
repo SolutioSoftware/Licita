@@ -14,7 +14,7 @@
             <h1>Membros de Apoio</h1>
             <br/>
 
-            <p:dataTable id='dt_equipe' var="entidade" value="#{controladorEquipe.pessoasfisica}" 
+            <p:dataTable id='dt_membroDeApoio' var="entidade" value="#{controladorEquipe.pessoasfisica}" 
                          widgetVar="tbl_equipe" paginator="true" style="padding:5px" rows="10" rowsPerPageTemplate="5,10"  
                          emptyMessage="Nenhum Membro Cadastrado"  paginatorAlwaysVisible="true">
 
@@ -52,6 +52,50 @@
                 </p:column>
 
             </p:dataTable>
+            
+            <h1>Pregoeiros</h1>
+            <br/>
+            
+            <p:dataTable id='dt_pregoeiro' var="entidade" value="#{controladorEquipe.pessoasfisica}" 
+                         widgetVar="tbl_equipe" paginator="true" style="padding:5px" rows="10" rowsPerPageTemplate="5,10"  
+                         emptyMessage="Nenhum Membro Cadastrado"  paginatorAlwaysVisible="true">
+
+                <f:facet name="header">
+                    <p:outputPanel>
+                        <p:commandButton value="Novo" style="width: 80px" action="#{controladorEquipe.limparDados}" update="@form"  icon="fa fa-plus" 
+                                         class="botaoNovo"/>
+                        <p:inputText id="globalFilter" onkeyup="PF('tbl_equipe').filter()" style="width:250px" placeholder="Digite sua busca" />
+                    </p:outputPanel>
+                </f:facet>
+
+                <p:column headerText="CPF: " filterBy="#{entidade.cpf}" filterMatchMode="contains" filterStyle="display:none">
+                    <h:outputText value="#{entidade.cpf}" />
+                </p:column>
+
+                <p:column headerText="Nome: " filterBy="#{entidade.nome}" filterMatchMode="contains" filterStyle="display:none">
+                    <h:outputText value="#{entidade.nome}" />
+                </p:column>
+
+                <p:column headerText="Ações" width="50">
+
+                    <p:commandButton id="btEditar" icon="ui-icon-pencil" action="#{controladorEquipe.preparaEditar()}" update="@form"  
+                                     style="font-size: 10px">
+                        <f:setPropertyActionListener value="#{entidade}" target="#{controladorEquipe.entidade}"  />
+                        <p:tooltip for="btEditar" value="Editar"/>
+                    </p:commandButton>
+
+                    <p:commandButton id="btExcluir" icon="fa fa-trash" action="#{controladorEquipe.deletar(entidade)}" update="@form" 
+                                     style="font-size: 10px">
+                        <f:setPropertyActionListener value="#{entidade}" target="#{controladorEquipe.entidade}"  />
+                        <p:tooltip for="btExcluir" value="Excluir"/>
+                        <p:confirm icon="ui-icon-alert" header="Excluir Membro de equipe" message="Deseja realmente excluir este membro de equipe"/>
+                    </p:commandButton>
+
+                </p:column>
+
+            </p:dataTable>
+            
+            
         </h:form>
 
     </ui:define>

@@ -79,7 +79,7 @@ public class Pregao implements Serializable{
     private transient Set<StatusPregao> statusPregaoSet;
     
     @OneToMany(mappedBy = "pregao")
-    private Set<ItemPregao> itensPregoes;
+    private transient Set<ItemPregao> itensPregoes;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPregao")
     private transient Set<Sessao> sessaoSet;
