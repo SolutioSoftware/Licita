@@ -20,14 +20,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
 
 /**
  *
  * @author WitaloCarlos
  */
 @ManagedBean
-@ViewScoped
+@RequestScoped
 public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> implements ControladorAbstratoIF<PessoaFisica> {
 
     private PessoaFisica entidade;
@@ -73,7 +73,6 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
         corrigirCPF(entidade);
         if ((isCargoPregoeiro()) && (pregoeiro != null) && (login != null)) {
             pregoeiro.setPessoaFisica(entidade);
-//            pregoeiro.setLogin(login);
             servicoPregoeiro.criar(pregoeiro);
             JsfUtil.addSuccessMessage("Salvo com Sucesso!");
         } else if (isCargoMembrodeApoio() && (membroApoio != null)) {
@@ -85,7 +84,7 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
             JsfUtil.addSuccessMessage("Nenhuma função selecionada");
         }
         limparDados();
-        return "equipe";
+        return "equipe?faces-redirect=true";
     }
 
     @Override
@@ -94,7 +93,7 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
         getServico().editar(entidade);
         setEntidade(new PessoaFisica());
         JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
-        return "equipe";
+        return "equipe?faces-redirect=true";
     }
 
     @Override
@@ -103,7 +102,7 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
         getServico().deletar(entidade);
         setEntidade(new PessoaFisica());
         JsfUtil.addSuccessMessage("Excluido com Sucesso!");
-        return "equipe";
+        return "equipe?faces-redirect=true";
     }
 
     public String preparaEditar() {
@@ -123,15 +122,15 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
     }
 
     public String limparDados() {
-        this.login = null;
+        this.login = new Login();
         this.membrosDeApoio = null;
         this.pregoeiros = null;
-        this.membroApoio = null;
-        this.pregoeiro = null;
+        this.membroApoio = new MembroApoio();
+        this.pregoeiro = new Pregoeiro();
         this.cargoPregoeiro = false;
         this.cargoMembrodeApoio = false;
         this.confirmaSenha = "";
-        return "equipeSalvar";
+        return "equipeSalvar?faces-redirect=true";
     }
 
     public boolean isCargoPregoeiro() {

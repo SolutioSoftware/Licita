@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.persistence.PersistenceException;
 
 /**
@@ -21,7 +21,7 @@ import javax.persistence.PersistenceException;
  * @author ricardocaldeira
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class ControladorMembroApoio extends ControladorAbstrato<MembroApoio> implements ControladorAbstratoIF<MembroApoio>  {
     
     private MembroApoio entidade;
@@ -38,13 +38,12 @@ public class ControladorMembroApoio extends ControladorAbstrato<MembroApoio> imp
         try {
             entidade = getEntidade();
             getServico().criar(entidade);
-            setEntidade(null);
             setEntidade(new MembroApoio());
             JsfUtil.addSuccessMessage("Salvo com Sucesso!");
-            return "equipe";
+            return "equipe?faces-redirect=true";
         } catch (PersistenceException | IllegalStateException e) {
             Logger.getLogger(ControladorPregao.class.getName()).log(Level.SEVERE, null, e);
-            return "equipeSalvarMembroApoio";
+            return "equipeSalvarMembroApoio?faces-redirect=true";
         }
 
     }
@@ -56,7 +55,7 @@ public class ControladorMembroApoio extends ControladorAbstrato<MembroApoio> imp
         getServico().editar(entidade);
         setEntidade(new MembroApoio());
         JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
-        return "equipe";
+        return "equipe?faces-redirect=true";
     }
 
     @Override
@@ -65,13 +64,13 @@ public class ControladorMembroApoio extends ControladorAbstrato<MembroApoio> imp
         getServico().deletar(entidade);
         setEntidade(new MembroApoio());
         JsfUtil.addSuccessMessage("Excluido com Sucesso!");
-        return "equipe";
+        return "equipe?faces-redirect=true";
     }
 
     public String limparDados() {
         setEntidade(null);
         setEntidade(new MembroApoio());
-        return "equipeSalvarMembroApoio";
+        return "equipeSalvarMembroApoio?faces-redirect=true";
     }
 
     public String preparaEditar() {
