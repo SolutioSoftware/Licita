@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.persistence.PersistenceException;
 
@@ -21,7 +22,7 @@ import javax.persistence.PersistenceException;
  * @author ricardocaldeira
  */
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class ControladorPregoeiro extends ControladorAbstrato<Pregoeiro> implements ControladorAbstratoIF<Pregoeiro> {
 
     private Pregoeiro entidade;
@@ -31,17 +32,18 @@ public class ControladorPregoeiro extends ControladorAbstrato<Pregoeiro> impleme
     public ControladorPregoeiro() {
         entidade = new Pregoeiro();
         servico = new ServicoPregoeiro();
+        pregoeiros = servico.buscarTodos();
     }
 
     @Override
     public String criar(Pregoeiro entidade) {
         try {
             entidade = getEntidade();
-            Logger.getLogger(ControladorPregao.class.getName()).log(Level.INFO, "TEU RABO", getEntidade().toString());
+            Logger.getLogger(ControladorPregao.class.getName()).log(Level.INFO, null, getEntidade().toString());
             getServico().criar(entidade);
+            setEntidade(null);
             setEntidade(new Pregoeiro());
             JsfUtil.addSuccessMessage("Salvo com Sucesso!");
-            setEntidade(null);
             return "equipe";
         } catch (PersistenceException | IllegalStateException e) {
             Logger.getLogger(ControladorPregao.class.getName()).log(Level.SEVERE, null, e);
