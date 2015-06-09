@@ -21,6 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -84,6 +85,8 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
             JsfUtil.addSuccessMessage("Nenhuma função selecionada");
         }
         limparDados();
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getExternalContext().getFlash().setKeepMessages(true);
         return "equipe?faces-redirect=true";
     }
 
@@ -223,7 +226,5 @@ public class ControladorEquipe extends ControladorAbstrato<PessoaFisica> impleme
     public List<Pregoeiro> getPregoeiros() {
         return pregoeiros = servicoPregoeiro.buscarTodos();
     }
-    
-    
 
 }

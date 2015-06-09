@@ -10,8 +10,8 @@ import br.solutio.licita.modelo.Login;
 import br.solutio.licita.servico.ServicoIF;
 import br.solutio.licita.servico.ServicoLogin;
 import br.solutio.licita.servico.ServicoLoginIF;
-import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 /**
@@ -19,7 +19,8 @@ import javax.faces.context.FacesContext;
  * @author Matheus Oliveira
  */
 @ManagedBean(name = "Login")
-public class ControladorLogin extends ControladorAbstrato<Login> {
+@SessionScoped
+public class ControladorLogin {
 
     private Login login;
     private transient ServicoLoginIF servico;
@@ -29,17 +30,14 @@ public class ControladorLogin extends ControladorAbstrato<Login> {
         servico = new ServicoLogin();
     }
 
-    @Override
     public Login getEntidade() {
         return this.login;
     }
 
-    @Override
     public void setEntidade(Login entidade) {
         this.login = entidade;
     }
 
-    @Override
     public ServicoIF getServico() {
         return this.servico;
     }
@@ -70,21 +68,6 @@ public class ControladorLogin extends ControladorAbstrato<Login> {
     public String efetuarLogout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "/restrito/login/login.xhtml?faces-redirect=true";
-    }
-
-    @Override
-    public String criar(Login entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String editar(Login entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String deletar(Login entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
