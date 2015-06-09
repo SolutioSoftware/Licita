@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.persistence.PersistenceException;
 
 /**
@@ -22,7 +22,7 @@ import javax.persistence.PersistenceException;
  * @author ricardocaldeira
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class ControladorPregoeiro extends ControladorAbstrato<Pregoeiro> implements ControladorAbstratoIF<Pregoeiro> {
 
     private Pregoeiro entidade;
@@ -39,15 +39,20 @@ public class ControladorPregoeiro extends ControladorAbstrato<Pregoeiro> impleme
     public String criar(Pregoeiro entidade) {
         try {
             entidade = getEntidade();
-            Logger.getLogger(ControladorPregao.class.getName()).log(Level.INFO, null, getEntidade().toString());
             getServico().criar(entidade);
             setEntidade(null);
             setEntidade(new Pregoeiro());
             JsfUtil.addSuccessMessage("Salvo com Sucesso!");
-            return "equipe";
+            //Imprimir Message apos o redirect
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.getExternalContext().getFlash().setKeepMessages(true);
+            return "equipe?faces-redirect=true";
         } catch (PersistenceException | IllegalStateException e) {
             Logger.getLogger(ControladorPregao.class.getName()).log(Level.SEVERE, null, e);
-            return "equipeSalvarPregoeiro";
+            //Imprimir Message apos o redirect
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.getExternalContext().getFlash().setKeepMessages(true);
+            return "equipeSalvarPregoeiro?faces-redirect=true";
         }
 
     }
@@ -59,7 +64,10 @@ public class ControladorPregoeiro extends ControladorAbstrato<Pregoeiro> impleme
         getServico().editar(entidade);
         setEntidade(new Pregoeiro());
         JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
-        return "equipe";
+        //Imprimir Message apos o redirect
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getExternalContext().getFlash().setKeepMessages(true);
+        return "equipe?faces-redirect=true";
     }
 
     @Override
@@ -68,17 +76,25 @@ public class ControladorPregoeiro extends ControladorAbstrato<Pregoeiro> impleme
         getServico().deletar(entidade);
         setEntidade(new Pregoeiro());
         JsfUtil.addSuccessMessage("Excluido com Sucesso!");
-        return "equipe";
+        //Imprimir Message apos o redirect
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getExternalContext().getFlash().setKeepMessages(true);
+        return "equipe?faces-redirect=true";
     }
 
     public String limparDados() {
-        setEntidade(null);
         setEntidade(new Pregoeiro());
-        return "equipeSalvarPregoeiro";
+        //Imprimir Message apos o redirect
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getExternalContext().getFlash().setKeepMessages(true);
+        return "equipeSalvarPregoeiro?faces-redirect=true";
     }
 
     public String preparaEditar() {
         logger.log(Level.INFO, "Editar funfando");
+        //Imprimir Message apos o redirect
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getExternalContext().getFlash().setKeepMessages(true);
         return "equipeEditarPregoeiro";
     }
 

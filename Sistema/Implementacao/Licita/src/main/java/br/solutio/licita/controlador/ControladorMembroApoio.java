@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.persistence.PersistenceException;
 
 /**
@@ -22,42 +22,50 @@ import javax.persistence.PersistenceException;
  * @author ricardocaldeira
  */
 @ManagedBean
-@SessionScoped
-public class ControladorMembroApoio extends ControladorAbstrato<MembroApoio> implements ControladorAbstratoIF<MembroApoio>  {
-    
+@RequestScoped
+public class ControladorMembroApoio extends ControladorAbstrato<MembroApoio> implements ControladorAbstratoIF<MembroApoio> {
+
     private MembroApoio entidade;
     private transient List<MembroApoio> membros;
     private final transient ServicoMembroApoioIF servico;
-    
-    public ControladorMembroApoio(){
+
+    public ControladorMembroApoio() {
         entidade = new MembroApoio();
         servico = new ServicoMembroApoio();
     }
-    
+
     @Override
     public String criar(MembroApoio entidade) {
         try {
             entidade = getEntidade();
             getServico().criar(entidade);
-            setEntidade(null);
             setEntidade(new MembroApoio());
             JsfUtil.addSuccessMessage("Salvo com Sucesso!");
-            return "equipe";
+            //Imprimir Message apos o redirect
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.getExternalContext().getFlash().setKeepMessages(true);
+            return "equipe?faces-redirect=true";
         } catch (PersistenceException | IllegalStateException e) {
             Logger.getLogger(ControladorPregao.class.getName()).log(Level.SEVERE, null, e);
-            return "equipeSalvarMembroApoio";
+            //Imprimir Message apos o redirect
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.getExternalContext().getFlash().setKeepMessages(true);
+            return "equipeSalvarMembroApoio?faces-redirect=true";
         }
 
     }
 
     @Override
     public String editar(MembroApoio entidade) {
-        
+
         entidade = getEntidade();
         getServico().editar(entidade);
         setEntidade(new MembroApoio());
         JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
-        return "equipe";
+        //Imprimir Message apos o redirect
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getExternalContext().getFlash().setKeepMessages(true);
+        return "equipe?faces-redirect=true";
     }
 
     @Override
@@ -66,13 +74,19 @@ public class ControladorMembroApoio extends ControladorAbstrato<MembroApoio> imp
         getServico().deletar(entidade);
         setEntidade(new MembroApoio());
         JsfUtil.addSuccessMessage("Excluido com Sucesso!");
-        return "equipe";
+        //Imprimir Message apos o redirect
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getExternalContext().getFlash().setKeepMessages(true);
+        return "equipe?faces-redirect=true";
     }
 
     public String limparDados() {
         setEntidade(null);
         setEntidade(new MembroApoio());
-        return "equipeSalvarMembroApoio";
+        //Imprimir Message apos o redirect
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getExternalContext().getFlash().setKeepMessages(true);
+        return "equipeSalvarMembroApoio?faces-redirect=true";
     }
 
     public String preparaEditar() {
