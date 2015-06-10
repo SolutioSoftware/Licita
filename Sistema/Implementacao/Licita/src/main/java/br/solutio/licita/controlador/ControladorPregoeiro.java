@@ -32,7 +32,6 @@ public class ControladorPregoeiro extends ControladorAbstrato<Pregoeiro> impleme
     public ControladorPregoeiro() {
         entidade = new Pregoeiro();
         servico = new ServicoPregoeiro();
-        pregoeiros = servico.buscarTodos();
     }
 
     @Override
@@ -40,7 +39,6 @@ public class ControladorPregoeiro extends ControladorAbstrato<Pregoeiro> impleme
         try {
             entidade = getEntidade();
             getServico().criar(entidade);
-            setEntidade(null);
             setEntidade(new Pregoeiro());
             JsfUtil.addSuccessMessage("Salvo com Sucesso!");
             //Imprimir Message apos o redirect
@@ -92,6 +90,7 @@ public class ControladorPregoeiro extends ControladorAbstrato<Pregoeiro> impleme
     }
 
     public String limparDados() {
+        setEntidade(null);
         setEntidade(new Pregoeiro());
         //Imprimir Message apos o redirect
         FacesContext context = FacesContext.getCurrentInstance();
