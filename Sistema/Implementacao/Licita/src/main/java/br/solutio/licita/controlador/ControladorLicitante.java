@@ -13,7 +13,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.persistence.PersistenceException;
 
 /**
@@ -21,7 +23,7 @@ import javax.persistence.PersistenceException;
  * @author ricardocaldeira
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class ControladorLicitante extends ControladorAbstrato<EmpresaLicitante> {
 
     private EmpresaLicitante entidade;
@@ -38,7 +40,6 @@ public class ControladorLicitante extends ControladorAbstrato<EmpresaLicitante> 
         try {
             entidade = getEntidade();
             getServico().criar(entidade);
-            setEntidade(null);
             setEntidade(new EmpresaLicitante());
             JsfUtil.addSuccessMessage("Salvo com Sucesso!");
             return "licitante";
@@ -56,11 +57,22 @@ public class ControladorLicitante extends ControladorAbstrato<EmpresaLicitante> 
 
     @Override
     public String editar(EmpresaLicitante entidade) {
-        entidade = getEntidade();
-        getServico().editar(entidade);
-        setEntidade(new EmpresaLicitante());
-        JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
-        return "licitante";
+
+        try {
+            entidade = getEntidade();
+            getServico().editar(entidade);
+            JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
+            return "licitante?faces-redirect=true";
+        } catch (PersistenceException e) {
+            Logger.getLogger(ControladorLicitante.class.getName()).log(Level.SEVERE, null, e);
+            JsfUtil.addErrorMessage("Servido fora do ar");
+            return "licitanteEditar?faces-redirect=true";
+        } catch (IllegalStateException e) {
+            Logger.getLogger(ControladorLicitante.class.getName()).log(Level.SEVERE, null, e);
+            JsfUtil.addErrorMessage("CNPJ já cadastrado");
+            return "licitanteEditar?faces-redirect=true";
+        }
+
     }
 
     @Override
@@ -73,7 +85,6 @@ public class ControladorLicitante extends ControladorAbstrato<EmpresaLicitante> 
     }
 
     public String limparDados() {
-        setEntidade(null);
         setEntidade(new EmpresaLicitante());
         return "licitanteSalvar";
     }
@@ -105,7 +116,5 @@ public class ControladorLicitante extends ControladorAbstrato<EmpresaLicitante> 
     public void setEntidade(EmpresaLicitante entidade) {
         this.entidade = entidade;
     }
-
-
 
 }

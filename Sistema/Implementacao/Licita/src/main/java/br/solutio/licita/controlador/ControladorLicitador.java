@@ -57,11 +57,24 @@ public class ControladorLicitador extends ControladorAbstrato<InstituicaoLicitad
 
     @Override
     public String editar(InstituicaoLicitadora entidade) {
-        entidade = getEntidade();
-        getServico().editar(entidade);
-        setEntidade(new InstituicaoLicitadora());
-        JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
-        return "licitador";
+
+        try {
+            entidade = getEntidade();
+            getServico().editar(entidade);
+            setEntidade(new InstituicaoLicitadora());
+            JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
+            return "licitador";
+        } catch (PersistenceException e) {
+            Logger.getLogger(ControladorLicitante.class.getName()).log(Level.SEVERE, null, e);
+            JsfUtil.addErrorMessage("Servidor fora do ar");
+            return "licitadorEditar";
+        } catch (IllegalStateException e) {
+            Logger.getLogger(ControladorLicitante.class.getName()).log(Level.SEVERE, null, e);
+            JsfUtil.addErrorMessage("CNPJ já cadastrado");
+            Logger.getLogger(e.getMessage());
+            return "licitadorEditar";
+        }
+
     }
 
     @Override

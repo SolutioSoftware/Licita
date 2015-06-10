@@ -42,7 +42,7 @@
 
 
     <ui:define name="pn_conteudo">
-        
+
         <p:growl id="growPregaoSalvar" showDetail="false" life="3000" class="ui-growl" />
 
         <h:form id="pregao_form" title="Pregão" style="text-align: center">
@@ -73,6 +73,15 @@
                         <f:selectItem itemLabel="Fracassado" itemValue="fracassad" />
 
                     </h:selectOneMenu>
+                    
+                    <p:outputLabel value="Instituição Licitadora:" for="instituicaoLicitadora"/>
+                    <h:selectOneMenu id="instituicaoLicitadora" value="#{controladorPregao.entidade.instituicaoLicitadora}" style="width: 213px" required="true" 
+                                     requiredMessage="O campo Instituição Licitadora deve ser selecionado" converter="instituicaoLicitadoraConverter">
+                        
+                        <f:selectItems value="#{controladorLicitador.instituicoes}" var="instituicao" itemLabel="#{instituicao.pessoaJuridica.nomeFantasia}" 
+                                       itemValue="#{controladorLicitador.entidade.id}"/>
+                        
+                    </h:selectOneMenu>
 
                     <p:outputLabel value="Descrição:"  for="descricao"/>
                     <p:inputTextarea id="descricao" value="#{controladorPregao.entidade.descricao}" title="Descrição" placeholder="Descrição" 
@@ -91,6 +100,8 @@
 
                 <p:commandButton  id="btAtualizarPregao" value="Atualizar" icon="fa fa-refresh" action="#{controladorPregao.editar(entidade)}" 
                                   update="pn_info : dt_pregoes" ajax="false" />
+
+                <p:commandButton  id="btAdicionarItens" value="Adicionar Itens" icon="fa fa-plus-circle" update="pn_info : dt_pregoes" ajax="false" />
 
             </div>
 

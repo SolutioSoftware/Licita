@@ -53,11 +53,19 @@ public class ControladorSessao extends ControladorAbstrato<Sessao> {
 
     @Override
     public String editar(Sessao entidade) {
-        entidade = getEntidade();
-        getServico().editar(entidade);
-        setEntidade(new Sessao());
-        JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
-        return "sessao";
+
+        try {
+            entidade = getEntidade();
+            getServico().editar(entidade);
+            setEntidade(new Sessao());
+            JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
+            return "sessao";
+        } catch (PersistenceException | IllegalStateException e) {
+            Logger.getLogger(ControladorSessao.class.getName()).log(Level.SEVERE, null, e);
+            JsfUtil.addErrorMessage("Sessão já existe");
+            return "sessaoEditar";
+        }
+
     }
 
     @Override
@@ -68,19 +76,19 @@ public class ControladorSessao extends ControladorAbstrato<Sessao> {
         JsfUtil.addSuccessMessage("Excluido com Sucesso!");
         return "sessao";
     }
-    
+
     public String limparDados() {
         setEntidade(null);
         setEntidade(new Sessao());
         return "sessaoSalvar";
     }
-    
+
     public String preparaEditar() {
         logger.log(Level.INFO, "Editar funfando");
         return "sessaoEditar";
     }
-    
-    public Date getDataAtual(){
+
+    public Date getDataAtual() {
         return new Date();
     }
 

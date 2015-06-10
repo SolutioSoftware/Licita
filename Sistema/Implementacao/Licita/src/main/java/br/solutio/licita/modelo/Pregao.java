@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -83,6 +84,10 @@ public class Pregao implements Serializable{
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPregao")
     private transient Set<Sessao> sessaoSet;
+    
+    @ManyToOne
+    @JoinColumn(name = "instituicaoLicitadora", referencedColumnName = "id")
+    private InstituicaoLicitadora instituicaoLicitadora;
 
     public Pregao() {
     }
@@ -170,7 +175,15 @@ public class Pregao implements Serializable{
     public void setSessaoSet(Set<Sessao> sessaoSet) {
         this.sessaoSet = sessaoSet;
     }
+    
+    public InstituicaoLicitadora getInstituicaoLicitadora() {
+        return instituicaoLicitadora;
+    }
 
+    public void setInstituicaoLicitadora(InstituicaoLicitadora instituicaoLicitadora) {
+        this.instituicaoLicitadora = instituicaoLicitadora;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

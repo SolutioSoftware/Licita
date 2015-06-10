@@ -30,7 +30,7 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
     public ControladorPregao() {
         entidade = new Pregao();
         servico = new ServicoPregao();
-        
+
     }
 
     @Override
@@ -52,12 +52,19 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
 
     @Override
     public String editar(Pregao entidade) {
-        
-        entidade = getEntidade();
-        getServico().editar(entidade);
-        setEntidade(new Pregao());
-        JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
-        return "pregao";
+
+        try {
+            entidade = getEntidade();
+            getServico().editar(entidade);
+            setEntidade(new Pregao());
+            JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
+            return "pregao";
+        } catch (PersistenceException | IllegalStateException e) {
+            Logger.getLogger(ControladorPregao.class.getName()).log(Level.SEVERE, null, e);
+            JsfUtil.addErrorMessage("Pregao ou Processo já existe");
+            return "pregaoEditar";
+        }
+
     }
 
     @Override

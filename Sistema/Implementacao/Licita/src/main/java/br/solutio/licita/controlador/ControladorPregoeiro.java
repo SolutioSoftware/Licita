@@ -60,14 +60,23 @@ public class ControladorPregoeiro extends ControladorAbstrato<Pregoeiro> impleme
     @Override
     public String editar(Pregoeiro entidade) {
 
-        entidade = getEntidade();
-        getServico().editar(entidade);
-        setEntidade(new Pregoeiro());
-        JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
-        //Imprimir Message apos o redirect
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.getExternalContext().getFlash().setKeepMessages(true);
-        return "equipe?faces-redirect=true";
+        try {
+            entidade = getEntidade();
+            getServico().editar(entidade);
+            setEntidade(new Pregoeiro());
+            JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
+            //Imprimir Message apos o redirect
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.getExternalContext().getFlash().setKeepMessages(true);
+            return "equipe?faces-redirect=true";
+        } catch (PersistenceException | IllegalStateException e) {
+            Logger.getLogger(ControladorPregao.class.getName()).log(Level.SEVERE, null, e);
+            //Imprimir Message apos o redirect
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.getExternalContext().getFlash().setKeepMessages(true);
+            return "equipeEditarPregoeiro?faces-redirect=true";
+        }
+
     }
 
     @Override

@@ -35,6 +35,24 @@
                           filterStyle="display:none">
                     <h:outputText value="#{entidade.pessoaJuridica.nomeFantasia}" />
                 </p:column>
+                
+                <p:column headerText="Ações" width="50">
+
+                    <p:commandButton id="btEditar" icon="ui-icon-pencil" action="#{controladorLicitante.preparaEditar}" update="@form"  
+                                     style="font-size: 10px">
+                        <f:setPropertyActionListener value="#{entidade}" target="#{controladorLicitante.entidade}"  />
+                        <p:tooltip for="btEditar" value="Editar"/>
+                    </p:commandButton>
+
+                    <p:commandButton id="btExcluir" icon="fa fa-trash" action="#{controladorLicitante.deletar(entidade)}" update="@form" 
+                                     style="font-size: 10px">
+                        <f:setPropertyActionListener value="#{entidade}" target="#{controladorLicitante.entidade}"  />
+                        <p:tooltip for="btExcluir" value="Excluir"/>
+                        <p:confirm icon="ui-icon-alert" header="Excluir Licitante" message="Deseja realmente excluir este licitante"/>
+                    </p:commandButton>
+
+                </p:column>
+
 
             </p:dataTable>
         </h:form>

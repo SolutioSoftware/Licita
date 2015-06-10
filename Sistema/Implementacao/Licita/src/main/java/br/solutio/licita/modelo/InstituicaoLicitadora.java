@@ -6,6 +6,7 @@
 package br.solutio.licita.modelo;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -41,6 +43,9 @@ public class InstituicaoLicitadora implements Serializable{
     @JoinColumn(name = "id_pessoa_juridica", referencedColumnName = "id")
     @OneToOne(optional = false, cascade = CascadeType.ALL)
     private PessoaJuridica pessoaJuridica;
+    
+    @OneToMany(mappedBy = "instituicaoLicitadora")
+    private Set<Pregao> pregoes;
 
     public InstituicaoLicitadora() {
         pessoaJuridica = new PessoaJuridica();
@@ -65,6 +70,14 @@ public class InstituicaoLicitadora implements Serializable{
 
     public void setPessoaJuridica(PessoaJuridica pessoaJuridica) {
         this.pessoaJuridica = pessoaJuridica;
+    }
+    
+    public Set<Pregao> getPregoes() {
+        return pregoes;
+    }
+
+    public void setPregoes(Set<Pregao> pregoes) {
+        this.pregoes = pregoes;
     }
 
     @Override

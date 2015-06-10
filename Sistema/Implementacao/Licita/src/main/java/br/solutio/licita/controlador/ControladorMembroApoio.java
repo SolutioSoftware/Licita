@@ -58,14 +58,23 @@ public class ControladorMembroApoio extends ControladorAbstrato<MembroApoio> imp
     @Override
     public String editar(MembroApoio entidade) {
 
-        entidade = getEntidade();
-        getServico().editar(entidade);
-        setEntidade(new MembroApoio());
-        JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
-        //Imprimir Message apos o redirect
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.getExternalContext().getFlash().setKeepMessages(true);
-        return "equipe?faces-redirect=true";
+        try {
+            entidade = getEntidade();
+            getServico().editar(entidade);
+            setEntidade(new MembroApoio());
+            JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
+            //Imprimir Message apos o redirect
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.getExternalContext().getFlash().setKeepMessages(true);
+            return "equipe?faces-redirect=true";
+        } catch (PersistenceException | IllegalStateException e) {
+            Logger.getLogger(ControladorPregao.class.getName()).log(Level.SEVERE, null, e);
+            //Imprimir Message apos o redirect
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.getExternalContext().getFlash().setKeepMessages(true);
+            return "equipeEditarMembroApoio?faces-redirect=true";
+        }
+
     }
 
     @Override

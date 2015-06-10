@@ -35,6 +35,59 @@ public class ControladorItem extends ControladorAbstrato<Item> {
         itens = servico.buscarTodos();
     }
 
+    @Override
+    public String criar(Item entidade) {
+
+        try {
+            entidade = getEntidade();
+            getServico().criar(entidade);
+            setEntidade(null);
+            setEntidade(new Item());
+            JsfUtil.addSuccessMessage("Salvo com Sucesso!");
+            itens = servico.buscarTodos();
+            return "item";
+        } catch (PersistenceException | IllegalStateException e) {
+            Logger.getLogger(ControladorPregao.class.getName()).log(Level.SEVERE, null, e);
+            JsfUtil.addErrorMessage("Item já existe");
+            return "itemSalvar";
+        }
+    }
+
+    @Override
+    public String editar(Item entidade) {
+
+        try {
+            entidade = getEntidade();
+            if (entidade.getId() == null) {
+                JsfUtil.addSuccessMessage("Criada!");
+                criar(entidade);
+            } else {
+                getServico().editar(entidade);
+                setEntidade(new Item());
+                JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
+                itens = servico.buscarTodos();
+            }
+            return "item";
+        } catch (PersistenceException | IllegalStateException e) {
+            Logger.getLogger(ControladorPregao.class.getName()).log(Level.SEVERE, null, e);
+            JsfUtil.addErrorMessage("Item já existe");
+            return "itemEditar";
+        }
+
+    }
+
+    @Override
+    public String deletar(Item entidade) {
+
+        entidade = getEntidade();
+        getServico().deletar(entidade);
+        setEntidade(new Item());
+        JsfUtil.addSuccessMessage("Excluido com Sucesso!");
+        itens = servico.buscarTodos();
+        return "item";
+
+    }
+
     public String limparDados() {
         setEntidade(null);
         setEntidade(new Item());
@@ -43,7 +96,7 @@ public class ControladorItem extends ControladorAbstrato<Item> {
 
     public String preparaEditar() {
         logger.log(Level.INFO, "Editar funfando");
-        
+
         return "itemEditar";
     }
 
@@ -72,52 +125,6 @@ public class ControladorItem extends ControladorAbstrato<Item> {
 
     public void setServico(ServicoIF<Item> servico) {
         this.servico = servico;
-    }
-
-    @Override
-    public String criar(Item entidade) {
-
-        try {
-            entidade = getEntidade();
-            getServico().criar(entidade);
-            setEntidade(null);
-            setEntidade(new Item());
-            JsfUtil.addSuccessMessage("Salvo com Sucesso!");
-            itens = servico.buscarTodos();
-            return "item";
-        } catch (PersistenceException | IllegalStateException e) {
-            Logger.getLogger(ControladorPregao.class.getName()).log(Level.SEVERE, null, e);
-            JsfUtil.addErrorMessage("Item já existe");
-            return "itemSalvar";
-        }
-    }
-
-    @Override
-    public String editar(Item entidade) {
-        
-        entidade = getEntidade();
-        if (entidade.getId() == null) {
-            JsfUtil.addSuccessMessage("Criada!");
-            criar(entidade);
-        } else {
-            getServico().editar(entidade);
-            setEntidade(new Item());
-            JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
-            itens = servico.buscarTodos();
-        }
-        return "item";
-    }
-
-    @Override
-    public String deletar(Item entidade) {
-
-        entidade = getEntidade();
-        getServico().deletar(entidade);
-        setEntidade(new Item());
-        JsfUtil.addSuccessMessage("Excluido com Sucesso!");
-        itens = servico.buscarTodos();
-        return "item";
-
     }
 
 }

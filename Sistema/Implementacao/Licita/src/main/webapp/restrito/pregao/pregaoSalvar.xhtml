@@ -23,7 +23,7 @@
                     </p:outputPanel>
                 </f:facet>
 
-                     <p:column headerText="Número do processo" filterBy="#{entidade.numeroProcesso}" filterMatchMode="contains" filterStyle="display:none">
+                <p:column headerText="Número do processo" filterBy="#{entidade.numeroProcesso}" filterMatchMode="contains" filterStyle="display:none">
                     <h:outputText value="#{entidade.numeroProcesso}" />
                 </p:column>
 
@@ -76,16 +76,19 @@
                     <p:outputLabel value="Status:" for="statusDoPregao" style="text-align:right"/>
                     <h:selectOneMenu id="statusDoPregao" value="#{controladorPregao.entidade.statusPregao}" style="width: 213px">
 
-                        <f:selectItem noSelectionOption="true" />
                         <f:selectItem itemLabel="Aberto" itemValue="aberto" />
-                        <f:selectItem itemLabel="Anulado" itemValue="anulado" />
-                        <f:selectItem itemLabel="Cancelado" itemValue="cancelado" />
-                        <f:selectItem itemLabel="Concluído COM Recurso" itemValue="comRecurso" />
-                        <f:selectItem itemLabel="Concluído SEM Recurso" itemValue="semRecurso" />
-                        <f:selectItem itemLabel="Deserto" itemValue="deserto" />
-                        <f:selectItem itemLabel="Fracassado" itemValue="fracassad" />
 
                     </h:selectOneMenu>
+                    
+                    <p:outputLabel value="Instituição Licitadora:" for="instituicaoLicitadora"/>
+                    <h:selectOneMenu id="instituicaoLicitadora" value="#{controladorPregao.entidade.instituicaoLicitadora}" style="width: 213px" required="true" 
+                                     requiredMessage="O campo Instituição Licitadora deve ser selecionado" converter="instituicaoLicitadoraConverter">
+                        
+                        <f:selectItems value="#{controladorLicitador.instituicoes}" var="instituicao" itemLabel="#{instituicao.pessoaJuridica.nomeFantasia}" 
+                                       itemValue="#{controladorLicitador.entidade.id}"/>
+                        
+                    </h:selectOneMenu>
+
 
                     <p:outputLabel value="Descrição:"  for="descricao" />
                     <p:inputTextarea id="descricao" value="#{controladorPregao.entidade.descricao}" title="Descrição" placeholder="Descrição" 
