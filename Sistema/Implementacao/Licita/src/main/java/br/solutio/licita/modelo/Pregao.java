@@ -6,6 +6,7 @@
 package br.solutio.licita.modelo;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -79,7 +80,7 @@ public class Pregao implements Serializable{
     @ManyToMany
     private transient Set<StatusPregao> statusPregaoSet;
     
-    @OneToMany(mappedBy = "pregao")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pregao")
     private transient Set<ItemPregao> itensPregoes;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPregao")
@@ -90,6 +91,7 @@ public class Pregao implements Serializable{
     private InstituicaoLicitadora instituicaoLicitadora;
 
     public Pregao() {
+        this.itensPregoes = new HashSet<>();
     }
 
     public Pregao(Long id) {

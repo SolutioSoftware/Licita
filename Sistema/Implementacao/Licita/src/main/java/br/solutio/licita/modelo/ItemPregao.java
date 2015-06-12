@@ -57,11 +57,11 @@ public class ItemPregao implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne (optional = false)
     @JoinColumn(name = "id_pregao", referencedColumnName = "id")
     private Pregao pregao;
 
-    @ManyToOne
+    @ManyToOne (optional = false)
     @JoinColumn(name = "id_item", referencedColumnName = "id")
     private Item item;
 

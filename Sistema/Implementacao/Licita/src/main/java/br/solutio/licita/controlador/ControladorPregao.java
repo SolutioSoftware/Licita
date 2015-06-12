@@ -11,8 +11,9 @@ import br.solutio.licita.modelo.ItemPregao;
 import br.solutio.licita.modelo.Pregao;
 import br.solutio.licita.servico.ServicoIF;
 import br.solutio.licita.servico.ServicoPregao;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
@@ -30,7 +31,7 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
     private ItemPregao itemPregao;
     private Item item;
     private transient List<Pregao> pregoes;
-    private transient List<ItemPregao> itensPregao;
+    private transient Set<ItemPregao> itensPregao;
     private transient ServicoIF<Pregao> servico;
 
     public ControladorPregao() {
@@ -38,7 +39,7 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
         servico = new ServicoPregao();
         item = new Item();
         itemPregao = new ItemPregao();
-        itensPregao = new ArrayList<>();
+        itensPregao = entidade.getItensPregoes();
     }
 
     @Override
@@ -63,9 +64,12 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
 
         try {
             entidade = getEntidade();
+            entidade.setItensPregoes(getItensPregao());
+            Logger.getLogger(ControladorPregao.class.getName()).log(Level.INFO, "" + getItensPregao().size());
+            Logger.getLogger(ControladorPregao.class.getName()).log(Level.INFO, "" + entidade.getItensPregoes().size());
             getServico().editar(entidade);
             setEntidade(new Pregao());
-            JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
+            JsfUtil.addSuccessMessage("Atualizado com Sucesso!!?");
             return "pregao";
         } catch (PersistenceException | IllegalStateException e) {
             Logger.getLogger(ControladorPregao.class.getName()).log(Level.SEVERE, null, e);
@@ -101,10 +105,15 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
     }
 
     public void adicionarItem() {
+        itemPregao.setPregao(entidade);
         itemPregao.setItem(item);
         itensPregao.add(itemPregao);
         itemPregao = new ItemPregao();
         item = new Item();
+    }
+    
+    public void removerItem(){
+        itensPregao.remove(itemPregao);
     }
 
     @Override
@@ -134,11 +143,11 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
         this.pregoes = pregoes;
     }
 
-    public List<ItemPregao> getItensPregao() {
+    public Set<ItemPregao> getItensPregao() {
         return itensPregao;
     }
 
-    public void setItensPregao(List<ItemPregao> itensPregao) {
+    public void setItensPregao(Set<ItemPregao> itensPregao) {
         this.itensPregao = itensPregao;
     }
 
