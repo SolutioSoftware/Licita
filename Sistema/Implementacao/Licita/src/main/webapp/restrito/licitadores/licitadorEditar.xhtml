@@ -112,7 +112,7 @@
 
                     <p:outputLabel value="E-mail:" for="email"/>
                     <p:inputText id="email" styleClass="lower" value="#{controladorLicitador.entidade.pessoaJuridica.contatoPessoaJuridica.email}" size="25" validatorMessage="E-mail incorreto" title="E-mail" placeholder="E-mail">
-                        <f:validateRegex pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})$"/>
+                        <f:validateRegex pattern="^$|^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})$"/>
                     </p:inputText>
 
                     <p:outputLabel value="Complemento:"  for="complemento"/>

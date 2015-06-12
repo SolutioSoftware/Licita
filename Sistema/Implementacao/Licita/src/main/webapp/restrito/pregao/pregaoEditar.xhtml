@@ -43,7 +43,7 @@
 
     <ui:define name="pn_conteudo">
 
-        <p:growl id="growPregaoSalvar" showDetail="false" life="3000" class="ui-growl" />
+        <p:growl id="growPregaoEditar" showDetail="false" life="3000" class="ui-growl" />
 
         <h:form id="pregao_form" title="Pregão" style="text-align: center">
 
@@ -100,8 +100,6 @@
 
                 <p:commandButton  id="btAtualizarPregao" value="Atualizar" icon="fa fa-refresh" action="#{controladorPregao.editar(entidade)}" 
                                   update="pn_info : dt_pregoes" ajax="false" />
-
-                <p:commandButton  id="btAdicionarItens" value="Adicionar Itens" icon="fa fa-plus-circle" update="pn_info : dt_pregoes" ajax="false" />
 
             </div>
 

@@ -6,9 +6,12 @@
 package br.solutio.licita.controlador;
 
 import br.solutio.licita.controlador.util.JsfUtil;
+import br.solutio.licita.modelo.Item;
+import br.solutio.licita.modelo.ItemPregao;
 import br.solutio.licita.modelo.Pregao;
 import br.solutio.licita.servico.ServicoIF;
 import br.solutio.licita.servico.ServicoPregao;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,13 +27,18 @@ import javax.persistence.PersistenceException;
 public class ControladorPregao extends ControladorAbstrato<Pregao> {
 
     private Pregao entidade;
+    private ItemPregao itemPregao;
+    private Item item;
     private transient List<Pregao> pregoes;
+    private transient List<ItemPregao> itensPregao;
     private transient ServicoIF<Pregao> servico;
 
     public ControladorPregao() {
         entidade = new Pregao();
         servico = new ServicoPregao();
-
+        item = new Item();
+        itemPregao = new ItemPregao();
+        itensPregao = new ArrayList<>();
     }
 
     @Override
@@ -87,6 +95,18 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
         return "pregaoEditar";
     }
 
+    public String preparaAdicionaItens() {
+        logger.log(Level.INFO, "Adicionar Itens funfando");
+        return "pregaoAdicionarItens";
+    }
+
+    public void adicionarItem() {
+        itemPregao.setItem(item);
+        itensPregao.add(itemPregao);
+        itemPregao = new ItemPregao();
+        item = new Item();
+    }
+
     @Override
     public ServicoIF getServico() {
         return this.servico;
@@ -112,6 +132,30 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
 
     public void setPregoes(List<Pregao> pregoes) {
         this.pregoes = pregoes;
+    }
+
+    public List<ItemPregao> getItensPregao() {
+        return itensPregao;
+    }
+
+    public void setItensPregao(List<ItemPregao> itensPregao) {
+        this.itensPregao = itensPregao;
+    }
+
+    public ItemPregao getItemPregao() {
+        return itemPregao;
+    }
+
+    public void setItemPregao(ItemPregao itemPregao) {
+        this.itemPregao = itemPregao;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
     }
 
 }
