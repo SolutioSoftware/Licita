@@ -59,8 +59,7 @@ public class ControladorMembroApoio extends ControladorAbstrato<MembroApoio> imp
     public String editar(MembroApoio entidade) {
 
         try {
-            entidade = getEntidade();
-            getServico().editar(entidade);
+            getServico().editar(this.entidade);
             setEntidade(new MembroApoio());
             JsfUtil.addSuccessMessage("Atualizado com Sucesso!");
             //Imprimir Message apos o redirect
