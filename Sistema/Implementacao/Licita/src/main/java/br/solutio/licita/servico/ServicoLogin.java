@@ -22,26 +22,12 @@ public class ServicoLogin extends ServicoAbstrato<Login> implements ServicoLogin
 
 
     private FabricaDaoIF fabricaDao;
-    private EntityManager entityLocal;
     private DaoIF<Login> dao;
-    
-    @Override
-    public DaoIF getDao() {
-        if (fabricaDao == null) {
-            fabricaDao = new FabricaDAO(getEntityLocal());
-        }
-        if (dao == null) {
-            dao = fabricaDao.getDaoLogin();
-        }
-        return dao;
-    }
 
-    public EntityManager getEntityLocal() {
-         if (entityLocal == null) {
-            entityLocal = ProdutorEntityManager.getInstancia().getEmLocal();
-        }
-        return entityLocal;
+    public ServicoLogin(EntityManager entityManager) {
+        super(entityManager);
     }
+   
 
     @Override
     public boolean verificarDados(String usuario, String senha) {
@@ -64,7 +50,18 @@ public class ServicoLogin extends ServicoAbstrato<Login> implements ServicoLogin
 
     @Override
     public List<Login> buscarTodos() {
-        return this.dao.consultar("Login.findAll", null, null);
+        return this.dao.consultar("Login.findAll");
+    }
+
+    @Override
+    public DaoIF<Login> getDao() {
+        if (fabricaDao == null) {
+            fabricaDao = new FabricaDAO(getEntityManager());
+        }
+        if (dao == null) {
+            dao = fabricaDao.getDaoLogin();
+        }
+        return dao; 
     }
     
 }

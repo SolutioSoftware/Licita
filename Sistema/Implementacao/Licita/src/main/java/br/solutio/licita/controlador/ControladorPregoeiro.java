@@ -7,6 +7,7 @@ package br.solutio.licita.controlador;
 
 import br.solutio.licita.controlador.util.JsfUtil;
 import br.solutio.licita.modelo.Pregoeiro;
+import br.solutio.licita.servico.ProdutorEntityManager;
 import br.solutio.licita.servico.ServicoPregoeiro;
 import br.solutio.licita.servico.ServicoPregoeiroIF;
 import java.util.List;
@@ -31,7 +32,7 @@ public class ControladorPregoeiro extends ControladorAbstrato<Pregoeiro> impleme
 
     public ControladorPregoeiro() {
         entidade = new Pregoeiro();
-        servico = new ServicoPregoeiro();
+        servico = new ServicoPregoeiro(ProdutorEntityManager.getInstancia().getEmLocal());
     }
 
     @Override

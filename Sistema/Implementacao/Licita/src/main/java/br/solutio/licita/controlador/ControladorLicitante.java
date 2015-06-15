@@ -7,6 +7,7 @@ package br.solutio.licita.controlador;
 
 import br.solutio.licita.controlador.util.JsfUtil;
 import br.solutio.licita.modelo.EmpresaLicitante;
+import br.solutio.licita.servico.ProdutorEntityManager;
 import br.solutio.licita.servico.ServicoIF;
 import br.solutio.licita.servico.ServicoLicitante;
 import java.util.List;
@@ -14,8 +15,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.persistence.PersistenceException;
 
 /**
@@ -32,7 +31,7 @@ public class ControladorLicitante extends ControladorAbstrato<EmpresaLicitante> 
 
     public ControladorLicitante() {
         entidade = new EmpresaLicitante();
-        servico = new ServicoLicitante();
+        servico = new ServicoLicitante(ProdutorEntityManager.getInstancia().getEmLocal());
     }
 
     @Override

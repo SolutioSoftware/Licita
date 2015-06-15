@@ -54,6 +54,8 @@ public interface DaoIF<T>{
      */
     public List<T> consultar(String namedQuery, String[] parametros, Object[] valores);
     
+    public List<T> consultar(String namedQuery);
+    
     public EntityManager getEntityManager();
     
     public void setEntityManager(EntityManager entityManager);

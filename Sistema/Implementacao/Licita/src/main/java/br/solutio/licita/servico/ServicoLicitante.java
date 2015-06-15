@@ -20,36 +20,33 @@ public class ServicoLicitante extends ServicoAbstrato<EmpresaLicitante> implemen
 
     private DaoIF<EmpresaLicitante> dao;
     private FabricaDaoIF fabricaDao;
-    private EntityManager entityLocal;
+    
 
-    public ServicoLicitante() {
+
+    public ServicoLicitante(EntityManager entityManager) {
+        super(entityManager);
     }
 
+    
     @Override
-    public DaoIF<EmpresaLicitante> getDao() {
-        if (fabricaDao == null) {
-            fabricaDao = new FabricaDAO(getEntityLocal());
-        }
-        if (dao == null) {
-            dao = fabricaDao.getDaoEmpresaLicitante();
-        }
-        return dao;
-    }
-
     public void setDao(DaoIF<EmpresaLicitante> dao) {
         this.dao = dao;
-    }
-
-    private EntityManager getEntityLocal() {
-        if (entityLocal == null || !entityLocal.isOpen()) {
-            entityLocal = ProdutorEntityManager.getInstancia().getEmLocal();
-        }
-        return entityLocal;
     }
 
     @Override
     public List<EmpresaLicitante> buscarTodos() {
         getDao().setEntityManager(ProdutorEntityManager.getInstancia().getEmLocal());
-        return getDao().consultar("EmpresaLicitante.findAll", null, null);
+        return getDao().consultar("EmpresaLicitante.findAll");
+    }
+
+    @Override
+    public DaoIF<EmpresaLicitante> getDao() {
+        if (fabricaDao == null) {
+            fabricaDao = new FabricaDAO(getEntityManager());
+        }
+        if (dao == null) {
+            dao = fabricaDao.getDaoEmpresaLicitante();
+        }
+        return dao; 
     }
 }

@@ -6,11 +6,12 @@
 package br.solutio.licita.dao;
 
 import br.solutio.licita.modelo.Pregao;
+import br.solutio.licita.persistencia.DaoConsultarException;
 import br.solutio.licita.persistencia.DaoIF;
 import br.solutio.licita.persistencia.FabricaDAO;
 import br.solutio.licita.persistencia.FabricaDaoIF;
 import br.solutio.licita.servico.GerenciadorTransacao;
-import br.solutio.licita.servico.ProdutorEntityManager;
+import java.util.List;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,6 +26,10 @@ public class DaoPregaoTest extends DaoTestesAbstrato{
     private FabricaDaoIF fabrica;
     private Pregao pregao;
     private Pregao pregao2, pregaoVazio, pregaoAtualizado;
+    private String[] parametro;
+    private Object[] valor;
+    
+    
     
     @Before
     public void setUp() {
@@ -34,6 +39,12 @@ public class DaoPregaoTest extends DaoTestesAbstrato{
         pregao2 = new Pregao();
         pregaoVazio = new Pregao();
         pregaoAtualizado = new Pregao();
+        
+        parametro = new String[1];
+        valor = new Object[1];
+        
+        parametro[0] = "id";
+        valor[0] = (long) 1;
         
         pregao.setDescricao("vai começar a ccyber lluta");
         pregao.setNumeroPregao("123123");
@@ -66,6 +77,13 @@ public class DaoPregaoTest extends DaoTestesAbstrato{
         assertEquals(false, pregao2.equals(pregaoVazio));
         assertEquals(false, pregao.equals(pregaoAtualizado));
         
+        List<Pregao> resultadoPorId = dao.consultar("Pregao.findById", parametro, valor);
+        
+        assertEquals(1, resultadoPorId.size());
+        
+        List<Pregao> resultadoPorTodos = dao.consultar("Pregao.findAll");
+        
+        assertEquals(2, resultadoPorTodos.size());
         
         //Atualizando os valores de PRegao2
         GerenciadorTransacao.abrirTransacao(dao.getEntityManager());
@@ -87,5 +105,17 @@ public class DaoPregaoTest extends DaoTestesAbstrato{
         assertEquals(false, pregao2.equals(pregaoVazio));
         
     }
+    
+    @Test(expected = DaoConsultarException.class)
+    public void consultaNulaException() {
+          List<Pregao> resultadoPorTodos = dao.consultar(null);
+    }
+    
+    @Test(expected = DaoConsultarException.class)
+    public void consultaParametroNuloException() {
+          List<Pregao> resultadoPorTodos = dao.consultar("Pregao.findById",null,null);
+    }
+    
+    
     
 }

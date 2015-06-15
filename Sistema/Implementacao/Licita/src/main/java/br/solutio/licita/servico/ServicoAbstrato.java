@@ -9,6 +9,7 @@ import br.solutio.licita.persistencia.DaoIF;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.EntityManager;
 import javax.persistence.RollbackException;
 import javax.persistence.TransactionRequiredException;
 import org.eclipse.persistence.exceptions.DatabaseException;
@@ -22,11 +23,29 @@ import org.eclipse.persistence.exceptions.TransactionException;
 public abstract class ServicoAbstrato<T> implements ServicoIF<T> {
 
     protected static final Logger logger = Logger.getLogger(ServicoAbstrato.class.getName());
+    
+    private EntityManager entityManager;
 
-    public abstract DaoIF getDao();
+    public abstract DaoIF<T> getDao();
+
+    public ServicoAbstrato(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+    
     
     public abstract void setDao(DaoIF<T> dao);
 
+    
+    
+    protected void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
+    
+    protected EntityManager getEntityManager() {
+     
+        return entityManager;
+    }
 
     @Override
     public void criar(T entidade) {

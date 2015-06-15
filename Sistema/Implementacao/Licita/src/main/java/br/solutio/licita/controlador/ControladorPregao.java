@@ -9,9 +9,9 @@ import br.solutio.licita.controlador.util.JsfUtil;
 import br.solutio.licita.modelo.Item;
 import br.solutio.licita.modelo.ItemPregao;
 import br.solutio.licita.modelo.Pregao;
+import br.solutio.licita.servico.ProdutorEntityManager;
 import br.solutio.licita.servico.ServicoIF;
 import br.solutio.licita.servico.ServicoPregao;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
@@ -36,7 +36,7 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
 
     public ControladorPregao() {
         entidade = new Pregao();
-        servico = new ServicoPregao();
+        servico = new ServicoPregao(ProdutorEntityManager.getInstancia().getEmLocal());
         item = new Item();
         itemPregao = new ItemPregao();
         itensPregao = entidade.getItensPregoes();

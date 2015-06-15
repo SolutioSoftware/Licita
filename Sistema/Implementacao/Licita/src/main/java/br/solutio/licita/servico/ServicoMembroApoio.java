@@ -19,42 +19,34 @@ import javax.persistence.EntityManager;
 public class ServicoMembroApoio extends ServicoAbstrato<MembroApoio> implements ServicoMembroApoioIF {
 
     private FabricaDaoIF fabricaDao;
-    private EntityManager entityLocal;
 
     private DaoIF<MembroApoio> dao;
 
-
-    @Override
-    public MembroApoio buscarPorId(Long id) {
-        return dao.buscarPorId(id);
+    public ServicoMembroApoio(EntityManager entityManager) {
+        super(entityManager);
     }
-
+    
+    
     @Override
     public void setDao(DaoIF<MembroApoio> dao) {
         this.dao = dao;
     }
 
-    @Override
-    public DaoIF<MembroApoio> getDao() {
-        if (fabricaDao == null) {
-            fabricaDao = new FabricaDAO(getEntityLocal());
-        }
-        if (dao == null) {
-            dao = fabricaDao.getDaoMembroApoio();
-        }
-        return dao;
-    }
-
-    public EntityManager getEntityLocal() {
-        if (entityLocal == null) {
-            entityLocal = ProdutorEntityManager.getInstancia().getEmLocal();
-        }
-        return entityLocal;
-    }
     
     @Override
     public List<MembroApoio> buscarTodos() {
         getDao().setEntityManager(ProdutorEntityManager.getInstancia().getEmLocal());
-        return getDao().consultar("MembroApoio.findAll", null, null);
+        return getDao().consultar("MembroApoio.findAll");
+    }
+
+    @Override
+    public DaoIF<MembroApoio> getDao() {
+        if (fabricaDao == null) {
+            fabricaDao = new FabricaDAO(getEntityManager());
+        }
+        if (dao == null) {
+            dao = fabricaDao.getDaoMembroApoio();
+        }
+        return dao; 
     }
 }

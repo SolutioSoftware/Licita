@@ -7,6 +7,7 @@ package br.solutio.licita.controlador;
 
 import br.solutio.licita.controlador.util.JsfUtil;
 import br.solutio.licita.modelo.InstituicaoLicitadora;
+import br.solutio.licita.servico.ProdutorEntityManager;
 import br.solutio.licita.servico.ServicoIF;
 import br.solutio.licita.servico.ServicoInstituicaoLicitadora;
 import br.solutio.licita.servico.ServicoInstituicaoLicitadoraIF;
@@ -30,7 +31,7 @@ public class ControladorLicitador extends ControladorAbstrato<InstituicaoLicitad
 
     public ControladorLicitador() {
         entidade = new InstituicaoLicitadora();
-        servico = new ServicoInstituicaoLicitadora();
+        servico = new ServicoInstituicaoLicitadora(ProdutorEntityManager.getInstancia().getEmLocal());
     }
 
     @Override

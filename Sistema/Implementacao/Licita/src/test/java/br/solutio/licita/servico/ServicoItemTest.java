@@ -10,8 +10,6 @@ import br.solutio.licita.persistencia.DaoIF;
 import br.solutio.licita.persistencia.FabricaDAO;
 import br.solutio.licita.persistencia.FabricaDaoIF;
 import br.solutio.licita.util.ProdutorEntityManagerDeTeste;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -35,17 +33,10 @@ public class ServicoItemTest {
     public void setUp(){
         
         
-         servico = new ServicoItem();
-         item = new Item();
-         itemAux = new Item();
+        servico = new ServicoItem(ProdutorEntityManagerDeTeste.getEntityManagerFactory().createEntityManager());
+        item = new Item();
+        itemAux = new Item();
         
-         
-         
-        fabrica = new FabricaDAO(ProdutorEntityManagerDeTeste.getEntityManagerFactory().createEntityManager());
-         
-        dao =  fabrica.getDaoItem();
-         
-        servico.setDao(dao);
          
         item.setDescricao("Bla Bla Bla");
         item.setNome("Chocolate Blz");
@@ -59,6 +50,9 @@ public class ServicoItemTest {
     
     @Test
     public void testeSalvar(){
+        
+        
+        
         servico.criar(item);
         servico.criar(itemAux);
         
@@ -69,6 +63,8 @@ public class ServicoItemTest {
         Long id = (long) 1;
         
         item = servico.buscarPorId(id);
+        
+        assertEquals(2, servico.buscarTodos().size());
         
         assertNotNull(item.getId());
         assertEquals(id, item.getId());

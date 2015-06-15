@@ -35,7 +35,12 @@ public class ProdutorEntityManager {
         if (emfLocal == null) {
             emfLocal = Persistence.createEntityManagerFactory("Licita_PU_Local");
         }
-        entityManagerLocal = emfLocal.createEntityManager();
+        
+        if (entityManagerLocal == null || !entityManagerLocal.isOpen()) {
+            entityManagerLocal = emfLocal.createEntityManager();
+        }
+        
+        
         return entityManagerLocal;
     }
 

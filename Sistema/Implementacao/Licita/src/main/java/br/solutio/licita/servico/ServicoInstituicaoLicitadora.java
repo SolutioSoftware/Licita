@@ -20,37 +20,32 @@ public class ServicoInstituicaoLicitadora extends ServicoAbstrato<InstituicaoLic
     
     private DaoIF<InstituicaoLicitadora> dao;
     private FabricaDaoIF fabricaDao;
-    private EntityManager entityLocal;
 
-    public ServicoInstituicaoLicitadora() {
+    public ServicoInstituicaoLicitadora(EntityManager entityManager){
+        super(entityManager);
     }
 
+   
     @Override
-    public DaoIF<InstituicaoLicitadora> getDao() {
-        if (fabricaDao == null) {
-            fabricaDao = new FabricaDAO(getEntityLocal());
-        }
-        if (dao == null) {
-            dao = fabricaDao.getDaoInstituicaoLicitadora();
-        }
-        return dao;
-    }
-
     public void setDao(DaoIF<InstituicaoLicitadora> dao) {
         this.dao = dao;
-    }
-
-    private EntityManager getEntityLocal() {
-        if (entityLocal == null || !entityLocal.isOpen()) {
-            entityLocal = ProdutorEntityManager.getInstancia().getEmLocal();
-        }
-        return entityLocal;
     }
 
     @Override
     public List<InstituicaoLicitadora> buscarTodos() {
         getDao().setEntityManager(ProdutorEntityManager.getInstancia().getEmLocal());
-        return getDao().consultar("InstituicaoLicitadora.findAll", null, null);
+        return getDao().consultar("InstituicaoLicitadora.findAll");
+    }
+
+    @Override
+    public DaoIF<InstituicaoLicitadora> getDao() {
+       if (fabricaDao == null) {
+            fabricaDao = new FabricaDAO(getEntityManager());
+        }
+        if (dao == null) {
+            dao = fabricaDao.getDaoInstituicaoLicitadora();
+        }
+        return dao; 
     }
     
 }

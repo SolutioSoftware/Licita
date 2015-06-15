@@ -7,6 +7,7 @@ package br.solutio.licita.controlador;
 
 import br.solutio.licita.controlador.util.JsfUtil;
 import br.solutio.licita.modelo.Login;
+import br.solutio.licita.servico.ProdutorEntityManager;
 import br.solutio.licita.servico.ServicoIF;
 import br.solutio.licita.servico.ServicoLogin;
 import br.solutio.licita.servico.ServicoLoginIF;
@@ -27,7 +28,7 @@ public class ControladorLogin {
 
     public ControladorLogin() {
         login = new Login();
-        servico = new ServicoLogin();
+        servico = new ServicoLogin(ProdutorEntityManager.getInstancia().getEmLocal());
     }
 
     public Login getEntidade() {

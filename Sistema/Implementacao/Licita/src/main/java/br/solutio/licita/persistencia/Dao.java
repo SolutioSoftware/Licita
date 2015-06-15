@@ -23,13 +23,10 @@ public class Dao<T> implements DaoIF<T> {
     protected static final Logger logger = Logger.getGlobal();
     private EntityManager entityManager;
 
-
     public Dao(Class<T> entidade, EntityManager entityManager) {
         this.entidade = entidade;
         this.entityManager = entityManager;
     }
-    
-    
 
     public Dao() {
     }
@@ -38,18 +35,17 @@ public class Dao<T> implements DaoIF<T> {
     public EntityManager getEntityManager() {
         return this.entityManager;
     }
-    
+
     @Override
-    public void setEntityManager(EntityManager entityManager){
+    public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
-
 
     @Override
     public void criar(T entidade) {
         logger.log(Level.INFO, "Criar");
         getEntityManager().persist(entidade);
-        
+
     }
 
     @Override
@@ -78,24 +74,38 @@ public class Dao<T> implements DaoIF<T> {
 
         Query query = getEntityManager().createNamedQuery(namedQuery, entidade);
 
-        List<T> list = new ArrayList<>();
         if (parametros != null && valores != null) {
             if (parametros.length == valores.length) {
+                
+
                 for (int i = 0; i < parametros.length; i++) {
 
                     query.setParameter(parametros[i], valores[i]);
 
                 }
-                list = query.getResultList();
-                return list;
+                
+
+                return query.getResultList();
+                
+                
             } else {
-                return list;
+                throw new DaoConsultarException("As listas de parametros e valores não possuem tamanhos iguais.");
             }
-        } else if (parametros == null && valores == null) {
-            list = query.getResultList();
-            return list;
         } else {
-            return list;
+            throw new DaoConsultarException("As listas de parametros e/ou valores não devem ser nulas.");
+        }
+
+    }
+
+    @Override
+    public List<T> consultar(String namedQuery) {
+        if (namedQuery != null) {
+
+            Query query = getEntityManager().createNamedQuery(namedQuery, entidade);
+            return query.getResultList();
+
+        } else {
+            throw new DaoConsultarException("O valor namedQuery não pode ser nulo.");
         }
 
     }

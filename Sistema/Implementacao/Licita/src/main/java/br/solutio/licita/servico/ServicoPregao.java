@@ -20,37 +20,36 @@ public class ServicoPregao extends ServicoAbstrato<Pregao> implements ServicoPre
 
     private DaoIF<Pregao> dao;
     private FabricaDaoIF fabricaDao;
-    private EntityManager entityLocal;
 
-    public ServicoPregao() {
+    public ServicoPregao(EntityManager entityManager) {
+        super(entityManager);
     }
+    
+    
 
     @Override
-    public DaoIF<Pregao> getDao() {
-        if (fabricaDao == null) {
-            fabricaDao = new FabricaDAO(getEntityLocal());
-        }
-        if (dao == null) {
-            dao = fabricaDao.getDaoPregao();
-        }
-        return dao;
-    }
-
     public void setDao(DaoIF<Pregao> dao) {
         this.dao = dao;
     }
 
-    private EntityManager getEntityLocal() {
-        if (entityLocal == null || !entityLocal.isOpen()) {
-            entityLocal = ProdutorEntityManager.getInstancia().getEmLocal();
-        }
-        return entityLocal;
-    }
+    
 
     @Override
     public List<Pregao> buscarTodos() {
-        getDao().setEntityManager(ProdutorEntityManager.getInstancia().getEmLocal());
-        return getDao().consultar("Pregao.findAll", null, null);
+        return getDao().consultar("Pregao.findAll");
+    }
+    
+    
+
+    @Override
+    public DaoIF<Pregao> getDao() {
+        if (fabricaDao == null) {
+            fabricaDao = new FabricaDAO(getEntityManager());
+        }
+        if (dao == null) {
+            dao = fabricaDao.getDaoPregao();
+        }
+        return dao; 
     }
 
 }

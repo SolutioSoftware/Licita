@@ -20,38 +20,34 @@ public class ServicoSessao extends ServicoAbstrato<Sessao> implements ServicoSes
 
     private DaoIF<Sessao> dao;
     private FabricaDaoIF fabricaDao;
-    private EntityManager entityLocal;
 
-    public ServicoSessao() {
+    public ServicoSessao(EntityManager entityManager) {
+        super(entityManager);
     }
-
-    @Override
-    public DaoIF<Sessao> getDao() {
-        if (fabricaDao == null) {
-            fabricaDao = new FabricaDAO(getEntityLocal());
-        }
-        if (dao == null) {
-            dao = fabricaDao.getDaoSessao();
-        }
-        return dao;
-    }
+      
     
     @Override
     public void setDao(DaoIF<Sessao> dao) {
         this.dao = dao;
     }
 
-    private EntityManager getEntityLocal() {
-        if (entityLocal == null || !entityLocal.isOpen()) {
-            entityLocal = ProdutorEntityManager.getInstancia().getEmLocal();
-        }
-        return entityLocal;
-    }
+    
 
     @Override
     public List<Sessao> buscarTodos() {
         getDao().setEntityManager(ProdutorEntityManager.getInstancia().getEmLocal());
-        return getDao().consultar("Sessao.findAll", null, null);
+        return getDao().consultar("Sessao.findAll");
+    }
+
+    @Override
+    public DaoIF<Sessao> getDao() {
+        if (fabricaDao == null) {
+            fabricaDao = new FabricaDAO(getEntityManager());
+        }
+        if (dao == null) {
+            dao = fabricaDao.getDaoSessao();
+        }
+        return dao; 
     }
 
 }

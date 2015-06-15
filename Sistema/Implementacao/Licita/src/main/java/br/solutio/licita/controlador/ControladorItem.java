@@ -8,6 +8,7 @@ package br.solutio.licita.controlador;
 import static br.solutio.licita.controlador.ControladorAbstrato.logger;
 import br.solutio.licita.controlador.util.JsfUtil;
 import br.solutio.licita.modelo.Item;
+import br.solutio.licita.servico.ProdutorEntityManager;
 import br.solutio.licita.servico.ServicoIF;
 import br.solutio.licita.servico.ServicoItem;
 import java.util.List;
@@ -31,7 +32,7 @@ public class ControladorItem extends ControladorAbstrato<Item> {
 
     public ControladorItem() {
         entidade = new Item();
-        servico = new ServicoItem();
+        servico = new ServicoItem(ProdutorEntityManager.getInstancia().getEmLocal());
         itens = servico.buscarTodos();
     }
 

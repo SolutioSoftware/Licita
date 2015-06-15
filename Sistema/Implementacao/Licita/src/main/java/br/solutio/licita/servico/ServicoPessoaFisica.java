@@ -20,37 +20,34 @@ public class ServicoPessoaFisica extends ServicoAbstrato<PessoaFisica> implement
 
    private DaoIF<PessoaFisica> dao;
     private FabricaDaoIF fabricaDao;
-    private EntityManager entityLocal;
 
-    public ServicoPessoaFisica() {
+    public ServicoPessoaFisica(EntityManager entityManager) {
+        super(entityManager);
+    }
+  
+
+   @Override
+    public void setDao(DaoIF<PessoaFisica> dao) {
+        this.dao = dao;
+    }
+
+    
+
+    @Override
+    public List<PessoaFisica> buscarTodos() {
+        getDao().setEntityManager(ProdutorEntityManager.getInstancia().getEmLocal());
+        return getDao().consultar("PessoaFisica.findAll");
     }
 
     @Override
     public DaoIF<PessoaFisica> getDao() {
         if (fabricaDao == null) {
-            fabricaDao = new FabricaDAO(getEntityLocal());
+            fabricaDao = new FabricaDAO(getEntityManager());
         }
         if (dao == null) {
             dao = fabricaDao.getDaoPessoaFisica();
         }
-        return dao;
-    }
-
-    public void setDao(DaoIF<PessoaFisica> dao) {
-        this.dao = dao;
-    }
-
-    private EntityManager getEntityLocal() {
-        if (entityLocal == null || !entityLocal.isOpen()) {
-            entityLocal = ProdutorEntityManager.getInstancia().getEmLocal();
-        }
-        return entityLocal;
-    }
-
-    @Override
-    public List<PessoaFisica> buscarTodos() {
-        getDao().setEntityManager(ProdutorEntityManager.getInstancia().getEmLocal());
-        return getDao().consultar("PessoaFisica.findAll", null, null);
+        return dao; 
     }
 
     

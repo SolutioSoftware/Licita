@@ -7,6 +7,7 @@ package br.solutio.licita.controlador;
 
 import br.solutio.licita.controlador.util.JsfUtil;
 import br.solutio.licita.modelo.Sessao;
+import br.solutio.licita.servico.ProdutorEntityManager;
 import br.solutio.licita.servico.ServicoIF;
 import br.solutio.licita.servico.ServicoSessao;
 import java.util.Date;
@@ -31,7 +32,7 @@ public class ControladorSessao extends ControladorAbstrato<Sessao> {
 
     public ControladorSessao() {
         entidade = new Sessao();
-        servico = new ServicoSessao();
+        servico = new ServicoSessao(ProdutorEntityManager.getInstancia().getEmLocal());
     }
 
     @Override

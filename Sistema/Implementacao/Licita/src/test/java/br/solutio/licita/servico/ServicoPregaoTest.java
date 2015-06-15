@@ -10,6 +10,7 @@ import br.solutio.licita.persistencia.DaoIF;
 import br.solutio.licita.persistencia.FabricaDAO;
 import br.solutio.licita.persistencia.FabricaDaoIF;
 import br.solutio.licita.util.ProdutorEntityManagerDeTeste;
+import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -32,14 +33,9 @@ public class ServicoPregaoTest {
     public void setUp() {
 
 
-        servico = new ServicoPregao();
+        servico = new ServicoPregao(ProdutorEntityManagerDeTeste.getEntityManagerFactory().createEntityManager());
 
         pregaoAux = new Pregao();
-
-        fabrica = new FabricaDAO(ProdutorEntityManagerDeTeste.getEntityManagerFactory().createEntityManager());
-
-        dao = fabrica.getDaoPregao();
-        servico.setDao(dao);
 
         pregao = new Pregao();
         pregaoAux = new Pregao();
@@ -66,35 +62,7 @@ public class ServicoPregaoTest {
         assertNotNull(pregao.getId());
         assertEquals(false, pregao.equals(pregaoAux));
         
-        Long id = (long) 1;
-        
-        pregao = servico.buscarPorId(id);
-        
-        assertNotNull(pregao.getId());
-        assertEquals(id, pregao.getId());
-        assertEquals(true, pregao.getId().equals(id));
-        
-        pregao.setNumeroPregao("2343");
-        
-        servico.editar(pregao);
-        
-        
-        
-        assertEquals(false, pregao.getNumeroPregao().equals(pregaoAux.getNumeroPregao()));
-        assertEquals(true, servico.buscarPorId(id).getNumeroPregao().equals(pregao.getNumeroPregao()));
-        
-    
-        
-        
-        pregao = servico.buscarPorId(id);
-                
-        assertNotNull(pregao.getId());
-        assertEquals(id, pregao.getId());
-        assertEquals(true, pregao.getId().equals(id));
-        
-        servico.deletar(pregao);
-        
-         assertNull(servico.buscarPorId(id));
+        assertEquals(2, servico.buscarTodos().size());
 
     }
 

@@ -7,6 +7,7 @@ package br.solutio.licita.controlador;
 
 import br.solutio.licita.controlador.util.JsfUtil;
 import br.solutio.licita.modelo.MembroApoio;
+import br.solutio.licita.servico.ProdutorEntityManager;
 import br.solutio.licita.servico.ServicoMembroApoio;
 import br.solutio.licita.servico.ServicoMembroApoioIF;
 import java.util.List;
@@ -31,7 +32,7 @@ public class ControladorMembroApoio extends ControladorAbstrato<MembroApoio> imp
 
     public ControladorMembroApoio() {
         entidade = new MembroApoio();
-        servico = new ServicoMembroApoio();
+        servico = new ServicoMembroApoio(ProdutorEntityManager.getInstancia().getEmLocal());
     }
 
     @Override

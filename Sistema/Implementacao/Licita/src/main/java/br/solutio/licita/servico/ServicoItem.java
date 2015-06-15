@@ -19,46 +19,33 @@ import javax.persistence.EntityManager;
 public class ServicoItem extends ServicoAbstrato<Item> implements ServicoItemIF {
 
     private DaoIF<Item> dao;
-    private EntityManager entityLocal;
     private FabricaDaoIF fabricaDao;
 
-    public ServicoItem() {
+    public ServicoItem(EntityManager entityManager) {
+        super(entityManager);
+    }
+
+   
+    @Override
+    public List<Item> buscarTodos() {
+        return getDao().consultar("Item.findAll");
+    }
+
+
+    @Override
+    public void setDao(DaoIF dao) {
+        this.dao = dao;
     }
 
     @Override
     public DaoIF<Item> getDao() {
         if (fabricaDao == null) {
-            fabricaDao = new FabricaDAO(getEntityLocal());
+            fabricaDao = new FabricaDAO(getEntityManager());
         }
         if (dao == null) {
             dao = fabricaDao.getDaoItem();
         }
-        return dao;
-    }
-
-   
-
-    @Override
-    public Item buscarPorId(Long id) {
-        return getDao().buscarPorId(id);
-    }
-
-    @Override
-    public List<Item> buscarTodos() {
-        getDao().setEntityManager(ProdutorEntityManager.getInstancia().getEmLocal());
-        return getDao().consultar("Item.findAll", null, null);
-    }
-
-    public EntityManager getEntityLocal() {
-       if (entityLocal == null) {
-            entityLocal = ProdutorEntityManager.getInstancia().getEmLocal();
-        }
-        return entityLocal;
-    }
-
-    @Override
-    public void setDao(DaoIF dao) {
-        this.dao = dao;
+        return dao; 
     }
 
 }
