@@ -17,12 +17,7 @@ import javax.persistence.EntityManager;
  */
 public interface DaoIF<T>{
     
-    /**
-     * Retorna a quantidade de registros da entidade na base de dados.
-     * @return contagem
-     */
-    public int contagem();
-    
+
     /**
      * Cria um registro de uma entidade na base de dados.
      * @param entidade
@@ -49,13 +44,7 @@ public interface DaoIF<T>{
      */
     public T buscarPorId(Long id);
     
-    
-     /**
-     * Busca todos os registros de uma entidade na base de dados.
-     * @return entidade do tipo Persistivel
-     */
-    public List<T> buscarTodos();
-    
+
     /**
      * Faz consultas através das namedQuery declaradas nas entidades.
      * @param namedQuery o nome da namedQuery que deseja consultar

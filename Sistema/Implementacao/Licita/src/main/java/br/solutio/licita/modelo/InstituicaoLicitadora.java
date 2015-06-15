@@ -45,7 +45,7 @@ public class InstituicaoLicitadora implements Serializable{
     private PessoaJuridica pessoaJuridica;
     
     @OneToMany(mappedBy = "instituicaoLicitadora")
-    private Set<Pregao> pregoes;
+    private transient Set<Pregao> pregoes;
 
     public InstituicaoLicitadora() {
         pessoaJuridica = new PessoaJuridica();

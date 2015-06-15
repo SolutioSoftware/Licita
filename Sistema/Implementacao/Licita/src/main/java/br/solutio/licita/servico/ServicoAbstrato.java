@@ -24,12 +24,9 @@ public abstract class ServicoAbstrato<T> implements ServicoIF<T> {
     protected static final Logger logger = Logger.getLogger(ServicoAbstrato.class.getName());
 
     public abstract DaoIF getDao();
+    
+    public abstract void setDao(DaoIF<T> dao);
 
-    @Override
-    public int contagem() {
-        return getDao().contagem();
-
-    }
 
     @Override
     public void criar(T entidade) {
@@ -79,8 +76,6 @@ public abstract class ServicoAbstrato<T> implements ServicoIF<T> {
     }
 
     @Override
-    public List<T> buscarTodos() {
-        return getDao().buscarTodos();
-    }
+    public abstract List<T> buscarTodos();
 
 }

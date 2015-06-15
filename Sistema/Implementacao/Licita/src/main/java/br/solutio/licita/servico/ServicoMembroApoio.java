@@ -23,16 +23,13 @@ public class ServicoMembroApoio extends ServicoAbstrato<MembroApoio> implements 
 
     private DaoIF<MembroApoio> dao;
 
-    @Override
-    public int contagem() {
-        return dao.contagem();
-    }
 
     @Override
     public MembroApoio buscarPorId(Long id) {
         return dao.buscarPorId(id);
     }
 
+    @Override
     public void setDao(DaoIF<MembroApoio> dao) {
         this.dao = dao;
     }

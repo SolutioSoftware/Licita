@@ -23,13 +23,13 @@ public class Dao<T> implements DaoIF<T> {
     protected static final Logger logger = Logger.getGlobal();
     private EntityManager entityManager;
 
-    public Dao(Class<T> entidade) {
-        this.entidade = entidade;
-    }
 
-    public Dao(EntityManager entityManager) {
+    public Dao(Class<T> entidade, EntityManager entityManager) {
+        this.entidade = entidade;
         this.entityManager = entityManager;
     }
+    
+    
 
     public Dao() {
     }
@@ -44,14 +44,6 @@ public class Dao<T> implements DaoIF<T> {
         this.entityManager = entityManager;
     }
 
-    @Override
-    public int contagem() {
-        javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
-        javax.persistence.criteria.Root<T> rt = cq.from(entidade);
-        cq.select(getEntityManager().getCriteriaBuilder().count(rt));
-        javax.persistence.Query q = getEntityManager().createQuery(cq);
-        return ((Long) q.getSingleResult()).intValue();
-    }
 
     @Override
     public void criar(T entidade) {
@@ -76,15 +68,9 @@ public class Dao<T> implements DaoIF<T> {
 
     @Override
     public T buscarPorId(Long id) {
+        logger.log(Level.INFO, "Busca por Id {0}", id);
         T entity = getEntityManager().find(this.entidade, id);
         return entity;
-    }
-
-    @Override
-    public List<T> buscarTodos() {
-        javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
-        cq.select(cq.from(entidade));
-        return getEntityManager().createQuery(cq).getResultList();
     }
 
     @Override

@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 /**
  *
  * @author WitaloCarlos
+ * @param <T>
  */
 
 public abstract class ControladorAbstrato<T> implements ControladorAbstratoIF<T>{
@@ -20,11 +21,7 @@ public abstract class ControladorAbstrato<T> implements ControladorAbstratoIF<T>
     static final Logger logger = Logger.getGlobal();
             
     public abstract ServicoIF getServico();
-    
-    @Override
-    public int contagem() {
-        return getServico().contagem();
-    }
+   
 
     @Override
     public abstract String criar(T entidade);

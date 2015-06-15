@@ -15,11 +15,7 @@ import java.util.List;
  */
 public interface ControladorAbstratoIF<T> extends Serializable{
     
-     /**
-     * Retorna a quantidade de registros da entidade na base de dados.
-     * @return contagem
-     */
-    public int contagem();
+ 
     
     /**
      * Cria um registro de uma entidade na base de dados.

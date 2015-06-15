@@ -7,8 +7,6 @@
 package br.solutio.licita.servico;
 
 import br.solutio.licita.modelo.Login;
-import br.solutio.licita.modelo.MembroApoio;
-import br.solutio.licita.modelo.Pregoeiro;
 import br.solutio.licita.persistencia.DaoIF;
 import br.solutio.licita.persistencia.FabricaDAO;
 import br.solutio.licita.persistencia.FabricaDaoIF;
@@ -57,6 +55,16 @@ public class ServicoLogin extends ServicoAbstrato<Login> implements ServicoLogin
         } else {
             return false;
         }
+    }
+
+    @Override
+    public void setDao(DaoIF<Login> dao) {
+        this.dao = dao;
+    }
+
+    @Override
+    public List<Login> buscarTodos() {
+        return this.dao.consultar("Login.findAll", null, null);
     }
     
 }

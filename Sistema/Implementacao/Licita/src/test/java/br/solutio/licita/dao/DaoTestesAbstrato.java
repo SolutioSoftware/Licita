@@ -6,8 +6,8 @@
 
 package br.solutio.licita.dao;
 
+import br.solutio.licita.util.ProdutorEntityManagerDeTeste;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 /**
  *
@@ -15,6 +15,6 @@ import javax.persistence.Persistence;
  */
 public class DaoTestesAbstrato {
     
-    public EntityManagerFactory emf = Persistence.createEntityManagerFactory("Licita_PU_Teste");
+    public EntityManagerFactory emf = ProdutorEntityManagerDeTeste.getEntityManagerFactory();
     
 }

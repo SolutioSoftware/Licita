@@ -6,8 +6,6 @@
 
 package br.solutio.licita.servico;
 
-import br.solutio.licita.modelo.MembroApoio;
-import br.solutio.licita.modelo.Pregoeiro;
 import java.util.List;
 
 /**
@@ -17,11 +15,6 @@ import java.util.List;
  */
 public interface ServicoIF<T>{
 
-    /**
-     * Retorna a quantidade de registros da entidade na base de dados.
-     * @return contagem
-     */
-    public int contagem();
     
     /**
      * Cria um registro de uma entidade na base de dados.

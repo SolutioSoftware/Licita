@@ -43,52 +43,52 @@ public class FabricaDAO implements FabricaDaoIF{
     
     @Override
     public DaoIF<Pregoeiro> getDaoPregoeiro(){
-        return new Dao<>(entityManager);
+        return new Dao<>(Pregoeiro.class, entityManager);
     }
     
     @Override
     public  DaoIF<InstituicaoLicitadora> getDaoInstituicaoLicitadora(){
-        return new Dao<>(entityManager);
+        return new Dao<>(InstituicaoLicitadora.class, entityManager);
     }
     
     @Override
     public  DaoIF<Login> getDaoLogin(){
-        return new Dao<>(entityManager);
+        return new Dao<>(Login.class, entityManager);
     }
     
     @Override
     public  DaoIF<EmpresaLicitante> getDaoEmpresaLicitante(){
-        return new Dao<>(entityManager);
+        return new Dao<>(EmpresaLicitante.class, entityManager);
     }
     
     @Override
     public  DaoIF<ItemPregao> getDaoItemPregao(){
-        return new Dao<>(entityManager);
+        return new Dao<>(ItemPregao.class, entityManager);
     }
     
     @Override 
     public  DaoIF<Pregao> getDaoPregao(){
-        return new Dao<>(entityManager);
+        return new Dao<>(Pregao.class, entityManager);
     }
     
     @Override
     public  DaoIF<PessoaFisica> getDaoPessoaFisica(){
-        return new Dao<>(entityManager);
+        return new Dao<>(PessoaFisica.class, entityManager);
     }
     
     @Override
     public  DaoIF<MembroApoio> getDaoMembroApoio(){
-        return new Dao<>(entityManager);
+        return new Dao<>(MembroApoio.class, entityManager);
     }
 
     @Override
     public DaoIF<Item> getDaoItem() {
-        return new Dao<>(entityManager);
+        return new Dao<>(Item.class, entityManager);
     }
     
     @Override
     public DaoIF<Sessao> getDaoSessao() {
-        return new Dao<>(entityManager);
+        return new Dao<>(Sessao.class, entityManager);
     }
    
 }

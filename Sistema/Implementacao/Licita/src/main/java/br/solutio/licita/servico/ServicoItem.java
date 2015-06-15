@@ -36,9 +36,7 @@ public class ServicoItem extends ServicoAbstrato<Item> implements ServicoItemIF 
         return dao;
     }
 
-    public void setDao(DaoIF<Item> dao) {
-        this.dao = dao;
-    }
+   
 
     @Override
     public Item buscarPorId(Long id) {
@@ -56,6 +54,11 @@ public class ServicoItem extends ServicoAbstrato<Item> implements ServicoItemIF 
             entityLocal = ProdutorEntityManager.getInstancia().getEmLocal();
         }
         return entityLocal;
+    }
+
+    @Override
+    public void setDao(DaoIF dao) {
+        this.dao = dao;
     }
 
 }

@@ -35,7 +35,8 @@ public class ServicoSessao extends ServicoAbstrato<Sessao> implements ServicoSes
         }
         return dao;
     }
-
+    
+    @Override
     public void setDao(DaoIF<Sessao> dao) {
         this.dao = dao;
     }

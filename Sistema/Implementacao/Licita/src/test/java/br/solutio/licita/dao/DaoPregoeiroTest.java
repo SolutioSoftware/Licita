@@ -13,6 +13,7 @@ import br.solutio.licita.servico.GerenciadorTransacao;
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -91,7 +92,15 @@ public class DaoPregoeiroTest extends DaoTestesAbstrato {
         dao.editar(pregoeiroEditar);
         GerenciadorTransacao.executarTransacao(dao.getEntityManager());
         
+        
+        assertEquals(false, pregoeiroEditar.getPessoaFisica().getCpf().equals("06953601400"));
         assertEquals(true, pregoeiroEditar.getId() == 3);
+        
+        GerenciadorTransacao.abrirTransacao(dao.getEntityManager());
+        dao.deletar(pregoeiroEditar);
+        GerenciadorTransacao.executarTransacao(dao.getEntityManager());
+                
+        assertNull(dao.buscarPorId((long) 3));
         
     }
     

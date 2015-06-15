@@ -13,6 +13,7 @@ import br.solutio.licita.persistencia.FabricaDaoIF;
 import br.solutio.licita.servico.GerenciadorTransacao;
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -42,9 +43,25 @@ public class DaoMembroApoioTest extends DaoTestesAbstrato{
     public void teste(){
         GerenciadorTransacao.abrirTransacao(dao.getEntityManager());
         dao.criar(membro);
-        membro.setFuncao("Aviador");
         GerenciadorTransacao.executarTransacao(dao.getEntityManager());
+        
         assertEquals(true, membro.getId() == 1);
+        assertEquals(true, dao.buscarPorId((long) 1).equals(membro));
+        
+        GerenciadorTransacao.abrirTransacao(dao.getEntityManager());
+        membro.setFuncao("Aviador");
+        dao.editar(membro);
+        GerenciadorTransacao.executarTransacao(dao.getEntityManager());
+        
+        assertEquals(true, dao.buscarPorId((long) 1).getFuncao().equals(membro.getFuncao()));
+        assertEquals(false, dao.buscarPorId((long) 1).getFuncao().equals("Avaliador"));
+        assertEquals(true, dao.buscarPorId((long) 1).getFuncao().equals("Aviador"));
+        
+        GerenciadorTransacao.abrirTransacao(dao.getEntityManager());
+        dao.deletar(membro);
+        GerenciadorTransacao.executarTransacao(dao.getEntityManager());
+        
+        assertNull(dao.buscarPorId((long) 1));
     }
     
     @After

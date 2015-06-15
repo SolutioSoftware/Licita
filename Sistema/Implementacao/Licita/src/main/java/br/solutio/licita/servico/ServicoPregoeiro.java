@@ -26,10 +26,7 @@ public class ServicoPregoeiro extends ServicoAbstrato<Pregoeiro> implements Serv
     private DaoIF<Pregoeiro> dao;
     private FabricaDaoIF fabricaDao;
 
-    @Override
-    public int contagem() {
-        return dao.contagem();
-    }
+
 
     @Override
     public void criar(Pregoeiro entidade) {
@@ -57,6 +54,7 @@ public class ServicoPregoeiro extends ServicoAbstrato<Pregoeiro> implements Serv
         entidade.getLogin().setSenha(novaSenha);
     }
 
+    @Override
     public void setDao(DaoIF<Pregoeiro> dao) {
         this.dao = dao;
     }
