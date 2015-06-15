@@ -45,7 +45,7 @@ public class ControladorItem extends ControladorAbstrato<Item> {
             setEntidade(new Item());
             JsfUtil.addSuccessMessage("Salvo com Sucesso!");
             itens = servico.buscarTodos();
-            return "item";
+            return "itemSalvar";
         } catch (PersistenceException | IllegalStateException e) {
             Logger.getLogger(ControladorPregao.class.getName()).log(Level.SEVERE, null, e);
             JsfUtil.addErrorMessage("Item já existe");

@@ -52,10 +52,6 @@
 
                 <h:panelGrid columns="4" id="panelGridSavePessoaFisica" cellpadding="5" columnClasses="colunaEsquerda,colunaDireita,colunaEsquerda,colunaDireita">
 
-                     <p:outputLabel value="Id:" for="id" />
-                     <p:inputText id="id" value="#{controladorPregoeiro.entidade.id}" title="Nome"  required="true"    
-                                 requiredMessage="O campo nome é obrigatório" placeholder="Nome" maxlength="80"/>
-                    
                     <p:outputLabel value="Nome:" for="nome" />
                     <p:inputText id="nome" value="#{controladorPregoeiro.entidade.pessoaFisica.nome}" title="Nome"  required="true"  
                                  requiredMessage="O campo nome é obrigatório" placeholder="Nome" maxlength="80"/>
@@ -140,6 +136,8 @@
                     <p:outputLabel/>
                     <p:outputLabel/>
                     <p:outputLabel id="display" />
+                    <h:inputHidden id="id" value="#{controladorPregoeiro.entidade.id}"   required="true"    
+                                 requiredMessage="O campo nome é obrigatório" />
 
                 </h:panelGrid>
 

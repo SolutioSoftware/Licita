@@ -22,7 +22,7 @@
                         <p:inputText id="globalFilter" onkeyup="PF('tbl_pregoes').filter()" style="width:250px" placeholder="Digite sua busca" />
                     </p:outputPanel>
                 </f:facet>
-           
+
 
                 <p:column headerText="Número do processo" filterBy="#{entidade.numeroProcesso}" filterMatchMode="contains" filterStyle="display:none" >
                     <h:outputText value="#{entidade.numeroProcesso}" />
@@ -37,17 +37,23 @@
                 </p:column>
 
 
-                <p:column headerText="Ações" width="50">
+                <p:column headerText="Ações" width="75">
 
                     <p:commandButton id="btEditar" icon="ui-icon-pencil" action="#{controladorPregao.preparaEditar}" update="@form"  style="font-size: 10px">
                         <f:setPropertyActionListener value="#{entidade}" target="#{controladorPregao.entidade}"  />
-                         <p:tooltip for="btEditar" value="Editar"/>
+                        <p:tooltip for="btEditar" value="Editar"/>
                     </p:commandButton>
 
                     <p:commandButton id="btExcluir" icon="fa fa-trash" action="#{controladorPregao.deletar(entidade)}" update="@form" style="font-size: 10px">
                         <f:setPropertyActionListener value="#{entidade}" target="#{controladorPregao.entidade}"  />
-                         <p:tooltip for="btExcluir" value="Excluir"/>
+                        <p:tooltip for="btExcluir" value="Excluir"/>
                         <p:confirm icon="ui-icon-alert" header="Excluir Pregão" message="Deseja realmente excluir este pregão"/>
+                    </p:commandButton>
+
+                    <p:commandButton id="btAdicionaItens" icon="fa fa-shopping-cart" action="#{controladorPregao.preparaAdicionaItens}" 
+                                     update="@form" style="font-size: 10px">
+                        <f:setPropertyActionListener value="#{entidade}" target="#{controladorPregao.entidade}"  />
+                        <p:tooltip for="btAdicionaItens" value="Adicionar Itens"/>
                     </p:commandButton>
 
                 </p:column>
@@ -62,5 +68,5 @@
 
 
 </ui:composition>
-               
+
 
