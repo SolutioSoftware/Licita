@@ -53,7 +53,7 @@ public abstract class ServicoAbstrato<T> implements ServicoIF<T> {
 
             if (e instanceof IllegalArgumentException) {
                 throw new IllegalArgumentException("O objeto não pode ser nulo.");
-            } else if (e instanceof IllegalArgumentException) {
+            } else if (e instanceof IllegalStateException) {
                 throw new IllegalStateException("Transação não pôde ser iniciada");
             } else if (e instanceof RollbackException) {
                 throw new RollbackException("Rollback");
@@ -76,7 +76,7 @@ public abstract class ServicoAbstrato<T> implements ServicoIF<T> {
             
             if (e instanceof IllegalArgumentException) {
                 throw new IllegalArgumentException("O objeto não pode ser nulo.");
-            } else if (e instanceof IllegalArgumentException) {
+            } else if (e instanceof IllegalStateException) {
                 throw new IllegalStateException("Transação não pôde ser iniciada");
             } else if (e instanceof RollbackException) {
                 throw new RollbackException("Rollback");
@@ -98,7 +98,7 @@ public abstract class ServicoAbstrato<T> implements ServicoIF<T> {
 
             if (e instanceof IllegalArgumentException) {
                 throw new IllegalArgumentException("O objeto não pode ser nulo.");
-            } else if (e instanceof IllegalArgumentException) {
+            } else if (e instanceof IllegalStateException) {
                 throw new IllegalStateException("Transação não pôde ser iniciada");
             } else if (e instanceof RollbackException) {
                 throw new RollbackException("Rollback");
