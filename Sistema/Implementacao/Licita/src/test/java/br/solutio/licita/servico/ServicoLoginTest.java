@@ -79,7 +79,7 @@ public class ServicoLoginTest {
         assertEquals(false, login.getUsuario().equals(loginAux.getUsuario()));
         assertEquals(false, login.getSenha().equals(loginAux.getSenha()));
         
-        assertEquals(2, servico.buscarTodos().size());
+        assertEquals(4, servico.buscarTodos().size());
 
     }
     

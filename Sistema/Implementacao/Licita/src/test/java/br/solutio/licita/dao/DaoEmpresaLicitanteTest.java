@@ -56,6 +56,10 @@ public class DaoEmpresaLicitanteTest extends DaoTestesAbstrato{
         
         assertEquals(true, empresaLicitante.getId() == 1);
         assertEquals(true, empresaLicitante.getPessoaJuridica().getId() == 1);
+        
+        GerenciadorTransacao.abrirTransacao(daoEmpresaLicitante.getEntityManager());
+        daoEmpresaLicitante.deletar(empresaLicitante);
+        GerenciadorTransacao.executarTransacao(daoEmpresaLicitante.getEntityManager());
     }
     
     @After

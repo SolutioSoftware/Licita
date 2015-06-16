@@ -77,7 +77,7 @@ public class ServicoPregoeiroTest {
         
         assertEquals(false, membro.equals(membroAux));
         
-        assertEquals(2, servico.buscarTodos().size());
+        assertEquals(4, servico.buscarTodos().size());
         
         servico.deletar(membro);
         servico.deletar(membroAux);

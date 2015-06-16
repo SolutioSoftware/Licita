@@ -64,6 +64,9 @@ public class ServicoInstituicaoLicitanteTest {
         assertEquals(false, instituicao.equals(instituicaoAux));
         
         assertEquals(2, servico.buscarTodos().size());
+        
+        servico.deletar(instituicao);
+        servico.deletar(instituicaoAux);
 
     }
     

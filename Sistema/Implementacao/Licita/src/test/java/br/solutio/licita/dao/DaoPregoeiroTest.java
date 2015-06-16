@@ -98,6 +98,8 @@ public class DaoPregoeiroTest extends DaoTestesAbstrato {
         
         GerenciadorTransacao.abrirTransacao(dao.getEntityManager());
         dao.deletar(pregoeiroEditar);
+        dao.deletar(pregoeiro);
+        dao.deletar(pregoeiroAux);
         GerenciadorTransacao.executarTransacao(dao.getEntityManager());
                 
         assertNull(dao.buscarPorId((long) 3));
