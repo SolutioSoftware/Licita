@@ -60,7 +60,7 @@ public class ServicoPregoeiro extends ServicoAbstrato<Pregoeiro> implements Serv
 
     @Override
     public List<Pregoeiro> buscarTodos() {
-        getDao().setEntityManager(ProdutorEntityManager.getInstancia().getEmLocal());
+        
         return getDao().consultar("Pregoeiro.findAll");
     }
 

@@ -6,10 +6,14 @@
 package br.solutio.licita.servico;
 
 import br.solutio.licita.modelo.Item;
+import br.solutio.licita.modelo.Pregao;
+import br.solutio.licita.persistencia.DaoConsultarException;
 import br.solutio.licita.persistencia.DaoIF;
 import br.solutio.licita.persistencia.FabricaDAO;
 import br.solutio.licita.persistencia.FabricaDaoIF;
 import br.solutio.licita.util.ProdutorEntityManagerDeTeste;
+import java.util.List;
+import javax.persistence.RollbackException;
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -94,11 +98,24 @@ public class ServicoItemTest {
         
     }
         
-    
-    
-    @After
-    public void tearDown(){
-        
+    @Test(expected = IllegalArgumentException.class)
+    public void cadastraObjetoNull() {
+          servico.criar(null);
     }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void editaObjetoNull() {
+          servico.editar(null);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void deletaObjetoNull() {
+          servico.deletar(null);
+    }
+    
+    
+   
+    
+   
     
 }

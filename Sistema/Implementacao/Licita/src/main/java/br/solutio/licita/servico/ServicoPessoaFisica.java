@@ -35,7 +35,6 @@ public class ServicoPessoaFisica extends ServicoAbstrato<PessoaFisica> implement
 
     @Override
     public List<PessoaFisica> buscarTodos() {
-        getDao().setEntityManager(ProdutorEntityManager.getInstancia().getEmLocal());
         return getDao().consultar("PessoaFisica.findAll");
     }
 

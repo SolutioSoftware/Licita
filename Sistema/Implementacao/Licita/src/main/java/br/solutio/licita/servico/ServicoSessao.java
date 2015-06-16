@@ -35,7 +35,7 @@ public class ServicoSessao extends ServicoAbstrato<Sessao> implements ServicoSes
 
     @Override
     public List<Sessao> buscarTodos() {
-        getDao().setEntityManager(ProdutorEntityManager.getInstancia().getEmLocal());
+        
         return getDao().consultar("Sessao.findAll");
     }
 

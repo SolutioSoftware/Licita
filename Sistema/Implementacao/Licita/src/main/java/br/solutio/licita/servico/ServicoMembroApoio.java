@@ -35,7 +35,7 @@ public class ServicoMembroApoio extends ServicoAbstrato<MembroApoio> implements 
     
     @Override
     public List<MembroApoio> buscarTodos() {
-        getDao().setEntityManager(ProdutorEntityManager.getInstancia().getEmLocal());
+
         return getDao().consultar("MembroApoio.findAll");
     }
 

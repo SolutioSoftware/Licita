@@ -11,9 +11,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.RollbackException;
-import javax.persistence.TransactionRequiredException;
-import org.eclipse.persistence.exceptions.DatabaseException;
-import org.eclipse.persistence.exceptions.TransactionException;
 
 /**
  *
@@ -23,7 +20,7 @@ import org.eclipse.persistence.exceptions.TransactionException;
 public abstract class ServicoAbstrato<T> implements ServicoIF<T> {
 
     protected static final Logger logger = Logger.getLogger(ServicoAbstrato.class.getName());
-    
+
     private EntityManager entityManager;
 
     public abstract DaoIF<T> getDao();
@@ -31,19 +28,15 @@ public abstract class ServicoAbstrato<T> implements ServicoIF<T> {
     public ServicoAbstrato(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
-    
-    
+
     public abstract void setDao(DaoIF<T> dao);
 
-    
-    
     protected void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
-    
     protected EntityManager getEntityManager() {
-     
+
         return entityManager;
     }
 
@@ -53,14 +46,19 @@ public abstract class ServicoAbstrato<T> implements ServicoIF<T> {
             GerenciadorTransacao.abrirTransacao(getDao().getEntityManager());
             getDao().criar(entidade);
             GerenciadorTransacao.executarTransacao(getDao().getEntityManager());
-        } catch (Exception e) {
+        } catch (IllegalStateException | RollbackException | IllegalArgumentException e) {
+
             GerenciadorTransacao.rollbackTransacao(getDao().getEntityManager());
-            Logger.getLogger(ServicoAbstrato.class.getName()).log(Level.SEVERE, null, e);
-            try {
-                GerenciadorTransacao.rollbackTransacao(getDao().getEntityManager());
-            } catch (RollbackException dbe) {
-                Logger.getLogger(ServicoAbstrato.class.getName()).log(Level.SEVERE, null, dbe);
+            Logger.getLogger(ServicoAbstrato.class.getName()).log(Level.SEVERE, "Rollback na Camada Serviço: {0}", e.getMessage());
+
+            if (e instanceof IllegalArgumentException) {
+                throw new IllegalArgumentException("O objeto não pode ser nulo.");
+            } else if (e instanceof IllegalArgumentException) {
+                throw new IllegalStateException("Transação não pôde ser iniciada");
+            } else if (e instanceof RollbackException) {
+                throw new RollbackException("Rollback");
             }
+
         }
 
     }
@@ -71,22 +69,43 @@ public abstract class ServicoAbstrato<T> implements ServicoIF<T> {
             GerenciadorTransacao.abrirTransacao(getDao().getEntityManager());
             getDao().editar(entidade);
             GerenciadorTransacao.executarTransacao(getDao().getEntityManager());
-        } catch (DatabaseException | TransactionException | TransactionRequiredException dbe) {
-            Logger.getLogger(ServicoAbstrato.class.getName()).log(Level.SEVERE, null, dbe);
-            try {
-                GerenciadorTransacao.rollbackTransacao(getDao().getEntityManager());
-            } catch (RollbackException e) {
-                Logger.getLogger(ServicoAbstrato.class.getName()).log(Level.SEVERE, null, e);
-            }
+        } catch (IllegalStateException | RollbackException | IllegalArgumentException e) {
 
+            GerenciadorTransacao.rollbackTransacao(getDao().getEntityManager());
+            Logger.getLogger(ServicoAbstrato.class.getName()).log(Level.SEVERE, "Exception na Camada Serviço: {0}", e.getMessage());
+            
+            if (e instanceof IllegalArgumentException) {
+                throw new IllegalArgumentException("O objeto não pode ser nulo.");
+            } else if (e instanceof IllegalArgumentException) {
+                throw new IllegalStateException("Transação não pôde ser iniciada");
+            } else if (e instanceof RollbackException) {
+                throw new RollbackException("Rollback");
+            }
+            
         }
     }
 
     @Override
     public void deletar(T entidade) {
-        GerenciadorTransacao.abrirTransacao(getDao().getEntityManager());
-        getDao().deletar(entidade);
-        GerenciadorTransacao.executarTransacao(getDao().getEntityManager());
+        try {
+            GerenciadorTransacao.abrirTransacao(getDao().getEntityManager());
+            getDao().deletar(entidade);
+            GerenciadorTransacao.executarTransacao(getDao().getEntityManager());
+        } catch (IllegalStateException | RollbackException | IllegalArgumentException e) {
+
+            GerenciadorTransacao.rollbackTransacao(getDao().getEntityManager());
+            Logger.getLogger(ServicoAbstrato.class.getName()).log(Level.SEVERE, "Exception na Camada Serviço: {0}", e.getMessage());
+
+            if (e instanceof IllegalArgumentException) {
+                throw new IllegalArgumentException("O objeto não pode ser nulo.");
+            } else if (e instanceof IllegalArgumentException) {
+                throw new IllegalStateException("Transação não pôde ser iniciada");
+            } else if (e instanceof RollbackException) {
+                throw new RollbackException("Rollback");
+            }
+            
+        }
+
     }
 
     @Override

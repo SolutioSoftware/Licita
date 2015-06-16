@@ -33,7 +33,7 @@ public class ServicoInstituicaoLicitadora extends ServicoAbstrato<InstituicaoLic
 
     @Override
     public List<InstituicaoLicitadora> buscarTodos() {
-        getDao().setEntityManager(ProdutorEntityManager.getInstancia().getEmLocal());
+        
         return getDao().consultar("InstituicaoLicitadora.findAll");
     }
 

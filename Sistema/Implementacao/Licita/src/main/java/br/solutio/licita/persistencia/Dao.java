@@ -28,8 +28,6 @@ public class Dao<T> implements DaoIF<T> {
         this.entityManager = entityManager;
     }
 
-    public Dao() {
-    }
 
     @Override
     public EntityManager getEntityManager() {

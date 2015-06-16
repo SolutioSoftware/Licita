@@ -35,7 +35,6 @@ public class ServicoLicitante extends ServicoAbstrato<EmpresaLicitante> implemen
 
     @Override
     public List<EmpresaLicitante> buscarTodos() {
-        getDao().setEntityManager(ProdutorEntityManager.getInstancia().getEmLocal());
         return getDao().consultar("EmpresaLicitante.findAll");
     }
 

@@ -7,13 +7,10 @@ package br.solutio.licita.servico;
 
 import br.solutio.licita.modelo.Pregao;
 import br.solutio.licita.persistencia.DaoIF;
-import br.solutio.licita.persistencia.FabricaDAO;
 import br.solutio.licita.persistencia.FabricaDaoIF;
 import br.solutio.licita.util.ProdutorEntityManagerDeTeste;
-import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -65,5 +62,38 @@ public class ServicoPregaoTest {
         assertEquals(2, servico.buscarTodos().size());
 
     }
+    
+    @Test(expected = IllegalStateException.class)
+    public void editarObjetoDuplicado() {
+        pregao.setNumeroPregao("1232");
+        pregaoAux.setNumeroPregao("1232");
+        servico.editar(pregao);
+        servico.editar(pregaoAux);
+    }
+    
+    @Test(expected = IllegalStateException.class)
+    public void cadastraObjetoDuplicado() {
+        pregao.setNumeroPregao("1232");
+        pregaoAux.setNumeroPregao("1232");
+        servico.criar(pregao);
+        servico.criar(pregaoAux);
+        
+        servico.deletar(pregao);
+        servico.deletar(pregaoAux);
+    }
+    
+   
+    @Test(expected = IllegalStateException.class)
+    public void deletaObjetoDuplicado() {
+        
+        servico.criar(pregao);
+     
+        
+        servico.deletar(pregao);
+        servico.deletar(pregao);
+     
+    }
+    
+    
 
 }
