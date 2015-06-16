@@ -112,8 +112,10 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
         item = new Item();
     }
     
-    public void removerItem(){
+    public String removerItem(){
+        logger.log(Level.INFO, "Excluir Itens funfando");
         itensPregao.remove(itemPregao);
+        return "pregaoAdicionarItens";
     }
 
     @Override

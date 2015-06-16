@@ -11,6 +11,8 @@ import br.solutio.licita.servico.ProdutorEntityManager;
 import br.solutio.licita.servico.ServicoIF;
 import br.solutio.licita.servico.ServicoLogin;
 import br.solutio.licita.servico.ServicoLoginIF;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -46,7 +48,9 @@ public class ControladorLogin {
     public boolean efetuarLogin() {
         boolean permissao = false;
         if (getEntidade().getSenha() != null && getEntidade().getUsuario() != null) {
+              Logger.getLogger(ControladorPregao.class.getName()).log(Level.INFO, "ControladorLogin {0}{1}", new Object[]{getEntidade().getUsuario(), getEntidade().getSenha()});
             permissao = this.servico.verificarDados(login.getUsuario(), login.getSenha());
+            Logger.getLogger(ControladorPregao.class.getName()).log(Level.INFO, "ControladorLogin {0}", permissao);
             return permissao;
         } else {
             return permissao;
