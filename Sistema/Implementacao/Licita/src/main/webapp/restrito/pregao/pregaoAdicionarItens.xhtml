@@ -7,7 +7,7 @@
                 template="/WEB-INF/template/TemplateLicitaPaineis.xhtml"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:define name="pn_info" >
+    <ui:define id="define_info" name="pn_info" >
 
         <h:form id="formDtItem">
 
@@ -36,7 +36,7 @@
                 <p:column headerText="Adicionar Item" width="70">
 
                     <p:commandButton id="btAdiconarItemPregao" icon="ui-icon-plus" action="#{controladorPregao.adicionarItem}" 
-                                     ajax="false" update=":formDtItemPregao:dt_itensPregao"
+                                     update=":pregao_form:formDtItemPregao:dt_itensPregao"
                                      style="font-size: 10px" >
                         <f:setPropertyActionListener value="#{entidade}" target="#{controladorPregao.item}"  />
                         <p:tooltip for="btAdiconarItemPregao" value="Adicionar"/>
@@ -49,7 +49,7 @@
 
     </ui:define>
 
-    <ui:define name="pn_conteudo">
+    <ui:define id="define_conteudo" name="pn_conteudo">
 
         <p:growl id="growPregaoAdicionarItens" showDetail="false" life="3000" class="ui-growl" />
 
@@ -84,7 +84,7 @@
 
             </div>
 
-            <h:form id="formDtItemPregao">
+            <h:form id="formDtItemPregao" prependId="false">
 
                 <p:dataTable id='dt_itensPregao' var="entidade" value="#{controladorPregao.itensPregao}" 
                              widgetVar="tbl_itensPregao" paginator="true" style="padding:5px" rows="8" rowsPerPageTemplate="5,10,30,50,100"  
@@ -123,13 +123,13 @@
                         </p:cellEditor>
                     </p:column>
                     
-                    <p:column headerText="Ecluir" width="50">
+                    <p:column headerText="Excluir" width="50">
 
-                        <p:commandButton id="btEcluirItemPregao" icon="ui-icon-trash" action="#{controladorPregao.removerItem}" 
-                                     ajax="false" update=":formDtItemPregao:dt_itensPregao"
+                        <p:commandButton id="btExcluirItemPregao" icon="ui-icon-trash" action="#{controladorPregao.removerItem}" 
+                                     update=":pregao_form:formDtItemPregao:dt_itensPregao"
                                      style="font-size: 10px" >
                             <f:setPropertyActionListener value="#{entidade}" target="#{controladorPregao.itemPregao}"  />
-                        <p:tooltip for="btEcluirItemPregao" value="Ecluir"/>
+                        <p:tooltip for="btExcluirItemPregao" value="Excluir"/>
                     </p:commandButton>
 
                 </p:column>
