@@ -107,16 +107,7 @@
                     </h:selectOneMenu>
 
                     <p:outputLabel value="CEP:" for="cep"/>
-                    <p:inputMask id="cep" value="#{controladorPregoeiro.entidade.pessoaFisica.endereco.cep}"  title="CPF" mask="99.999-999" placeholder="CPF"/>
-
-                    <p:outputLabel value="Login:" for="it_login"/>
-                    <p:inputText id="it_login" value="#{controladorPregoeiro.entidade.login.usuario}" required="true" 
-                                 requiredMessage="O campo login é obrigatório" placeholder="Login"/>
-
-                    <p:outputLabel value="Senha:" for="senha"/>
-                    <p:password id="senha" value="#{controladorPregoeiro.entidade.login.senha}" feedback="true" required="true" 
-                                requiredMessage="O campo senha é obrigatório" placeholder="Senha" strongLabel="Senha Forte" goodLabel="Senha Boa" 
-                                weakLabel="Senha Fraca" promptLabel="Digite Sua Senha"/>
+                    <p:inputMask id="cep" value="#{controladorPregoeiro.entidade.pessoaFisica.endereco.cep}"  title="CEP" mask="99.999-999" placeholder="CPF"/>
 
                     <p:outputLabel value="Telefone:" for="telefone"/>
                     <p:inputText id="telefone" value="#{controladorPregoeiro.entidade.pessoaFisica.contatoPessoaFisica.telefone}" title="Telefone" placeholder="(DDD) 9999-9999" maxlength="14"/>

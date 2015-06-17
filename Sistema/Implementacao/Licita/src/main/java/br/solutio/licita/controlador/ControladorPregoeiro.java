@@ -29,6 +29,7 @@ public class ControladorPregoeiro extends ControladorAbstrato<Pregoeiro> impleme
     private Pregoeiro entidade;
     private transient List<Pregoeiro> pregoeiros;
     private final transient ServicoPregoeiroIF servico;
+    private String senha;
 
     public ControladorPregoeiro() {
         entidade = new Pregoeiro();
@@ -38,8 +39,7 @@ public class ControladorPregoeiro extends ControladorAbstrato<Pregoeiro> impleme
     @Override
     public String criar(Pregoeiro entidade) {
         try {
-            entidade = getEntidade();
-            getServico().criar(entidade);
+            getServico().criar(this.entidade);
             setEntidade(new Pregoeiro());
             JsfUtil.addSuccessMessage("Salvo com Sucesso!");
             //Imprimir Message apos o redirect
@@ -124,6 +124,14 @@ public class ControladorPregoeiro extends ControladorAbstrato<Pregoeiro> impleme
     @Override
     public ServicoPregoeiroIF getServico() {
         return servico;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
 }
