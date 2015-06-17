@@ -49,9 +49,10 @@ public class ControladorPregoeiro extends ControladorAbstrato<Pregoeiro> impleme
         } catch (PersistenceException | IllegalStateException e) {
             Logger.getLogger(ControladorPregao.class.getName()).log(Level.SEVERE, null, e);
             //Imprimir Message apos o redirect
+             JsfUtil.addErrorMessage("CPF já existe");
             FacesContext context = FacesContext.getCurrentInstance();
             context.getExternalContext().getFlash().setKeepMessages(true);
-            return "equipeSalvarPregoeiro?faces-redirect=true";
+            return "equipeSalvarPregoeiro";
         }
 
     }
@@ -71,9 +72,10 @@ public class ControladorPregoeiro extends ControladorAbstrato<Pregoeiro> impleme
         } catch (PersistenceException | IllegalStateException e) {
             Logger.getLogger(ControladorPregao.class.getName()).log(Level.SEVERE, null, e);
             //Imprimir Message apos o redirect
+             JsfUtil.addErrorMessage("CPF já existe");
             FacesContext context = FacesContext.getCurrentInstance();
             context.getExternalContext().getFlash().setKeepMessages(true);
-            return "equipeEditarPregoeiro?faces-redirect=true";
+            return "equipeEditarPregoeiro";
         }
 
     }

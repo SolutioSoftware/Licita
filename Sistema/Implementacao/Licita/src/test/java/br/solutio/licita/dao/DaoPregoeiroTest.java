@@ -33,7 +33,7 @@ public class DaoPregoeiroTest extends DaoTestesAbstrato {
     public void setUp() {
 
         pregoeiro = new Pregoeiro();
-        pregoeiro.getPessoaFisica().setCpf("06953601400");
+        pregoeiro.getPessoaFisica().setCpf("06863601400");
         pregoeiro.getPessoaFisica().setNome("Matheus");
         pregoeiro.getPessoaFisica().setRg("35229");
         pregoeiro.getLogin().setLogado(Boolean.TRUE);
@@ -47,7 +47,7 @@ public class DaoPregoeiroTest extends DaoTestesAbstrato {
         pregoeiro.getPessoaFisica().getEndereco().setNumero(94);
 
         pregoeiroAux = new Pregoeiro();
-        pregoeiroAux.getPessoaFisica().setCpf("06953601400");
+        pregoeiroAux.getPessoaFisica().setCpf("06923601400");
         pregoeiroAux.getPessoaFisica().setNome("Matheus");
         pregoeiroAux.getPessoaFisica().setRg("35229");
         pregoeiroAux.getLogin().setLogado(Boolean.TRUE);
@@ -55,7 +55,7 @@ public class DaoPregoeiroTest extends DaoTestesAbstrato {
         pregoeiroAux.getLogin().setSenha("123");
 
         pregoeiroEditar = new Pregoeiro();
-        pregoeiroEditar.getPessoaFisica().setCpf("06953601400");
+        pregoeiroEditar.getPessoaFisica().setCpf("09153601400");
         pregoeiroEditar.getPessoaFisica().setNome("Matheus");
         pregoeiroEditar.getPessoaFisica().setRg("35229");
         pregoeiroEditar.getLogin().setLogado(Boolean.TRUE);
@@ -88,12 +88,12 @@ public class DaoPregoeiroTest extends DaoTestesAbstrato {
         GerenciadorTransacao.executarTransacao(dao.getEntityManager());
         
         GerenciadorTransacao.abrirTransacao(dao.getEntityManager());
-        pregoeiroEditar.getPessoaFisica().setCpf("05434576623");
+        pregoeiroEditar.getPessoaFisica().setCpf("05434676623");
         dao.editar(pregoeiroEditar);
         GerenciadorTransacao.executarTransacao(dao.getEntityManager());
         
         
-        assertEquals(false, pregoeiroEditar.getPessoaFisica().getCpf().equals("06953601400"));
+        assertEquals(false, pregoeiroEditar.getPessoaFisica().getCpf().equals("06950601400"));
         assertEquals(true, pregoeiroEditar.getId() == 3);
         
         GerenciadorTransacao.abrirTransacao(dao.getEntityManager());

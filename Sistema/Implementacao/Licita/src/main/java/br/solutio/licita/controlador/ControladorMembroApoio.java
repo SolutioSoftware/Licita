@@ -49,9 +49,10 @@ public class ControladorMembroApoio extends ControladorAbstrato<MembroApoio> imp
         } catch (PersistenceException | IllegalStateException e) {
             Logger.getLogger(ControladorPregao.class.getName()).log(Level.SEVERE, null, e);
             //Imprimir Message apos o redirect
+            JsfUtil.addErrorMessage("CPF já existe");
             FacesContext context = FacesContext.getCurrentInstance();
             context.getExternalContext().getFlash().setKeepMessages(true);
-            return "equipeSalvarMembroApoio?faces-redirect=true";
+            return "equipeSalvarMembroApoio";
         }
 
     }
@@ -70,9 +71,10 @@ public class ControladorMembroApoio extends ControladorAbstrato<MembroApoio> imp
         } catch (PersistenceException | IllegalStateException e) {
             Logger.getLogger(ControladorPregao.class.getName()).log(Level.SEVERE, null, e);
             //Imprimir Message apos o redirect
+            JsfUtil.addErrorMessage("CPF já existe");
             FacesContext context = FacesContext.getCurrentInstance();
             context.getExternalContext().getFlash().setKeepMessages(true);
-            return "equipeEditarMembroApoio?faces-redirect=true";
+            return "equipeEditarMembroApoio";
         }
 
     }

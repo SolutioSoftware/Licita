@@ -33,7 +33,7 @@ public class DaoMembroApoioTest extends DaoTestesAbstrato{
         fabrica = new FabricaDAO(emf.createEntityManager());
         dao = fabrica.getDaoMembroApoio();
         
-        membro.getPessoaFisica().setCpf("12312312312");
+        membro.getPessoaFisica().setCpf("12312312512");
         membro.getPessoaFisica().setNome("Matheus");
         membro.getPessoaFisica().setRg("11221312");
         membro.setFuncao("Avaliador");

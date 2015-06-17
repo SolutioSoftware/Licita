@@ -51,7 +51,7 @@ public class PessoaFisica implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 11)
-    @Column(name = "cpf")
+    @Column(name = "cpf", unique = true)
     private String cpf;
 
     @Size(max = 30)
