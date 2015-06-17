@@ -46,7 +46,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "ItemPregao.findById", query = "SELECT i FROM ItemPregao i WHERE i.id = :id"),
     @NamedQuery(name = "ItemPregao.findByQuantidade", query = "SELECT i FROM ItemPregao i WHERE i.quantidade = :quantidade"),
     @NamedQuery(name = "ItemPregao.findByValorReferencia", query = "SELECT i FROM ItemPregao i WHERE i.valorReferencia = :valorReferencia"),
-    @NamedQuery(name = "ItemPregao.findByStatusItem", query = "SELECT i FROM ItemPregao i WHERE i.statusItem = :statusItem")})
+    @NamedQuery(name = "ItemPregao.findByStatusItem", query = "SELECT i FROM ItemPregao i WHERE i.statusItem = :statusItem"),
+    @NamedQuery(name = "ItemPregao.findByPregao", query = "SELECT i FROM ItemPregao i WHERE i.pregao = :idPregao")})
 public class ItemPregao implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -57,7 +58,7 @@ public class ItemPregao implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne (optional = false)
+    @ManyToOne (optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_pregao", referencedColumnName = "id")
     private Pregao pregao;
 

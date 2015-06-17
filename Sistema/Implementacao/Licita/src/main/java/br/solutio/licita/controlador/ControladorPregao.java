@@ -12,6 +12,7 @@ import br.solutio.licita.modelo.Pregao;
 import br.solutio.licita.servico.ProdutorEntityManager;
 import br.solutio.licita.servico.ServicoIF;
 import br.solutio.licita.servico.ServicoPregao;
+import br.solutio.licita.servico.ServicoPregaoIF;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
@@ -32,14 +33,13 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
     private Item item;
     private transient List<Pregao> pregoes;
     private transient Set<ItemPregao> itensPregao;
-    private transient ServicoIF<Pregao> servico;
+    private transient ServicoPregaoIF servico;
 
     public ControladorPregao() {
         entidade = new Pregao();
         servico = new ServicoPregao(ProdutorEntityManager.getInstancia().getEmLocal());
         item = new Item();
         itemPregao = new ItemPregao();
-        itensPregao = entidade.getItensPregoes();
     }
 
     @Override
@@ -70,7 +70,7 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
             getServico().editar(entidade);
             setEntidade(new Pregao());
             JsfUtil.addSuccessMessage("Atualizado com Sucesso!!?");
-            return "pregao";
+            return "pregao?faces-redirect=true";
         } catch (PersistenceException | IllegalStateException e) {
             Logger.getLogger(ControladorPregao.class.getName()).log(Level.SEVERE, null, e);
             JsfUtil.addErrorMessage("Pregao ou Processo já existe");
@@ -101,7 +101,8 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
 
     public String preparaAdicionaItens() {
         logger.log(Level.INFO, "Adicionar Itens funfando");
-        return "pregaoAdicionarItens";
+        setItensPregao(null);
+        return "pregaoAdicionarItens?faces-redirect=true";
     }
 
     public void adicionarItem() {
@@ -111,8 +112,8 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
         itemPregao = new ItemPregao();
         item = new Item();
     }
-    
-    public void removerItem(){
+
+    public void removerItem() {
         itensPregao.remove(itemPregao);
     }
 
@@ -144,6 +145,9 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
     }
 
     public Set<ItemPregao> getItensPregao() {
+        if (itensPregao == null) {
+            itensPregao = servico.buscarItensPregoes(entidade);
+        }
         return itensPregao;
     }
 
