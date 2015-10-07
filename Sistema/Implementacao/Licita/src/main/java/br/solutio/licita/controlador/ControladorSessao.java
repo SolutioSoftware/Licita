@@ -51,6 +51,21 @@ public class ControladorSessao extends ControladorAbstrato<Sessao> {
         }
 
     }
+    
+    public String iniciar(Sessao entidade){
+        try{
+            entidade = getEntidade();
+            getServico().criar(entidade);
+            setEntidade(null);
+            setEntidade(new Sessao());
+            JsfUtil.addSuccessMessage("Salvo com Sucesso!");
+            return "sessao?faces-redirect=true";
+        }catch( PersistenceException | IllegalStateException e){
+            Logger.getLogger(ControladorSessao.class.getName()).log(Level.SEVERE, null, e);
+            JsfUtil.addErrorMessage("Sessão já existe");
+            return "sessaoSalvar?faces-redirect=true";
+        }
+    }
 
     @Override
     public String editar(Sessao entidade) {
