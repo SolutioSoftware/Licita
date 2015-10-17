@@ -41,7 +41,7 @@ public class ControladorLicitante extends ControladorAbstrato<EmpresaLicitante> 
             getServico().criar(entidade);
             setEntidade(new EmpresaLicitante());
             JsfUtil.addSuccessMessage("Salvo com Sucesso!");
-            return "licitante";
+            return "licitante?faces-redirect=true";
         } catch (PersistenceException e) {
             Logger.getLogger(ControladorLicitante.class.getName()).log(Level.SEVERE, null, e);
             JsfUtil.addErrorMessage("Servido fora do ar");
@@ -65,11 +65,11 @@ public class ControladorLicitante extends ControladorAbstrato<EmpresaLicitante> 
         } catch (PersistenceException e) {
             Logger.getLogger(ControladorLicitante.class.getName()).log(Level.SEVERE, null, e);
             JsfUtil.addErrorMessage("Servido fora do ar");
-            return "licitanteEditar?faces-redirect=true";
+            return "licitanteEditar";
         } catch (IllegalStateException e) {
             Logger.getLogger(ControladorLicitante.class.getName()).log(Level.SEVERE, null, e);
             JsfUtil.addErrorMessage("CNPJ já cadastrado");
-            return "licitanteEditar?faces-redirect=true";
+            return "licitanteEditar";
         }
 
     }

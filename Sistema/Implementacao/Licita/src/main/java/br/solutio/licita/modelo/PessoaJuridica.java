@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -67,7 +68,7 @@ public class PessoaJuridica implements Serializable{
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoaJuridica")
     private InstituicaoLicitadora instituicaoLicitadora;
     
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoaJuridica")
+    @Embedded
     private Endereco endereco;
 
     public PessoaJuridica() {

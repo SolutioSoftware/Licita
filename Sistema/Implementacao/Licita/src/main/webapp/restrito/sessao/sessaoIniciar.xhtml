@@ -11,55 +11,38 @@
 
         <h:form id="formInSessao">
 
-            <p:dataTable id='dtIn_sessao' var="entidade" value="#{controladorSessao.sessoes}" 
-                         widgetVar="tbl_sessoes" paginator="true" style="padding:5px" rows="10" rowsPerPageTemplate="5,10"  
-                         emptyMessage="Nenhuma sessão cadastrada"  paginatorAlwaysVisible="true">
+            <p:dataTable id='dt_empresas' var="empresaLicitante" value="#{controladorSessao.empresasLicitantes}" 
+                         widgetVar="tbl_licitantes" paginator="true" style="padding:5px" rows="12" rowsPerPageTemplate="10"  
+                         emptyMessage="Nenhuma Emp. Licitante Cadastrada"  paginatorAlwaysVisible="true" scrollable="false">
 
                 <f:facet name="header">
                     <p:outputPanel>
-                        <p:commandButton value="Novo" style="width: 80px" action="#{controladorSessao.limparDados}" update="@form"  icon="fa fa-plus" 
-                                         class="botaoNovo"/>
-                        <p:inputText id="globalFilter" onkeyup="PF('tbl_sessoes').filter()" style="width:250px" placeholder="Digite sua busca" />
+                        <p:inputText id="globalFilter" onkeyup="PF('tbl_licitantes').filter()" style="width:250px" placeholder="Digite sua busca" />
                     </p:outputPanel>
                 </f:facet>
 
-                <p:column headerText="Numero do Pregão" filterBy="#{entidade.idPregao.numeroPregao}" filterMatchMode="contains" 
-                          filterStyle="display:none" >
-                    <h:outputText value="#{entidade.idPregao.numeroPregao}" />
-                </p:column>
+                <p:column headerText="CNPJ" filterBy="#{empresaLicitante.pessoaJuridica.cnpj}" filterMatchMode="contains" filterStyle="display:none">
+                    <h:outputText value="#{empresaLicitante.pessoaJuridica.cnpj}" />
+                </p:column> 
 
-                <p:column headerText="Codigo da Sessão" filterBy="#{entidade.id}" filterMatchMode="contains" 
-                          filterStyle="display:none" >
-                    <h:outputText value="#{entidade.id}" />
-                </p:column>
-
-                <p:column headerText="Data Previsto" filterBy="#{entidade.dataRealizacao.date} or #{entidade.dataRealizacao.month+1}" filterMatchMode="contains" 
-                          filterStyle="display:none" >
-                    <h:outputText value="#{entidade.dataRealizacao.date}/#{entidade.dataRealizacao.month+1}" />
-                </p:column>
-
-                <p:column headerText="Status da Sessão" filterBy="#{entidade.statusSessao}" filterMatchMode="contains" 
-                          filterStyle="display:none" >
-                    <h:outputText value="#{entidade.statusSessao}" />
+                <p:column headerText="Nome Fantasia" filterBy="#{empresaLicitante.pessoaJuridica.nomeFantasia}" filterMatchMode="contains" filterStyle="display:none">
+                    <h:outputText value="#{empresaLicitante.pessoaJuridica.nomeFantasia}" />
                 </p:column>
 
 
-                <p:column headerText="Ações" width="50">
+                <p:column headerText="Adicionar Licitante" width="70">
 
-                    <p:commandButton id="btInEditar" icon="ui-icon-pencil" action="#{controladorSessao.preparaEditar}" update="@form"  style="font-size: 10px">
-                        <f:setPropertyActionListener value="#{entidade}" target="#{controladorSessao.entidade}"  />
-                        <p:tooltip for="btInEditar" value="Editar"/>
-                    </p:commandButton>
-
-                    <p:commandButton id="btInExcluir" icon="fa fa-trash" action="#{controladorSessao.deletar(entidade)}" update="@form" style="font-size: 10px">
-                        <f:setPropertyActionListener value="#{entidade}" target="#{controladorSessao.entidade}"  />
-                        <p:tooltip for="btInExcluir" value="Excluir"/>
-                        <p:confirm icon="ui-icon-alert" header="Excluir Sessão" message="Deseja realmente excluir esta sessão"/>
+                    <p:commandButton id="btAdiconarEmpresaLicitante" icon="ui-icon-plus"
+                                     update=":sessaoIn_form"
+                                     style="font-size: 10px"   >
+                        <f:setPropertyActionListener value="#{empresaLicitante}" target="#{controladorSessao.empresaLicitante}"  />
+                        <p:tooltip for="btAdiconarEmpresaLicitante" value="Adicionar"/>
                     </p:commandButton>
 
                 </p:column>
 
             </p:dataTable>
+
         </h:form>
     </ui:define>
 
@@ -68,53 +51,49 @@
 
         <h:form id="sessaoIn_form" title="Sessão" style="text-align: center"  >
 
-            <p:growl id="growSessao" showDetail="false" life="3000" class="ui-growl" />
+            <div style="margin-left: 2%; margin-top: 2%; margin-right: 2%">
 
-            <div style="margin-left: 25%; margin-top: 2%">
+                <h:panelGrid columns="4" id="panelGridAdicionarLicitantes" >
 
-                <h:panelGrid columns="2" id="panelGridIniciarSessao" columnClasses="colunaEsquerda,colunaDireita"  >
+                    <p:outputLabel value="Número do Pregão:" for="numeroPregao" style="font-weight:bold"/>
+                    <p:outputLabel id="numeroPregao" value="#{controladorSessao.entidade.idPregao.numeroPregao}"/>
 
-                    <p:outputLabel value="Numero do Pregão:" for="numeroDoPregao"/>
-                    <h:selectOneMenu id="numeroDoPregao" value="#{controladorSessao.entidade.idPregao}" style="width: 190px" required="true" 
-                                     requiredMessage="O campo Numero de Pregão deve ser selecionado" converter="pregaoConverter">
-                        
-                        <f:selectItems value="#{controladorPregao.pregoes}" var="pregao" itemLabel="#{pregao.numeroPregao}" 
-                                       itemValue="#{controladorPregao.entidade.id}"/>
-                        
-                    </h:selectOneMenu>
+                    <p:outputLabel value="Número do Processo:" for="numeroProcesso" style="font-weight:bold"/>
+                    <p:outputLabel id="numeroProcesso" value="#{controladorSessao.entidade.idPregao.numeroProcesso}"/> 
+
+                    <p:outputLabel value="Status do Pregão:" for="statusDoPregao" style="font-weight:bold"/>
+                    <p:outputLabel id="statusDoPregao" value="#{controladorSessao.entidade.statusSessao}"/>
+
+                    <p:outputLabel value="Descrição do Pregão:" for="descricaoPregao" style="font-weight:bold"/>
+                    <p:outputLabel id="descricaoPregao" value="#{controladorSessao.entidade.idPregao.descricao}"/>
                     
-                    <p:outputLabel value="Data Prevista:" for="dataPrevista"/>
-                    <p:calendar id="dataPrevista" value="#{controladorSessao.entidade.dataRealizacao}" mindate="#{controladorSessao.dataAtual}" locale="pt_BR" style="width: 210px"/>
-
-                    <p:outputLabel value="Horário Previsto:" for="horarioPrevisto"/>
-                    <p:calendar id="horarioPrevisto" value="#{controladorSessao.entidade.horarioPrevisto}" pattern="HH:mm" timeOnly="true" style="width: 210px"/>
+                    <p:outputLabel></p:outputLabel>
+                    <p:outputLabel></p:outputLabel>
+                    <p:outputLabel></p:outputLabel>
                     
-                    <p:outputLabel value="Status:" for="statusDaSessao"/>
-                    <h:selectOneMenu id="statusDaSessao" value="#{controladorSessao.entidade.statusSessao}" style="width: 190px" required="true" requiredMessage="O Campo Status da Sessão deve ser selecionado">
-
-                        <f:selectItem noSelectionOption="true" />
-                        <f:selectItem itemLabel="Agendada" itemValue="Agendada" />
-                        <f:selectItem itemLabel="Anulada" itemValue="Anulada" />
-                        <f:selectItem itemLabel="Cancelada" itemValue="Cancelada" />
-                        <f:selectItem itemLabel="Deserto" itemValue="Deserto" />
-                        <f:selectItem itemLabel="Encerrada" itemValue="Encerrada" />
-                        <f:selectItem itemLabel="Iniciada" itemValue="Iniciada" />
-                        <f:selectItem itemLabel="Pausada" itemValue="Pausada" />
-                        <f:selectItem itemLabel="Remarcada" itemValue="Remarcada" />
-
-                    </h:selectOneMenu>
+                    <!-- Dados da Empresa Licitante que entregou as propostas -->
+                    <p:outputLabel value="Razão Social: " for="razaoSocial" style="font-weight:bold"/>
+                    <p:outputLabel id="razaoSocial" value="#{controladorSessao.empresaLicitante.pessoaJuridica.razaoSocial}"/>
+                    
+                    <p:outputLabel value="Nome Fantasia: " for="nomeFantasia" style="font-weight:bold"/>
+                    <p:outputLabel id="nomeFantasia" value="#{controladorSessao.empresaLicitante.pessoaJuridica.nomeFantasia}"/>
+                    
+                    <p:outputLabel value="CNPJ: " for="cnpjLicitante" style="font-weight:bold"/>
+                    <p:outputLabel id="cnpjLicitante" value="#{controladorSessao.empresaLicitante.pessoaJuridica.cnpj}"/>
+                    
+                    
 
                 </h:panelGrid>
-
             </div>
 
             <div style="margin-left: 2%; margin-top: 2%; margin-right: 2%">
-
-                <p:commandButton  id="bt_Atualizar_Sessao" value="Atualizar" icon="fa fa-refresh" action="#{controladorSessao.editar(entidade)}" 
-                                  update="growSessao" ajax="false" style="width: 125px"/>
-                <p:commandButton  id="bt_Iniciar_Sessao" value="Iniciar Sessão" icon="fa fa-youtube-play" update="growSessao" ajax="false" style="width: 125px"/>
-
+                <p:commandButton  id="btImportarProposta" value="Importar Proposta" icon="fa fa-youtube-play"/>
+                <p:commandButton  id="btClassificarProposta" value="Classificar Proposta" icon="fa fa-refresh"  />
             </div>
+
+
+
+
 
         </h:form>
 

@@ -6,7 +6,6 @@
     <class>br.solutio.licita.modelo.ContatoPessoaFisica</class>
     <class>br.solutio.licita.modelo.ContatoPessoaJuridica</class>
     <class>br.solutio.licita.modelo.EmpresaLicitante</class>
-    <class>br.solutio.licita.modelo.Endereco</class>
     <class>br.solutio.licita.modelo.InstituicaoLicitadora</class>
     <class>br.solutio.licita.modelo.ItemPregao</class>
     <class>br.solutio.licita.modelo.Lance</class>

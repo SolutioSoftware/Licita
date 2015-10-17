@@ -5,7 +5,9 @@
  */
 package br.solutio.licita.servico;
 
+import br.solutio.licita.modelo.EmpresaLicitante;
 import br.solutio.licita.modelo.Sessao;
+import java.util.List;
 
 /**
  *
@@ -13,4 +15,5 @@ import br.solutio.licita.modelo.Sessao;
  */
 public interface ServicoSessaoIF extends ServicoIF<Sessao> {
     
+    public List<EmpresaLicitante> getEmpresasLicitantes();
 }

@@ -15,14 +15,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.persistence.PersistenceException;
 
 /**
  * @author ricardocaldeira
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class ControladorLicitador extends ControladorAbstrato<InstituicaoLicitadora> implements ControladorAbstratoIF<InstituicaoLicitadora> {
 
     private InstituicaoLicitadora entidade;

@@ -124,6 +124,9 @@
                     <p:outputLabel/>
                     <p:outputLabel/>
                     <p:outputLabel id="display" />
+                    
+                    <h:inputHidden  id="id_falso_licitador" value="#{controladorLicitador.entidade.id}" required="true"/>
+                    <h:inputHidden  id="id_falso_juridica" value="#{controladorLicitador.entidade.pessoaJuridica.id}" required="true"/>
 
                 </h:panelGrid>
             </div>

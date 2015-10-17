@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -70,7 +71,7 @@ public class PessoaFisica implements Serializable {
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoaFisica")
     private Pregoeiro pregoeiro;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoaFisica")
+    @Embedded
     private Endereco endereco;
 
     public PessoaFisica() {

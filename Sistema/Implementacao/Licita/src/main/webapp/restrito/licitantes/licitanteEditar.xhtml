@@ -220,6 +220,9 @@
                         <p:inputMask id="celular"  title="Celular" placeholder="Celular" value="#{controladorLicitante.entidade.pessoaJuridica.contatoPessoaJuridica.celular}"
                                      maxlength="15" style="width:260px" mask="(99)99999-9999"/>
 
+                        
+                        <h:inputHidden  id="id_falso_licitante" value="#{controladorLicitante.entidade.id}" required="true"/>
+                        <h:inputHidden  id="id_falso_jur" value="#{controladorLicitante.entidade.pessoaJuridica.id}" required="true"/>
                     </h:panelGrid>
 
                 </div>

@@ -6,10 +6,12 @@
 package br.solutio.licita.controlador;
 
 import br.solutio.licita.controlador.util.JsfUtil;
+import br.solutio.licita.modelo.EmpresaLicitante;
 import br.solutio.licita.modelo.Sessao;
 import br.solutio.licita.servico.ProdutorEntityManager;
 import br.solutio.licita.servico.ServicoIF;
 import br.solutio.licita.servico.ServicoSessao;
+import br.solutio.licita.servico.ServicoSessaoIF;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -27,8 +29,10 @@ import javax.persistence.PersistenceException;
 public class ControladorSessao extends ControladorAbstrato<Sessao> {
 
     private Sessao entidade;
+    private EmpresaLicitante empresaLicitante;
     private transient List<Sessao> sessoes;
-    private final transient ServicoIF<Sessao> servico;
+    private transient List<EmpresaLicitante> empresasLicitantes;
+    private final transient ServicoSessaoIF servico;
 
     public ControladorSessao() {
         entidade = new Sessao();
@@ -56,15 +60,17 @@ public class ControladorSessao extends ControladorAbstrato<Sessao> {
         try{
             entidade = getEntidade();
             getServico().criar(entidade);
-            setEntidade(null);
-            setEntidade(new Sessao());
             JsfUtil.addSuccessMessage("Salvo com Sucesso!");
-            return "sessao?faces-redirect=true";
+            return "sessaoIniciar?faces-redirect=true";
         }catch( PersistenceException | IllegalStateException e){
             Logger.getLogger(ControladorSessao.class.getName()).log(Level.SEVERE, null, e);
             JsfUtil.addErrorMessage("Sessão já existe");
             return "sessaoSalvar?faces-redirect=true";
         }
+    }
+    
+    public void selecionarEmpresaLicitante(){
+        
     }
 
     @Override
@@ -117,6 +123,14 @@ public class ControladorSessao extends ControladorAbstrato<Sessao> {
     public void setEntidade(Sessao entidade) {
         this.entidade = entidade;
     }
+    
+    public EmpresaLicitante getEmpresaLicitante(){
+        return this.empresaLicitante;
+    }
+    
+    public void setEmpresaLicitante(EmpresaLicitante empresaLicitante){
+        this.empresaLicitante = empresaLicitante;
+    }
 
     public List<Sessao> getSessoes() {
         return sessoes = servico.buscarTodos();
@@ -124,6 +138,10 @@ public class ControladorSessao extends ControladorAbstrato<Sessao> {
 
     public void setSessoes(List<Sessao> sessoes) {
         this.sessoes = sessoes;
+    }
+    
+    public List<EmpresaLicitante> getEmpresasLicitantes(){
+        return servico.getEmpresasLicitantes();
     }
 
     @Override
