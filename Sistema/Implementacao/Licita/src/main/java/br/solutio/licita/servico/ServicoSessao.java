@@ -6,6 +6,7 @@
 package br.solutio.licita.servico;
 
 import br.solutio.licita.modelo.EmpresaLicitante;
+import br.solutio.licita.modelo.Proposta;
 import br.solutio.licita.modelo.Sessao;
 import br.solutio.licita.persistencia.DaoIF;
 import br.solutio.licita.persistencia.FabricaDAO;
@@ -22,6 +23,7 @@ public class ServicoSessao extends ServicoAbstrato<Sessao> implements ServicoSes
     private DaoIF<Sessao> dao;
     private FabricaDaoIF fabricaDao;
     private DaoIF<EmpresaLicitante> daoLicitante;
+    private DaoIF<Proposta> daoProposta;
 
     public ServicoSessao(EntityManager entityManager) {
         super(entityManager);
@@ -61,10 +63,27 @@ public class ServicoSessao extends ServicoAbstrato<Sessao> implements ServicoSes
         }
         return daoLicitante; 
     }
+    
+    private DaoIF<Proposta> getDaoProposta(){
+        if (fabricaDao == null) {
+            fabricaDao = new FabricaDAO(getEntityManager());
+        }
+        if (daoProposta == null) {
+            daoProposta = fabricaDao.getDaoProposta();
+        }
+        return daoProposta; 
+    }
 
     @Override
     public List<EmpresaLicitante> getEmpresasLicitantes() {
         return getDaoLicitante().consultar("EmpresaLicitante.findAll");
+    }
+
+    @Override
+    public List<Proposta> getPropostas(Sessao sessao) {
+        String[] parametros = {"idSessao"};
+        Sessao[] valores = {sessao};
+        return getDaoProposta().consultar("Proposta.findBySessao", parametros, valores);
     }
 
 }

@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Proposta.findAll", query = "SELECT p FROM Proposta p"),
     @NamedQuery(name = "Proposta.findById", query = "SELECT p FROM Proposta p WHERE p.id = :id"),
+    @NamedQuery(name = "Proposta.findBySessao", query = "SELECT p FROM Proposta p WHERE P.idSessao = :idSessao"),
     @NamedQuery(name = "Proposta.findByValorUnitario", query = "SELECT p FROM Proposta p WHERE p.valorUnitario = :valorUnitario"),
     @NamedQuery(name = "Proposta.findByClassificada", query = "SELECT p FROM Proposta p WHERE p.classificada = :classificada")})
 public class Proposta implements Serializable{

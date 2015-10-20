@@ -14,6 +14,7 @@ import br.solutio.licita.modelo.MembroApoio;
 import br.solutio.licita.modelo.PessoaFisica;
 import br.solutio.licita.modelo.Pregao;
 import br.solutio.licita.modelo.Pregoeiro;
+import br.solutio.licita.modelo.Proposta;
 import br.solutio.licita.modelo.Sessao;
 
 /**
@@ -32,5 +33,6 @@ public interface FabricaDaoIF {
     public DaoIF<PessoaFisica> getDaoPessoaFisica();
     public DaoIF<MembroApoio> getDaoMembroApoio();
     public DaoIF<Sessao> getDaoSessao();
+    public DaoIF<Proposta> getDaoProposta();
 
 }

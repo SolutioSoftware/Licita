@@ -7,6 +7,7 @@ package br.solutio.licita.controlador;
 
 import br.solutio.licita.controlador.util.JsfUtil;
 import br.solutio.licita.modelo.EmpresaLicitante;
+import br.solutio.licita.modelo.Proposta;
 import br.solutio.licita.modelo.Sessao;
 import br.solutio.licita.servico.ProdutorEntityManager;
 import br.solutio.licita.servico.ServicoIF;
@@ -18,7 +19,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.persistence.PersistenceException;
+import org.primefaces.model.UploadedFile;
 
 /**
  *
@@ -29,14 +32,34 @@ import javax.persistence.PersistenceException;
 public class ControladorSessao extends ControladorAbstrato<Sessao> {
 
     private Sessao entidade;
+    private UploadedFile arquivoProposta;
     private EmpresaLicitante empresaLicitante;
     private transient List<Sessao> sessoes;
     private transient List<EmpresaLicitante> empresasLicitantes;
+    private transient List<Proposta> propostas;
     private final transient ServicoSessaoIF servico;
 
     public ControladorSessao() {
         entidade = new Sessao();
         servico = new ServicoSessao(ProdutorEntityManager.getInstancia().getEmLocal());
+    }
+    
+    public void uploadArquivo(){
+        if(arquivoProposta != null){
+            if(validarArquivo(arquivoProposta)){
+                JsfUtil.addSuccessMessage("Arquivo Anexado Com Sucesso!");
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.getExternalContext().getFlash().setKeepMessages(true);
+            }else{
+                JsfUtil.addErrorMessage("O Arquivo Selecionado não é .XLS");
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.getExternalContext().getFlash().setKeepMessages(true);
+            }
+        }else{
+            JsfUtil.addErrorMessage("Nenhum Arquivo Foi Localizado!");
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.getExternalContext().getFlash().setKeepMessages(true);
+        }
     }
 
     @Override
@@ -148,5 +171,22 @@ public class ControladorSessao extends ControladorAbstrato<Sessao> {
     public ServicoIF<Sessao> getServico() {
         return servico;
     }
+    
+    public UploadedFile getArquivoProposta(){
+        return this.arquivoProposta;
+    }
+    
+    public void setArquivoProposta(UploadedFile arquivoProposta){
+        this.arquivoProposta = arquivoProposta;
+    }
 
+    private Boolean validarArquivo(UploadedFile arquivoProposta) {
+        String tipoArquivo = ".xls";
+        return arquivoProposta.getFileName().contains(tipoArquivo);
+    }
+    
+    public List<Proposta> getPropostas(){
+        return servico.getPropostas(entidade);
+    }
+    
 }
