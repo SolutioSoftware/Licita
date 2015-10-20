@@ -120,7 +120,7 @@
                         </p:cellEditor>
                     </p:column>
                     
-                    <p:column headerText="Excluir" width="50">
+                    <p:column headerText="Excluir" width="50" exportable="false">
 
                         <p:commandButton id="btExcluirItemPregao" icon="ui-icon-trash" action="#{controladorPregao.removerItem}" 
                                      update=":pregao_form:formDtItemPregao:dt_itensPregao"
@@ -132,6 +132,11 @@
                 </p:column>
 
                 </p:dataTable>
+                
+                <p:commandButton value="Export Excel" ajax="false" icon="fa fa-file-excel-o">
+                    <p:dataExporter type="xls" target="dt_itensPregao" fileName="Itens Pregao nº:#{controladorPregao.entidade.numeroPregao}" />
+                </p:commandButton>
+                
             </h:form>
 
         </h:form>
