@@ -126,25 +126,28 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
         HSSFWorkbook wb = (HSSFWorkbook) document;
         HSSFSheet planilha = wb.getSheetAt(0);
         HSSFCell coluna = null;
-        
+
+        //Move as celulas selecionadas para baixo de acordo com o valor informado
+        planilha.shiftRows(planilha.getFirstRowNum(), planilha.getLastRowNum(), 4);
+
         HSSFRow linha0 = planilha.createRow(0);
         linha0.createCell(0).setCellValue("Instituição Licitadora:");
         planilha.addMergedRegion(new CellRangeAddress(0, 0, 0, 1));
         linha0.createCell(2).setCellValue(" " + getEntidade().getInstituicaoLicitadora().getPessoaJuridica().getNomeFantasia());
         planilha.addMergedRegion(new CellRangeAddress(0, 0, 2, 6));
-        
+
         HSSFRow linha1 = planilha.createRow(1);
         linha1.createCell(0).setCellValue("Numero do Pregao:");
         planilha.addMergedRegion(new CellRangeAddress(1, 1, 0, 1));
         linha1.createCell(2).setCellValue(" " + getEntidade().getNumeroPregao());
         planilha.addMergedRegion(new CellRangeAddress(1, 1, 2, 6));
-        
+
         HSSFRow linha2 = planilha.createRow(2);
         linha2.createCell(0).setCellValue("Numero do Processo:");
         planilha.addMergedRegion(new CellRangeAddress(2, 2, 0, 1));
         linha2.createCell(2).setCellValue(" " + getEntidade().getNumeroProcesso());
         planilha.addMergedRegion(new CellRangeAddress(2, 2, 2, 6));
-        
+
         HSSFRow linha3 = planilha.createRow(3);
         linha3.createCell(0).setCellValue("Empresa Licitante:");
         planilha.addMergedRegion(new CellRangeAddress(3, 3, 0, 1));

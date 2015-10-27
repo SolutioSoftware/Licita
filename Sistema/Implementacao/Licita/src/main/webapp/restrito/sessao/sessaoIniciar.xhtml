@@ -43,9 +43,9 @@
                 </p:column>
 
             </p:dataTable>
-            
+
             <p:outputLabel value="Propostas" style="font-weight:bold" />
-            
+
             <p:dataTable id='dt_propostas' var="proposta" value="#{controladorSessao.propostas}" 
                          widgetVar="tbl_propostas" paginator="true" style="padding:5px" rows="5" rowsPerPageTemplate="5"  
                          emptyMessage="Nenhuma Proposta Salva"  paginatorAlwaysVisible="true" scrollable="false">
@@ -85,7 +85,7 @@
     <ui:define name="pn_conteudo">
 
         <h:form id="sessaoIn_form" title="Sessão" style="text-align: center"  >
-           <p:growl id="growSessao" showDetail="false" life="3000" class="ui-growl" />
+            <p:growl id="growSessao" showDetail="true" life="3000" class="ui-growl" />
 
             <div style="margin-left: 2%; margin-top: 2%; margin-right: 2%">
 
@@ -102,32 +102,37 @@
 
                     <p:outputLabel value="Descrição do Pregão:" for="descricaoPregao" style="font-weight:bold"/>
                     <p:outputLabel id="descricaoPregao" value="#{controladorSessao.entidade.idPregao.descricao}"/>
-                    
+
                     <p:outputLabel></p:outputLabel>
                     <p:outputLabel></p:outputLabel>
                     <p:outputLabel></p:outputLabel>
-                    
+
                     <!-- Dados da Empresa Licitante que entregou as propostas -->
                     <p:outputLabel value="Razão Social: " for="razaoSocial" style="font-weight:bold"/>
                     <p:outputLabel id="razaoSocial" value="#{controladorSessao.empresaLicitante.pessoaJuridica.razaoSocial}"/>
-                    
+
                     <p:outputLabel value="Nome Fantasia: " for="nomeFantasia" style="font-weight:bold"/>
                     <p:outputLabel id="nomeFantasia" value="#{controladorSessao.empresaLicitante.pessoaJuridica.nomeFantasia}"/>
-                    
+
                     <p:outputLabel value="CNPJ: " for="cnpjLicitante" style="font-weight:bold"/>
                     <p:outputLabel id="cnpjLicitante" value="#{controladorSessao.empresaLicitante.pessoaJuridica.cnpj}"/>
-                    
-                    
+
+
 
                 </h:panelGrid>
             </div>
 
             <div style="margin-left: 2%; margin-top: 2%; margin-right: 2%">
-                <div >
-                    <p:fileUpload value="#{controladorSessao.arquivoProposta}" mode="simple" label="Selecionar Arquivo" skinSimple="true" />
-                </div>
+                <p:fileUpload value="#{controladorSessao.arquivoProposta}"
+                              mode="simple"
+                              fileLimit="1"
+                              
+                              skinSimple="true"
+                              />
+                
                 <p:commandButton  id="btImportarProposta" value="Importar Proposta" icon="fa fa-youtube-play" 
-                                  action="#{controladorSessao.uploadArquivo}"/>
+                                  update="growSessao" 
+                                  actionListener="#{controladorSessao.uploadArquivo}"/>
                 <p:commandButton  id="btClassificarProposta" value="Classificar Proposta" icon="fa fa-refresh"  />
             </div>
 

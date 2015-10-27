@@ -19,7 +19,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.persistence.PersistenceException;
 import org.primefaces.model.UploadedFile;
 
@@ -48,17 +47,11 @@ public class ControladorSessao extends ControladorAbstrato<Sessao> {
         if(arquivoProposta != null){
             if(validarArquivo(arquivoProposta)){
                 JsfUtil.addSuccessMessage("Arquivo Anexado Com Sucesso!");
-                FacesContext context = FacesContext.getCurrentInstance();
-                context.getExternalContext().getFlash().setKeepMessages(true);
             }else{
                 JsfUtil.addErrorMessage("O Arquivo Selecionado não é .XLS");
-                FacesContext context = FacesContext.getCurrentInstance();
-                context.getExternalContext().getFlash().setKeepMessages(true);
             }
         }else{
             JsfUtil.addErrorMessage("Nenhum Arquivo Foi Localizado!");
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.getExternalContext().getFlash().setKeepMessages(true);
         }
     }
 
@@ -92,10 +85,6 @@ public class ControladorSessao extends ControladorAbstrato<Sessao> {
         }
     }
     
-    public void selecionarEmpresaLicitante(){
-        
-    }
-
     @Override
     public String editar(Sessao entidade) {
 
