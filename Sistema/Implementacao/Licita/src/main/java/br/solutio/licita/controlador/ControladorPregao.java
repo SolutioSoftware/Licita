@@ -178,7 +178,7 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
             cell.setCellStyle(cellStyle);
         }
 
-        planilha.protectSheet("123");
+        planilha.protectSheet("1234");
         CellStyle unlockedCellStyle = wb.createCellStyle();
         unlockedCellStyle.setLocked(false);
         
