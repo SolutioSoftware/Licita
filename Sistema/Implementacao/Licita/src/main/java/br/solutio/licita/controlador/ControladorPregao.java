@@ -178,13 +178,15 @@ public class ControladorPregao extends ControladorAbstrato<Pregao> {
             cell.setCellStyle(cellStyle);
         }
 
-        planilha.protectSheet("1234");
+        
         CellStyle unlockedCellStyle = wb.createCellStyle();
         unlockedCellStyle.setLocked(false);
         
         HSSFCell celula2 = linha3.getCell(2);
         celula2.setCellStyle(unlockedCellStyle);
         
+        
+//        planilha.protectSheet("1234");
 //        for (int i = 6; i < planilha.getLastRowNum(); i++) {
 //            HSSFRow linhas = planilha.getRow(i);
 //            
