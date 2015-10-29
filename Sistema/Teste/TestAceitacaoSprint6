@@ -1,0 +1,96 @@
+package com.example.tests;
+
+import java.util.regex.Pattern;
+import java.util.concurrent.TimeUnit;
+import org.junit.*;
+import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
+import org.openqa.selenium.*;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class TestAceitacaoSprint6 {
+  private WebDriver driver;
+  private String baseUrl;
+  private boolean acceptNextAlert = true;
+  private StringBuffer verificationErrors = new StringBuffer();
+
+  @Before
+  public void setUp() throws Exception {
+    driver = new FirefoxDriver();
+    baseUrl = "http://localhost:8084/";
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+  }
+
+  @Test
+  public void testAceitacaoSprint6() throws Exception {
+    driver.get(baseUrl + "/Licita/");
+    driver.findElement(By.id("j_idt9:campo_login")).clear();
+    driver.findElement(By.id("j_idt9:campo_login")).sendKeys("admin");
+    driver.findElement(By.id("j_idt9:campo_senha")).clear();
+    driver.findElement(By.id("j_idt9:campo_senha")).sendKeys("admin");
+    driver.findElement(By.id("j_idt9:j_idt16")).click();
+    driver.findElement(By.id("bt_sessoes")).click();
+    // ERROR: Caught exception [ERROR: Unsupported command [waitForPopUp | _self | 30000]]
+    driver.findElement(By.id("formDtSessao:dt_sessao:0:btEditar")).click();
+    driver.findElement(By.id("sessao_form:bt_Iniciar_Sessao")).click();
+    driver.findElement(By.id("formInSessao:dt_empresas:0:btAdiconarEmpresaLicitante")).click();
+    driver.findElement(By.id("sessaoIn_form:btImportarProposta")).click();
+    driver.findElement(By.id("sessaoIn_form:j_idt48_input")).click();
+    driver.findElement(By.id("sessaoIn_form:j_idt48_input")).clear();
+    driver.findElement(By.id("sessaoIn_form:j_idt48_input")).sendKeys("/Users/ricardocaldeira/Downloads/Itens Pregao nº_321321.xls");
+    driver.findElement(By.id("sessaoIn_form:btImportarProposta")).click();
+    driver.findElement(By.id("formInSessao:dt_empresas:0:btAdiconarEmpresaLicitante")).click();
+    driver.findElement(By.id("formInSessao:dt_empresas:1:btAdiconarEmpresaLicitante")).click();
+    driver.findElement(By.id("bt_pregoes")).click();
+    // ERROR: Caught exception [ERROR: Unsupported command [waitForPopUp | _self | 30000]]
+    driver.findElement(By.id("formDtPregao:dt_pregoes:0:btAdicionaItens")).click();
+    driver.findElement(By.id("pregao_form:j_idt52")).click();
+    driver.findElement(By.id("pregao_form:dt_itensPregao:1:btExcluirItemPregao")).click();
+    driver.findElement(By.xpath("//tbody[@id='pregao_form:dt_itensPregao_data']/tr[3]/td[6]")).click();
+    driver.findElement(By.id("pregao_form:dt_itensPregao:2:btExcluirItemPregao")).click();
+    driver.findElement(By.id("pregao_form:j_idt52")).click();
+  }
+
+  @After
+  public void tearDown() throws Exception {
+    driver.quit();
+    String verificationErrorString = verificationErrors.toString();
+    if (!"".equals(verificationErrorString)) {
+      fail(verificationErrorString);
+    }
+  }
+
+  private boolean isElementPresent(By by) {
+    try {
+      driver.findElement(by);
+      return true;
+    } catch (NoSuchElementException e) {
+      return false;
+    }
+  }
+
+  private boolean isAlertPresent() {
+    try {
+      driver.switchTo().alert();
+      return true;
+    } catch (NoAlertPresentException e) {
+      return false;
+    }
+  }
+
+  private String closeAlertAndGetItsText() {
+    try {
+      Alert alert = driver.switchTo().alert();
+      String alertText = alert.getText();
+      if (acceptNextAlert) {
+        alert.accept();
+      } else {
+        alert.dismiss();
+      }
+      return alertText;
+    } finally {
+      acceptNextAlert = true;
+    }
+  }
+}
