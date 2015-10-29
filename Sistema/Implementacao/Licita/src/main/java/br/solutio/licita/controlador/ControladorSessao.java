@@ -6,6 +6,7 @@
 package br.solutio.licita.controlador;
 
 import br.solutio.licita.controlador.util.JsfUtil;
+import br.solutio.licita.excecoes.RunExcecoesLicita;
 import br.solutio.licita.modelo.EmpresaLicitante;
 import br.solutio.licita.modelo.Proposta;
 import br.solutio.licita.modelo.Sessao;
@@ -42,16 +43,21 @@ public class ControladorSessao extends ControladorAbstrato<Sessao> {
         entidade = new Sessao();
         servico = new ServicoSessao(ProdutorEntityManager.getInstancia().getEmLocal());
     }
-    
-    public void uploadArquivo(){
-        if(arquivoProposta != null){
-            if(validarArquivo(arquivoProposta)){
-                JsfUtil.addSuccessMessage("Arquivo Anexado Com Sucesso!");
-            }else{
-                JsfUtil.addErrorMessage("O Arquivo Selecionado não é .XLS");
+
+    public void uploadArquivo() {
+        try {
+            if (arquivoProposta != null) {
+                if (validarArquivo(arquivoProposta)) {
+                    JsfUtil.addSuccessMessage("Arquivo Anexado Com Sucesso!");
+                } else {
+                    throw new RunExcecoesLicita("O Arquivo Selecionado não é .XLS  ");
+                }
+            } else {
+                JsfUtil.addErrorMessage("Nenhum Arquivo Foi Localizado!");
             }
-        }else{
-            JsfUtil.addErrorMessage("Nenhum Arquivo Foi Localizado!");
+        } catch (RunExcecoesLicita re) {
+            JsfUtil.addErrorMessage(re, re.getMessage());
+            Logger.getLogger(ControladorSessao.class.getName()).log(Level.SEVERE, null, re);
         }
     }
 
@@ -71,20 +77,20 @@ public class ControladorSessao extends ControladorAbstrato<Sessao> {
         }
 
     }
-    
-    public String iniciar(Sessao entidade){
-        try{
+
+    public String iniciar(Sessao entidade) {
+        try {
             entidade = getEntidade();
             getServico().criar(entidade);
             JsfUtil.addSuccessMessage("Salvo com Sucesso!");
             return "sessaoIniciar?faces-redirect=true";
-        }catch( PersistenceException | IllegalStateException e){
+        } catch (PersistenceException | IllegalStateException e) {
             Logger.getLogger(ControladorSessao.class.getName()).log(Level.SEVERE, null, e);
             JsfUtil.addErrorMessage("Sessão já existe");
             return "sessaoSalvar?faces-redirect=true";
         }
     }
-    
+
     @Override
     public String editar(Sessao entidade) {
 
@@ -135,12 +141,12 @@ public class ControladorSessao extends ControladorAbstrato<Sessao> {
     public void setEntidade(Sessao entidade) {
         this.entidade = entidade;
     }
-    
-    public EmpresaLicitante getEmpresaLicitante(){
+
+    public EmpresaLicitante getEmpresaLicitante() {
         return this.empresaLicitante;
     }
-    
-    public void setEmpresaLicitante(EmpresaLicitante empresaLicitante){
+
+    public void setEmpresaLicitante(EmpresaLicitante empresaLicitante) {
         this.empresaLicitante = empresaLicitante;
     }
 
@@ -151,8 +157,8 @@ public class ControladorSessao extends ControladorAbstrato<Sessao> {
     public void setSessoes(List<Sessao> sessoes) {
         this.sessoes = sessoes;
     }
-    
-    public List<EmpresaLicitante> getEmpresasLicitantes(){
+
+    public List<EmpresaLicitante> getEmpresasLicitantes() {
         return servico.getEmpresasLicitantes();
     }
 
@@ -160,12 +166,12 @@ public class ControladorSessao extends ControladorAbstrato<Sessao> {
     public ServicoIF<Sessao> getServico() {
         return servico;
     }
-    
-    public UploadedFile getArquivoProposta(){
+
+    public UploadedFile getArquivoProposta() {
         return this.arquivoProposta;
     }
-    
-    public void setArquivoProposta(UploadedFile arquivoProposta){
+
+    public void setArquivoProposta(UploadedFile arquivoProposta) {
         this.arquivoProposta = arquivoProposta;
     }
 
@@ -173,9 +179,9 @@ public class ControladorSessao extends ControladorAbstrato<Sessao> {
         String tipoArquivo = ".xls";
         return arquivoProposta.getFileName().contains(tipoArquivo);
     }
-    
-    public List<Proposta> getPropostas(){
+
+    public List<Proposta> getPropostas() {
         return servico.getPropostas(entidade);
     }
-    
+
 }
