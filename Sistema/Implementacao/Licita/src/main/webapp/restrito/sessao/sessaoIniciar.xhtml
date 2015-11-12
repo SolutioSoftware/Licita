@@ -84,7 +84,7 @@
 
     <ui:define name="pn_conteudo">
 
-        <h:form id="sessaoIn_form" title="Sessão" style="text-align: center"  >
+        <h:form id="sessaoIn_form" title="Sessão" style="text-align: center" enctype="multipart/form-data" >
             <p:growl id="growSessao" showDetail="true" life="3000" class="ui-growl" />
 
             <div style="margin-left: 2%; margin-top: 2%; margin-right: 2%">
@@ -123,15 +123,13 @@
             </div>
 
             <div style="margin-left: 2%; margin-top: 2%; margin-right: 2%">
-                <p:fileUpload value="#{controladorSessao.arquivoProposta}"
+                <p:fileUpload id="file-import-xls" value="#{controladorSessao.arquivoProposta}"
                               mode="simple"
-                              fileLimit="1"
-                              
                               skinSimple="true"
+                              required="true"
                               />
-                
-                <p:commandButton  id="btImportarProposta" value="Importar Proposta" icon="fa fa-youtube-play" 
-                                  update="growSessao" 
+
+                <h:commandButton  id="btImportarProposta"  value="Importar Proposta" label="Importa Proposta"
                                   actionListener="#{controladorSessao.uploadArquivo}"/>
                 <p:commandButton  id="btClassificarProposta" value="Classificar Proposta" icon="fa fa-refresh"  />
             </div>

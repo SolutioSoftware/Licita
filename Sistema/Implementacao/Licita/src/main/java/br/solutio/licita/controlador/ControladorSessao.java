@@ -48,16 +48,19 @@ public class ControladorSessao extends ControladorAbstrato<Sessao> {
         try {
             if (arquivoProposta != null) {
                 if (validarArquivo(arquivoProposta)) {
+                    Logger.getLogger(ControladorSessao.class.getName()).log(Level.INFO, "Arquivo anexado com sucesso");
                     JsfUtil.addSuccessMessage("Arquivo Anexado Com Sucesso!");
                 } else {
+                    Logger.getLogger(ControladorSessao.class.getName()).log(Level.SEVERE, "O Arquivo Selecionado não é .XLS  ");
                     throw new RunExcecoesLicita("O Arquivo Selecionado não é .XLS  ");
                 }
             } else {
+                Logger.getLogger(ControladorSessao.class.getName()).log(Level.SEVERE, "Nenhum arquivo foi localizado");
                 JsfUtil.addErrorMessage("Nenhum Arquivo Foi Localizado!");
             }
         } catch (RunExcecoesLicita re) {
             JsfUtil.addErrorMessage(re, re.getMessage());
-            Logger.getLogger(ControladorSessao.class.getName()).log(Level.SEVERE, null, re);
+            Logger.getLogger(ControladorSessao.class.getName()).log(Level.SEVERE, re.getMessage(), re);
         }
     }
 
