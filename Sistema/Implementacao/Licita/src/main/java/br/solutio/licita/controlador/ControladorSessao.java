@@ -48,6 +48,7 @@ public class ControladorSessao extends ControladorAbstrato<Sessao> {
         try {
             if (arquivoProposta != null) {
                 if (validarArquivo(arquivoProposta)) {
+                    filtrarDadosPlanilha(arquivoProposta);
                     Logger.getLogger(ControladorSessao.class.getName()).log(Level.INFO, "Arquivo anexado com sucesso");
                     JsfUtil.addSuccessMessage("Arquivo Anexado Com Sucesso!");
                 } else {
@@ -62,6 +63,10 @@ public class ControladorSessao extends ControladorAbstrato<Sessao> {
             JsfUtil.addErrorMessage(re, re.getMessage());
             Logger.getLogger(ControladorSessao.class.getName()).log(Level.SEVERE, re.getMessage(), re);
         }
+    }
+
+    public void filtrarDadosPlanilha(UploadedFile arquivoUpload) {
+        servico.filtraPlanilha(arquivoUpload);
     }
 
     @Override

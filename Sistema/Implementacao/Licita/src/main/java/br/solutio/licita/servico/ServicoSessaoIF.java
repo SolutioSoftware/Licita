@@ -9,6 +9,7 @@ import br.solutio.licita.modelo.EmpresaLicitante;
 import br.solutio.licita.modelo.Proposta;
 import br.solutio.licita.modelo.Sessao;
 import java.util.List;
+import org.primefaces.model.UploadedFile;
 
 /**
  *
@@ -18,4 +19,11 @@ public interface ServicoSessaoIF extends ServicoIF<Sessao> {
     
     public List<EmpresaLicitante> getEmpresasLicitantes();
     public List<Proposta> getPropostas(Sessao sessao);
+
+    /**
+     *
+     * @param uploadArquivo
+     * @return
+     */
+    public void filtraPlanilha(UploadedFile uploadArquivo);
 }
