@@ -25,5 +25,7 @@ public interface ServicoSessaoIF extends ServicoIF<Sessao> {
      * @param uploadArquivo
      * @return
      */
-    public void filtraPlanilha(UploadedFile uploadArquivo);
+    public boolean filtraPlanilha(UploadedFile uploadArquivo);
+
+    public boolean salvarPropostas(Sessao entidade, EmpresaLicitante empresaLicitante);
 }

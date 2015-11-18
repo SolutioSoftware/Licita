@@ -6,6 +6,7 @@
 package br.solutio.licita.controlador;
 
 import br.solutio.licita.controlador.util.JsfUtil;
+import br.solutio.licita.excecoes.ExcecoesLicita;
 import br.solutio.licita.excecoes.RunExcecoesLicita;
 import br.solutio.licita.modelo.EmpresaLicitante;
 import br.solutio.licita.modelo.Proposta;
@@ -48,11 +49,14 @@ public class ControladorSessao extends ControladorAbstrato<Sessao> {
         try {
             if (arquivoProposta != null) {
                 if (validarArquivo(arquivoProposta)) {
-                    filtrarDadosPlanilha(arquivoProposta);
-                    Logger.getLogger(ControladorSessao.class.getName()).log(Level.INFO, "Arquivo anexado com sucesso");
-                    JsfUtil.addSuccessMessage("Arquivo Anexado Com Sucesso!");
+                    if (filtrarDadosPlanilha(arquivoProposta)) {
+                        salvarPropostas();
+                        Logger.getLogger(ControladorSessao.class.getName()).log(Level.INFO, "Arquivo anexado com sucesso");
+                        JsfUtil.addSuccessMessage("Arquivo Anexado Com Sucesso!");
+                    }else{
+                        throw new ExcecoesLicita("Não foi localizado nenhum valor");
+                    }
                 } else {
-                    Logger.getLogger(ControladorSessao.class.getName()).log(Level.SEVERE, "O Arquivo Selecionado não é .XLS  ");
                     throw new RunExcecoesLicita("O Arquivo Selecionado não é .XLS  ");
                 }
             } else {
@@ -62,11 +66,18 @@ public class ControladorSessao extends ControladorAbstrato<Sessao> {
         } catch (RunExcecoesLicita re) {
             JsfUtil.addErrorMessage(re, re.getMessage());
             Logger.getLogger(ControladorSessao.class.getName()).log(Level.SEVERE, re.getMessage(), re);
+        } catch (ExcecoesLicita el) {
+            JsfUtil.addErrorMessage(el, el.getMessage());
+            Logger.getLogger(ControladorSessao.class.getName()).log(Level.SEVERE, el.getMessage(), el);
         }
     }
 
-    public void filtrarDadosPlanilha(UploadedFile arquivoUpload) {
-        servico.filtraPlanilha(arquivoUpload);
+    private boolean filtrarDadosPlanilha(UploadedFile arquivoUpload) {
+        return servico.filtraPlanilha(arquivoUpload);
+    }
+
+    private boolean salvarPropostas() {
+        return servico.salvarPropostas(entidade, empresaLicitante);
     }
 
     @Override
