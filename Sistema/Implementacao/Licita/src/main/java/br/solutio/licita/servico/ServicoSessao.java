@@ -39,6 +39,7 @@ public class ServicoSessao extends ServicoAbstrato<Sessao> implements ServicoSes
     private DaoIF<ItemPregao> daoItemPregao;
     private ArrayList<Double> numTable;
     private Double[][] propostas;
+    List<List> listas = null;
 
     public ServicoSessao(EntityManager entityManager) {
         super(entityManager);
@@ -48,6 +49,17 @@ public class ServicoSessao extends ServicoAbstrato<Sessao> implements ServicoSes
     @Override
     public void setDao(DaoIF<Sessao> dao) {
         this.dao = dao;
+    }
+
+    @Override
+    public void buscarPropostas(Sessao sessao, List<EmpresaLicitante> empresaLicitantes) {
+        String[] parametros = {"idLicitante", "idSessao"};
+        listas = new ArrayList<>();
+        for (EmpresaLicitante licitante : empresaLicitantes) {
+            Object[] valores = {licitante, sessao};
+            listas.add(daoProposta.consultar("Proposta.findBySessaoWithLicitante", parametros, valores));
+        }
+        System.out.println(listas);
     }
 
     @Override
@@ -65,15 +77,15 @@ public class ServicoSessao extends ServicoAbstrato<Sessao> implements ServicoSes
         //Indica o numero da coluna onde inicia os valores que serão retirado
         int indInicioValores = 6;
         // +1, devido a necessidade de contar mais uma coluna
-        propostas = new Double [(planilha.getLastRowNum()+1) - indInicioValores][2];
-        
+        propostas = new Double[(planilha.getLastRowNum() + 1) - indInicioValores][2];
+
         for (int i = 6; i <= planilha.getLastRowNum(); i++) {
             HSSFRow linha = planilha.getRow(i);
-            
+
             String conversao = linha.getCell(0).getStringCellValue();
             Double convertido = Double.parseDouble(conversao);
-            propostas[i-indInicioValores][0] = convertido;
-            propostas[i-indInicioValores][1] = linha.getCell(5).getNumericCellValue();
+            propostas[i - indInicioValores][0] = convertido;
+            propostas[i - indInicioValores][1] = linha.getCell(5).getNumericCellValue();
             numTable.add(linha.getCell(5).getNumericCellValue());
             Logger.getLogger(ControladorSessao.class.getName()).log(Level.INFO, numTable.toString());
         }
@@ -82,17 +94,19 @@ public class ServicoSessao extends ServicoAbstrato<Sessao> implements ServicoSes
 
     @Override
     public boolean salvarPropostas(Sessao sessao, EmpresaLicitante empresaLicitante) {
-        for (int i = 0 ; i < propostas.length ; i++ ){
-            Proposta proposta = new Proposta();
-            proposta.setIdLicitante(empresaLicitante);
-            proposta.setIdSessao(sessao);
-            proposta.setValorUnitario(new BigDecimal (propostas[i][1], MathContext.DECIMAL64));
-            ItemPregao itemPregao = getDaoItemPregao().buscarPorId(propostas[i][0].longValue());
-            proposta.setIdItemPregao(itemPregao);
-            daoProposta.criar(proposta);
+        if (empresaLicitante != null) {
+            for (int i = 0; i < propostas.length; i++) {
+                Proposta proposta = new Proposta();
+                proposta.setIdLicitante(empresaLicitante);
+                proposta.setIdSessao(sessao);
+                proposta.setValorUnitario(new BigDecimal(propostas[i][1], MathContext.DECIMAL64));
+                ItemPregao itemPregao = getDaoItemPregao().buscarPorId(propostas[i][0].longValue());
+                proposta.setIdItemPregao(itemPregao);
+                daoProposta.criar(proposta);
+            }
+            return true;
         }
-        
-        return true;
+        return false;
     }
 
     @Override
@@ -131,9 +145,9 @@ public class ServicoSessao extends ServicoAbstrato<Sessao> implements ServicoSes
         }
         return daoProposta;
     }
-    
-    private DaoIF<ItemPregao> getDaoItemPregao(){
-         if (fabricaDao == null) {
+
+    private DaoIF<ItemPregao> getDaoItemPregao() {
+        if (fabricaDao == null) {
             fabricaDao = new FabricaDAO(getEntityManager());
         }
         if (daoItemPregao == null) {
@@ -155,6 +169,3 @@ public class ServicoSessao extends ServicoAbstrato<Sessao> implements ServicoSes
     }
 
 }
- 
-    
-

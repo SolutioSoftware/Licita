@@ -131,8 +131,9 @@
                               />
 
                 <h:commandButton  id="btImportarProposta"  value="Importar Proposta" label="Importa Proposta"
-                                  actionListener="#{controladorSessao.uploadArquivo}"/>
-                <p:commandButton  id="btClassificarProposta" value="Classificar Proposta" icon="fa fa-refresh"  />
+                                  action="#{controladorSessao.uploadArquivo}" />
+                <p:commandButton  id="btClassificarProposta" value="Classificar Proposta" icon="fa fa-refresh"
+                                  actionListener="#{controladorSessao.classificarPropostas}"/>
             </div>
 
 
