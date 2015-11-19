@@ -1,0 +1,105 @@
+package com.example.tests;
+
+import java.util.regex.Pattern;
+import java.util.concurrent.TimeUnit;
+import org.junit.*;
+import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
+import org.openqa.selenium.*;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class ImportarPlanilha {
+  private WebDriver driver;
+  private String baseUrl;
+  private boolean acceptNextAlert = true;
+  private StringBuffer verificationErrors = new StringBuffer();
+
+  @Before
+  public void setUp() throws Exception {
+    driver = new FirefoxDriver();
+    baseUrl = "http://localhost:8084/";
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+  }
+
+  @Test
+  public void testImportarPlanilha() throws Exception {
+    driver.get(baseUrl + "/Licita/restrito/login/login.xhtml");
+    driver.findElement(By.id("j_idt9:campo_login")).clear();
+    driver.findElement(By.id("j_idt9:campo_login")).sendKeys("admin");
+    driver.findElement(By.id("j_idt9:campo_senha")).clear();
+    driver.findElement(By.id("j_idt9:campo_senha")).sendKeys("admin");
+    driver.findElement(By.id("j_idt9:j_idt16")).click();
+    driver.findElement(By.id("bt_sessoes")).click();
+    // ERROR: Caught exception [ERROR: Unsupported command [waitForPopUp | _self | 30000]]
+    driver.findElement(By.id("formDtSessao:dt_sessao:0:btEditar")).click();
+    driver.findElement(By.id("sessao_form:bt_Iniciar_Sessao")).click();
+    driver.findElement(By.id("sessaoIn_form:file-import-xls_input")).click();
+    driver.findElement(By.id("sessaoIn_form:file-import-xls_input")).clear();
+    driver.findElement(By.id("sessaoIn_form:file-import-xls_input")).sendKeys("/Users/ricardocaldeira/Downloads/Formação em Gestão de Micro e Pequenos Negócios.pdf");
+    driver.findElement(By.id("sessaoIn_form:btImportarProposta")).click();
+    try {
+      assertEquals("O Arquivo Selecionado não é .XLS", driver.findElement(By.cssSelector("p")).getText());
+    } catch (Error e) {
+      verificationErrors.append(e.toString());
+    }
+    driver.findElement(By.id("sessaoIn_form:file-import-xls_input")).click();
+    driver.findElement(By.id("sessaoIn_form:btImportarProposta")).click();
+    try {
+      assertEquals("O Arquivo Selecionado não é .XLS O Arquivo Selecionado não é .XLS", driver.findElement(By.cssSelector("div.ui-growl-item")).getText());
+    } catch (Error e) {
+      verificationErrors.append(e.toString());
+    }
+    driver.findElement(By.id("sessaoIn_form:file-import-xls_input")).click();
+    driver.findElement(By.id("sessaoIn_form:file-import-xls_input")).clear();
+    driver.findElement(By.id("sessaoIn_form:file-import-xls_input")).sendKeys("/Users/ricardocaldeira/Downloads/Itens Pregao nº_321321.xls");
+    driver.findElement(By.id("sessaoIn_form:btImportarProposta")).click();
+    try {
+      assertEquals("Arquivo Anexado Com Sucesso!", driver.findElement(By.cssSelector("span.ui-growl-title")).getText());
+    } catch (Error e) {
+      verificationErrors.append(e.toString());
+    }
+  }
+
+  @After
+  public void tearDown() throws Exception {
+    driver.quit();
+    String verificationErrorString = verificationErrors.toString();
+    if (!"".equals(verificationErrorString)) {
+      fail(verificationErrorString);
+    }
+  }
+
+  private boolean isElementPresent(By by) {
+    try {
+      driver.findElement(by);
+      return true;
+    } catch (NoSuchElementException e) {
+      return false;
+    }
+  }
+
+  private boolean isAlertPresent() {
+    try {
+      driver.switchTo().alert();
+      return true;
+    } catch (NoAlertPresentException e) {
+      return false;
+    }
+  }
+
+  private String closeAlertAndGetItsText() {
+    try {
+      Alert alert = driver.switchTo().alert();
+      String alertText = alert.getText();
+      if (acceptNextAlert) {
+        alert.accept();
+      } else {
+        alert.dismiss();
+      }
+      return alertText;
+    } finally {
+      acceptNextAlert = true;
+    }
+  }
+}
