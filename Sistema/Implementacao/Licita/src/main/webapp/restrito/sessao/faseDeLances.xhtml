@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="/WEB-INF/template/TemplateLicitalance.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="pn_conteudo">
+
+        <h:form id="fasesDeLances" style="text-align: center">
+            <p:growl id="growFasesDeLances" showDetail="true" life="3000" class="ui-growl" />
+
+            <p:outputLabel value="Item: " style="font-weight:bold"/>
+            <p:outputLabel value="Quantidade: " style="font-weight:bold"/>
+            <br/>
+            <p:outputLabel value="Proposta Atual: " style="font-weight:bold"/>
+            <p:outputLabel value="Ofertante: " style="font-weight:bold"/>
+            <br/>
+
+            <p:outputLabel value="Lances Anteriores" style="font-weight:bold"/>
+            <p:dataTable id='dt_faseDeLances' var="lances" value="" 
+                         paginator="true" style="padding:5px" rows="5" rowsPerPageTemplate="5"  
+                         emptyMessage="Nenhum Lance Registrado"  paginatorAlwaysVisible="true" scrollable="false">
+
+
+                <p:column headerText="Valor" filterBy="" filterMatchMode="contains" filterStyle="display:none">
+                    <h:outputText value="" />
+                </p:column> 
+
+                <p:column headerText="Ofertante" filterBy="" filterMatchMode="contains" filterStyle="display:none">
+                    <h:outputText value="" />
+                </p:column> 
+
+                <p:column headerText="Horário" filterBy="" filterMatchMode="contains" filterStyle="display:none">
+                    <h:outputText value="" />
+                </p:column> 
+
+            </p:dataTable>
+            <br/>
+
+            <p:outputLabel value="Empresa" style="font-weight:bold"/>
+            <p:outputLabel value="" style="font-weight:bold"/>
+            
+            <p:outputLabel value="Nova Proposta" style="font-weight:bold"/>
+            <p:inputText value="" />
+            
+            <p:commandButton id="btIDarLance" icon="ui-icon-plus"  value="Dar Lance" label="Dar Lance"
+                                  />
+            
+            <p:commandButton id="btIDeclinarProposta" icon="ui-icon-close"  value="Declinar Proposta" label="Declinar Proposta"
+                                  />
+            
+            <p:commandButton id="btIEncerrarItem" icon="ui-icon-gavel"  value="Encerrar Item" label="Encerrar Item"
+                                  />
+
+        </h:form>
+
+    </ui:define> 
+
+</ui:composition>

@@ -46,7 +46,7 @@
 
             <p:outputLabel value="Propostas" style="font-weight:bold" />
 
-            <p:dataTable id='dt_propostas' var="proposta" value="#{controladorSessao.propostas}" 
+            <p:dataTable id='dt_propostas' var="proposta" value="#{controladorSessao.arquivoProposta}" 
                          widgetVar="tbl_propostas" paginator="true" style="padding:5px" rows="5" rowsPerPageTemplate="5"  
                          emptyMessage="Nenhuma Proposta Salva"  paginatorAlwaysVisible="true" scrollable="false">
 
@@ -63,7 +63,6 @@
                 <p:column headerText="Nome Fantasia" filterBy="#{proposta.idLicitante.pessoaJuridica.nomeFantasia}" filterMatchMode="contains" filterStyle="display:none">
                     <h:outputText value="#{proposta.idLicitante.pessoaJuridica.nomeFantasia}" />
                 </p:column>
-
 
                 <p:column headerText="Ações" width="70">
 
@@ -134,6 +133,8 @@
                                   action="#{controladorSessao.uploadArquivo}" />
                 <p:commandButton  id="btClassificarProposta" value="Classificar Proposta" icon="fa fa-refresh"
                                   actionListener="#{controladorSessao.classificarPropostas}"/>
+                
+                <p:button value="Fase De Lances" id="bt_faseDeLance" class="bt_faseDeLAnce" outcome="/restrito/sessao/faseDeLances.xhtml"/>
             </div>
 
 

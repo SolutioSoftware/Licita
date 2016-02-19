@@ -14,6 +14,7 @@ import br.solutio.licita.servico.ServicoItem;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.PersistenceException;
@@ -31,11 +32,15 @@ public class ControladorItem extends ControladorAbstrato<Item> {
     private transient ServicoIF<Item> servico;
 
     public ControladorItem() {
+    }
+
+    @PostConstruct
+    public void init() {
         entidade = new Item();
         servico = new ServicoItem(ProdutorEntityManager.getInstancia().getEmLocal());
         itens = servico.buscarTodos();
     }
-
+    
     @Override
     public String criar(Item entidade) {
 
