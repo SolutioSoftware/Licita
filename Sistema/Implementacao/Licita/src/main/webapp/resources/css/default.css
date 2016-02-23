@@ -364,3 +364,13 @@ footer {
 .icones:hover{
     color: #ffffff; text-transform: capitalize;text-decoration: none;
 }
+
+.labelfaselance{
+    
+    font-size: 36px;
+    font-weight: bold;
+    margin: 0px;
+    padding: 0px;
+    color: #036fab;
+    
+}

@@ -12,14 +12,18 @@
         <h:form id="fasesDeLances" style="text-align: center">
             <p:growl id="growFasesDeLances" showDetail="true" life="3000" class="ui-growl" />
 
-            <p:outputLabel value="Item: " style="font-weight:bold"/>
-            <p:outputLabel value="Quantidade: " style="font-weight:bold"/>
+            <p:outputLabel value="Item 103: Caneta Preta" style="font-size: 36px; color: #036fab; font-weight: bold"  />
             <br/>
-            <p:outputLabel value="Proposta Atual: " style="font-weight:bold"/>
-            <p:outputLabel value="Ofertante: " style="font-weight:bold"/>
+            <p:outputLabel value="Melhor Proposta: R$ 0,60 por papelaria papel bom LTDA" style="font-weight:bold; font-size: 18px;"/>
             <br/>
-
-            <p:outputLabel value="Lances Anteriores" style="font-weight:bold"/>
+            <p:outputLabel value="Quantidade: 500 und" style="font-weight:bold; font-size: 18px;"/>
+            <br/>
+            <br/>
+            <p:outputLabel value="Lance atual: R$ 0,52" style="font-size: 30px; color: #036fab; font-weight: bold"/>
+            <br/>
+            <p:outputLabel value="Ofertante: Papelaria Soares" style="font-size: 18px; color: #036fab; font-weight: bold"/>
+            <br/>
+            
             <p:dataTable id='dt_faseDeLances' var="lances" value="" 
                          paginator="true" style="padding:5px" rows="5" rowsPerPageTemplate="5"  
                          emptyMessage="Nenhum Lance Registrado"  paginatorAlwaysVisible="true" scrollable="false">
